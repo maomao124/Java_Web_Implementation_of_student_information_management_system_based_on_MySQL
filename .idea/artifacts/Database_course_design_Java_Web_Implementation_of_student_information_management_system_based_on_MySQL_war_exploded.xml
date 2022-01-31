@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL:war exploded">
+    <output-path>$PROJECT_DIR$/target/Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL-1.0</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.27" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.8" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.1" />
+          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL-1.0/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL/web/Web" />
+    </root>
+  </artifact>
+</component>

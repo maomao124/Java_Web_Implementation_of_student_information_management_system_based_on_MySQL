@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

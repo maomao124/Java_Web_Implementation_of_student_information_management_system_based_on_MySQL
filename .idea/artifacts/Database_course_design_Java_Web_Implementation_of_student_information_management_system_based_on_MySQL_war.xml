@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL-1.0.war">
+      <element id="artifact" artifact-name="Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL:war exploded" />
+    </root>
+  </artifact>
+</component>
