@@ -1,4 +1,4 @@
-17
+18
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -16,3 +16,4 @@ src\\main\\java\\tools\\Handler\\BeanHandler.java
 src\\main\\java\\tools\\Handler\\BeanListHandler.java
 src\\main\\java\\tools\\Handler\\ResultSetHandler.java
 src\\main\\java\\tools\\Handler\\ScalarHandler.java
+src\\main\\java\\tools\\JDBCTemplate.java
