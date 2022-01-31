@@ -1,5 +1,6 @@
 package tools.Handler;
 
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -26,7 +27,7 @@ public interface ResultSetHandler<T>
 }
  */
 
-@SuppressWarnings("all")
+
 public class BeanHandler<T> implements ResultSetHandler<T>
 {
 
