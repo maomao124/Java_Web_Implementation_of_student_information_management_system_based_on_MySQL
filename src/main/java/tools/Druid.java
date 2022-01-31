@@ -28,7 +28,7 @@ public class Druid
 
     #可以缺省，会根据url自动识别
     driverClassName=com.mysql.cj.jdbc.Driver
-    url=jdbc:mysql://localhost:3306/student
+    url=jdbc:mysql://localhost:3306/student1
     username=root
     password=20010713
 
