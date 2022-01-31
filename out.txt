@@ -1831,3 +1831,728 @@ public class TeacherPassword
     }
 }
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\Druid.java
+package tools;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+
+import javax.sql.DataSource;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools
+ * Class(类名): Druid
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:57
+ * Version(版本): 1.0
+ * Description(描述)： Druid连接池
+ */
+
+
+public class Druid
+{
+    /*
+    druid.properties文件：
+
+    #可以缺省，会根据url自动识别
+    driverClassName=com.mysql.cj.jdbc.Driver
+    url=jdbc:mysql://localhost:3306/student1
+    username=root
+    password=20010713
+
+    ##初始连接数，默认0
+    initialSize=10
+    #最大连接数，默认8
+    maxActive=30
+    #最小闲置数
+    minIdle=10
+    #获取连接的最大等待时间，单位毫秒
+    maxWait=3000
+    #缓存PreparedStatement，默认false
+    poolPreparedStatements=true
+    #缓存PreparedStatement的最大数量，默认-1（不缓存）。大于0时会自动开启缓存PreparedStatement，所以可以省略上一句设置
+    maxOpenPreparedStatements=20
+
+
+     */
+
+    //数据源变量
+    private static DataSource dataSource;
+
+    static
+    {
+        try
+        {
+            //加载配置文件
+            InputStream inputStream = Druid.class.getClassLoader().getResourceAsStream("druid.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            //获取数据库连接对象
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 私有化构造函数，不能创建对象
+     */
+    private Druid()
+    {
+
+    }
+
+    /**
+     * 获得一个连接对象，从Druid连接池内
+     *
+     * @return Connection对象, 如果获取失败，则返回null
+     */
+    public static Connection getConnection()
+    {
+        Connection connection = null;
+        try
+        {
+            connection = dataSource.getConnection();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+    /**
+     * 获取数据库连接池对象
+     *
+     * @return 返回DataSource对象
+     */
+    public static DataSource getDataSource()
+    {
+        return dataSource;
+    }
+
+
+    //关闭方法
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 123
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Connection connection, Statement statement, ResultSet resultSet)
+    {
+        if (resultSet != null)
+        {
+            try
+            {
+                resultSet.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null)
+        {
+            try
+            {
+                statement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 132
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Connection connection, ResultSet resultSet, Statement statement)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 213
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Statement statement, Connection connection, ResultSet resultSet)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 231
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Statement statement, ResultSet resultSet, Connection connection)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 312
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(ResultSet resultSet, Connection connection, Statement statement)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 321
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(ResultSet resultSet, Statement statement, Connection connection)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 123
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet)
+    {
+        if (resultSet != null)
+        {
+            try
+            {
+                resultSet.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null)
+        {
+            try
+            {
+                preparedStatement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 132
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(Connection connection, ResultSet resultSet, PreparedStatement preparedStatement)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 213
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(PreparedStatement preparedStatement, Connection connection, ResultSet resultSet)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 231
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(PreparedStatement preparedStatement, ResultSet resultSet, Connection connection)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 312
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(ResultSet resultSet, Connection connection, PreparedStatement preparedStatement)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 321
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭更新的连接 12
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     */
+    public static void close(Connection connection, Statement statement)
+    {
+        if (statement != null)
+        {
+            try
+            {
+                statement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭更新的连接 21
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     */
+    public static void close(Statement statement, Connection connection)
+    {
+        close(connection, statement);
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭预编译的更新的连接 12
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     */
+    public static void close(Connection connection, PreparedStatement preparedStatement)
+    {
+        if (preparedStatement != null)
+        {
+            try
+            {
+                preparedStatement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭预编译的更新的连接 21
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     */
+    public static void close(PreparedStatement preparedStatement, Connection connection)
+    {
+        close(connection, preparedStatement);
+    }
+
+    /**
+     * 关闭连接对象
+     *
+     * @param connection 连接对象
+     */
+    public static void close(Connection connection)
+    {
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭预编译执行者对象
+     *
+     * @param preparedStatement 预编译执行者对象
+     */
+    public static void close(PreparedStatement preparedStatement)
+    {
+        if (preparedStatement != null)
+        {
+            try
+            {
+                preparedStatement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\Handler\\BeanHandler.java
+package tools.Handler;
+
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.Handler
+ * Class(类名): BeanHandler
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:58
+ * Version(版本): 1.0
+ * Description(描述)： 处理一条记录的结果集
+ */
+
+/*
+接口：
+public interface ResultSetHandler<T>
+{
+    <T> T handler(ResultSet resultSet);
+}
+ */
+
+@SuppressWarnings("all")
+public class BeanHandler<T> implements ResultSetHandler<T>
+{
+
+    //class对象类型的变量
+    private final Class<T> beanClass;
+
+    //构造方法赋值
+    public BeanHandler(Class<T> beanClass)
+    {
+        this.beanClass = beanClass;
+    }
+
+    /**
+     * 根据结果集对象返回对应的对象
+     *
+     * @param resultSet 结果集对象
+     * @return 对象
+     */
+    @Override
+    public T handler(ResultSet resultSet)
+    {
+        //声明自定义类型
+        T bean = null;
+        try
+        {
+            //为自定义对象进行赋值
+            bean = beanClass.getDeclaredConstructor().newInstance();
+            //获取结果集的数据
+            if (resultSet.next())
+            {
+                //通过结果集的对象获取结果源信息对象
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                //通过源信息对象获取列数
+                int count = metaData.getColumnCount();
+                //循环遍历列数
+                for (int i = 1; i <= count; i++)
+                {
+                    //获取列名
+                    String columnName = metaData.getColumnName(i);
+                    //通过列名获取数据
+                    Object object = resultSet.getObject(columnName);
+                    //创建属性描述器对象,对对象的set方法进行赋值
+                    PropertyDescriptor propertyDescriptor = new PropertyDescriptor(columnName.toLowerCase(), beanClass);
+                    //获取set方法
+                    Method writeMethod = propertyDescriptor.getWriteMethod();
+                    //执行set方法,赋值
+                    writeMethod.invoke(bean, object);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //返回对象
+        return bean;
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\Handler\\BeanListHandler.java
+package tools.Handler;
+
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.Handler
+ * Class(类名): BeanListHandler
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 23:04
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+/*
+接口：
+public interface ResultSetHandler<T>
+{
+    <T> T handler(ResultSet resultSet);
+}
+ */
+
+@SuppressWarnings("all")
+public class BeanListHandler<T> implements ResultSetHandler<T>
+{
+    //class对象类型的变量
+    private final Class<T> beanClass;
+
+    //构造方法赋值
+    public BeanListHandler(Class<T> beanClass)
+    {
+        this.beanClass = beanClass;
+    }
+
+    /**
+     * 根据结果集对象返回对应的对象集合
+     *
+     * @param resultSet 结果集对象
+     * @return list集合
+     */
+    @Override
+    public List<T> handler(ResultSet resultSet)
+    {
+        //声明集合类型
+        List<T> list = new ArrayList<>();
+        try
+        {
+            //获取结果集的数据
+            while (resultSet.next())
+            {
+                //为自定义对象进行赋值
+                T bean = beanClass.getDeclaredConstructor().newInstance();
+                //通过结果集的对象获取结果源信息对象
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                //通过源信息对象获取列数
+                int count = metaData.getColumnCount();
+                //循环遍历列数
+                for (int i = 1; i <= count; i++)
+                {
+                    //获取列名
+                    String columnName = metaData.getColumnName(i);
+                    //通过列名获取数据
+                    Object object = resultSet.getObject(columnName);
+                    //创建属性描述器对象,对对象的set方法进行赋值
+                    PropertyDescriptor propertyDescriptor = new PropertyDescriptor(columnName.toLowerCase(), beanClass);
+                    //获取set方法
+                    Method writeMethod = propertyDescriptor.getWriteMethod();
+                    //执行set方法,赋值
+                    writeMethod.invoke(bean, object);
+                }
+                //将对象保存到集合中
+                list.add(bean);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //返回对象
+        return list;
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\Handler\\ResultSetHandler.java
+package tools.Handler;
+
+import java.sql.ResultSet;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.Handler
+ * Interface(接口名): ResultSetHandler
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:59
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public interface ResultSetHandler<T>
+{
+    <T> T handler(ResultSet resultSet);
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\Handler\\ScalarHandler.java
+package tools.Handler;
+
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.Handler
+ * Class(类名): SclalerHandler
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 23:04
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+/*
+接口：
+public interface ResultSetHandler<T>
+{
+    <T> T handler(ResultSet resultSet);
+}
+ */
+
+@SuppressWarnings("all")
+public class ScalarHandler<T> implements ResultSetHandler<T>
+{
+
+    //构造方法
+    public ScalarHandler()
+    {
+
+    }
+
+    /**
+     * 根据结果集对象返回对应的数据
+     *
+     * @param resultSet 结果集对象
+     * @return Long型的变量
+     */
+    @Override
+    public Long handler(ResultSet resultSet)
+    {
+        //定义Long类型的变量
+        Long value = null;
+        try
+        {
+            //获取结果集的数据
+            if (resultSet.next())
+            {
+                //通过结果集的对象获取结果源信息对象
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                //获取第一列的列名
+                String columnName = metaData.getColumnName(1);
+                //通过列名获取数据
+                value = resultSet.getLong(columnName);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //返回对象
+        return value;
+    }
+}
+
+�
