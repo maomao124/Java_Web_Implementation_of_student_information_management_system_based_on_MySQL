@@ -1,0 +1,13 @@
+12
+src\\main\\java\\data\\Administrators.java
+src\\main\\java\\data\\AdministratorsPassword.java
+src\\main\\java\\data\\Class.java
+src\\main\\java\\data\\Course.java
+src\\main\\java\\data\\Forum.java
+src\\main\\java\\data\\News.java
+src\\main\\java\\data\\Score.java
+src\\main\\java\\data\\Student.java
+src\\main\\java\\data\\StudentPassword.java
+src\\main\\java\\data\\Teach.java
+src\\main\\java\\data\\Teacher.java
+src\\main\\java\\data\\TeacherPassword.java

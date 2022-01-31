@@ -1,0 +1,1833 @@
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Administrators.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Administrators
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 21:43
+ * Version(版本): 1.0
+ * Description(描述)： 管理员类数据
+ */
+
+public class Administrators
+{
+    //管理员编号
+    private Long administrator_no;
+    //管理员姓名
+    private String administrator_name;
+    //管理员职务
+    private String administrator_job;
+
+    /**
+     * 无参构造
+     */
+    public Administrators()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param administrator_no   管理员编号
+     * @param administrator_name 管理员姓名
+     * @param administrator_job  管理员职务
+     */
+    public Administrators(Long administrator_no, String administrator_name, String administrator_job)
+    {
+        if (administrator_no < 0)
+        {
+            this.administrator_no = 0L;
+        }
+        else
+        {
+            this.administrator_no = administrator_no;
+        }
+        this.administrator_name = administrator_name;
+        this.administrator_job = administrator_job;
+    }
+
+    //对应的getter方法和setter方法
+
+
+    public Long getAdministrator_no()
+    {
+        return administrator_no;
+    }
+
+    public void setAdministrator_no(Long administrator_no)
+    {
+        if (administrator_no < 0)
+        {
+            this.administrator_no = 0L;
+        }
+        else
+        {
+            this.administrator_no = administrator_no;
+        }
+    }
+
+    public String getAdministrator_name()
+    {
+        return administrator_name;
+    }
+
+    public void setAdministrator_name(String administrator_name)
+    {
+        this.administrator_name = administrator_name;
+    }
+
+    public String getAdministrator_job()
+    {
+        return administrator_job;
+    }
+
+    public void setAdministrator_job(String administrator_job)
+    {
+        this.administrator_job = administrator_job;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
+        stringbuilder.append("administrator_name：").append(administrator_name).append('\t');
+        stringbuilder.append("administrator_job：").append(administrator_job).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\AdministratorsPassword.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): AdministratorsPassword
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 21:52
+ * Version(版本): 1.0
+ * Description(描述)： 管理员密码
+ */
+
+public class AdministratorsPassword
+{
+    //管理员编号
+    private Long administrator_no;
+    //管理员密码
+    private String administrator_password;
+
+    /**
+     * 无参构造
+     */
+    public AdministratorsPassword()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param administrator_no       管理员编号
+     * @param administrator_password 管理员密码
+     */
+    public AdministratorsPassword(Long administrator_no, String administrator_password)
+    {
+        if (administrator_no < 0)
+        {
+            this.administrator_no = 0L;
+        }
+        else
+        {
+            this.administrator_no = administrator_no;
+        }
+        this.administrator_password = administrator_password;
+    }
+
+    //对应的getter方法和setter方法
+
+
+    public Long getAdministrator_no()
+    {
+        return administrator_no;
+    }
+
+    public void setAdministrator_no(Long administrator_no)
+    {
+        if (administrator_no < 0)
+        {
+            this.administrator_no = 0L;
+        }
+        else
+        {
+            this.administrator_no = administrator_no;
+        }
+    }
+
+    public String getAdministrator_password()
+    {
+        return administrator_password;
+    }
+
+    public void setAdministrator_password(String administrator_password)
+    {
+        this.administrator_password = administrator_password;
+    }
+
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
+        stringbuilder.append("administrator_password：").append(administrator_password).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Class.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Class
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 21:56
+ * Version(版本): 1.0
+ * Description(描述)： 班级
+ */
+
+public class Class
+{
+    //班级编号
+    private Long class_no;
+    //班级名称
+    private String class_name;
+    //所属学院
+    private String class_college;
+    //所属专业
+    private String class_major;
+    //入学年份
+    private Integer class_enrollment_year;
+
+    /**
+     * 无参构造
+     */
+    public Class()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param class_no              班级编号
+     * @param class_name            班级名称
+     * @param class_college         所属学院
+     * @param class_major           所属专业
+     * @param class_enrollment_year 入学年份
+     */
+    public Class(Long class_no, String class_name, String class_college, String class_major, Integer class_enrollment_year)
+    {
+        this.class_no = class_no;
+        this.class_name = class_name;
+        this.class_college = class_college;
+        this.class_major = class_major;
+        if (class_enrollment_year >= 0)
+        {
+            this.class_enrollment_year = class_enrollment_year;
+        }
+        else
+        {
+            this.class_enrollment_year = 0;
+        }
+    }
+
+    //对应的getter方法和setter方法
+
+
+    public Long getClass_no()
+    {
+        return class_no;
+    }
+
+    public void setClass_no(Long class_no)
+    {
+        this.class_no = class_no;
+    }
+
+    public String getClass_name()
+    {
+        return class_name;
+    }
+
+    public void setClass_name(String class_name)
+    {
+        this.class_name = class_name;
+    }
+
+    public String getClass_college()
+    {
+        return class_college;
+    }
+
+    public void setClass_college(String class_college)
+    {
+        this.class_college = class_college;
+    }
+
+    public String getClass_major()
+    {
+        return class_major;
+    }
+
+    public void setClass_major(String class_major)
+    {
+        this.class_major = class_major;
+    }
+
+    public Integer getClass_enrollment_year()
+    {
+        return class_enrollment_year;
+    }
+
+    public void setClass_enrollment_year(Integer class_enrollment_year)
+    {
+        if (class_enrollment_year >= 0)
+        {
+            this.class_enrollment_year = class_enrollment_year;
+        }
+        else
+        {
+            this.class_enrollment_year = 0;
+        }
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("class_no：").append(class_no).append('\t');
+        stringbuilder.append("class_name：").append(class_name).append('\t');
+        stringbuilder.append("class_college：").append(class_college).append('\t');
+        stringbuilder.append("class_major：").append(class_major).append('\t');
+        stringbuilder.append("class_enrollment_year：").append(class_enrollment_year).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Course.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Course
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:01
+ * Version(版本): 1.0
+ * Description(描述)： 课程
+ */
+
+public class Course
+{
+    //课程编号
+    private Long course_no;
+    //课程名称
+    private String course_name;
+    //课程学分
+    private Float course_credit;
+    //课程学时
+    private Integer course_hour;
+    //方式，考试或者考察
+    private String course_mode;
+
+    /**
+     * 无参构造
+     */
+    public Course()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param course_no     课程编号
+     * @param course_name   课程名称
+     * @param course_credit 课程学分
+     * @param course_hour   课程学时
+     * @param course_mode   方式，考试或者考察
+     */
+    public Course(Long course_no, String course_name, Float course_credit, Integer course_hour, String course_mode)
+    {
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+        this.course_name = course_name;
+        if (course_credit >= 0)
+        {
+            this.course_credit = course_credit;
+        }
+        else
+        {
+            this.course_credit = 0f;
+        }
+        if (course_hour >= 0)
+        {
+            this.course_hour = course_hour;
+        }
+        else
+        {
+            this.course_hour = 0;
+        }
+        this.course_mode = course_mode;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getCourse_no()
+    {
+        return course_no;
+    }
+
+    public void setCourse_no(Long course_no)
+    {
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+    }
+
+    public Float getCourse_credit()
+    {
+        return course_credit;
+    }
+
+    public void setCourse_credit(Float course_credit)
+    {
+        if (course_credit >= 0)
+        {
+            this.course_credit = course_credit;
+        }
+        else
+        {
+            this.course_credit = 0f;
+        }
+    }
+
+    public Integer getCourse_hour()
+    {
+        return course_hour;
+    }
+
+    public void setCourse_hour(Integer course_hour)
+    {
+        if (course_hour >= 0)
+        {
+            this.course_hour = course_hour;
+        }
+        else
+        {
+            this.course_hour = 0;
+        }
+    }
+
+    public String getCourse_name()
+    {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name)
+    {
+        this.course_name = course_name;
+    }
+
+    public String getCourse_mode()
+    {
+        return course_mode;
+    }
+
+    public void setCourse_mode(String course_mode)
+    {
+        this.course_mode = course_mode;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("course_no：").append(course_no).append('\t');
+        stringbuilder.append("course_name：").append(course_name).append('\t');
+        stringbuilder.append("course_credit：").append(course_credit).append('\t');
+        stringbuilder.append("course_hour：").append(course_hour).append('\t');
+        stringbuilder.append("course_mode：").append(course_mode).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Forum.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Forum
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:07
+ * Version(版本): 1.0
+ * Description(描述)： 论坛
+ */
+
+public class Forum
+{
+    //论坛编号，楼层
+    private Long forum_no;
+    //论坛发布者的学号或职工号，当发布不当言论时，可以通过此消息定位到某个人，不对外显示，和其它表独立
+    private Long forum_people_no;
+    //论坛发布者姓名
+    private String forum_name;
+    //论坛发布者身份，学生，老师或者管理员
+    private String forum_identity;
+    //论坛发布时间，这里用程序填充时间
+    private String forum_time;
+    //论坛文字内容，最大长度255字
+    private String forum_content;
+
+    /**
+     * 无参构造
+     */
+    public Forum()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param forum_no        论坛编号，楼层
+     * @param forum_people_no 论坛发布者的学号或职工号，当发布不当言论时，可以通过此消息定位到某个人，不对外显示，和其它表独立
+     * @param forum_name      论坛发布者姓名
+     * @param forum_identity  论坛发布者身份，学生，老师或者管理员
+     * @param forum_time      论坛发布时间，这里用程序填充时间
+     * @param forum_content   论坛文字内容，最大长度255字
+     */
+    public Forum(Long forum_no, Long forum_people_no, String forum_name, String forum_identity, String forum_time, String forum_content)
+    {
+        if (forum_no >= 0)
+        {
+            this.forum_no = forum_no;
+        }
+        else
+        {
+            this.forum_no = 0L;
+        }
+        if (forum_people_no >= 0)
+        {
+            this.forum_people_no = forum_people_no;
+        }
+        else
+        {
+            this.forum_people_no = 0L;
+        }
+        this.forum_name = forum_name;
+        this.forum_identity = forum_identity;
+        this.forum_time = forum_time;
+        this.forum_content = forum_content;
+    }
+
+    public Long getForum_no()
+    {
+        return forum_no;
+    }
+
+    public void setForum_no(Long forum_no)
+    {
+        if (forum_no >= 0)
+        {
+            this.forum_no = forum_no;
+        }
+        else
+        {
+            this.forum_no = 0L;
+        }
+    }
+
+    public Long getForum_people_no()
+    {
+        return forum_people_no;
+    }
+
+    public void setForum_people_no(Long forum_people_no)
+    {
+        if (forum_people_no >= 0)
+        {
+            this.forum_people_no = forum_people_no;
+        }
+        else
+        {
+            this.forum_people_no = 0L;
+        }
+    }
+
+    public String getForum_name()
+    {
+        return forum_name;
+    }
+
+    public void setForum_name(String forum_name)
+    {
+        this.forum_name = forum_name;
+    }
+
+    public String getForum_identity()
+    {
+        return forum_identity;
+    }
+
+    public void setForum_identity(String forum_identity)
+    {
+        this.forum_identity = forum_identity;
+    }
+
+    public String getForum_time()
+    {
+        return forum_time;
+    }
+
+    public void setForum_time(String forum_time)
+    {
+        this.forum_time = forum_time;
+    }
+
+    public String getForum_content()
+    {
+        return forum_content;
+    }
+
+    public void setForum_content(String forum_content)
+    {
+        this.forum_content = forum_content;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("forum_no：").append(forum_no).append('\t');
+        stringbuilder.append("forum_people_no：").append(forum_people_no).append('\t');
+        stringbuilder.append("forum_name：").append(forum_name).append('\t');
+        stringbuilder.append("forum_identity：").append(forum_identity).append('\t');
+        stringbuilder.append("forum_time：").append(forum_time).append('\t');
+        stringbuilder.append("forum_content：").append(forum_content).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\News.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): News
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:17
+ * Version(版本): 1.0
+ * Description(描述)： 新闻
+ */
+
+public class News
+{
+    //新闻编号
+    private Long new_no;
+    //新闻发布者(作者)
+    private String new_author;
+    //新闻发布时间，时间由程序填充
+    private String new_time;
+    //新闻标题
+    private String new_title;
+    //新闻内容
+    private String new_text;
+
+    /**
+     * 无参构造
+     */
+    public News()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param new_no     新闻编号
+     * @param new_author 新闻发布者(作者)
+     * @param new_time   新闻发布时间，时间由程序填充
+     * @param new_title  新闻标题
+     * @param new_text   新闻内容
+     */
+    public News(Long new_no, String new_author, String new_time, String new_title, String new_text)
+    {
+        if (new_no >= 0)
+        {
+            this.new_no = new_no;
+        }
+        else
+        {
+            this.new_no = 0L;
+        }
+        this.new_author = new_author;
+        this.new_time = new_time;
+        this.new_title = new_title;
+        this.new_text = new_text;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getNew_no()
+    {
+        return new_no;
+    }
+
+    public void setNew_no(Long new_no)
+    {
+        if (new_no >= 0)
+        {
+            this.new_no = new_no;
+        }
+        else
+        {
+            this.new_no = 0L;
+        }
+    }
+
+    public String getNew_author()
+    {
+        return new_author;
+    }
+
+    public void setNew_author(String new_author)
+    {
+        this.new_author = new_author;
+    }
+
+    public String getNew_time()
+    {
+        return new_time;
+    }
+
+    public void setNew_time(String new_time)
+    {
+        this.new_time = new_time;
+    }
+
+    public String getNew_title()
+    {
+        return new_title;
+    }
+
+    public void setNew_title(String new_title)
+    {
+        this.new_title = new_title;
+    }
+
+    public String getNew_text()
+    {
+        return new_text;
+    }
+
+    public void setNew_text(String new_text)
+    {
+        this.new_text = new_text;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("new_no：").append(new_no).append('\t');
+        stringbuilder.append("new_author：").append(new_author).append('\t');
+        stringbuilder.append("new_time：").append(new_time).append('\t');
+        stringbuilder.append("new_title：").append(new_title).append('\t');
+        stringbuilder.append("new_text：").append(new_text).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Score.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Score
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:23
+ * Version(版本): 1.0
+ * Description(描述)： 分数
+ */
+
+public class Score
+{
+    //学生学号
+    private Long no;
+    //课程编号
+    private Long course_no;
+    //平时成绩
+    private Float usual_score;
+    //期末成绩
+    private Float end_score;
+    //最终分数
+    private Float final_score;
+    //绩点
+    private Float grade_point;
+    //学期
+    private String semester;
+
+    /**
+     * 无参构造
+     */
+    public Score()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param no          学生学号
+     * @param course_no   课程编号
+     * @param usual_score 平时成绩
+     * @param end_score   期末成绩
+     * @param final_score 最终分数
+     * @param grade_point 绩点
+     * @param semester    学期
+     */
+    public Score(Long no, Long course_no, Float usual_score, Float end_score, Float final_score, Float grade_point, String semester)
+    {
+        if (no >= 0)
+        {
+            this.no = no;
+        }
+        else
+        {
+            this.no = 0L;
+        }
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+        if (usual_score >= 0)
+        {
+            this.usual_score = usual_score;
+        }
+        else
+        {
+            this.usual_score = 0f;
+        }
+        if (end_score >= 0)
+        {
+            this.end_score = end_score;
+        }
+        else
+        {
+            this.end_score = 0f;
+        }
+        if (final_score >= 0)
+        {
+            this.final_score = final_score;
+        }
+        else
+        {
+            this.final_score = 0f;
+        }
+        if (grade_point >= 0)
+        {
+            this.grade_point = grade_point;
+        }
+        else
+        {
+            this.grade_point = 0f;
+        }
+        this.semester = semester;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getNo()
+    {
+        return no;
+    }
+
+    public void setNo(Long no)
+    {
+        if (no >= 0)
+        {
+            this.no = no;
+        }
+        else
+        {
+            this.no = 0L;
+        }
+    }
+
+    public Long getCourse_no()
+    {
+        return course_no;
+    }
+
+    public void setCourse_no(Long course_no)
+    {
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+    }
+
+    public Float getUsual_score()
+    {
+        return usual_score;
+    }
+
+    public void setUsual_score(Float usual_score)
+    {
+        if (usual_score >= 0)
+        {
+            this.usual_score = usual_score;
+        }
+        else
+        {
+            this.usual_score = 0f;
+        }
+    }
+
+    public Float getEnd_score()
+    {
+        return end_score;
+    }
+
+    public void setEnd_score(Float end_score)
+    {
+        if (end_score >= 0)
+        {
+            this.end_score = end_score;
+        }
+        else
+        {
+            this.end_score = 0f;
+        }
+    }
+
+    public Float getFinal_score()
+    {
+        return final_score;
+    }
+
+    public void setFinal_score(Float final_score)
+    {
+        if (final_score >= 0)
+        {
+            this.final_score = final_score;
+        }
+        else
+        {
+            this.final_score = 0f;
+        }
+    }
+
+    public Float getGrade_point()
+    {
+        return grade_point;
+    }
+
+    public void setGrade_point(Float grade_point)
+    {
+        if (grade_point >= 0)
+        {
+            this.grade_point = grade_point;
+        }
+        else
+        {
+            this.grade_point = 0f;
+        }
+    }
+
+    public String getSemester()
+    {
+        return semester;
+    }
+
+    public void setSemester(String semester)
+    {
+        this.semester = semester;
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("no：").append(no).append('\t');
+        stringbuilder.append("course_no：").append(course_no).append('\t');
+        stringbuilder.append("usual_score：").append(usual_score).append('\t');
+        stringbuilder.append("end_score：").append(end_score).append('\t');
+        stringbuilder.append("final_score：").append(final_score).append('\t');
+        stringbuilder.append("grade_point：").append(grade_point).append('\t');
+        stringbuilder.append("semester：").append(semester).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Student.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Student
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 21:28
+ * Version(版本): 1.0
+ * Description(描述)： 学生类数据
+ */
+
+public class Student
+{
+    //学号
+    private Long no;
+    //学生姓名
+    private String name;
+    //学生性别
+    private String sex;
+    //电话号码
+    private String telephone_number;
+    //家庭电话号码，或者紧急联系人
+    private String family_telephone_number;
+    //生日
+    private String birthday;
+    //家庭地址
+    private String address;
+    //身份证号
+    private String id_card;
+    //电子邮箱
+    private String email;
+    //寝室号
+    private String dormitory_number;
+    //所属班级号
+    private Long class_no;
+    //状态，在读、毕业或者退学
+    private String state;
+    //备注
+    private String remarks;
+
+
+    /**
+     * 无参构造
+     */
+    public Student()
+    {
+
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param no                      学号
+     * @param name                    学生姓名
+     * @param sex                     学生性别
+     * @param telephone_number        电话号码
+     * @param family_telephone_number 家庭电话号码，或者紧急联系人
+     * @param birthday                生日
+     * @param address                 家庭地址
+     * @param id_card                 身份证号
+     * @param email                   电子邮箱
+     * @param dormitory_number        寝室号
+     * @param class_no                所属班级号
+     * @param state                   状态，在读、毕业或者退学
+     * @param remarks                 备注
+     */
+    public Student(Long no, String name, String sex, String telephone_number, String family_telephone_number, String birthday,
+                   String address, String id_card, String email, String dormitory_number, Long class_no, String state, String remarks)
+    {
+        if (no <= 0)
+        {
+            this.no = 0L;
+        }
+        else
+        {
+            this.no = no;
+        }
+        this.name = name;
+        this.sex = sex;
+        this.telephone_number = telephone_number;
+        this.family_telephone_number = family_telephone_number;
+        this.birthday = birthday;
+        this.address = address;
+        this.id_card = id_card;
+        this.email = email;
+        this.dormitory_number = dormitory_number;
+        if (class_no < 0)
+        {
+            this.class_no = 0L;
+        }
+        else
+        {
+            this.class_no = class_no;
+        }
+        this.state = state;
+        this.remarks = remarks;
+    }
+
+    //对应的getter方法和setter方法
+
+    public long getNo()
+    {
+        return no;
+    }
+
+    public void setNo(Long no)
+    {
+        if (no <= 0)
+        {
+            this.no = 0L;
+        }
+        else
+        {
+            this.no = no;
+        }
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getSex()
+    {
+        return sex;
+    }
+
+    public void setSex(String sex)
+    {
+        this.sex = sex;
+    }
+
+    public String getTelephone_number()
+    {
+        return telephone_number;
+    }
+
+    public void setTelephone_number(String telephone_number)
+    {
+        this.telephone_number = telephone_number;
+    }
+
+    public String getFamily_telephone_number()
+    {
+        return family_telephone_number;
+    }
+
+    public void setFamily_telephone_number(String family_telephone_number)
+    {
+        this.family_telephone_number = family_telephone_number;
+    }
+
+    public String getBirthday()
+    {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday)
+    {
+        this.birthday = birthday;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public String getId_card()
+    {
+        return id_card;
+    }
+
+    public void setId_card(String id_card)
+    {
+        this.id_card = id_card;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public String getDormitory_number()
+    {
+        return dormitory_number;
+    }
+
+    public void setDormitory_number(String dormitory_number)
+    {
+        this.dormitory_number = dormitory_number;
+    }
+
+    public long getClass_no()
+    {
+        return class_no;
+    }
+
+    public void setClass_no(Long class_no)
+    {
+        if (class_no < 0)
+        {
+            this.class_no = 0L;
+        }
+        else
+        {
+            this.class_no = class_no;
+        }
+    }
+
+    public String getState()
+    {
+        return state;
+    }
+
+    public void setState(String state)
+    {
+        this.state = state;
+    }
+
+    public String getRemarks()
+    {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks)
+    {
+        this.remarks = remarks;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 打印属性的字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("no：").append(no).append('\t');
+        stringbuilder.append("name：").append(name).append('\t');
+        stringbuilder.append("sex：").append(sex).append('\t');
+        stringbuilder.append("telephone_number：").append(telephone_number).append('\t');
+        stringbuilder.append("family_telephone_number：").append(family_telephone_number).append('\t');
+        stringbuilder.append("birthday：").append(birthday).append('\t');
+        stringbuilder.append("address：").append(address).append('\t');
+        stringbuilder.append("id_card：").append(id_card).append('\t');
+        stringbuilder.append("email：").append(email).append('\t');
+        stringbuilder.append("dormitory_number：").append(dormitory_number).append('\t');
+        stringbuilder.append("class_no：").append(class_no).append('\t');
+        stringbuilder.append("state：").append(state).append('\t');
+        stringbuilder.append("remarks：").append(remarks).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\StudentPassword.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): StudentPassword
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:30
+ * Version(版本): 1.0
+ * Description(描述)： 学生密码
+ */
+
+public class StudentPassword
+{
+    //学生学号
+    private Long no;
+    //学生登录密码
+    private String password;
+
+    /**
+     * 无参构造
+     */
+    public StudentPassword()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param no       学生学号
+     * @param password 学生登录密码
+     */
+    public StudentPassword(Long no, String password)
+    {
+        if (no >= 0)
+        {
+            this.no = no;
+        }
+        else
+        {
+            this.no = 0L;
+        }
+        this.password = password;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getNo()
+    {
+        return no;
+    }
+
+    public void setNo(Long no)
+    {
+        if (no >= 0)
+        {
+            this.no = no;
+        }
+        else
+        {
+            this.no = 0L;
+        }
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("no：").append(no).append('\t');
+        stringbuilder.append("password：").append(password).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Teach.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Teach
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:35
+ * Version(版本): 1.0
+ * Description(描述)： 教
+ */
+
+public class Teach
+{
+    //编号
+    private Long teach_no;
+    //老师编号
+    private Long teacher_no;
+    //老师所教的班级编号
+    private Long class_no;
+    //学期,比如：2019年下学期
+    private String semester;
+
+    /**
+     * 无参构造
+     */
+    public Teach()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param teach_no   编号
+     * @param teacher_no 老师编号
+     * @param class_no   老师所教的班级编号
+     * @param semester   学期,比如：2019年下学期
+     */
+    public Teach(Long teach_no, Long teacher_no, Long class_no, String semester)
+    {
+        if (teach_no >= 0)
+        {
+            this.teach_no = teach_no;
+        }
+        else
+        {
+            this.teach_no = 0L;
+        }
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+        if (class_no >= 0)
+        {
+            this.class_no = class_no;
+        }
+        else
+        {
+            this.class_no = 0L;
+        }
+        this.semester = semester;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getTeach_no()
+    {
+        return teach_no;
+    }
+
+    public void setTeach_no(Long teach_no)
+    {
+        if (teach_no >= 0)
+        {
+            this.teach_no = teach_no;
+        }
+        else
+        {
+            this.teach_no = 0L;
+        }
+    }
+
+    public Long getTeacher_no()
+    {
+        return teacher_no;
+    }
+
+    public void setTeacher_no(Long teacher_no)
+    {
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+    }
+
+    public Long getClass_no()
+    {
+        return class_no;
+    }
+
+    public void setClass_no(Long class_no)
+    {
+        if (class_no >= 0)
+        {
+            this.class_no = class_no;
+        }
+        else
+        {
+            this.class_no = 0L;
+        }
+    }
+
+    public String getSemester()
+    {
+        return semester;
+    }
+
+    public void setSemester(String semester)
+    {
+        this.semester = semester;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("teach_no：").append(teach_no).append('\t');
+        stringbuilder.append("teacher_no：").append(teacher_no).append('\t');
+        stringbuilder.append("class_no：").append(class_no).append('\t');
+        stringbuilder.append("semester：").append(semester).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\Teacher.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): Teacher
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:41
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class Teacher
+{
+    //老师编号
+    private Long teacher_no;
+    //老师姓名
+    private String teacher_name;
+    //老师性别
+    private String teacher_sex;
+    //老师电话号码
+    private String teacher_telephone_number;
+    //老师电子邮箱
+    private String teacher_email;
+    //老师家庭地址
+    private String teacher_address;
+    //老师身份证号码
+    private String teacher_idcard;
+
+    /**
+     * 无参构造
+     */
+    public Teacher()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param teacher_no               老师编号
+     * @param teacher_name             老师姓名
+     * @param teacher_sex              老师性别
+     * @param teacher_telephone_number 老师电话号码
+     * @param teacher_email            老师电子邮箱
+     * @param teacher_address          老师家庭地址
+     * @param teacher_idcard           老师身份证号码
+     */
+    public Teacher(Long teacher_no, String teacher_name, String teacher_sex, String teacher_telephone_number,
+                   String teacher_email, String teacher_address, String teacher_idcard)
+    {
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+        this.teacher_name = teacher_name;
+        this.teacher_sex = teacher_sex;
+        this.teacher_telephone_number = teacher_telephone_number;
+        this.teacher_email = teacher_email;
+        this.teacher_address = teacher_address;
+        this.teacher_idcard = teacher_idcard;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getTeacher_no()
+    {
+        return teacher_no;
+    }
+
+    public void setTeacher_no(Long teacher_no)
+    {
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+    }
+
+    public String getTeacher_name()
+    {
+        return teacher_name;
+    }
+
+    public void setTeacher_name(String teacher_name)
+    {
+        this.teacher_name = teacher_name;
+    }
+
+    public String getTeacher_sex()
+    {
+        return teacher_sex;
+    }
+
+    public void setTeacher_sex(String teacher_sex)
+    {
+        this.teacher_sex = teacher_sex;
+    }
+
+    public String getTeacher_telephone_number()
+    {
+        return teacher_telephone_number;
+    }
+
+    public void setTeacher_telephone_number(String teacher_telephone_number)
+    {
+        this.teacher_telephone_number = teacher_telephone_number;
+    }
+
+    public String getTeacher_email()
+    {
+        return teacher_email;
+    }
+
+    public void setTeacher_email(String teacher_email)
+    {
+        this.teacher_email = teacher_email;
+    }
+
+    public String getTeacher_address()
+    {
+        return teacher_address;
+    }
+
+    public void setTeacher_address(String teacher_address)
+    {
+        this.teacher_address = teacher_address;
+    }
+
+    public String getTeacher_idcard()
+    {
+        return teacher_idcard;
+    }
+
+    public void setTeacher_idcard(String teacher_idcard)
+    {
+        this.teacher_idcard = teacher_idcard;
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("teacher_no：").append(teacher_no).append('\t');
+        stringbuilder.append("teacher_name：").append(teacher_name).append('\t');
+        stringbuilder.append("teacher_sex：").append(teacher_sex).append('\t');
+        stringbuilder.append("teacher_telephone_number：").append(teacher_telephone_number).append('\t');
+        stringbuilder.append("teacher_email：").append(teacher_email).append('\t');
+        stringbuilder.append("teacher_address：").append(teacher_address).append('\t');
+        stringbuilder.append("teacher_idcard：").append(teacher_idcard).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\TeacherPassword.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): TeacherPassword
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/1/31
+ * Time(创建时间)： 22:50
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class TeacherPassword
+{
+    //老师编号
+    private Long teacher_no;
+    //老师登录密码
+    private String teacher_password;
+
+    /**
+     * 无参构造
+     */
+    public TeacherPassword()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param teacher_no       老师编号
+     * @param teacher_password 老师登录密码
+     */
+    public TeacherPassword(Long teacher_no, String teacher_password)
+    {
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+        this.teacher_password = teacher_password;
+    }
+
+    //对应的getter方法和setter方法
+
+    public Long getTeacher_no()
+    {
+        return teacher_no;
+    }
+
+    public void setTeacher_no(Long teacher_no)
+    {
+        if (teacher_no >= 0)
+        {
+            this.teacher_no = teacher_no;
+        }
+        else
+        {
+            this.teacher_no = 0L;
+        }
+    }
+
+    public String getTeacher_password()
+    {
+        return teacher_password;
+    }
+
+    public void setTeacher_password(String teacher_password)
+    {
+        this.teacher_password = teacher_password;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("teacher_no：").append(teacher_no).append('\t');
+        stringbuilder.append("teacher_password：").append(teacher_password).append('\n');
+        return stringbuilder.toString();
+    }
+}
+�
