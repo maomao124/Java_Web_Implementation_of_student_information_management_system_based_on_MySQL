@@ -15,20 +15,22 @@ body {
 }
 
 div {
+    width: 580px;
     position: absolute;
     top: 17%;
-    left: 35%;
+    left: 50%;
     font-size: 48px;
     color: red;
     border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
 }
 
 a {
     color: coral;
     font-size: 36px;
     position: absolute;
-    top: 30%;
-    left: 42%;
+    top: 40%;
+    left: 50%;
     display: block;
     width: 200px;
     height: 100px;
@@ -37,5 +39,6 @@ a {
     text-align: center;
     text-decoration: none;
     border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
 }
     
