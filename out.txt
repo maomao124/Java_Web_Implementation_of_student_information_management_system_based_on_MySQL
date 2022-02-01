@@ -1831,6 +1831,258 @@ public class TeacherPassword
     }
 }
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Administrators.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Administrators
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Administrators
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\AdministratorsPassword.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): AdministratorsPassword
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class AdministratorsPassword
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Class.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Class
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Class
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Course.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Course
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Course
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Forum.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Forum
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Forum
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\News.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): News
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class News
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Score.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Score
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Score
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Student.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Student
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:11
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Student
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\StudentPassword.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): StudentPassword
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class StudentPassword
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Teach.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Teach
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Teach
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Teacher.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Teacher
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:13
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class Teacher
+{
+
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\TeacherPassword.java
+package table;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): TeacherPassword
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:14
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æ— 
+ */
+
+public class TeacherPassword
+{
+
+}
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\tools\\Druid.java
 package tools;
 
@@ -2282,6 +2534,7 @@ public class Druid
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\tools\\Handler\\BeanHandler.java
 package tools.Handler;
 
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -2308,7 +2561,7 @@ public interface ResultSetHandler<T>
 }
  */
 
-@SuppressWarnings("all")
+
 public class BeanHandler<T> implements ResultSetHandler<T>
 {
 
@@ -3242,4 +3495,196 @@ public class JDBCTemplate
 }
 
 
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): index
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:18
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>ç®¡ç†å‘˜-èœå•</title>
+</head>
+<body>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\Authentication.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): Authentication
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:16
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>èº«ä»½éªŒè¯</title>
+</head>
+<body>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\Error.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): Error
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:17
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>é”™è¯¯</title>
+</head>
+<body>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\index.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): index
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 21:07
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š ç´¢å¼•çš„cssæ–‡ä»¶
+ */
+
+body {
+    background-color: skyblue;
+}
+
+div {
+    position: absolute;
+    top: 17%;
+    left: 35%;
+    font-size: 48px;
+    color: red;
+    border: 10px dotted lightpink;
+}
+
+a {
+    color: coral;
+    font-size: 36px;
+    position: absolute;
+    top: 30%;
+    left: 42%;
+    display: block;
+    width: 200px;
+    height: 100px;
+    background-color: lawngreen;
+    line-height: 100px;
+    text-align: center;
+    text-decoration: none;
+    border: 10px dotted lightpink;
+}
+    ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\index.jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<br/>
+<div>
+    <c:out value="æ¬¢è¿ä½¿ç”¨å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ" escapeXml="true" default="null"/>
+</div>
+<a href="">è¿›å…¥ç¨‹åº</a>
+</body>
+</html>ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\Login.html
+<!DOCTYPE html>
+
+<!--
+Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): Login
+  Authors(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:15
+  Description(æè¿°)ï¼š æ— 
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ç™»å½•</title>
+</head>
+<body>
+
+</body>
+</html>ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\student\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): index
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:19
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>å­¦ç”Ÿ-èœå•</title>
+</head>
+<body>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\teacher\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): index
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:19
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>è€å¸ˆ-èœå•</title>
+</head>
+<body>
+
+</body>
+</html>
 ÿ
