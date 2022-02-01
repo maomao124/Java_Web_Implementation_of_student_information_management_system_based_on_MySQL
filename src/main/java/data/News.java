@@ -139,11 +139,11 @@ public class News
     public String toString()
     {
         final StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("new_no：").append(new_no).append('\n');
-        stringbuilder.append("new_author：").append(new_author).append('\n');
-        stringbuilder.append("new_identity：").append(new_identity).append('\n');
-        stringbuilder.append("new_time：").append(new_time).append('\n');
-        stringbuilder.append("new_title：").append(new_title).append('\n');
+        stringbuilder.append("new_no：").append(new_no).append('\t');
+        stringbuilder.append("new_author：").append(new_author).append('\t');
+        stringbuilder.append("new_identity：").append(new_identity).append('\t');
+        stringbuilder.append("new_time：").append(new_time).append('\t');
+        stringbuilder.append("new_title：").append(new_title).append('\t');
         stringbuilder.append("new_text：").append(new_text).append('\n');
         return stringbuilder.toString();
     }

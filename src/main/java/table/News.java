@@ -1,11 +1,13 @@
 package table;
 
 import tools.Handler.BeanHandler;
+import tools.Handler.BeanListHandler;
 import tools.Handler.ScalarHandler;
 import tools.JDBCTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
@@ -67,7 +69,15 @@ public class News
         return news_count;
     }
 
-
+    /**
+     * 插入一条新闻
+     *
+     * @param new_author   作者
+     * @param new_identity 身份
+     * @param new_title    标题
+     * @param new_text     正文
+     * @return 插入身份成功，成功则返回true，失败返回false
+     */
     public static boolean insert(String new_author, String new_identity, String new_title, String new_text)
     {
         //应该确保数据不为空
@@ -90,7 +100,7 @@ public class News
         //获得时间信息
         Date date = new Date();
         //格式化时间
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd   HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
         //获得格式后的字符串
         String time = simpleDateFormat.format(date);
         //System.out.println(time);
@@ -106,5 +116,20 @@ public class News
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获得新闻清单，不包括正文，按编号降序
+     *
+     * @return List<data.News>对象
+     */
+    public static List<data.News> getNewsList()
+    {
+        //sql语句
+        String sql = "SELECT news.new_no,news.new_author,news.new_identity,news.new_time,news.new_title FROM news ORDER BY new_no DESC";
+        //查询
+        List<data.News> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.News.class));
+        //返回
+        return list;
     }
 }

@@ -2,6 +2,8 @@ package table;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -39,5 +41,15 @@ class NewsTest
     {
         boolean insert = News.insert("张三", "校长", "学校2020年总结", "正文");
         System.out.println(insert);
+    }
+
+    @Test
+    void getNewsList()
+    {
+        List<data.News> list = News.getNewsList();
+        for (data.News news : list)
+        {
+            System.out.print(news);
+        }
     }
 }
