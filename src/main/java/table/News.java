@@ -132,4 +132,37 @@ public class News
         //返回
         return list;
     }
+
+    /**
+     * 获得第n条新闻
+     *
+     * @param new_number 数字n，新闻按编号降序，数字1则代表获取最新一条新闻，数字2代表获取第二条新闻，用于页面显示
+     * @return data.News对象，包括正文
+     */
+    public static data.News getNew(Long new_number)
+    {
+        //获得新闻总数
+        long count = getNewsCount();
+        //总数为0，直接返回null
+        if (count == 0)
+        {
+            return null;
+        }
+        //传入的编号大于总数，或者是负数和0，直接返回null
+        if (count < new_number || new_number <= 0)
+        {
+            return null;
+        }
+        long number = count - new_number;
+        //sql语句
+        String sql = "SELECT * FROM news LIMIT " + number + ",1";
+        System.out.println(sql);
+        data.News news = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.News.class));
+        //返回结果
+        if (news == null)
+        {
+            return null;
+        }
+        return news;
+    }
 }

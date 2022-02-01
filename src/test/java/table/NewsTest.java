@@ -52,4 +52,11 @@ class NewsTest
             System.out.print(news);
         }
     }
+
+    @Test
+    void getNew()
+    {
+        data.News news = News.getNew(1L);
+        System.out.println(news);
+    }
 }
