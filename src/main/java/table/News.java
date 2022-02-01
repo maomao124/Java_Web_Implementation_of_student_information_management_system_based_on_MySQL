@@ -156,7 +156,7 @@ public class News
         long number = count - new_number;
         //sql语句
         String sql = "SELECT * FROM news LIMIT " + number + ",1";
-        System.out.println(sql);
+        //System.out.println(sql);
         data.News news = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.News.class));
         //返回结果
         if (news == null)
@@ -164,5 +164,27 @@ public class News
             return null;
         }
         return news;
+    }
+
+    /**
+     * 删除一条新闻
+     *
+     * @param new_no 新闻编号
+     * @return 删除成功，返回true，删除失败返回false
+     */
+    public static boolean delete(Long new_no)
+    {
+        //sql语句
+        String sql = "delete from news where new_no=?";
+        //参数
+        Object[] objects = {new_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
     }
 }

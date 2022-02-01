@@ -59,4 +59,11 @@ class NewsTest
         data.News news = News.getNew(1L);
         System.out.println(news);
     }
+
+    @Test
+    void delete()
+    {
+        boolean result = News.delete(7L);
+        System.out.println(result);
+    }
 }
