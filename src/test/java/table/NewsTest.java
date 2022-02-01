@@ -33,4 +33,11 @@ class NewsTest
         Long newsCount = News.getNewsCount();
         System.out.println(newsCount);
     }
+
+    @Test
+    void insert()
+    {
+        boolean insert = News.insert("张三", "校长", "学校2020年总结", "正文");
+        System.out.println(insert);
+    }
 }

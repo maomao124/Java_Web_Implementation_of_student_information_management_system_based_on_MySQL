@@ -4,6 +4,9 @@ import tools.Handler.BeanHandler;
 import tools.Handler.ScalarHandler;
 import tools.JDBCTemplate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
  * Package(包名): table
@@ -65,4 +68,43 @@ public class News
     }
 
 
+    public static boolean insert(String new_author, String new_identity, String new_title, String new_text)
+    {
+        //应该确保数据不为空
+        if (new_author == null)
+        {
+            return false;
+        }
+        if (new_identity == null)
+        {
+            return false;
+        }
+        if (new_title == null)
+        {
+            return false;
+        }
+        if (new_text == null)
+        {
+            return false;
+        }
+        //获得时间信息
+        Date date = new Date();
+        //格式化时间
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd   HH:mm:ss");
+        //获得格式后的字符串
+        String time = simpleDateFormat.format(date);
+        //System.out.println(time);
+        //格式化参数
+        Object[] objects = {new_author, new_identity, time, new_title, new_text};
+        //sql语句
+        String sql = "insert into news (new_author,new_identity,new_time,new_title,new_text) values(?,?,?,?,?)";
+        //写入数据库
+        int result = JDBCTemplate.update(sql, objects);
+        //判断返回值
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

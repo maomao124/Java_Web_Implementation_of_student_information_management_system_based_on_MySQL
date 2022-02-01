@@ -19,6 +19,8 @@ public class News
     private Long new_no;
     //新闻发布者(作者)
     private String new_author;
+    //新闻发布者身份
+    private String new_identity;
     //新闻发布时间，时间由程序填充
     private String new_time;
     //新闻标题
@@ -87,6 +89,16 @@ public class News
         this.new_author = new_author;
     }
 
+    public String getNew_identity()
+    {
+        return new_identity;
+    }
+
+    public void setNew_identity(String new_identity)
+    {
+        this.new_identity = new_identity;
+    }
+
     public String getNew_time()
     {
         return new_time;
@@ -127,11 +139,12 @@ public class News
     public String toString()
     {
         final StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("new_no：").append(new_no).append('\t');
-        stringbuilder.append("new_author：").append(new_author).append('\t');
-        stringbuilder.append("new_time：").append(new_time).append('\t');
-        stringbuilder.append("new_title：").append(new_title).append('\t');
-        stringbuilder.append("new_text：").append(new_text).append('\t');
+        stringbuilder.append("new_no：").append(new_no).append('\n');
+        stringbuilder.append("new_author：").append(new_author).append('\n');
+        stringbuilder.append("new_identity：").append(new_identity).append('\n');
+        stringbuilder.append("new_time：").append(new_time).append('\n');
+        stringbuilder.append("new_title：").append(new_title).append('\n');
+        stringbuilder.append("new_text：").append(new_text).append('\n');
         return stringbuilder.toString();
     }
 }
