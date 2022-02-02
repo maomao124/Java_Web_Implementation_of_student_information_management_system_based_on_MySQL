@@ -10,7 +10,7 @@ package SHA;
  * Date(创建日期)： 2022/2/2
  * Time(创建时间)： 14:10
  * Version(版本): 1.0
- * Description(描述)： 散列算法 md5
+ * Description(描述)： 散列算法 md5，用于转换学生的密码和验证学生密码
  */
 
 public class MD5
@@ -242,6 +242,12 @@ public class MD5
         }
     }
 
+    /**
+     * 获得字符串对应的散列值，MD5，小写
+     *
+     * @param message 要转化的字符串
+     * @return 字符串对应的MD5码，小写
+     */
     public static String getMD5(String message)
     {
         String result = "";
@@ -251,6 +257,12 @@ public class MD5
         return result;
     }
 
+    /**
+     * 获得字符串对应的散列值，MD5，大写
+     *
+     * @param message 要转化的字符串
+     * @return 字符串对应的MD5码，大写
+     */
     public static String getMD5toUpperCase(String message)
     {
         String result = "";
