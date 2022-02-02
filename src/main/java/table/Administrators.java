@@ -61,4 +61,36 @@ public class Administrators
         }
         return administrator;
     }
+
+    /**
+     * 插入一条管理员信息,此操作应该只允许超级管理员操作
+     *
+     * @param administrator data.Administrators对象
+     * @return 插入成功，则返回true，失败返回false
+     */
+    public static boolean insert(data.Administrators administrator)
+    {
+        //获得身份证号码
+        String id_card = administrator.getAdministrator_idcard();
+        //获得密码，身份证后6位
+        String password = id_card.substring(id_card.length() - 6);
+        //获得密码的散列值
+        String password_SHA3_512 = SHA.SHA3_512.getSHA3_512(password);
+        //sql语句
+        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?)";
+        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(),
+                administrator.getAdministrator_job(), administrator.getAdministrator_idcard()};
+        String sql2 = "INSERT INTO administrators_password VALUES(?,?)";
+        Object[] objects2 = {administrator.getAdministrator_no(), password_SHA3_512};
+        //执行sql语句
+        String[] sql = {sql1, sql2};
+        Object[][] objects = {objects1, objects2};
+        int result = JDBCTemplate.update(sql, objects);
+        //返回
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

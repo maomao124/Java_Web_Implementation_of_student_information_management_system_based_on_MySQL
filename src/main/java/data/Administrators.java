@@ -21,6 +21,8 @@ public class Administrators
     private String administrator_name;
     //管理员职务
     private String administrator_job;
+    //管理员身份证号码
+    private String administrator_idcard;
 
     /**
      * 无参构造
@@ -32,11 +34,12 @@ public class Administrators
     /**
      * 全参构造
      *
-     * @param administrator_no   管理员编号
-     * @param administrator_name 管理员姓名
-     * @param administrator_job  管理员职务
+     * @param administrator_no     管理员编号
+     * @param administrator_name   管理员姓名
+     * @param administrator_job    管理员职务
+     * @param administrator_idcard 管理员身份证号码
      */
-    public Administrators(Long administrator_no, String administrator_name, String administrator_job)
+    public Administrators(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
     {
         if (administrator_no < 0)
         {
@@ -48,6 +51,7 @@ public class Administrators
         }
         this.administrator_name = administrator_name;
         this.administrator_job = administrator_job;
+        this.administrator_idcard = administrator_idcard;
     }
 
     //对应的getter方法和setter方法
@@ -90,6 +94,16 @@ public class Administrators
         this.administrator_job = administrator_job;
     }
 
+    public String getAdministrator_idcard()
+    {
+        return administrator_idcard;
+    }
+
+    public void setAdministrator_idcard(String administrator_idcard)
+    {
+        this.administrator_idcard = administrator_idcard;
+    }
+
     /**
      * toString方法
      *
@@ -102,7 +116,8 @@ public class Administrators
         final StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
         stringbuilder.append("administrator_name：").append(administrator_name).append('\t');
-        stringbuilder.append("administrator_job：").append(administrator_job).append('\n');
+        stringbuilder.append("administrator_job：").append(administrator_job).append('\t');
+        stringbuilder.append("administrator_idcard：").append(administrator_idcard).append('\n');
         return stringbuilder.toString();
     }
 }

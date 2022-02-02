@@ -31,6 +31,6 @@ class SHA256Test
     @Test
     void getSHA256toUpperCase()
     {
-        System.out.println(SHA.SHA256.getSHA256("123456"));
+        System.out.println(SHA.SHA256.getSHA256toUpperCase("123456"));
     }
 }

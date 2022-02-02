@@ -38,13 +38,14 @@ public class News
     /**
      * 全参构造
      *
-     * @param new_no     新闻编号
-     * @param new_author 新闻发布者(作者)
-     * @param new_time   新闻发布时间，时间由程序填充
-     * @param new_title  新闻标题
-     * @param new_text   新闻内容
+     * @param new_no       新闻编号
+     * @param new_author   新闻发布者(作者)
+     * @param new_time     新闻发布时间，时间由程序填充
+     * @param new_identity 新闻发布者身份
+     * @param new_title    新闻标题
+     * @param new_text     新闻内容
      */
-    public News(Long new_no, String new_author, String new_time, String new_title, String new_text)
+    public News(Long new_no, String new_author, String new_identity, String new_time, String new_title, String new_text)
     {
         if (new_no >= 0)
         {
@@ -55,6 +56,7 @@ public class News
             this.new_no = 0L;
         }
         this.new_author = new_author;
+        this.new_identity = new_identity;
         this.new_time = new_time;
         this.new_title = new_title;
         this.new_text = new_text;
