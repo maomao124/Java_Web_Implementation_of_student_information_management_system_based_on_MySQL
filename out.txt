@@ -22,6 +22,8 @@ public class Administrators
     private String administrator_name;
     //管理员职务
     private String administrator_job;
+    //管理员身份证号码
+    private String administrator_idcard;
 
     /**
      * 无参构造
@@ -33,11 +35,12 @@ public class Administrators
     /**
      * 全参构造
      *
-     * @param administrator_no   管理员编号
-     * @param administrator_name 管理员姓名
-     * @param administrator_job  管理员职务
+     * @param administrator_no     管理员编号
+     * @param administrator_name   管理员姓名
+     * @param administrator_job    管理员职务
+     * @param administrator_idcard 管理员身份证号码
      */
-    public Administrators(Long administrator_no, String administrator_name, String administrator_job)
+    public Administrators(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
     {
         if (administrator_no < 0)
         {
@@ -49,6 +52,7 @@ public class Administrators
         }
         this.administrator_name = administrator_name;
         this.administrator_job = administrator_job;
+        this.administrator_idcard = administrator_idcard;
     }
 
     //对应的getter方法和setter方法
@@ -91,6 +95,16 @@ public class Administrators
         this.administrator_job = administrator_job;
     }
 
+    public String getAdministrator_idcard()
+    {
+        return administrator_idcard;
+    }
+
+    public void setAdministrator_idcard(String administrator_idcard)
+    {
+        this.administrator_idcard = administrator_idcard;
+    }
+
     /**
      * toString方法
      *
@@ -103,7 +117,8 @@ public class Administrators
         final StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
         stringbuilder.append("administrator_name：").append(administrator_name).append('\t');
-        stringbuilder.append("administrator_job：").append(administrator_job).append('\n');
+        stringbuilder.append("administrator_job：").append(administrator_job).append('\t');
+        stringbuilder.append("administrator_idcard：").append(administrator_idcard).append('\n');
         return stringbuilder.toString();
     }
 }
@@ -718,13 +733,14 @@ public class News
     /**
      * 全参构造
      *
-     * @param new_no     新闻编号
-     * @param new_author 新闻发布者(作者)
-     * @param new_time   新闻发布时间，时间由程序填充
-     * @param new_title  新闻标题
-     * @param new_text   新闻内容
+     * @param new_no       新闻编号
+     * @param new_author   新闻发布者(作者)
+     * @param new_time     新闻发布时间，时间由程序填充
+     * @param new_identity 新闻发布者身份
+     * @param new_title    新闻标题
+     * @param new_text     新闻内容
      */
-    public News(Long new_no, String new_author, String new_time, String new_title, String new_text)
+    public News(Long new_no, String new_author, String new_identity, String new_time, String new_title, String new_text)
     {
         if (new_no >= 0)
         {
@@ -735,6 +751,7 @@ public class News
             this.new_no = 0L;
         }
         this.new_author = new_author;
+        this.new_identity = new_identity;
         this.new_time = new_time;
         this.new_title = new_title;
         this.new_text = new_text;
@@ -1844,6 +1861,309 @@ public class TeacherPassword
     }
 }
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\io\\Add.java
+package io;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): io
+ * Class(类名): Add
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 15:36
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class Add
+{
+    public static String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String firstName = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘" +
+            "葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪" +
+            "祁毛禹狄米贝明臧计伏成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田樊胡凌霍虞万支柯咎" +
+            "管卢莫经房裘缪干解应宗宣丁贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊於惠甄魏加封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗" +
+            "山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭厉戎祖武符刘姜詹束龙叶幸司韶郜黎蓟薄印宿白怀蒲台从鄂索咸籍赖卓蔺屠蒙池乔阴郁胥能苍" +
+            "双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍却璩桑桂濮牛寿通边扈燕冀郏浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖庚终暨居衡步" +
+            "都耿满弘匡国文寇广禄阙东殴殳沃利蔚越夔隆师巩厍聂晁勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关蒯相查后江红游竺权逯盖益桓公万" +
+            "俟司马上官欧阳夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于仲孙太叔申屠公孙乐正轩辕令狐钟离闾丘长孙慕容鲜于宇文司徒" +
+            "司空亓官司寇仉督子车颛孙端木巫马公西漆雕乐正壤驷公良拓拔夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑" +
+            "亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福百家姓续";
+    private static final String girl = "秀娟英华慧巧美娜静淑惠珠翠雅芝玉萍红娥玲芬芳燕彩春菊兰凤洁梅琳素云莲真环雪荣爱妹霞香月莺媛" +
+            "艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓纨仪荷丹蓉眉君琴蕊薇菁梦岚苑婕馨瑗琰韵融园艺" +
+            "咏卿聪澜纯毓悦昭冰爽琬茗羽希宁欣飘育滢馥筠柔竹霭凝晓欢霄枫芸菲寒伊亚宜可姬舒影荔枝思丽";
+    private static final String boy = "伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥才发武新利清飞彬" +
+            "富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心邦承乐绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮" +
+            "翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德行时泰盛雄琛钧冠策腾楠榕风航弘";
+    private static final String[] road = ("重庆大厦,黑龙江路,十梅庵街,遵义路,湘潭街,瑞金广场,仙山街,仙山东路,仙山西大厦,白沙河路," +
+            "赵红广场,机场路,民航街,长城南路,流亭立交桥,虹桥广场,长城大厦,礼阳路,风岗街,中川路,白塔广场,兴阳路,文阳街,绣城路,河城大厦" +
+            ",锦城广场,崇阳街,华城路,康城街,正阳路,和阳广场,中城路,江城大厦,顺城路,安城街,山城广场,春城街,国城路,泰城街,德阳路,明阳大厦" +
+            ",春阳路,艳阳街,秋阳路,硕阳街,青威高速,瑞阳街,丰海路,双元大厦,惜福镇街道,夏庄街道,古庙工业园,中山街,太平路,广西街,潍县广场," +
+            "博山大厦,湖南路,济宁街,芝罘路,易州广场,荷泽四路,荷泽二街,荷泽一路,荷泽三大厦,观海二广场,广西支街,观海一路,济宁支街,莒县路," +
+            "平度广场,明水路,蒙阴大厦,青岛路,湖北街,江宁广场,郯城街,天津路,保定街,安徽路,河北大厦,黄岛路,北京街,莘县路,济南街," +
+            "宁阳广场,日照街,德县路,新泰大厦,荷泽路,山西广场,沂水路,肥城街,兰山路,四方街,平原广场,泗水大厦,浙江路,曲阜街,寿康路," +
+            "河南广场,泰安路,大沽街,红山峡支路,西陵峡一大厦,台西纬一广场,台西纬四街,台西纬二路,西陵峡二街,西陵峡三路,台西纬三广场," +
+            "台西纬五路,明月峡大厦,青铜峡路,台西二街,观音峡广场,瞿塘峡街,团岛二路,团岛一街,台西三路,台西一大厦,郓城南路,团岛三街," +
+            "刘家峡路,西藏二街,西藏一广场,台西四街,三门峡路,城武支大厦,红山峡路,郓城北广场,龙羊峡路,西陵峡街,台西五路,团岛四街," +
+            "石村广场,巫峡大厦,四川路,寿张街,嘉祥路,南村广场,范县路,西康街,云南路,巨野大厦,西江广场,鱼台街,单县路,定陶街,滕县路," +
+            "钜野广场,观城路,汶上大厦,朝城路,滋阳街,邹县广场,濮县街,磁山路,汶水街,西藏路,城武大厦,团岛路,南阳街,广州路,东平街," +
+            "枣庄广场,贵州街,费县路,南海大厦,登州路,文登广场,信号山支路,延安一街,信号山路,兴安支街,福山支广场,红岛支大厦,莱芜二路" +
+            ",吴县一街,金口三路,金口一广场,伏龙山路,鱼山支街,观象二路,吴县二大厦,莱芜一广场,金口二街,海阳路,龙口街,恒山路," +
+            "鱼山广场,掖县路,福山大厦,红岛路,常州街,大学广场,龙华街,齐河路,莱阳街,黄县路,张店大厦,祚山路,苏州街,华山路,伏龙街" +
+            ",江苏广场,龙江街,王村路,琴屿大厦,齐东路,京山广场,龙山路,牟平街,延安三路,延吉街,南京广场,东海东大厦,银川西路,海口街," +
+            "山东路,绍兴广场,芝泉路,东海中街,宁夏路,香港西大厦,隆德广场,扬州街,郧阳路,太平角一街,宁国二支路,太平角二广场," +
+            "天台东一路,太平角三大厦,漳州路一路,漳州街二街,宁国一支广场,太平角六街,太平角四路,天台东二街,太平角五路,宁国三大厦," +
+            "澳门三路,江西支街,澳门二路,宁国四街,大尧一广场,咸阳支街,洪泽湖路,吴兴二大厦,澄海三路,天台一广场,新湛二路,三明北街," +
+            "新湛支路,湛山五街,泰州三广场,湛山四大厦,闽江三路,澳门四街,南海支路,吴兴三广场,三明南路,湛山二街,二轻新村镇,江南大厦," +
+            "吴兴一广场,珠海二街,嘉峪关路,高邮湖街,湛山三路,澳门六广场,泰州二路,东海一大厦,天台二路,微山湖街,洞庭湖广场,珠海支街," +
+            "福州南路,澄海二街,泰州四路,香港中大厦,澳门五路,新湛三街,澳门一路,正阳关街,宁武关广场,闽江四街,新湛一路,宁国一大厦," +
+            "王家麦岛,澳门七广场,泰州一路,泰州六街,大尧二路,青大一街,闽江二广场,闽江一大厦,屏东支路,湛山一街,东海西路," +
+            "徐家麦岛函谷关广场,大尧三路,晓望支街,秀湛二路,逍遥三大厦,澳门九广场,泰州五街,澄海一路,澳门八街,福州北路,珠海一广场," +
+            "宁国二路,临淮关大厦,燕儿岛路,紫荆关街,武胜关广场,逍遥一街,秀湛四路,居庸关街,山海关路,鄱阳湖大厦,新湛路,漳州街,仙游路," +
+            "花莲街,乐清广场,巢湖街,台南路,吴兴大厦,新田路,福清广场,澄海路,莆田街,海游路,镇江街,石岛广场,宜兴大厦,三明路,仰口街," +
+            "沛县路,漳浦广场,大麦岛,台湾街,天台路,金湖大厦,高雄广场,海江街,岳阳路,善化街,荣成路,澳门广场,武昌路,闽江大厦,台北路," +
+            "龙岩街,咸阳广场,宁德街,龙泉路,丽水街,海川路,彰化大厦,金田路,泰州街,太湖路,江西街,泰兴广场,青大街,金门路,南通大厦,旌德路," +
+            "汇泉广场,宁国路,泉州街,如东路,奉化街,鹊山广场,莲岛大厦,华严路,嘉义街,古田路,南平广场,秀湛路,长汀街,湛山路,徐州大厦," +
+            "丰县广场,汕头街,新竹路,黄海街,安庆路,基隆广场,韶关路,云霄大厦,新安路,仙居街,屏东广场,晓望街,海门路,珠海街,上杭路,永嘉大厦," +
+            "漳平路,盐城街,新浦路,新昌街,高田广场,市场三街,金乡东路,市场二大厦,上海支路,李村支广场,惠民南路,市场纬街,长安南路,陵县支街," +
+            "冠县支广场,小港一大厦,市场一路,小港二街,清平路,广东广场,新疆路,博平街,港通路,小港沿,福建广场,高唐街,茌平路,港青街,高密路," +
+            "阳谷广场,平阴路,夏津大厦,邱县路,渤海街,恩县广场,旅顺街,堂邑路,李村街,即墨路,港华大厦,港环路,馆陶街,普集路,朝阳街,甘肃广场," +
+            "港夏街,港联路,陵县大厦,上海路,宝山广场,武定路,长清街,长安路,惠民街,武城广场,聊城大厦,海泊路,沧口街,宁波路,胶州广场,莱州路," +
+            "招远街,冠县路,六码头,金乡广场,禹城街,临清路,东阿街,吴淞路,大港沿,辽宁路,棣纬二大厦,大港纬一路,贮水山支街,无棣纬一广场," +
+            "大港纬三街,大港纬五路,大港纬四街,大港纬二路,无棣二大厦,吉林支路,大港四街,普集支路,无棣三街,黄台支广场,大港三街,无棣一路," +
+            "贮水山大厦,泰山支路,大港一广场,无棣四路,大连支街,大港二路,锦州支街,德平广场,高苑大厦,长山路,乐陵街,临邑路,嫩江广场,合江路," +
+            "大连街,博兴路,蒲台大厦,黄台广场,城阳街,临淄路,安邱街,临朐路,青城广场,商河路,热河大厦,济阳路,承德街,淄川广场,辽北街,阳信路," +
+            "益都街,松江路,流亭大厦,吉林路,恒台街,包头路,无棣街,铁山广场,锦州街,桓台路,兴安大厦,邹平路,胶东广场,章丘路,丹东街,华阳路," +
+            "青海街,泰山广场,周村大厦,四平路,台东西七街,台东东二路,台东东七广场,台东西二路,东五街,云门二路,芙蓉山村,延安二广场,云门一街," +
+            "台东四路,台东一街,台东二路,杭州支广场,内蒙古路,台东七大厦,台东六路,广饶支街,台东八广场,台东三街,四平支路,郭口东街,青海支路," +
+            "沈阳支大厦,菜市二路,菜市一街,北仲三路,瑞云街,滨县广场,庆祥街,万寿路,大成大厦,芙蓉路,历城广场,大名路,昌平街,平定路,长兴街," +
+            "浦口广场,诸城大厦,和兴路,德盛街,宁海路,威海广场,东山路,清和街,姜沟路,雒口大厦,松山广场,长春街,昆明路,顺兴街,利津路,阳明广场," +
+            "人和路,郭口大厦,营口路,昌邑街,孟庄广场,丰盛街,埕口路,丹阳街,汉口路,洮南大厦,桑梓路,沾化街,山口路,沈阳街,南口广场,振兴街," +
+            "通化路,福寺大厦,峄县路,寿光广场,曹县路,昌乐街,道口路,南九水街,台湛广场,东光大厦,驼峰路,太平山,标山路,云溪广场,太清路").split(",");
+    private static final String[] email_suffix = ("@gmail.com,@yahoo.com,@msn.com,@hotmail.com,@aol.com,@ask.com," +
+            "@live.com,@qq.com,@0355.net,@163.com,@163.net,@263.net,@3721.net,@yeah.net,@googlemail.com,@126.com," +
+            "@sina.com,@sohu.com,@yahoo.com.cn").split(",");
+    private static final String[] className = ("计算机科学与技术1901班,计算机科学与技术1902班,计算机科学与技术1903班," +
+            "计算机科学与技术1904班,计算机科学与技术1801班,计算机科学与技术1802班,计算机科学与技术1803班,计算机科学与技术1804班," +
+            "计算机科学与技术2001班,计算机科学与技术2002班,计算机科学与技术2003班,计算机科学与技术2004班," +
+            "计算机科学与技术1981班,计算机科学与技术1982班,计算机科学与技术1983班,计算机科学与技术1984班," +
+            "计算机科学与技术1881班,计算机科学与技术1881班,计算机科学与技术1881班,计算机科学与技术1881班," +
+            "软件工程1901班,软件工程1902班,软件工程1903班,软件工程1904班," +
+            "软件工程1801班,软件工程1801班,软件工程1801班,软件工程1801班,").split(",");
+
+    public static int getNum(int start, int end)
+    {
+        return (int) (Math.random() * (end - start + 1) + start);
+    }
+
+    /**
+     * 返回Email
+     *
+     * @param lMin 最小长度
+     * @param lMax 最大长度
+     * @return Email
+     */
+    public static String getEmail(int lMin, int lMax)
+    {
+        int length = getNum(lMin, lMax);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++)
+        {
+            int number = (int) (Math.random() * base.length());
+            sb.append(base.charAt(number));
+        }
+        sb.append(email_suffix[(int) (Math.random() * email_suffix.length)]);
+        return sb.toString();
+    }
+
+    /**
+     * 返回手机号码
+     */
+    private static final String[] telFirst = "134,135,136,137,138,139,150,151,152,157,158,159,130,131,132,155,156,133,153".split(",");
+
+    private static String getTel()
+    {
+        int index = getNum(0, telFirst.length - 1);
+        String first = telFirst[index];
+        String second = String.valueOf(getNum(1, 888) + 10000).substring(1);
+        String thrid = String.valueOf(getNum(1, 9100) + 10000).substring(1);
+        return first + second + thrid;
+    }
+
+    /**
+     * 返回中文姓名
+     */
+    private static String name_sex = "";
+
+    private static String getChineseName()
+    {
+        int index = getNum(0, firstName.length() - 1);
+        String first = firstName.substring(index, index + 1);
+        int sex = getNum(0, 1);
+        String str = boy;
+        int length = boy.length();
+        if (sex == 0)
+        {
+            str = girl;
+            length = girl.length();
+            name_sex = "女";
+        }
+        else
+        {
+            name_sex = "男";
+        }
+        index = getNum(0, length - 1);
+        String second = str.substring(index, index + 1);
+        int hasThird = getNum(0, 1);
+        String third = "";
+        if (hasThird == 1)
+        {
+            index = getNum(0, length - 1);
+            third = str.substring(index, index + 1);
+        }
+        return first + second + third;
+    }
+
+    /**
+     * 返回地址
+     *
+     * @return 地址
+     */
+    private static String getRoad()
+    {
+        int index = getNum(0, road.length - 1);
+        String first = road[index];
+        String second = String.valueOf(getNum(11, 150)) + "号";
+        String third = "-" + getNum(1, 20) + "-" + getNum(1, 10);
+        return first + second + third;
+    }
+
+
+    /**
+     * 获得班级
+     *
+     * @return 班级信息
+     */
+    private static String getClassName()
+    {
+        return className[getNum(0, className.length - 1)];
+    }
+
+    //生日信息
+    private static String year;
+    private static String month;
+    private static String day;
+
+    private static final DecimalFormat decimalFormat = new DecimalFormat("00");
+
+
+    /**
+     * 获得生日信息
+     *
+     * @return 生日
+     */
+    private static String getBirthday()
+    {
+        year = String.valueOf(getNum(1999, 2003));
+        month = decimalFormat.format(getNum(1, 12));
+        day = decimalFormat.format(getNum(1, 28));
+        return year + "-" + month + "-" + day;
+    }
+
+
+    private static String IdCard;
+
+    /**
+     * 获得身份证号
+     *
+     * @return 身份证
+     */
+    private static String getIdCard()
+    {
+        IdCard = "" + getNum(421100, 441233) + year + month + day + getNum(1010, 8756);
+        return IdCard;
+    }
+
+
+    /**
+     * 获得初始密码，密码为身份证后6位
+     *
+     * @return 密码
+     */
+    private static String getPassWord()
+    {
+        return IdCard.substring(IdCard.length() - 6);
+    }
+
+
+    /**
+     * 获得寝室号
+     *
+     * @return 寝室号
+     */
+    private static String getDormitoryNumber()
+    {
+        if (name_sex.equals("女"))
+        {
+            return "" + getNum(1, 6) + "栋" + getNum(1, 6) + decimalFormat.format(getNum(1, 25));
+        }
+        else
+        {
+            return "" + getNum(7, 12) + "栋" + getNum(1, 6) + decimalFormat.format(getNum(1, 25));
+        }
+    }
+
+
+    /**
+     * 获得家属电话
+     *
+     * @return 电话
+     */
+    private static String getFamilyPhone()
+    {
+        int index = getNum(0, telFirst.length - 1);
+        String first = telFirst[index];
+        String second = String.valueOf(getNum(1, 888) + 10000).substring(1);
+        String thrid = String.valueOf(getNum(1, 9100) + 10000).substring(1);
+        return first + second + thrid;
+    }
+
+    /**
+     * 数据封装
+     *
+     * @return Map<String, String>
+     */
+    public static Map<String, String> getStudentInformation()
+    {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", getChineseName());
+        map.put("sex", name_sex);
+        map.put("road", getRoad());
+        map.put("tel", getTel());
+        map.put("email", getEmail(6, 9));
+        map.put("class", getClassName());
+        map.put("birthday", getBirthday());
+        map.put("IdCard", getIdCard());
+        map.put("password", getPassWord());
+        map.put("dormitoryNumber", getDormitoryNumber());
+        map.put("FamilyPhone", getFamilyPhone());
+        return map;
+    }
+
+    public static void main(String[] args)
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            System.out.println(getStudentInformation());
+        }
+    }
+}
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\io\\ErrorLog.java
 package io;
 
@@ -2638,6 +2958,87 @@ public class Administrators
             return null;
         }
         return administrator;
+    }
+
+    /**
+     * 插入一条管理员信息,此操作应该只允许超级管理员操作
+     *
+     * @param administrator data.Administrators对象
+     * @return 插入成功，则返回true，失败返回false
+     */
+    public static boolean insert(data.Administrators administrator)
+    {
+        //获得身份证号码
+        String id_card = administrator.getAdministrator_idcard();
+        //获得密码，身份证后6位
+        String password = id_card.substring(id_card.length() - 6);
+        //获得密码的散列值
+        String password_SHA3_512 = SHA.SHA3_512.getSHA3_512(password);
+        //sql语句
+        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?)";
+        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(),
+                administrator.getAdministrator_job(), administrator.getAdministrator_idcard()};
+        String sql2 = "INSERT INTO administrators_password VALUES(?,?)";
+        Object[] objects2 = {administrator.getAdministrator_no(), password_SHA3_512};
+        //执行sql语句
+        String[] sql = {sql1, sql2};
+        Object[][] objects = {objects1, objects2};
+        int result = JDBCTemplate.update(sql, objects);
+        //返回
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 更新管理员信息，此操作应该只允许超级管理员操作
+     *
+     * @param administrator_no     要更新的管理员编号
+     * @param administrator_name   新的管理员姓名
+     * @param administrator_job    新的管理员职位
+     * @param administrator_idcard 新的管理员身份证，这个用于把身份证输入错了才改这项
+     * @return 更新成功，则返回true，失败返回false
+     */
+    public static boolean update(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    {
+        //sql语句
+        String sql = "UPDATE administrators SET administrator_name=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
+        Object[] objects = {administrator_name, administrator_job, administrator_idcard, administrator_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除管理员信息，此操作应该只允许超级管理员操作
+     *
+     * @param administrator_no 要删除的管理员编号
+     * @return 删除成功，则返回true，失败返回false
+     */
+    public static boolean delete(Long administrator_no)
+    {
+        //sql语句
+        String sql1 = "DELETE FROM administrators_password WHERE administrator_no=?";
+        String sql2 = "DELETE FROM administrators WHERE administrators.administrator_no=?";
+        Object[] objects1 = {administrator_no};
+        Object[] objects2 = {administrator_no};
+        String[] sql = {sql1, sql2};
+        Object[][] objects = {objects1, objects2};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
 �
@@ -4456,207 +4857,125 @@ public class JDBCTemplate
 
 
 �
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\index.jsp
-<%--
-  Created by IntelliJ IDEA.
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): index
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:18
-  Description(描述)： 无
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>管理员-菜单</title>
-</head>
-<body>
-
-</body>
-</html>
-�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Authentication.jsp
-<%--
-  Created by IntelliJ IDEA.
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): Authentication
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:16
-  Description(描述)： 无
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>身份验证</title>
-</head>
-<body>
-
-</body>
-</html>
-�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Error.jsp
-<%--
-  Created by IntelliJ IDEA.
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): Error
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:17
-  Description(描述)： 无
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>错误</title>
-</head>
-<body>
-
-</body>
-</html>
-�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\index.css
-/*
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
-  File name(文件名): index
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31 
-  Time(创建时间)： 21:07
-  Version(版本): 1.0
-  Description(描述)： 索引的css文件
- */
-
-body {
-    background-color: skyblue;
-}
-
-div {
-    width: 580px;
-    position: absolute;
-    top: 17%;
-    left: 50%;
-    font-size: 48px;
-    color: red;
-    border: 10px dotted lightpink;
-    transform: translate(-50%,-50%);
-}
-
-a {
-    color: coral;
-    font-size: 36px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    display: block;
-    width: 200px;
-    height: 100px;
-    background-color: lawngreen;
-    line-height: 100px;
-    text-align: center;
-    text-decoration: none;
-    border: 10px dotted lightpink;
-    transform: translate(-50%,-50%);
-}
-    �
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\index.jsp
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>学生信息管理系统</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-<br/>
-<div>
-    <c:out value="欢迎使用学生信息管理系统" escapeXml="true" default="null"/>
-</div>
-<a href="">进入程序</a>
-</body>
-</html>�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Login.html
-<!DOCTYPE html>
-
-<!--
-Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): Login
-  Authors(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:15
-  Description(描述)： 无
--->
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-</head>
-<body>
-
-</body>
-</html>�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\index.jsp
-<%--
-  Created by IntelliJ IDEA.
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): index
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:19
-  Description(描述)： 无
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>学生-菜单</title>
-</head>
-<body>
-
-</body>
-</html>
-�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\teacher\\index.jsp
-<%--
-  Created by IntelliJ IDEA.
-  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): index
-  Author(作者）: mao
-  Author QQ：1296193245
-  GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/1/31
-  Time(创建时间)： 23:19
-  Description(描述)： 无
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>老师-菜单</title>
-</head>
-<body>
-
-</body>
-</html>
-�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\AdministratorsTest.java
-package table;
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\MD5Test.java
+package SHA;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(测试类名): MD5Test
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:25
+ * Version(版本): 1.0
+ * Description(描述)： 测试类
+ */
+
+class MD5Test
+{
+
+    @Test
+    void getMD5()
+    {
+        //e10adc3949ba59abbe56e057f20f883e
+        //长度为32位
+        System.out.println(SHA.MD5.getMD5("123456"));
+    }
+
+    @Test
+    void getMD5toUpperCase()
+    {
+        System.out.println(SHA.MD5.getMD5toUpperCase("123456"));
+    }
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\SHA256Test.java
+package SHA;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(测试类名): SHA256Test
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:29
+ * Version(版本): 1.0
+ * Description(描述)： 测试类
+ */
+
+class SHA256Test
+{
+
+    @Test
+    void getSHA256()
+    {
+        //8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+        //长度为64位
+        System.out.println(SHA.SHA256.getSHA256("123456"));
+    }
+
+    @Test
+    void getSHA256toUpperCase()
+    {
+        System.out.println(SHA.SHA256.getSHA256toUpperCase("123456"));
+    }
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\SHA3_512Test.java
+package SHA;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(测试类名): SHA3_512Test
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:27
+ * Version(版本): 1.0
+ * Description(描述)： 测试类
+ */
+
+class SHA3_512Test
+{
+
+    @Test
+    void getSHA3_512()
+    {
+        //64d09d9930c8ecf79e513167a588cb75439b762ce8f9b22ea59765f32aa74ca19d2f1e97dc922a3d4954594a05062917fb24d1f8e72f2ed02a58ed7534f94d27
+        //长度为128位
+        System.out.println(SHA.SHA3_512.getSHA3_512("123456"));
+    }
+
+    @Test
+    void getSHA3_512toUpperCase()
+    {
+        System.out.println(SHA.SHA3_512.getSHA3_512toUpperCase("123456"));
+    }
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\AdministratorsTest.java
+package table;
+
+import io.Add;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -4691,6 +5010,45 @@ class AdministratorsTest
     {
         data.Administrators administrator = Administrators.getAdministrator(20L);
         System.out.println(administrator);
+    }
+
+    @Test
+    void insert()
+    {
+        data.Administrators administrator = new data.Administrators(10004L, "王七",
+                "副校长", "435588745685891235");
+        System.out.println(table.Administrators.insert(administrator));
+    }
+
+    @Test
+    void update()
+    {
+        data.Administrators administrator = new data.Administrators(10004L, "王七",
+                "副校长", "435588745685891235");
+        System.out.println(table.Administrators.update(10004L, "赵六",
+                "副校长", "435588745685891235"));
+    }
+
+    @Test
+    void delete()
+    {
+        System.out.println(table.Administrators.delete(10003L));
+    }
+
+    @Test
+    void add()
+    {
+        //Map<String, String> studentInformation = Add.getStudentInformation();
+        for (int i = 0; i < 30; i++)
+        {
+            Map<String, String> studentInformation = Add.getStudentInformation();
+            Long no = i + 10001L;
+            String name = studentInformation.get("name");
+            String job = "管理员";
+            String id_card = studentInformation.get("IdCard");
+            data.Administrators administrator = new data.Administrators(no, name, job, id_card);
+            System.out.println(table.Administrators.insert(administrator));
+        }
     }
 }�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\NewsTest.java

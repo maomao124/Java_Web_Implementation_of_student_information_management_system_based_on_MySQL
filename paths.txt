@@ -1,4 +1,4 @@
-47
+43
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -11,6 +11,7 @@ src\\main\\java\\data\\StudentPassword.java
 src\\main\\java\\data\\Teach.java
 src\\main\\java\\data\\Teacher.java
 src\\main\\java\\data\\TeacherPassword.java
+src\\main\\java\\io\\Add.java
 src\\main\\java\\io\\ErrorLog.java
 src\\main\\java\\servlet\\filter\\AdministratorsFilter.java
 src\\main\\java\\servlet\\filter\\StudentFilter.java
@@ -36,13 +37,8 @@ src\\main\\java\\tools\\Handler\\BeanListHandler.java
 src\\main\\java\\tools\\Handler\\ResultSetHandler.java
 src\\main\\java\\tools\\Handler\\ScalarHandler.java
 src\\main\\java\\tools\\JDBCTemplate.java
-src\\main\\webapp\\administrator\\index.jsp
-src\\main\\webapp\\Authentication.jsp
-src\\main\\webapp\\Error.jsp
-src\\main\\webapp\\index.css
-src\\main\\webapp\\index.jsp
-src\\main\\webapp\\Login.html
-src\\main\\webapp\\student\\index.jsp
-src\\main\\webapp\\teacher\\index.jsp
+src\\test\\java\\SHA\\MD5Test.java
+src\\test\\java\\SHA\\SHA256Test.java
+src\\test\\java\\SHA\\SHA3_512Test.java
 src\\test\\java\\table\\AdministratorsTest.java
 src\\test\\java\\table\\NewsTest.java
