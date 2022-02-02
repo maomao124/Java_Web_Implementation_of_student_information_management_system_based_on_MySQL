@@ -122,7 +122,7 @@ public class ErrorLog
         }
         catch (FileNotFoundException e)      //文件未找到
         {
-            Toolkit.getDefaultToolkit().beep();
+            //Toolkit.getDefaultToolkit().beep();
             System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -132,7 +132,7 @@ public class ErrorLog
         }
         catch (Exception e)                  //其它异常
         {
-            Toolkit.getDefaultToolkit().beep();
+            //Toolkit.getDefaultToolkit().beep();
             e.printStackTrace();
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -159,7 +159,7 @@ public class ErrorLog
             }
             catch (NullPointerException e)    //空指针异常
             {
-                Toolkit.getDefaultToolkit().beep();
+                //Toolkit.getDefaultToolkit().beep();
                 System.err.println("文件已经被关闭，无法再次关闭！！！");
                 final Writer result = new StringWriter();
                 final PrintWriter printWriter = new PrintWriter(result);
@@ -169,7 +169,7 @@ public class ErrorLog
             }
             catch (Exception e)              //其它异常
             {
-                Toolkit.getDefaultToolkit().beep();
+                //Toolkit.getDefaultToolkit().beep();
                 e.printStackTrace();
                 final Writer result = new StringWriter();
                 final PrintWriter printWriter = new PrintWriter(result);

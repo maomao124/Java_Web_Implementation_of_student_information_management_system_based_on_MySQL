@@ -1,7 +1,11 @@
 package tools;
 
+import io.ErrorLog;
 import tools.Handler.ResultSetHandler;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,6 +81,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -190,6 +199,11 @@ public class JDBCTemplate
                 ex.printStackTrace();
             }
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -201,6 +215,11 @@ public class JDBCTemplate
             catch (SQLException e)
             {
                 e.printStackTrace();
+                final Writer writer = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(writer);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = writer.toString();
+                ErrorLog.write(stackTraceStr);
             }
             //归还连接
             Druid.close(connection);
@@ -265,6 +284,11 @@ public class JDBCTemplate
                 ex.printStackTrace();
             }
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -276,6 +300,11 @@ public class JDBCTemplate
             catch (SQLException e)
             {
                 e.printStackTrace();
+                final Writer writer = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(writer);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = writer.toString();
+                ErrorLog.write(stackTraceStr);
             }
             //归还连接
             Druid.close(connection);
@@ -338,6 +367,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -404,6 +438,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -469,6 +508,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -578,6 +622,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -669,6 +718,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
