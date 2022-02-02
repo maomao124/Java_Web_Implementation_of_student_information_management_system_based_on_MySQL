@@ -77,8 +77,9 @@ public class Administrators
         //获得密码的散列值
         String password_SHA3_512 = SHA.SHA3_512.getSHA3_512(password);
         //sql语句
-        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?)";
-        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(),
+        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?,?,?)";
+        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(), administrator.getAdministrator_sex(),
+                administrator.getAdministrator_telephone_number(),
                 administrator.getAdministrator_job(), administrator.getAdministrator_idcard()};
         String sql2 = "INSERT INTO administrators_password VALUES(?,?)";
         Object[] objects2 = {administrator.getAdministrator_no(), password_SHA3_512};
@@ -97,17 +98,21 @@ public class Administrators
     /**
      * 更新管理员信息，此操作应该只允许超级管理员操作
      *
-     * @param administrator_no     要更新的管理员编号
-     * @param administrator_name   新的管理员姓名
-     * @param administrator_job    新的管理员职位
-     * @param administrator_idcard 新的管理员身份证，这个用于把身份证输入错了才改这项
+     * @param administrator_no               要更新的管理员编号
+     * @param administrator_name             新的管理员姓名
+     * @param administrator_sex              新的管理员性别
+     * @param administrator_telephone_number 新的管理员电话号码
+     * @param administrator_job              新的管理员职位
+     * @param administrator_idcard           新的管理员身份证，这个用于把身份证输入错了才改这项
      * @return 更新成功，则返回true，失败返回false
      */
-    public static boolean update(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    public static boolean update(Long administrator_no, String administrator_name, String administrator_sex,
+                                 String administrator_telephone_number, String administrator_job, String administrator_idcard)
     {
         //sql语句
-        String sql = "UPDATE administrators SET administrator_name=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
-        Object[] objects = {administrator_name, administrator_job, administrator_idcard, administrator_no};
+        String sql = "UPDATE administrators SET administrator_name=?,administrator_sex=?,administrator_telephone_number=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
+        Object[] objects = {administrator_name, administrator_sex, administrator_telephone_number,
+                administrator_job, administrator_idcard, administrator_no};
         //执行sql
         int result = JDBCTemplate.update(sql, objects);
         //返回结果

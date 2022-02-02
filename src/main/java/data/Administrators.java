@@ -19,6 +19,10 @@ public class Administrators
     private Long administrator_no;
     //管理员姓名
     private String administrator_name;
+    //管理员性别
+    private String administrator_sex;
+    //管理员手机号码
+    private String administrator_telephone_number;
     //管理员职务
     private String administrator_job;
     //管理员身份证号码
@@ -34,12 +38,15 @@ public class Administrators
     /**
      * 全参构造
      *
-     * @param administrator_no     管理员编号
-     * @param administrator_name   管理员姓名
-     * @param administrator_job    管理员职务
-     * @param administrator_idcard 管理员身份证号码
+     * @param administrator_no               管理员编号
+     * @param administrator_name             管理员姓名
+     * @param administrator_sex              管理员性别
+     * @param administrator_telephone_number 管理员电话号码
+     * @param administrator_job              管理员职务
+     * @param administrator_idcard           管理员身份证号码
      */
-    public Administrators(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    public Administrators(Long administrator_no, String administrator_name, String administrator_sex,
+                          String administrator_telephone_number, String administrator_job, String administrator_idcard)
     {
         if (administrator_no < 0)
         {
@@ -50,6 +57,8 @@ public class Administrators
             this.administrator_no = administrator_no;
         }
         this.administrator_name = administrator_name;
+        this.administrator_sex = administrator_sex;
+        this.administrator_telephone_number = administrator_telephone_number;
         this.administrator_job = administrator_job;
         this.administrator_idcard = administrator_idcard;
     }
@@ -84,6 +93,26 @@ public class Administrators
         this.administrator_name = administrator_name;
     }
 
+    public String getAdministrator_sex()
+    {
+        return administrator_sex;
+    }
+
+    public void setAdministrator_sex(String administrator_sex)
+    {
+        this.administrator_sex = administrator_sex;
+    }
+
+    public String getAdministrator_telephone_number()
+    {
+        return administrator_telephone_number;
+    }
+
+    public void setAdministrator_telephone_number(String administrator_telephone_number)
+    {
+        this.administrator_telephone_number = administrator_telephone_number;
+    }
+
     public String getAdministrator_job()
     {
         return administrator_job;
@@ -116,6 +145,8 @@ public class Administrators
         final StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
         stringbuilder.append("administrator_name：").append(administrator_name).append('\t');
+        stringbuilder.append("administrator_sex：").append(administrator_sex).append('\t');
+        stringbuilder.append("administrator_telephone_number：").append(administrator_telephone_number).append('\t');
         stringbuilder.append("administrator_job：").append(administrator_job).append('\t');
         stringbuilder.append("administrator_idcard：").append(administrator_idcard).append('\n');
         return stringbuilder.toString();

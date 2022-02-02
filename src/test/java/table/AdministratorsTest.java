@@ -44,24 +44,24 @@ class AdministratorsTest
     @Test
     void insert()
     {
-        data.Administrators administrator = new data.Administrators(10004L, "王七",
-                "副校长", "435588745685891235");
+        data.Administrators administrator = new data.Administrators(10004L, "王七", "男",
+                "1588888888", "副校长", "435588745685891235");
         System.out.println(table.Administrators.insert(administrator));
     }
 
     @Test
     void update()
     {
-        data.Administrators administrator = new data.Administrators(10004L, "王七",
+        data.Administrators administrator = new data.Administrators(10004L, "王七", "女", "18888888888",
                 "副校长", "435588745685891235");
-        System.out.println(table.Administrators.update(10004L, "赵六",
+        System.out.println(table.Administrators.update(10004L, "赵六", "女", "1888888888",
                 "副校长", "435588745685891235"));
     }
 
     @Test
     void delete()
     {
-        System.out.println(table.Administrators.delete(10003L));
+        System.out.println(table.Administrators.delete(10004L));
     }
 
     @Test
@@ -73,9 +73,11 @@ class AdministratorsTest
             Map<String, String> studentInformation = Add.getStudentInformation();
             Long no = i + 10001L;
             String name = studentInformation.get("name");
+            String sex = studentInformation.get("sex");
+            String tel = studentInformation.get("tel");
             String job = "管理员";
             String id_card = studentInformation.get("IdCard");
-            data.Administrators administrator = new data.Administrators(no, name, job, id_card);
+            data.Administrators administrator = new data.Administrators(no, name, sex, tel, job, id_card);
             System.out.println(table.Administrators.insert(administrator));
         }
     }
