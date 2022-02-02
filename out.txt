@@ -20,6 +20,10 @@ public class Administrators
     private Long administrator_no;
     //管理员姓名
     private String administrator_name;
+    //管理员性别
+    private String administrator_sex;
+    //管理员手机号码
+    private String administrator_telephone_number;
     //管理员职务
     private String administrator_job;
     //管理员身份证号码
@@ -35,12 +39,15 @@ public class Administrators
     /**
      * 全参构造
      *
-     * @param administrator_no     管理员编号
-     * @param administrator_name   管理员姓名
-     * @param administrator_job    管理员职务
-     * @param administrator_idcard 管理员身份证号码
+     * @param administrator_no               管理员编号
+     * @param administrator_name             管理员姓名
+     * @param administrator_sex              管理员性别
+     * @param administrator_telephone_number 管理员电话号码
+     * @param administrator_job              管理员职务
+     * @param administrator_idcard           管理员身份证号码
      */
-    public Administrators(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    public Administrators(Long administrator_no, String administrator_name, String administrator_sex,
+                          String administrator_telephone_number, String administrator_job, String administrator_idcard)
     {
         if (administrator_no < 0)
         {
@@ -51,6 +58,8 @@ public class Administrators
             this.administrator_no = administrator_no;
         }
         this.administrator_name = administrator_name;
+        this.administrator_sex = administrator_sex;
+        this.administrator_telephone_number = administrator_telephone_number;
         this.administrator_job = administrator_job;
         this.administrator_idcard = administrator_idcard;
     }
@@ -85,6 +94,26 @@ public class Administrators
         this.administrator_name = administrator_name;
     }
 
+    public String getAdministrator_sex()
+    {
+        return administrator_sex;
+    }
+
+    public void setAdministrator_sex(String administrator_sex)
+    {
+        this.administrator_sex = administrator_sex;
+    }
+
+    public String getAdministrator_telephone_number()
+    {
+        return administrator_telephone_number;
+    }
+
+    public void setAdministrator_telephone_number(String administrator_telephone_number)
+    {
+        this.administrator_telephone_number = administrator_telephone_number;
+    }
+
     public String getAdministrator_job()
     {
         return administrator_job;
@@ -117,6 +146,8 @@ public class Administrators
         final StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("administrator_no：").append(administrator_no).append('\t');
         stringbuilder.append("administrator_name：").append(administrator_name).append('\t');
+        stringbuilder.append("administrator_sex：").append(administrator_sex).append('\t');
+        stringbuilder.append("administrator_telephone_number：").append(administrator_telephone_number).append('\t');
         stringbuilder.append("administrator_job：").append(administrator_job).append('\t');
         stringbuilder.append("administrator_idcard：").append(administrator_idcard).append('\n');
         return stringbuilder.toString();
@@ -688,6 +719,145 @@ public class Forum
         stringbuilder.append("forum_identity：").append(forum_identity).append('\t');
         stringbuilder.append("forum_time：").append(forum_time).append('\t');
         stringbuilder.append("forum_content：").append(forum_content).append('\t');
+        return stringbuilder.toString();
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\data\\LoginLog.java
+package data;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): data
+ * Class(类名): LoginLog
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 20:13
+ * Version(版本): 1.0
+ * Description(描述)： 登录日志
+ */
+
+public class LoginLog
+{
+    //日志编号，主键
+    private Long log_no;
+    //登录时间
+    private String log_time;
+    //登录人学号或者编号
+    private Long log_login_no;
+    //登录人姓名
+    private String log_name;
+
+    /**
+     * 无参构造
+     */
+    public LoginLog()
+    {
+    }
+
+    /**
+     * 全参构造
+     *
+     * @param log_no       日志编号，主键
+     * @param log_time     登录时间
+     * @param log_login_no 登录人学号或者编号
+     * @param log_name     登录人姓名
+     */
+    public LoginLog(Long log_no, String log_time, Long log_login_no, String log_name)
+    {
+        if (log_no >= 0)
+        {
+            this.log_no = log_no;
+        }
+        else
+        {
+            this.log_no = 0L;
+        }
+        this.log_time = log_time;
+        if (log_login_no >= 0)
+        {
+            this.log_login_no = log_login_no;
+        }
+        else
+        {
+            this.log_login_no = 0L;
+        }
+        this.log_name = log_name;
+    }
+
+    //对应的getter方法和setter方法
+
+
+    public Long getLog_no()
+    {
+        return log_no;
+    }
+
+    public void setLog_no(Long log_no)
+    {
+        if (log_no >= 0)
+        {
+            this.log_no = log_no;
+        }
+        else
+        {
+            this.log_no = 0L;
+        }
+    }
+
+    public Long getLog_login_no()
+    {
+        return log_login_no;
+    }
+
+    public void setLog_login_no(Long log_login_no)
+    {
+        if (log_login_no >= 0)
+        {
+            this.log_login_no = log_login_no;
+        }
+        else
+        {
+            this.log_login_no = 0L;
+        }
+    }
+
+    public String getLog_time()
+    {
+        return log_time;
+    }
+
+    public void setLog_time(String log_time)
+    {
+        this.log_time = log_time;
+    }
+
+    public String getLog_name()
+    {
+        return log_name;
+    }
+
+    public void setLog_name(String log_name)
+    {
+        this.log_name = log_name;
+    }
+
+    /**
+     * toString方法
+     *
+     * @return 字符串
+     */
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("log_no：").append(log_no).append('\t');
+        stringbuilder.append("log_time：").append(log_time).append('\t');
+        stringbuilder.append("log_login_no：").append(log_login_no).append('\t');
+        stringbuilder.append("log_name：").append(log_name).append('\n');
         return stringbuilder.toString();
     }
 }
@@ -2289,7 +2459,7 @@ public class ErrorLog
         }
         catch (FileNotFoundException e)      //文件未找到
         {
-            Toolkit.getDefaultToolkit().beep();
+            //Toolkit.getDefaultToolkit().beep();
             System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -2299,7 +2469,7 @@ public class ErrorLog
         }
         catch (Exception e)                  //其它异常
         {
-            Toolkit.getDefaultToolkit().beep();
+            //Toolkit.getDefaultToolkit().beep();
             e.printStackTrace();
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -2326,7 +2496,7 @@ public class ErrorLog
             }
             catch (NullPointerException e)    //空指针异常
             {
-                Toolkit.getDefaultToolkit().beep();
+                //Toolkit.getDefaultToolkit().beep();
                 System.err.println("文件已经被关闭，无法再次关闭！！！");
                 final Writer result = new StringWriter();
                 final PrintWriter printWriter = new PrintWriter(result);
@@ -2336,7 +2506,7 @@ public class ErrorLog
             }
             catch (Exception e)              //其它异常
             {
-                Toolkit.getDefaultToolkit().beep();
+                //Toolkit.getDefaultToolkit().beep();
                 e.printStackTrace();
                 final Writer result = new StringWriter();
                 final PrintWriter printWriter = new PrintWriter(result);
@@ -2975,8 +3145,9 @@ public class Administrators
         //获得密码的散列值
         String password_SHA3_512 = SHA.SHA3_512.getSHA3_512(password);
         //sql语句
-        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?)";
-        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(),
+        String sql1 = "INSERT INTO administrators VALUES(?,?,?,?,?,?)";
+        Object[] objects1 = {administrator.getAdministrator_no(), administrator.getAdministrator_name(), administrator.getAdministrator_sex(),
+                administrator.getAdministrator_telephone_number(),
                 administrator.getAdministrator_job(), administrator.getAdministrator_idcard()};
         String sql2 = "INSERT INTO administrators_password VALUES(?,?)";
         Object[] objects2 = {administrator.getAdministrator_no(), password_SHA3_512};
@@ -2995,17 +3166,21 @@ public class Administrators
     /**
      * 更新管理员信息，此操作应该只允许超级管理员操作
      *
-     * @param administrator_no     要更新的管理员编号
-     * @param administrator_name   新的管理员姓名
-     * @param administrator_job    新的管理员职位
-     * @param administrator_idcard 新的管理员身份证，这个用于把身份证输入错了才改这项
+     * @param administrator_no               要更新的管理员编号
+     * @param administrator_name             新的管理员姓名
+     * @param administrator_sex              新的管理员性别
+     * @param administrator_telephone_number 新的管理员电话号码
+     * @param administrator_job              新的管理员职位
+     * @param administrator_idcard           新的管理员身份证，这个用于把身份证输入错了才改这项
      * @return 更新成功，则返回true，失败返回false
      */
-    public static boolean update(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    public static boolean update(Long administrator_no, String administrator_name, String administrator_sex,
+                                 String administrator_telephone_number, String administrator_job, String administrator_idcard)
     {
         //sql语句
-        String sql = "UPDATE administrators SET administrator_name=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
-        Object[] objects = {administrator_name, administrator_job, administrator_idcard, administrator_no};
+        String sql = "UPDATE administrators SET administrator_name=?,administrator_sex=?,administrator_telephone_number=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
+        Object[] objects = {administrator_name, administrator_sex, administrator_telephone_number,
+                administrator_job, administrator_idcard, administrator_no};
         //执行sql
         int result = JDBCTemplate.update(sql, objects);
         //返回结果
@@ -3045,6 +3220,9 @@ public class Administrators
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\AdministratorsPassword.java
 package table;
 
+import tools.Handler.BeanHandler;
+import tools.JDBCTemplate;
+
 /**
  * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
  * Package(包名): table
@@ -3060,7 +3238,73 @@ package table;
 
 public class AdministratorsPassword
 {
+    /**
+     * 管理员登录验证
+     *
+     * @param administrator_no 管理员编号
+     * @param LoginPassword    管理员登录密码
+     * @return 如果密码正确，返回true，密码错误，返回false
+     */
+    public static boolean verification(Long administrator_no, String LoginPassword)
+    {
+        //获得此密码的散列值
+        String loginPassword_SHA3_512 = SHA.SHA3_512.getSHA3_512(LoginPassword);
+        //sql语句
+        String sql = "select * from administrators_password where administrator_no=? and administrator_password=?";
+        //参数
+        Object[] objects = {administrator_no, loginPassword_SHA3_512};
+        //执行sql
+        data.AdministratorsPassword administratorsPassword = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.AdministratorsPassword.class), objects);
+        //判断返回值
+        if (administratorsPassword.getAdministrator_no() == null)
+        {
+            //主键为空，密码错误或者账号不存在
+            return false;
+        }
+        else
+        {
+            //主键不为空
+            administratorsPassword = null;
+            return true;
+        }
+    }
 
+    /**
+     * 更改管理员密码，包含旧密码验证
+     *
+     * @param administrator_no 管理员编号
+     * @param oldPassword      老密码
+     * @param newPassword      新密码
+     * @return 如果密码正确，并且更改1成功，返回true，密码错误，或者更改失败，返回false
+     */
+    public static boolean changePassword(Long administrator_no, String oldPassword, String newPassword)
+    {
+        //旧密码验证
+        boolean verificationResult = verification(administrator_no, oldPassword);
+        if (!verificationResult)
+        {
+            //验证结果为false，旧密码不正确，直接返回false
+            return false;
+        }
+        //验证结果为true，旧密码正确
+        //获得新密码的散列值
+        String newPassword_SHA3_512 = SHA.SHA3_512.getSHA3_512(newPassword);
+        //sql语句
+        String sql = "update administrators_password set administrator_password=? where administrator_no=?";
+        //参数
+        Object[] objects = {newPassword_SHA3_512, administrator_no};
+        //执行sql语句
+        int result = JDBCTemplate.update(sql, objects);
+        //处理结果
+        if (result > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 �
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\Class.java
@@ -3122,6 +3366,27 @@ package table;
  */
 
 public class Forum
+{
+
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\LoginLog.java
+package table;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): table
+ * Class(类名): LoginLog
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 20:19
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class LoginLog
 {
 
 }
@@ -4173,8 +4438,12 @@ public class ScalarHandler<T> implements ResultSetHandler<T>
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\JDBCTemplate.java
 package tools;
 
+import io.ErrorLog;
 import tools.Handler.ResultSetHandler;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -4250,6 +4519,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4363,6 +4637,11 @@ public class JDBCTemplate
                 ex.printStackTrace();
             }
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4374,6 +4653,11 @@ public class JDBCTemplate
             catch (SQLException e)
             {
                 e.printStackTrace();
+                final Writer writer = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(writer);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = writer.toString();
+                ErrorLog.write(stackTraceStr);
             }
             //归还连接
             Druid.close(connection);
@@ -4438,6 +4722,11 @@ public class JDBCTemplate
                 ex.printStackTrace();
             }
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4449,6 +4738,11 @@ public class JDBCTemplate
             catch (SQLException e)
             {
                 e.printStackTrace();
+                final Writer writer = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(writer);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = writer.toString();
+                ErrorLog.write(stackTraceStr);
             }
             //归还连接
             Druid.close(connection);
@@ -4511,6 +4805,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4577,6 +4876,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4642,6 +4946,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4751,6 +5060,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4842,6 +5156,11 @@ public class JDBCTemplate
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer writer = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(writer);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = writer.toString();
+            ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -4968,6 +5287,43 @@ class SHA3_512Test
         System.out.println(SHA.SHA3_512.getSHA3_512toUpperCase("123456"));
     }
 }�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\AdministratorsPasswordTest.java
+package table;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): table
+ * Class(测试类名): AdministratorsPasswordTest
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 19:16
+ * Version(版本): 1.0
+ * Description(描述)： 测试类
+ */
+
+class AdministratorsPasswordTest
+{
+
+    @Test
+    void verification()
+    {
+        boolean verification = AdministratorsPassword.verification(10001L, "274998");
+        System.out.println(verification);
+    }
+
+    @Test
+    void changePassword()
+    {
+        boolean b = AdministratorsPassword.changePassword(10001L, "274998", "123456");
+        System.out.println(b);
+    }
+}�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\AdministratorsTest.java
 package table;
 
@@ -5015,24 +5371,24 @@ class AdministratorsTest
     @Test
     void insert()
     {
-        data.Administrators administrator = new data.Administrators(10004L, "王七",
-                "副校长", "435588745685891235");
+        data.Administrators administrator = new data.Administrators(10004L, "王七", "男",
+                "1588888888", "副校长", "435588745685891235");
         System.out.println(table.Administrators.insert(administrator));
     }
 
     @Test
     void update()
     {
-        data.Administrators administrator = new data.Administrators(10004L, "王七",
+        data.Administrators administrator = new data.Administrators(10004L, "王七", "女", "18888888888",
                 "副校长", "435588745685891235");
-        System.out.println(table.Administrators.update(10004L, "赵六",
+        System.out.println(table.Administrators.update(10004L, "赵六", "女", "1888888888",
                 "副校长", "435588745685891235"));
     }
 
     @Test
     void delete()
     {
-        System.out.println(table.Administrators.delete(10003L));
+        System.out.println(table.Administrators.delete(10004L));
     }
 
     @Test
@@ -5044,9 +5400,11 @@ class AdministratorsTest
             Map<String, String> studentInformation = Add.getStudentInformation();
             Long no = i + 10001L;
             String name = studentInformation.get("name");
+            String sex = studentInformation.get("sex");
+            String tel = studentInformation.get("tel");
             String job = "管理员";
             String id_card = studentInformation.get("IdCard");
-            data.Administrators administrator = new data.Administrators(no, name, job, id_card);
+            data.Administrators administrator = new data.Administrators(no, name, sex, tel, job, id_card);
             System.out.println(table.Administrators.insert(administrator));
         }
     }

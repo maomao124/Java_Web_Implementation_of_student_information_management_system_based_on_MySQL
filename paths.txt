@@ -1,9 +1,10 @@
-43
+46
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
 src\\main\\java\\data\\Course.java
 src\\main\\java\\data\\Forum.java
+src\\main\\java\\data\\LoginLog.java
 src\\main\\java\\data\\News.java
 src\\main\\java\\data\\Score.java
 src\\main\\java\\data\\Student.java
@@ -24,6 +25,7 @@ src\\main\\java\\table\\AdministratorsPassword.java
 src\\main\\java\\table\\Class.java
 src\\main\\java\\table\\Course.java
 src\\main\\java\\table\\Forum.java
+src\\main\\java\\table\\LoginLog.java
 src\\main\\java\\table\\News.java
 src\\main\\java\\table\\Score.java
 src\\main\\java\\table\\Student.java
@@ -40,5 +42,6 @@ src\\main\\java\\tools\\JDBCTemplate.java
 src\\test\\java\\SHA\\MD5Test.java
 src\\test\\java\\SHA\\SHA256Test.java
 src\\test\\java\\SHA\\SHA3_512Test.java
+src\\test\\java\\table\\AdministratorsPasswordTest.java
 src\\test\\java\\table\\AdministratorsTest.java
 src\\test\\java\\table\\NewsTest.java
