@@ -699,6 +699,8 @@ public class News
     private Long new_no;
     //æ–°é—»å‘å¸ƒè€…(ä½œè€…)
     private String new_author;
+    //æ–°é—»å‘å¸ƒè€…èº«ä»½
+    private String new_identity;
     //æ–°é—»å‘å¸ƒæ—¶é—´ï¼Œæ—¶é—´ç”±ç¨‹åºå¡«å……
     private String new_time;
     //æ–°é—»æ ‡é¢˜
@@ -767,6 +769,16 @@ public class News
         this.new_author = new_author;
     }
 
+    public String getNew_identity()
+    {
+        return new_identity;
+    }
+
+    public void setNew_identity(String new_identity)
+    {
+        this.new_identity = new_identity;
+    }
+
     public String getNew_time()
     {
         return new_time;
@@ -809,9 +821,10 @@ public class News
         final StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("new_noï¼š").append(new_no).append('\t');
         stringbuilder.append("new_authorï¼š").append(new_author).append('\t');
+        stringbuilder.append("new_identityï¼š").append(new_identity).append('\t');
         stringbuilder.append("new_timeï¼š").append(new_time).append('\t');
         stringbuilder.append("new_titleï¼š").append(new_title).append('\t');
-        stringbuilder.append("new_textï¼š").append(new_text).append('\t');
+        stringbuilder.append("new_textï¼š").append(new_text).append('\n');
         return stringbuilder.toString();
     }
 }
@@ -1834,6 +1847,12 @@ public class TeacherPassword
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Administrators.java
 package table;
 
+import tools.Handler.BeanHandler;
+import tools.Handler.BeanListHandler;
+import tools.JDBCTemplate;
+
+import java.util.List;
+
 /**
  * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
  * Package(åŒ…å): table
@@ -1844,12 +1863,51 @@ package table;
  * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/1/31
  * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
  * Version(ç‰ˆæœ¬): 1.0
- * Description(æè¿°)ï¼š æ— 
+ * Description(æè¿°)ï¼š ç®¡ç†å‘˜ä¿¡æ¯è¡¨
  */
 
 public class Administrators
 {
+    /**
+     * ç§æœ‰åŒ–æ„é€ å‡½æ•°ï¼Œä¸èƒ½åˆ›å»ºå¯¹è±¡
+     */
+    private Administrators()
+    {
+    }
 
+    /**
+     * ç®¡ç†å‘˜ä¿¡æ¯è¡¨ï¼ŒæŸ¥è¯¢å…¨éƒ¨ä¿¡æ¯å¹¶è¿”å›é›†åˆå¯¹è±¡
+     *
+     * @return List<data.Administrators>å¯¹è±¡
+     */
+    public static List<data.Administrators> getAdministrators()
+    {
+        String sql = "SELECT * FROM administrators";
+        //æŸ¥è¯¢
+        List<data.Administrators> administrators = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Administrators.class));
+        return administrators;
+    }
+
+    /**
+     * è·å¾—æŸä¸ªç®¡ç†å‘˜çš„ä¿¡æ¯
+     *
+     * @param no ç®¡ç†å‘˜ç¼–å·
+     * @return data.Administratorså¯¹è±¡
+     */
+    public static data.Administrators getAdministrator(Long no)
+    {
+        String sql = "SELECT * FROM administrators WHERE administrator_no=?";
+        //å ä½ç¬¦å‚æ•°åˆ—è¡¨
+        Object[] objects = {no};
+        //æŸ¥è¯¢
+        data.Administrators administrator = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Administrators.class), objects);
+        //ä¸»é”®ä¸ºç©ºï¼Œç›´æ¥è¿”å›null
+        if (administrator.getAdministrator_no() == null)
+        {
+            return null;
+        }
+        return administrator;
+    }
 }
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\AdministratorsPassword.java
@@ -1939,6 +1997,15 @@ public class Forum
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\News.java
 package table;
 
+import tools.Handler.BeanHandler;
+import tools.Handler.BeanListHandler;
+import tools.Handler.ScalarHandler;
+import tools.JDBCTemplate;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
  * Package(åŒ…å): table
@@ -1954,7 +2021,169 @@ package table;
 
 public class News
 {
+    /**
+     * ç§æœ‰åŒ–æ„é€ å‡½æ•°ï¼Œä¸èƒ½åˆ›å»ºå¯¹è±¡
+     */
+    private News()
+    {
+    }
 
+    /**
+     * æŸ¥è¯¢æ–°é—»
+     *
+     * @param new_no æ–°é—»ç¼–å·
+     * @return data.Newså¯¹è±¡
+     */
+    public static data.News getNews(Long new_no)
+    {
+        //sqlè¯­å¥
+        String sql = "SELECT * FROM news WHERE new_no=?";
+        //å‚æ•°
+        Object[] objects = {new_no};
+        //æŸ¥è¯¢
+        data.News news = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.News.class), objects);
+        //è¿”å›
+        if (news.getNew_no() == null)
+        {
+            //æ–°é—»ç¼–å·ä¸ºç©ºï¼Œè¿”å›null
+            return null;
+        }
+        return news;
+    }
+
+    /**
+     * è·å¾—æ–°é—»çš„æ€»æ•°é‡
+     *
+     * @return æ€»æ¡æ•°
+     */
+    public static Long getNewsCount()
+    {
+        //sqlè¯­å¥
+        String sql = "SELECT COUNT(new_no) FROM news";
+        //æŸ¥è¯¢
+        Long news_count = JDBCTemplate.queryForScalar(sql, new ScalarHandler<>());
+        //è¿”å›
+        return news_count;
+    }
+
+    /**
+     * æ’å…¥ä¸€æ¡æ–°é—»
+     *
+     * @param new_author   ä½œè€…
+     * @param new_identity èº«ä»½
+     * @param new_title    æ ‡é¢˜
+     * @param new_text     æ­£æ–‡
+     * @return æ’å…¥èº«ä»½æˆåŠŸï¼ŒæˆåŠŸåˆ™è¿”å›trueï¼Œå¤±è´¥è¿”å›false
+     */
+    public static boolean insert(String new_author, String new_identity, String new_title, String new_text)
+    {
+        //åº”è¯¥ç¡®ä¿æ•°æ®ä¸ä¸ºç©º
+        if (new_author == null)
+        {
+            return false;
+        }
+        if (new_identity == null)
+        {
+            return false;
+        }
+        if (new_title == null)
+        {
+            return false;
+        }
+        if (new_text == null)
+        {
+            return false;
+        }
+        //è·å¾—æ—¶é—´ä¿¡æ¯
+        Date date = new Date();
+        //æ ¼å¼åŒ–æ—¶é—´
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+        //è·å¾—æ ¼å¼åçš„å­—ç¬¦ä¸²
+        String time = simpleDateFormat.format(date);
+        //System.out.println(time);
+        //æ ¼å¼åŒ–å‚æ•°
+        Object[] objects = {new_author, new_identity, time, new_title, new_text};
+        //sqlè¯­å¥
+        String sql = "insert into news (new_author,new_identity,new_time,new_title,new_text) values(?,?,?,?,?)";
+        //å†™å…¥æ•°æ®åº“
+        int result = JDBCTemplate.update(sql, objects);
+        //åˆ¤æ–­è¿”å›å€¼
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * è·å¾—æ–°é—»æ¸…å•ï¼Œä¸åŒ…æ‹¬æ­£æ–‡ï¼ŒæŒ‰ç¼–å·é™åº
+     *
+     * @return List<data.News>å¯¹è±¡
+     */
+    public static List<data.News> getNewsList()
+    {
+        //sqlè¯­å¥
+        String sql = "SELECT news.new_no,news.new_author,news.new_identity,news.new_time,news.new_title FROM news ORDER BY new_no DESC";
+        //æŸ¥è¯¢
+        List<data.News> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.News.class));
+        //è¿”å›
+        return list;
+    }
+
+    /**
+     * è·å¾—ç¬¬næ¡æ–°é—»
+     *
+     * @param new_number æ•°å­—nï¼Œæ–°é—»æŒ‰ç¼–å·é™åºï¼Œæ•°å­—1åˆ™ä»£è¡¨è·å–æœ€æ–°ä¸€æ¡æ–°é—»ï¼Œæ•°å­—2ä»£è¡¨è·å–ç¬¬äºŒæ¡æ–°é—»ï¼Œç”¨äºé¡µé¢æ˜¾ç¤º
+     * @return data.Newså¯¹è±¡ï¼ŒåŒ…æ‹¬æ­£æ–‡
+     */
+    public static data.News getNew(Long new_number)
+    {
+        //è·å¾—æ–°é—»æ€»æ•°
+        long count = getNewsCount();
+        //æ€»æ•°ä¸º0ï¼Œç›´æ¥è¿”å›null
+        if (count == 0)
+        {
+            return null;
+        }
+        //ä¼ å…¥çš„ç¼–å·å¤§äºæ€»æ•°ï¼Œæˆ–è€…æ˜¯è´Ÿæ•°å’Œ0ï¼Œç›´æ¥è¿”å›null
+        if (count < new_number || new_number <= 0)
+        {
+            return null;
+        }
+        long number = count - new_number;
+        //sqlè¯­å¥
+        String sql = "SELECT * FROM news LIMIT " + number + ",1";
+        //System.out.println(sql);
+        data.News news = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.News.class));
+        //è¿”å›ç»“æœ
+        if (news == null)
+        {
+            return null;
+        }
+        return news;
+    }
+
+    /**
+     * åˆ é™¤ä¸€æ¡æ–°é—»
+     *
+     * @param new_no æ–°é—»ç¼–å·
+     * @return åˆ é™¤æˆåŠŸï¼Œè¿”å›trueï¼Œåˆ é™¤å¤±è´¥è¿”å›false
+     */
+    public static boolean delete(Long new_no)
+    {
+        //sqlè¯­å¥
+        String sql = "delete from news where new_no=?";
+        //å‚æ•°
+        Object[] objects = {new_no};
+        //æ‰§è¡Œsql
+        int result = JDBCTemplate.update(sql, objects);
+        //è¿”å›ç»“æœ
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Score.java
@@ -3580,20 +3809,22 @@ body {
 }
 
 div {
+    width: 580px;
     position: absolute;
     top: 17%;
-    left: 35%;
+    left: 50%;
     font-size: 48px;
     color: red;
     border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
 }
 
 a {
     color: coral;
     font-size: 36px;
     position: absolute;
-    top: 30%;
-    left: 42%;
+    top: 40%;
+    left: 50%;
     display: block;
     width: 200px;
     height: 100px;
@@ -3602,6 +3833,7 @@ a {
     text-align: center;
     text-decoration: none;
     border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
 }
     ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\index.jsp
@@ -3688,3 +3920,115 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </body>
 </html>
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\AdministratorsTest.java
+package table;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(æµ‹è¯•ç±»å): AdministratorsTest
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/1
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 21:05
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æµ‹è¯•ç±»
+ */
+
+class AdministratorsTest
+{
+
+    @Test
+    void getAdministrators()
+    {
+        List<data.Administrators> administrators = Administrators.getAdministrators();
+        for (data.Administrators administrator : administrators)
+        {
+            System.out.print(administrator);
+        }
+    }
+
+    @Test
+    void getAdministrator()
+    {
+        data.Administrators administrator = Administrators.getAdministrator(20L);
+        System.out.println(administrator);
+    }
+}ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\NewsTest.java
+package table;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(æµ‹è¯•ç±»å): NewsTest
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/1
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 21:18
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æµ‹è¯•ç±»
+ */
+
+class NewsTest
+{
+
+    @Test
+    void getNews()
+    {
+        data.News news = News.getNews(200L);
+        System.out.println(news);
+    }
+
+    @Test
+    void getNewsCount()
+    {
+        Long newsCount = News.getNewsCount();
+        System.out.println(newsCount);
+    }
+
+    @Test
+    void insert()
+    {
+        boolean insert = News.insert("å¼ ä¸‰", "æ ¡é•¿", "å­¦æ ¡2020å¹´æ€»ç»“", "æ­£æ–‡");
+        System.out.println(insert);
+    }
+
+    @Test
+    void getNewsList()
+    {
+        List<data.News> list = News.getNewsList();
+        for (data.News news : list)
+        {
+            System.out.print(news);
+        }
+    }
+
+    @Test
+    void getNew()
+    {
+        data.News news = News.getNew(1L);
+        System.out.println(news);
+    }
+
+    @Test
+    void delete()
+    {
+        boolean result = News.delete(7L);
+        System.out.println(result);
+    }
+}ÿ

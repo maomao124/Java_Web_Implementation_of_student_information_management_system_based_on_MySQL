@@ -1,4 +1,4 @@
-38
+40
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -37,3 +37,5 @@ src\\main\\webapp\\index.jsp
 src\\main\\webapp\\Login.html
 src\\main\\webapp\\student\\index.jsp
 src\\main\\webapp\\teacher\\index.jsp
+src\\test\\java\\table\\AdministratorsTest.java
+src\\test\\java\\table\\NewsTest.java
