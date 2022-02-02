@@ -1,8 +1,10 @@
 package table;
 
+import io.Add;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,13 +54,29 @@ class AdministratorsTest
     {
         data.Administrators administrator = new data.Administrators(10004L, "王七",
                 "副校长", "435588745685891235");
-        System.out.println(table.Administrators.update(10004L,"赵六",
-                "副校长","435588745685891235"));
+        System.out.println(table.Administrators.update(10004L, "赵六",
+                "副校长", "435588745685891235"));
     }
 
     @Test
     void delete()
     {
         System.out.println(table.Administrators.delete(10003L));
+    }
+
+    @Test
+    void add()
+    {
+        //Map<String, String> studentInformation = Add.getStudentInformation();
+        for (int i = 0; i < 30; i++)
+        {
+            Map<String, String> studentInformation = Add.getStudentInformation();
+            Long no = i + 10001L;
+            String name = studentInformation.get("name");
+            String job = "管理员";
+            String id_card = studentInformation.get("IdCard");
+            data.Administrators administrator = new data.Administrators(no, name, job, id_card);
+            System.out.println(table.Administrators.insert(administrator));
+        }
     }
 }
