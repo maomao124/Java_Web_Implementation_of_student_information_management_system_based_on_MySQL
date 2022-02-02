@@ -23,14 +23,14 @@ class AdministratorsPasswordTest
     @Test
     void verification()
     {
-        boolean verification = AdministratorsPassword.verification(10001L, "156312");
+        boolean verification = AdministratorsPassword.verification(10001L, "274998");
         System.out.println(verification);
     }
 
     @Test
     void changePassword()
     {
-        boolean b = AdministratorsPassword.changePassword(10001L, "156312", "123456");
+        boolean b = AdministratorsPassword.changePassword(10001L, "274998", "123456");
         System.out.println(b);
     }
 }
