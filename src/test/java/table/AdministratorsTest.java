@@ -38,4 +38,27 @@ class AdministratorsTest
         data.Administrators administrator = Administrators.getAdministrator(20L);
         System.out.println(administrator);
     }
+
+    @Test
+    void insert()
+    {
+        data.Administrators administrator = new data.Administrators(10004L, "王七",
+                "副校长", "435588745685891235");
+        System.out.println(table.Administrators.insert(administrator));
+    }
+
+    @Test
+    void update()
+    {
+        data.Administrators administrator = new data.Administrators(10004L, "王七",
+                "副校长", "435588745685891235");
+        System.out.println(table.Administrators.update(10004L,"赵六",
+                "副校长","435588745685891235"));
+    }
+
+    @Test
+    void delete()
+    {
+        System.out.println(table.Administrators.delete(10003L));
+    }
 }

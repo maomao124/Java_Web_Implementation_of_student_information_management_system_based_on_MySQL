@@ -93,4 +93,53 @@ public class Administrators
         }
         return false;
     }
+
+    /**
+     * 更新管理员信息，此操作应该只允许超级管理员操作
+     *
+     * @param administrator_no     要更新的管理员编号
+     * @param administrator_name   新的管理员姓名
+     * @param administrator_job    新的管理员职位
+     * @param administrator_idcard 新的管理员身份证，这个用于把身份证输入错了才改这项
+     * @return 更新成功，则返回true，失败返回false
+     */
+    public static boolean update(Long administrator_no, String administrator_name, String administrator_job, String administrator_idcard)
+    {
+        //sql语句
+        String sql = "UPDATE administrators SET administrator_name=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
+        Object[] objects = {administrator_name, administrator_job, administrator_idcard, administrator_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除管理员信息，此操作应该只允许超级管理员操作
+     *
+     * @param administrator_no 要删除的管理员编号
+     * @return 删除成功，则返回true，失败返回false
+     */
+    public static boolean delete(Long administrator_no)
+    {
+        //sql语句
+        String sql1 = "DELETE FROM administrators_password WHERE administrator_no=?";
+        String sql2 = "DELETE FROM administrators WHERE administrators.administrator_no=?";
+        Object[] objects1 = {administrator_no};
+        Object[] objects2 = {administrator_no};
+        String[] sql = {sql1, sql2};
+        Object[][] objects = {objects1, objects2};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
