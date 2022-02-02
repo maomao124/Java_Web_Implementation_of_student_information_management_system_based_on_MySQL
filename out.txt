@@ -1844,6 +1844,737 @@ public class TeacherPassword
     }
 }
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\io\\ErrorLog.java
+package io;
+
+import java.awt.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): io
+ * Class(类名): ErrorLog
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:07
+ * Version(版本): 1.0
+ * Description(描述)： 错误日志类，老代码了，将就用，log4j凉凉
+ */
+
+public class ErrorLog
+{
+    private static final String path = "error.log";  //错误日志路径
+
+    /**
+     * 把错误的堆栈字符串写入文件
+     *
+     * @param message 堆栈字符串
+     */
+    public static void write(String message)
+    {
+        Calendar calendar = Calendar.getInstance();// 获取当前时间
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;                         //月份从 0 开始，所以加 1
+        int day = calendar.get(Calendar.DATE);
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        week = week - 1;                             //星期日为第一天
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); //时
+        int minute = calendar.get(Calendar.MINUTE);   //分
+        int second = calendar.get(Calendar.SECOND);   //秒
+        int millisecond = calendar.get(Calendar.MILLISECOND); //毫秒
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH); // 获取今天是本月第几天
+        int dayOfWeekInMonth = calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH); // 获取今天是本月第几周
+        int many = calendar.get(Calendar.DAY_OF_YEAR); // 获取今天是今年第几天
+        StringBuilder stringBuffer1 = new StringBuilder();
+        DecimalFormat decimalFormat1 = new DecimalFormat("00");
+        //stringBuffer1.append(year).append("年 ").append(month).append("月 ").append(day).append("日 ")
+        // .append(hour).append("时 ").append(minute).append("分 ").append(second).append("秒");
+        stringBuffer1.append("日期：");
+        stringBuffer1.append(decimalFormat1.format(year)).append("/").append(decimalFormat1.format(month)).append("/")
+                .append(decimalFormat1.format(day)).append("    时间：").append(decimalFormat1.format(hour))
+                .append(":").append(decimalFormat1.format(minute)).append(":").append(decimalFormat1.format(second));
+        //System.out.println(stringBuffer1);
+        stringBuffer1.append("        主机：").append(System.getProperty("user.name"));
+        stringBuffer1.append("        错误堆栈：\n");
+        stringBuffer1.append(message);
+        stringBuffer1.append("\n\n\n");
+
+        //写入
+        FileOutputStream fileOutputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileOutputStream = new FileOutputStream(path, true);
+            fileOutputStream.write(stringBuffer1.toString().getBytes(StandardCharsets.UTF_8));
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 从错误日志里读错误日志
+     *
+     * @return 字符串 错误日志
+     */
+    public static String read()
+    {
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
+        BufferedReader bufferedReader = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileInputStream = new FileInputStream(path);
+            InputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            bufferedReader = new BufferedReader(InputStreamReader);
+            String str;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((str = bufferedReader.readLine()) != null)
+            {
+                stringBuilder.append(str).append("\n");
+            }
+            return stringBuilder.toString();
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileInputStream != null)
+                {
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
+                }
+                if (bufferedReader != null)
+                {
+                    bufferedReader.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                ErrorLog.write(stackTraceStr);
+            }
+        }
+        return null;
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\servlet\\filter\\AdministratorsFilter.java
+package servlet.filter;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): ${PACKAGE_NAME}
+ * Class(类名): ${NAME}
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:00
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+@WebFilter(filterName = "AdministratorsFilter")
+public class AdministratorsFilter implements Filter
+{
+    public void init(FilterConfig config) throws ServletException
+    {
+    }
+
+    public void destroy()
+    {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException
+    {
+        chain.doFilter(request, response);
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\servlet\\filter\\StudentFilter.java
+package servlet.filter;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): ${PACKAGE_NAME}
+ * Class(类名): ${NAME}
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 13:59
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+@WebFilter(filterName = "StudentFilter")
+public class StudentFilter implements Filter
+{
+    public void init(FilterConfig config) throws ServletException
+    {
+    }
+
+    public void destroy()
+    {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException
+    {
+        chain.doFilter(request, response);
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\servlet\\filter\\TeacherFilter.java
+package servlet.filter;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): ${PACKAGE_NAME}
+ * Class(类名): ${NAME}
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:00
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+@WebFilter(filterName = "TeacherFilter")
+public class TeacherFilter implements Filter
+{
+    public void init(FilterConfig config) throws ServletException
+    {
+    }
+
+    public void destroy()
+    {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException
+    {
+        chain.doFilter(request, response);
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\SHA\\MD5.java
+package SHA;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(类名): MD5
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:10
+ * Version(版本): 1.0
+ * Description(描述)： 散列算法 md5，用于转换学生的密码和验证学生密码
+ */
+
+public class MD5
+{
+    //存储小组
+    //private long[] groups = null;
+    //存储结果
+    private String resultMessage = "";
+
+    //四个寄存器的初始向量IV,采用小端存储
+    private static final long A = 0x67452301L;
+    private static final long B = 0xefcdab89L;
+    private static final long C = 0x98badcfeL;
+    private static final long D = 0x10325476L;
+
+    //java不支持无符号的基本数据(unsigned),所以选用long数据类型
+    private long[] result = {A, B, C, D};
+
+    private static final long[][] T =
+            {
+                    {0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
+                            0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
+                            0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
+                            0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821},
+
+                    {0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa,
+                            0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
+                            0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed,
+                            0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a},
+
+                    {0xfffa3942, 0x8771f681, 0x6d9d6122, 0xfde5380c,
+                            0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
+                            0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05,
+                            0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665},
+
+                    {0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
+                            0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
+                            0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
+                            0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391}
+            };
+    //表示X[k]中的的k取值，决定如何使用消息分组中的字
+    private static final int[][] k =
+            {
+                    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
+                    {1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12},
+                    {5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2},
+                    {0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9}
+            };
+
+    //各次迭代中采用的做循环移位的s值
+    private static final int[][] S =
+            {
+                    {7, 12, 17, 22},
+                    {5, 9, 14, 20},
+                    {4, 11, 16, 23},
+                    {6, 10, 15, 21}
+            };
+
+    //4轮循环中使用的生成函数(轮函数)g
+    private static long g(int i, long b, long c, long d)
+    {
+        switch (i)
+        {
+            case 0:
+                return (b & c) | ((~b) & d);
+            case 1:
+                return (b & d) | (c & (~d));
+            case 2:
+                return b ^ c ^ d;
+            case 3:
+                return c ^ (b | (~d));
+            default:
+                return 0;
+        }
+    }
+
+    //开始使用MD5加密
+    private String start(String message)
+    {
+        //转化为字节数组
+        byte[] inputBytes = message.getBytes();
+        //6A 61 6E 6b 69 6e 67
+        //获取字节数组的长度
+        int byteLen = inputBytes.length;
+        //得到K值（以bit作单位的message长度）
+        long K = (long) (byteLen << 3);
+        //完整小组(512bit)(64byte)的个数
+        int groupCount = byteLen / 64;
+
+        //分块
+        for (int i = 0; i < groupCount; i++)
+        {
+            //每次取512bit
+            //处理一个分组
+            H(divide(inputBytes, i * 64));
+        }
+
+        //填充
+        int rest = byteLen % 64;
+        //即将填充的一个分组
+        byte[] paddingBytes = new byte[64];
+        //原来的尾部数据
+        for (int i = 0; i < rest; i++)
+        {
+            paddingBytes[i] = inputBytes[byteLen - rest + i];
+        }
+        //即小于448bit的情况，先填充100...0再填充K值的低64位
+        //此时只会新增一个分组
+        if (rest <= 56)
+        {
+            //填充100...0
+            if (rest < 56)
+            {
+                //填充10000000
+                paddingBytes[rest] = (byte) (1 << 7);
+                //填充00000000
+                for (int i = 1; i < 56 - rest; i++)
+                {
+                    paddingBytes[rest + i] = 0;
+                }
+            }
+            //填充K值低64位
+            for (int i = 0; i < 8; i++)
+            {
+                paddingBytes[56 + i] = (byte) (K & 0xFFL);
+                K = K >> 8;
+            }
+            //处理分组
+            H(divide(paddingBytes, 0));
+            //即大于448bit的情况，先填充100...0再填充K值的低64位
+            //此时会新增两个分组
+        }
+        else
+        {
+            //填充10000000
+            paddingBytes[rest] = (byte) (1 << 7);
+            //填充00000000
+            for (int i = rest + 1; i < 64; i++)
+            {
+                paddingBytes[i] = 0;
+            }
+            //处理第一个尾部分组
+            H(divide(paddingBytes, 0));
+
+            //填充00000000
+            for (int i = 0; i < 56; i++)
+            {
+                paddingBytes[i] = 0;
+            }
+
+            //填充低64位
+            for (int i = 0; i < 8; i++)
+            {
+                //这里很关键，使用小端方式，即Byte数组先存储len的低位数据，然后右移len
+                paddingBytes[56 + i] = (byte) (K & 0xFFL);
+                K = K >> 8;
+            }
+            //处理第二个尾部分组
+            H(divide(paddingBytes, 0));
+        }
+        //将Hash值转换成十六进制的字符串
+        //小端方式!
+        for (int i = 0; i < 4; i++)
+        {
+            //解决缺少前置0的问题
+            resultMessage += String.format("%02x", result[i] & 0xFF) +
+                    String.format("%02x", (result[i] & 0xFF00) >> 8) +
+                    String.format("%02x", (result[i] & 0xFF0000) >> 16) +
+                    String.format("%02x", (result[i] & 0xFF000000) >> 24);
+
+        }
+        return resultMessage;
+    }
+
+    //从inputBytes的index开始取512位，作为新的512bit的分组
+    private static long[] divide(byte[] inputBytes, int start)
+    {
+        //存储一整个分组,就是512bit,数组里每个是32bit，就是4字节，为了消除符号位的影响，所以使用long
+        long[] group = new long[16];
+        for (int i = 0; i < 16; i++)
+        {
+            //每个32bit由4个字节拼接而来
+            //小端的从byte数组到bit恢复方法
+            group[i] = byte2unsign(inputBytes[4 * i + start]) |
+                    (byte2unsign(inputBytes[4 * i + 1 + start])) << 8 |
+                    (byte2unsign(inputBytes[4 * i + 2 + start])) << 16 |
+                    (byte2unsign(inputBytes[4 * i + 3 + start])) << 24;
+        }
+        return group;
+    }
+
+    //其实byte相当于一个字节的有符号整数，这里不需要符号位，所以把符号位去掉
+    private static long byte2unsign(byte b)
+    {
+        return b < 0 ? b & 0x7F + 128 : b;
+    }
+
+    // groups[] 中每一个分组512位（64字节）
+    // MD5压缩函数
+    private void H(long[] groups)
+    {
+        //缓冲区（寄存器）数组
+        long a = result[0], b = result[1], c = result[2], d = result[3];
+        //四轮循环
+        for (int n = 0; n < 4; n++)
+        {
+            //16轮迭代
+            for (int i = 0; i < 16; i++)
+            {
+                result[0] += (g(n, result[1], result[2], result[3]) & 0xFFFFFFFFL) + groups[k[n][i]] + T[n][i];
+                result[0] = result[1] + ((result[0] & 0xFFFFFFFFL) << S[n][i % 4] | ((result[0] & 0xFFFFFFFFL) >>> (32 - S[n][i % 4])));
+                //循环轮换
+                long temp = result[3];
+                result[3] = result[2];
+                result[2] = result[1];
+                result[1] = result[0];
+                result[0] = temp;
+            }
+        }
+        //加入之前计算的结果
+        result[0] += a;
+        result[1] += b;
+        result[2] += c;
+        result[3] += d;
+        //防止溢出
+        for (int n = 0; n < 4; n++)
+        {
+            result[n] &= 0xFFFFFFFFL;
+        }
+    }
+
+    /**
+     * 获得字符串对应的散列值，MD5，小写
+     *
+     * @param message 要转化的字符串
+     * @return 字符串对应的MD5码，小写
+     */
+    public static String getMD5(String message)
+    {
+        String result = "";
+        MD5 md5 = new MD5();
+        result = md5.start(message);
+        md5 = null;
+        return result;
+    }
+
+    /**
+     * 获得字符串对应的散列值，MD5，大写
+     *
+     * @param message 要转化的字符串
+     * @return 字符串对应的MD5码，大写
+     */
+    public static String getMD5toUpperCase(String message)
+    {
+        String result = "";
+        MD5 md5 = new MD5();
+        md5.start(message);
+        result = md5.resultMessage.toUpperCase();
+        md5 = null;
+        return result;
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\SHA\\SHA256.java
+package SHA;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(类名): SHA256
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:10
+ * Version(版本): 1.0
+ * Description(描述)： 散列算法，SHA256，用于转换老师密码和验证老师密码
+ */
+
+public class SHA256
+{
+    private static String SHA(final String strText)
+    {
+        String strResult = null;
+        if (strText != null && strText.length() > 0)
+        {
+            try
+            {
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                messageDigest.update(strText.getBytes());
+                byte[] byteBuffer = messageDigest.digest();
+                StringBuilder strHexString = new StringBuilder();
+                for (int i = 0; i < byteBuffer.length; i++)
+                {
+                    String hex = Integer.toHexString(0xff & byteBuffer[i]);
+                    if (hex.length() == 1)
+                    {
+                        strHexString.append('0');
+                    }
+                    strHexString.append(hex);
+                }
+                strResult = strHexString.toString();
+            }
+            catch (NoSuchAlgorithmException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return strResult;
+    }
+
+    /**
+     * 获得字符串对应的散列值，SHA256，小写
+     *
+     * @param strText 要转换的字符串
+     * @return 字符串对应的SHA256码，小写
+     */
+    public static String getSHA256(String strText)
+    {
+        return SHA(strText);
+    }
+
+    /**
+     * 获得字符串对应的散列值，SHA256，大写
+     *
+     * @param strText 要转换的字符串
+     * @return 字符串对应的SHA256码，大写
+     */
+    public static String getSHA256toUpperCase(String strText)
+    {
+        return SHA(strText).toUpperCase();
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\SHA\\SHA3_512.java
+package SHA;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): SHA
+ * Class(类名): SHA3_512
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/2
+ * Time(创建时间)： 14:10
+ * Version(版本): 1.0
+ * Description(描述)： 散列算法，SHA3_512，用于转换管理员密码和验证学生密码
+ */
+
+public class SHA3_512
+{
+    private static String SHA(final String strText)
+    {
+        String strResult = null;
+        if (strText != null && strText.length() > 0)
+        {
+            try
+            {
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA3-512");
+                messageDigest.update(strText.getBytes());
+                byte[] byteBuffer = messageDigest.digest();
+                StringBuilder strHexString = new StringBuilder();
+                for (int i = 0; i < byteBuffer.length; i++)
+                {
+                    String hex = Integer.toHexString(0xff & byteBuffer[i]);
+                    if (hex.length() == 1)
+                    {
+                        strHexString.append('0');
+                    }
+                    strHexString.append(hex);
+                }
+                strResult = strHexString.toString();
+            }
+            catch (NoSuchAlgorithmException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return strResult;
+    }
+
+    /**
+     * 获得字符串对应的散列值，SHA3_512，小写
+     *
+     * @param strText 要转化的字符串
+     * @return 字符串对应的SHA3_512码，小写
+     */
+    public static String getSHA3_512(String strText)
+    {
+        return SHA(strText);
+    }
+
+    /**
+     * 获得字符串对应的散列值，SHA3_512，大写
+     *
+     * @param strText 要转化的字符串
+     * @return 字符串对应的SHA3_512码，大写
+     */
+    public static String getSHA3_512toUpperCase(String strText)
+    {
+        return SHA(strText).toUpperCase();
+    }
+}
+
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\Administrators.java
 package table;
 
