@@ -308,9 +308,14 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
             --r: 2
         }
 
-        .s{
+        .s {
             text-align: center;
             width: 170px;
+        }
+
+        .code {
+
+            font-size: 23px;
         }
 
     </style>
@@ -349,7 +354,15 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
             <tr>
                 <td class="s">验证码</td>
                 <td>
-                    <input class="c" type="number" max="9999" min="1000" name="number"/>
+                    <input class="c" type="text" name="CheckCode"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="code" href="#" onclick="run()">看不清，换一张</a>
+                </td>
+                <td>
+                    <img id="imgId" src="CheckCodeServlet">
                 </td>
             </tr>
             <tr>
@@ -417,4 +430,13 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
     </figure>
 </div>
 </body>
+<script type="text/javascript">
+    // 看不清，换一张，时间戳
+    function run()
+    {
+        // 获取图片
+        var image = document.getElementById("imgId");
+        image.src = "CheckCodeServlet?" + new Date().getTime();
+    }
+</script>
 </html>
