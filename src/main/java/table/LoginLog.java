@@ -10,7 +10,7 @@ package table;
  * Date(创建日期)： 2022/2/2
  * Time(创建时间)： 20:19
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 登录日志表
  */
 
 public class LoginLog
