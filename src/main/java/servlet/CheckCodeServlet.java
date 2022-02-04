@@ -23,7 +23,7 @@ import java.util.Random;
  * Date(创建日期)： 2022/2/3
  * Time(创建时间)： 23:47
  * Version(版本): 1.0
- * Description(描述)： 验证码
+ * Description(描述)： 验证码类
  */
 
 @WebServlet("/CheckCodeServlet")

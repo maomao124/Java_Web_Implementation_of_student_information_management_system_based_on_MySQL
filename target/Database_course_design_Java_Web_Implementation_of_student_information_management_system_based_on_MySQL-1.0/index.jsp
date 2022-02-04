@@ -11,6 +11,6 @@
 <div>
     <c:out value="欢迎使用学生信息管理系统" escapeXml="true" default="null"/>
 </div>
-<a href="">进入程序</a>
+<a href="Login.html">进入程序</a>
 </body>
 </html>

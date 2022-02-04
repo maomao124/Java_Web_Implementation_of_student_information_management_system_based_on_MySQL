@@ -2520,6 +2520,121 @@ public class ErrorLog
 }
 
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\servlet\\CheckCodeServlet.java
+package servlet;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): servlet
+ * Class(类名): CheckCodeServlet
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/3
+ * Time(创建时间)： 23:47
+ * Version(版本): 1.0
+ * Description(描述)： 验证码
+ */
+
+@WebServlet("/CheckCodeServlet")
+public class CheckCodeServlet extends HttpServlet
+{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        int width = 120;
+        int height = 35;
+        // 在内存中生成图片
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        // 先获取画笔对象
+        Graphics2D graphics2D = (Graphics2D) image.getGraphics();
+        // 设置灰色
+        graphics2D.setColor(Color.GRAY);
+        // 画填充的矩形
+        graphics2D.fillRect(0, 0, width, height);
+        // 设置颜色
+        graphics2D.setColor(Color.BLUE);
+        // 画边框
+        graphics2D.drawRect(0, 0, width - 1, height - 1);
+        // 准备数据，随机获取4个字符
+        String words = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        // 设置颜色
+        graphics2D.setColor(Color.YELLOW);
+        // 设置字体
+        graphics2D.setFont(new Font("隶书", Font.BOLD, 20));
+        StringBuilder code = new StringBuilder();
+        //构造存储字符的数组
+        char[] a = {};
+        //构造存储字符串的集合
+        ArrayList<String> list = new ArrayList<>();
+        Random random = new Random();
+        int x = 20;
+        int y = 20;
+        for (int i = 0; i < 4; i++)
+        {
+            // void rotate(double theta, double x, double y)
+            // theta 弧度
+            // hudu = jiaodu * Math.PI / 180;
+            // 获取正负30之间的角度
+            int jiaodu = random.nextInt(60) - 30;
+            double hudu = jiaodu * Math.PI / 180;
+            graphics2D.rotate(hudu, x, y);
+            // 获取下标
+            int index = random.nextInt(words.length());
+            // 返回指定下标位置的字符，随机获取下标
+            char ch = words.charAt(index);
+            //将字符存入字符数组中
+            char[] chc = {ch};
+            //使用字符数组构造字符串
+            String string = new String(chc);
+            //将构造好的字符串添加进list集合中
+            list.add(string);
+            // 写字符串
+            graphics2D.drawString("" + ch, x, y);
+            graphics2D.rotate(-hudu, x, y);
+            x += 20;
+        }
+        for (String s : list)
+        {
+            code.append(s);
+        }
+        //将验证码存入session中
+        HttpSession session = request.getSession();
+        session.setAttribute("code", code.toString());
+        // 设置颜色
+        graphics2D.setColor(Color.GREEN);
+        int x1, x2, y1, y2;
+        // 画干扰线
+        for (int i = 0; i < 4; i++)
+        {
+            x1 = random.nextInt(width);
+            y1 = random.nextInt(height);
+            x2 = random.nextInt(width);
+            y2 = random.nextInt(height);
+            graphics2D.drawLine(x1, y1, x2, y2);
+        }
+        // 输出到客户端
+        ImageIO.write(image, "jpg", response.getOutputStream());
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        doGet(request, response);
+    }
+}
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\servlet\\filter\\AdministratorsFilter.java
 package servlet.filter;
 
@@ -3383,7 +3498,7 @@ package table;
  * Date(创建日期)： 2022/2/2
  * Time(创建时间)： 20:19
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 登录日志表
  */
 
 public class LoginLog
@@ -5175,6 +5290,621 @@ public class JDBCTemplate
 }
 
 
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:18
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>管理员-菜单</title>
+</head>
+<body>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Authentication.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): Authentication
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:16
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>身份验证</title>
+</head>
+<body>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Error.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): Error
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:17
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>错误</title>
+</head>
+<body>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\index.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31 
+  Time(创建时间)： 21:07
+  Version(版本): 1.0
+  Description(描述)： 索引的css文件
+ */
+
+body {
+    background-color: skyblue;
+}
+
+div {
+    width: 580px;
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    font-size: 48px;
+    color: red;
+    border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
+}
+
+a {
+    color: coral;
+    font-size: 36px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: block;
+    width: 200px;
+    height: 100px;
+    background-color: lawngreen;
+    line-height: 100px;
+    text-align: center;
+    text-decoration: none;
+    border: 10px dotted lightpink;
+    transform: translate(-50%,-50%);
+}
+    �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\index.jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>学生信息管理系统</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<br/>
+<div>
+    <c:out value="欢迎使用学生信息管理系统" escapeXml="true" default="null"/>
+</div>
+<a href="Login.html">进入程序</a>
+</body>
+</html>�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\Login.html
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): Login
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:15
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        div.form {
+            border: 10px skyblue dotted;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        table {
+            width: 500px;
+            border-collapse: collapse;
+            color: skyblue;
+            background-color: lightpink;
+        }
+
+        td, input, input.c {
+            font-size: 30px;
+        }
+
+        input {
+            /*font-size: 24px;*/
+            /*width: 90%;*/
+            color: coral;
+        }
+
+        input.c {
+            width: 80%;
+            color: coral;
+        }
+
+
+        body {
+            background: skyblue;
+            /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+        }
+
+        .wrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vh;
+            background: skyblue;
+            /*margin: 60px auto;*/
+            transition: all 1s linear 0s;
+        }
+
+        span {
+            width: 60px;
+            height: 10px;
+            background: cornflowerblue;
+            position: absolute;
+            transition: all 1s linear 0s;
+        }
+
+        span:nth-child(2) {
+            bottom: 0;
+            left: 0;
+        }
+
+        span:nth-child(3) {
+            bottom: 0;
+            right: 0;
+        }
+
+        span:nth-child(4) {
+            top: 0;
+            right: 0;
+        }
+
+        span:nth-child(5) {
+            width: 10px;
+            height: 60px;
+            top: 0;
+            left: 0;
+        }
+
+        span:nth-child(6) {
+            width: 10px;
+            height: 60px;
+            top: 0;
+            right: 0;
+        }
+
+        span:nth-child(7) {
+            width: 10px;
+            height: 60px;
+            bottom: 0;
+            right: 0;
+        }
+
+        span:nth-child(8) {
+            width: 10px;
+            height: 60px;
+            bottom: 0;
+            left: 0;
+        }
+
+        .wrap:hover {
+            background: #e6bfff;
+        }
+
+        .wrap:hover span:nth-child(1) {
+            width: 100%;
+            height: 5px;
+        }
+
+        .wrap:hover span:nth-child(6) {
+            width: 5px;
+            height: 100%;
+        }
+
+        .wrap:hover span:nth-child(2) {
+            width: 100%;
+            height: 5px;
+        }
+
+        .wrap:hover span:nth-child(4) {
+            /* width: 100%; */
+            height: 5px;
+        }
+
+        .wrap:hover span:nth-child(5) {
+            width: 5px;
+            height: 100%;
+        }
+
+        .wrap:hover span:nth-child(7) {
+            width: 5px;
+            height: 100%;
+        }
+
+        .wrap:hover span:nth-child(3) {
+            height: 5px;
+        }
+
+        .wrap:hover span:nth-child(8) {
+            width: 5px;
+        }
+
+        /*热气球*/
+
+        div.left {
+            position: absolute;
+            bottom: 1%;
+            left: 1%;
+            /*transform: translate(50%, -50%);*/
+        }
+
+        div.right {
+            position: absolute;
+            bottom: 1%;
+            right: 1%;
+            /*transform: translate(-50%, -50%);*/
+        }
+
+        div.left1 {
+            position: absolute;
+            top: 3%;
+            left: 1%;
+            /*transform: translate(50%, -50%);*/
+        }
+
+        div.right1 {
+            position: absolute;
+            top: 3%;
+            right: 1%;
+            /*transform: translate(-50%, -50%);*/
+        }
+
+        /*纵向居中布局*/
+        .balloon {
+
+            font-size: 13px;
+            width: 12em;
+            height: 19em;
+            display: flex;
+            flex-direction: column; /*主轴线设置为了垂直方向，那么侧轴线就是水平方向*/
+            align-items: center; /*使得垂直排列的元素，在侧轴线线上居中对齐*/
+            animation: drift 2s infinite alternate; /*名为drift的动画 在两秒内完成一次；执行次数无限次 正反运动往返执行*/
+        }
+
+        @keyframes drift {
+            to {
+                transform: translateY(-10%); /*提升的距离是自身元素高度的30%*/
+            }
+        }
+
+        .envelope {
+            position: relative;
+            width: inherit;
+            height: 16em; /*高度不够，用来将盖子下面的倒三角截成倒梯形*/
+            overflow: hidden;
+        }
+
+        /*伞盖的形状是上端为球形，下端为圆锥形,所以我们先在上部画一个圆，再在下部画一个三角形。
+        先画上部的圆：*/
+        .envelope span {
+            position: absolute;
+            width: inherit;
+            height: 12em;
+            border-radius: 50%;
+            color: orange;
+            background-color: currentColor;
+        }
+
+        /*再用伪元素画出下部的等腰三角形：*/
+        .envelope span::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-width: 10em 5.5em 0 5.5em;
+            border-style: solid;
+            border-color: currentColor transparent transparent transparent;
+            left: calc(50% - 5.5em); /*动态计算长度值*/
+            top: 8.45em;
+        }
+
+        .envelope span:nth-child(2) { /*这里的两个span元素其实是重叠的相同的图案，这里将第二个span元素进行压缩和变色，是为了形成两幅图案的色彩叠加效果*/
+            transform: scaleX(0.4);
+            filter: brightness(0.85) contrast(1.4); /*滤镜效果：前者调整明亮程度；后者是对比度设置*/
+        }
+
+        /*定义吊篮的尺寸：*/
+        .basket {
+            position: relative;
+            width: 2em;
+            height: 3em;
+        }
+
+        /*用 ::before 伪元素画出篮子：*/
+        .basket::before {
+            content: '';
+            position: absolute;
+            width: inherit;
+            height: 1.6em;
+            background-color: peru; /*秘鲁色：明度稍高的褐色*/
+            bottom: 0px;
+            border-radius: 0 0 0.5em 0.5em; /*圆角边框设置*/
+        }
+
+        /*用 ::after 伪元素画出篮子的顶边：*/
+        .basket::after {
+            content: '';
+            position: absolute;
+            width: 105%;
+            height: 0.3em;
+            background-color: saddlebrown;
+            top: 1.3em;
+            left: calc((100% - 105%) / 2); /*用于将篮边居中对齐*/
+            border-radius: 0.3em;
+        }
+
+        /*定位缆绳，并倾斜不同的角度：*/
+        .basket span {
+            position: absolute;
+            width: 0.1em;
+            height: 1.5em;
+            background-color: burlywood;
+            left: calc((var(--n) - 1) * 0.6em);
+            transform: rotate(calc(var(--r) * 7deg));
+            trasnform-origin: bottom;
+        }
+
+        .basket span:nth-child(1) {
+            --n: 1;
+            --r: -2;
+        }
+
+        /*对每一个span元素都应用上面的span设置，相当于调用类*/
+        .basket span:nth-child(2) {
+            --n: 2;
+            --r: -1;
+        }
+
+        .basket span:nth-child(3) {
+            --n: 3;
+            --r: 1;
+        }
+
+        .basket span:nth-child(4) {
+            --n: 4;
+            --r: 2
+        }
+
+        .s {
+            text-align: center;
+            width: 170px;
+        }
+
+        .code {
+
+            font-size: 23px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="form">
+    <form action="" method="post">
+        <table border="1">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学号/职工号</td>
+                <td>
+                    <input class="c" type="text" name="username"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">密码</td>
+                <td>
+                    <input class="c" type="password" name="password"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">验证码</td>
+                <td>
+                    <input class="c" type="text" name="CheckCode"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="code" href="#" onclick="run()">看不清，换一张</a>
+                </td>
+                <td>
+                    <img id="imgId" src="CheckCodeServlet">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="登录"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="left">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="left1">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right1">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+<script type="text/javascript">
+    // 看不清，换一张，时间戳
+    function run()
+    {
+        // 获取图片
+        var image = document.getElementById("imgId");
+        image.src = "CheckCodeServlet?" + new Date().getTime();
+    }
+</script>
+</html>�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:19
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>学生-菜单</title>
+</head>
+<body>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\teacher\\index.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:19
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>老师-菜单</title>
+</head>
+<body>
+
+</body>
+</html>
 �
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\MD5Test.java
 package SHA;
