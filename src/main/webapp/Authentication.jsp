@@ -15,6 +15,25 @@
     <title>身份验证</title>
 </head>
 <body>
-
+<%
+    //获取request请求的信息
+    //学号或者职工号（编号）
+    String no = request.getParameter("no");
+    //密码
+    String password = request.getParameter("password");
+    //验证码
+    String code = request.getParameter("CheckCode");
+    //从session里取正确的验证码
+    String session_code = (String) session.getAttribute("code");
+%>
+输出验证：
+<br>
+<%=no%>
+<br/>
+<%=password%>
+<br/>
+<%=code%>
+<br/>
+<%=session_code%>
 </body>
 </html>

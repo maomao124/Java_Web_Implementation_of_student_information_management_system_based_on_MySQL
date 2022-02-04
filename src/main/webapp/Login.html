@@ -314,8 +314,13 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         }
 
         .code {
-
+            color: royalblue;
+            text-decoration: none;
             font-size: 23px;
+        }
+
+        .img {
+            /*text-align: center;*/
         }
 
     </style>
@@ -333,7 +338,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
 </div>
 
 <div class="form">
-    <form action="" method="post">
+    <form action="Authentication.jsp" method="post">
         <table border="1">
             <tr>
                 <td colspan="2" align="center">
@@ -342,7 +347,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
             <tr>
                 <td class="s">学号/职工号</td>
                 <td>
-                    <input class="c" type="text" name="username"/>
+                    <input class="c" type="text" name="no"/>
                 </td>
             </tr>
             <tr>
@@ -361,7 +366,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
                 <td>
                     <a class="code" href="#" onclick="run()">看不清，换一张</a>
                 </td>
-                <td>
+                <td class="img">
                     <img id="imgId" src="CheckCodeServlet">
                 </td>
             </tr>
