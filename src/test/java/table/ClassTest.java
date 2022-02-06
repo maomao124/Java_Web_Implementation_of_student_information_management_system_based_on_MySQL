@@ -32,4 +32,37 @@ class ClassTest
             System.out.print(c);
         }
     }
+
+    @Test
+    void getClassCount()
+    {
+        System.out.println(table.Class.getClassCount());
+    }
+
+    @Test
+    void getClassInformation()
+    {
+        System.out.println(table.Class.getClassInformation(1003L));
+    }
+
+    @Test
+    void insert()
+    {
+        boolean b = Class.insert(10012L, "计算机", "计算机学院", "计算机专业", "2019");
+        System.out.println(b);
+    }
+
+    @Test
+    void update()
+    {
+        boolean b = Class.update(10012L, "计算机2", "计算机学院", "计算机专业", "2020");
+        System.out.println(b);
+    }
+
+    @Test
+    void delete()
+    {
+        boolean b = Class.delete(10012L);
+        System.out.println(b);
+    }
 }
