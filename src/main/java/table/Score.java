@@ -200,7 +200,7 @@ public class Score
         //计算绩点
         Float gradePoint = getGradePoint(final_score);
         //sql语句
-        String sql = "update score set usual_score=?,end_score=?,final_score=?,grade_point=?,semester=? where no=?,course_no=?";
+        String sql = "update score set usual_score=?,end_score=?,final_score=?,grade_point=?,semester=? where no=? and course_no=?";
         //参数
         Object[] objects = {usual_score, end_score, final_score, gradePoint, semester, no, course_no};
         //执行sql
@@ -213,5 +213,62 @@ public class Score
         return false;
     }
 
+    /**
+     * 删除一条成绩(一名学生的一名成绩)
+     *
+     * @param no        学生学号
+     * @param course_no 课程编号
+     * @return 成功，返回true，失败返回false
+     */
+    public static boolean delete(Long no, Long course_no)
+    {
+        //sql语句
+        String sql = "delete from score where no=? and course=?";
+        //参数
+        Object[] objects = {no, course_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //判断返回值
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
+    /**
+     * 删除学生的全部成绩(一名学生的所有成绩) ，谨慎使用！
+     *
+     * @param no 学生学号
+     * @return 删除的成绩条数
+     */
+    public static int deleteStudentAllScore(Long no)
+    {
+        //sql语句
+        String sql = "delete from score where no=?";
+        //参数
+        Object[] objects = {no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回
+        return result;
+    }
+
+    /**
+     * 删除一门课程的所有学生的成绩(所有学生的某门成绩)，谨慎使用！
+     *
+     * @param course_no 课程编号
+     * @return 删除的成绩条数
+     */
+    public static int deleteCourseAllScore(Long course_no)
+    {
+        //sql语句
+        String sql = "delete from score where course_no=?";
+        //参数
+        Object[] objects = {course_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回
+        return result;
+    }
 }
