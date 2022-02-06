@@ -117,7 +117,6 @@ public class Score
         return result;
     }
 
-
     /**
      * 获得某科目成绩的总数
      *
@@ -135,5 +134,84 @@ public class Score
         //返回
         return result;
     }
+
+    /**
+     * 插入一条成绩信息
+     *
+     * @param no          学生学号
+     * @param course_no   课程编号
+     * @param usual_score 平时成绩
+     * @param end_score   期末成绩，或者考试成绩
+     * @param semester    学期
+     * @return 成功，返回true，失败返回false
+     */
+    public static boolean insert(Long no, Long course_no, Float usual_score, Float end_score, String semester)
+    {
+        //根据课程编号查询课程信息
+        data.Course courseInformation = Course.getCourseInformation(course_no);
+        //应该要存在此课程才能插入
+        //如果不存在，直接返回
+        if (courseInformation == null)
+        {
+            return false;
+        }
+        //课程存在
+        //计算最终成绩
+        Float final_score = getFinalScore(courseInformation.getCourse_mode(), usual_score, end_score);
+        //计算绩点
+        Float gradePoint = getGradePoint(final_score);
+        //sql语句
+        String sql = "insert into score values(?,?,?,?,?,?,?)";
+        //参数
+        Object[] objects = {no, course_no, usual_score, end_score, final_score, gradePoint, semester};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修改成绩，应该只能管理员能修改，老师只有插入权
+     *
+     * @param no          要修改成绩的学生学号
+     * @param course_no   要修改成绩的学生课程号
+     * @param usual_score 平时成绩
+     * @param end_score   期末成绩
+     * @param semester    学期
+     * @return 成功，返回true，失败返回false
+     */
+    public static boolean update(Long no, Long course_no, Float usual_score, Float end_score, String semester)
+    {
+        //根据课程编号查询课程信息
+        data.Course courseInformation = Course.getCourseInformation(course_no);
+        //应该要存在此课程才能插入
+        //如果不存在，直接返回
+        if (courseInformation == null)
+        {
+            return false;
+        }
+        //课程存在
+        //计算最终成绩
+        Float final_score = getFinalScore(courseInformation.getCourse_mode(), usual_score, end_score);
+        //计算绩点
+        Float gradePoint = getGradePoint(final_score);
+        //sql语句
+        String sql = "update score set usual_score=?,end_score=?,final_score=?,grade_point=?,semester=? where no=?,course_no=?";
+        //参数
+        Object[] objects = {usual_score, end_score, final_score, gradePoint, semester, no, course_no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //返回结果
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 }
