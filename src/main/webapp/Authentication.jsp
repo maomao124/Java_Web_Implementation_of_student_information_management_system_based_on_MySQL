@@ -17,6 +17,8 @@
 <body>
 <%
     //获取request请求的信息
+    //获得身份信息
+    String identity = request.getParameter("identity");
     //学号或者职工号（编号）
     String no = request.getParameter("no");
     //密码
@@ -28,6 +30,8 @@
 %>
 输出验证：
 <br>
+<%=identity%>
+<br/>
 <%=no%>
 <br/>
 <%=password%>

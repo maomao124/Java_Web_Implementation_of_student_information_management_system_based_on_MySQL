@@ -15,6 +15,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <link rel="stylesheet" href="animate.css">
     <style>
         * {
             margin: 0;
@@ -47,7 +48,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         }
 
         input.c {
-            width: 80%;
+            width: 90%;
             color: coral;
         }
 
@@ -339,9 +340,26 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
 
 <div class="form">
     <form action="Authentication.jsp" method="post">
-        <table border="1">
+        <table border="1" class="animated bounceInDown">
             <tr>
                 <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">身份</td>
+                <td>
+                    <label>
+                        <input type="radio" name="identity"  value="1">
+                        学生
+                    </label>
+                    <label>
+                        <input type="radio" name="identity" value="2">
+                        老师
+                    </label>
+                    <label>
+                        <input type="radio" name="identity" value="3">
+                        管理员
+                    </label>
                 </td>
             </tr>
             <tr>
@@ -378,7 +396,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         </table>
     </form>
 </div>
-<div class="left">
+<div class="left animated slideInUp">
     <figure class="balloon">
         <div class="envelope">
             <span></span>
@@ -392,7 +410,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         </div>
     </figure>
 </div>
-<div class="right">
+<div class="right animated slideInUp">
     <figure class="balloon">
         <div class="envelope">
             <span></span>
@@ -406,7 +424,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         </div>
     </figure>
 </div>
-<div class="left1">
+<div class="left1 animated slideInDown">
     <figure class="balloon">
         <div class="envelope">
             <span></span>
@@ -420,7 +438,7 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
         </div>
     </figure>
 </div>
-<div class="right1">
+<div class="right1 animated slideInDown">
     <figure class="balloon">
         <div class="envelope">
             <span></span>
