@@ -55,7 +55,7 @@ public class AdministratorsPassword
      * @param administrator_no 管理员编号
      * @param oldPassword      老密码
      * @param newPassword      新密码
-     * @return 如果密码正确，并且更改1成功，返回true，密码错误，或者更改失败，返回false
+     * @return 如果密码正确，并且更改成功，返回true，密码错误，或者更改失败，返回false
      */
     public static boolean changePassword(Long administrator_no, String oldPassword, String newPassword)
     {

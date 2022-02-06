@@ -1,4 +1,4 @@
-55
+59
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -41,6 +41,7 @@ src\\main\\java\\tools\\Handler\\ResultSetHandler.java
 src\\main\\java\\tools\\Handler\\ScalarHandler.java
 src\\main\\java\\tools\\JDBCTemplate.java
 src\\main\\webapp\\administrator\\index.jsp
+src\\main\\webapp\\animate.css
 src\\main\\webapp\\Authentication.jsp
 src\\main\\webapp\\Error.jsp
 src\\main\\webapp\\index.css
@@ -53,4 +54,7 @@ src\\test\\java\\SHA\\SHA256Test.java
 src\\test\\java\\SHA\\SHA3_512Test.java
 src\\test\\java\\table\\AdministratorsPasswordTest.java
 src\\test\\java\\table\\AdministratorsTest.java
+src\\test\\java\\table\\ClassTest.java
+src\\test\\java\\table\\CourseTest.java
 src\\test\\java\\table\\NewsTest.java
+src\\test\\java\\table\\ScoreTest.java
