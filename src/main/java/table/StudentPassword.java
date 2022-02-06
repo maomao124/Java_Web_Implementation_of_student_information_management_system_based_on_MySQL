@@ -19,6 +19,13 @@ import tools.JDBCTemplate;
 public class StudentPassword
 {
     /**
+     * 私有化构造函数，目的是不让创建对象
+     */
+    public StudentPassword()
+    {
+    }
+
+    /**
      * 学生登录验证
      *
      * @param no            学生学号

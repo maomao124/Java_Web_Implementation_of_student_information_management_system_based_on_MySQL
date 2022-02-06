@@ -25,6 +25,13 @@ public class Score
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     /**
+     * 私有化构造函数，目的是不让创建对象
+     */
+    public Score()
+    {
+    }
+
+    /**
      * 根据模式，平时成绩和考试成绩得到最终成绩
      *
      * @param mode        考核方式，考试或者考察

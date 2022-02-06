@@ -19,6 +19,13 @@ import tools.JDBCTemplate;
 public class AdministratorsPassword
 {
     /**
+     * 私有化构造函数，不能创建对象
+     */
+    public AdministratorsPassword()
+    {
+    }
+
+    /**
      * 管理员登录验证
      *
      * @param administrator_no 管理员编号

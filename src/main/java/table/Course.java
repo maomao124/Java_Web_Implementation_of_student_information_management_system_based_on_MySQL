@@ -23,6 +23,13 @@ import java.util.List;
 public class Course
 {
     /**
+     * 私有化构造函数，目的是不让创建对象
+     */
+    public Course()
+    {
+    }
+
+    /**
      * 获得课程列表
      *
      * @return List<data.Course>集合对象

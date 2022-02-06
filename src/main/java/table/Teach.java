@@ -15,5 +15,10 @@ package table;
 
 public class Teach
 {
-
+    /**
+     * 私有化构造函数，目的是不让创建对象
+     */
+    public Teach()
+    {
+    }
 }

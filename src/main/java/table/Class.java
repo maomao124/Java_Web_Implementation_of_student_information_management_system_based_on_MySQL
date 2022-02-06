@@ -23,6 +23,13 @@ import java.util.List;
 public class Class
 {
     /**
+     * 私有化构造函数，不能创建对象
+     */
+    public Class()
+    {
+    }
+
+    /**
      * 获得班级列表
      *
      * @return List<data.Class>集合对象
