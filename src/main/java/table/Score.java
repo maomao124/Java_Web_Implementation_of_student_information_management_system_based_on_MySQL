@@ -1,6 +1,11 @@
 package table;
 
+import tools.Handler.BeanListHandler;
+import tools.Handler.ScalarHandler;
+import tools.JDBCTemplate;
+
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
@@ -58,5 +63,29 @@ public class Score
         }
         //绩点=分数/10-5
         return Float.valueOf(decimalFormat.format(final_score / 10 - 5));
+    }
+
+    public static List<data.Score> getScoreList()
+    {
+        //sql语句
+        String sql = "select * from score";
+        //参数，无
+        Object[] objects = {};
+        //执行sql
+        List<data.Score> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Score.class), objects);
+        //返回
+        return list;
+    }
+
+    public static Long getScoreCount()
+    {
+        //sql语句
+        String sql = "select count(no) from score";
+        //参数，无
+        Object[] objects = {};
+        //执行sql
+        Long result = JDBCTemplate.queryForScalar(sql, new ScalarHandler<>(), objects);
+        //返回
+        return result;
     }
 }

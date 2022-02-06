@@ -2,6 +2,8 @@ package table;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -39,5 +41,22 @@ class ScoreTest
         System.out.println(table.Score.getGradePoint(87f));
         System.out.println(table.Score.getGradePoint(99.5f));
         System.out.println(table.Score.getGradePoint(100f));
+    }
+
+    @Test
+    void getScoreList()
+    {
+        List<data.Score> list = Score.getScoreList();
+        for (data.Score score : list)
+        {
+            System.out.print(score);
+        }
+    }
+
+    @Test
+    void getScoreCount()
+    {
+        Long scoreCount = Score.getScoreCount();
+        System.out.println(scoreCount);
     }
 }
