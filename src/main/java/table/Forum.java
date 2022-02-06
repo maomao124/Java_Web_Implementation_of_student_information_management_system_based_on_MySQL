@@ -10,7 +10,7 @@ package table;
  * Date(创建日期)： 2022/1/31
  * Time(创建时间)： 23:13
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 论坛
  */
 
 public class Forum
