@@ -65,6 +65,11 @@ public class Score
         return Float.valueOf(decimalFormat.format(final_score / 10 - 5));
     }
 
+    /**
+     * 获得成绩列表
+     *
+     * @return List<data.Score>对象
+     */
     public static List<data.Score> getScoreList()
     {
         //sql语句
@@ -77,6 +82,11 @@ public class Score
         return list;
     }
 
+    /**
+     * 获得成绩总数
+     *
+     * @return 成绩总数
+     */
     public static Long getScoreCount()
     {
         //sql语句
@@ -88,4 +98,42 @@ public class Score
         //返回
         return result;
     }
+
+    /**
+     * 获得学生的成绩总数量
+     *
+     * @param no 学生学号
+     * @return 学生的成绩总数
+     */
+    public static Long getStudentScoreCount(Long no)
+    {
+        //sql语句
+        String sql = "select count(no) from score where no=?";
+        //参数
+        Object[] objects = {no};
+        //执行sql
+        Long result = JDBCTemplate.queryForScalar(sql, new ScalarHandler<>(), objects);
+        //返回
+        return result;
+    }
+
+
+    /**
+     * 获得某科目成绩的总数
+     *
+     * @param course_no 课程编号
+     * @return 该课程编号科目成绩的总数
+     */
+    public static Long getCourseScoreCount(Long course_no)
+    {
+        //sql语句
+        String sql = "select count(no) from score where course_no=?";
+        //参数
+        Object[] objects = {course_no};
+        //执行sql
+        Long result = JDBCTemplate.queryForScalar(sql, new ScalarHandler<>(), objects);
+        //返回
+        return result;
+    }
+
 }

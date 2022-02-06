@@ -59,4 +59,16 @@ class ScoreTest
         Long scoreCount = Score.getScoreCount();
         System.out.println(scoreCount);
     }
+
+    @Test
+    void getStudentScoreCount()
+    {
+        System.out.println(table.Score.getStudentScoreCount(20L));
+    }
+
+    @Test
+    void getCourseScoreCount()
+    {
+        System.out.println(table.Score.getCourseScoreCount(50L));
+    }
 }
