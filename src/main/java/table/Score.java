@@ -223,7 +223,7 @@ public class Score
     public static boolean delete(Long no, Long course_no)
     {
         //sql语句
-        String sql = "delete from score where no=? and course=?";
+        String sql = "delete from score where no=? and course_no=?";
         //参数
         Object[] objects = {no, course_no};
         //执行sql

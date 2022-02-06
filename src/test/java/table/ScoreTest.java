@@ -71,4 +71,39 @@ class ScoreTest
     {
         System.out.println(table.Score.getCourseScoreCount(50L));
     }
+
+    @Test
+    void insert()
+    {
+        boolean b = Score.insert(100011111L, 100001L, 89f, 74f, "2019下学期");
+        System.out.println(b);
+    }
+
+    @Test
+    void update()
+    {
+        boolean b = Score.update(100011111L, 100001L, 89f, 74f, "2019下学期");
+        System.out.println(b);
+    }
+
+    @Test
+    void delete()
+    {
+        boolean b = Score.delete(100011111L, 100001L);
+        System.out.println(b);
+    }
+
+    @Test
+    void deleteStudentAllScore()
+    {
+        int b = Score.deleteStudentAllScore(100011111L);
+        System.out.println(b);
+    }
+
+    @Test
+    void deleteCourseAllScore()
+    {
+        int b = Score.deleteCourseAllScore(100001L);
+        System.out.println(b);
+    }
 }
