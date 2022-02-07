@@ -96,7 +96,7 @@ class ScoreTest
     @Test
     void deleteStudentAllScore()
     {
-        int b = Score.deleteStudentAllScore(100011111L);
+        int b = Score.deleteStudentAllScore(202012340101L);
         System.out.println(b);
     }
 

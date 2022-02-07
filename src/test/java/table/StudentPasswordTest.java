@@ -23,12 +23,13 @@ class StudentPasswordTest
     @Test
     void verification()
     {
-
+        System.out.println(table.StudentPassword.verification(202012340101L, "213162"));
     }
 
     @Test
     void changePassword()
     {
-
+        boolean b = StudentPassword.changePassword(202012340101L, "213162", "123456");
+        System.out.println(b);
     }
 }

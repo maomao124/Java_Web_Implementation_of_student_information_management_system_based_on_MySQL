@@ -109,14 +109,7 @@ public class Student
 
     public void setStudent_no(Long student_no)
     {
-        if (student_no <= 0)
-        {
-            this.student_no = 0L;
-        }
-        else
-        {
-            this.student_no = student_no;
-        }
+        this.student_no = student_no;
     }
 
     public String getName()

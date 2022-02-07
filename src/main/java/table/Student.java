@@ -40,7 +40,7 @@ public class Student
         //参数，无
         Object[] objects = {};
         //执行sql
-        List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class), objects);
+        List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class));
         //返回结果
         return list;
     }

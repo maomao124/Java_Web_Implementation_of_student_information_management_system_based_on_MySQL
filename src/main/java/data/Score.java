@@ -226,7 +226,7 @@ public class Score
         stringbuilder.append("end_score：").append(end_score).append('\t');
         stringbuilder.append("final_score：").append(final_score).append('\t');
         stringbuilder.append("grade_point：").append(grade_point).append('\t');
-        stringbuilder.append("semester：").append(semester).append('\t');
+        stringbuilder.append("semester：").append(semester).append('\n');
         return stringbuilder.toString();
     }
 }
