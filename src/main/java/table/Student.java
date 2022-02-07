@@ -16,7 +16,7 @@ import java.util.List;
  * Date(创建日期)： 2022/1/31
  * Time(创建时间)： 23:11
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 学生表
  */
 
 public class Student
@@ -169,6 +169,74 @@ public class Student
         Object[] objects2 = {student.getNo(), student.getName(), student.getSex(), student.getTelephone_number(),
                 student.getFamily_telephone_number(), student.getBirthday(), student.getAddress(),
                 student.getId_card(), student.getEmail(), student.getDormitory_number(), student.getClass_no(), student.getState(), student.getRemarks()};
+        //合并
+        String[] sql = {sql1, sql2};
+        Object[][] objects = {objects1, objects2};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //判断返回值
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 更新一条学生信息，不可更新学号，如果想更新学号，删除了重新插入
+     *
+     * @param no                      要更新的学生学号
+     * @param name                    学生姓名
+     * @param sex                     学生性别
+     * @param telephone_number        电话号码
+     * @param family_telephone_number 家庭电话号码，或者紧急联系人
+     * @param birthday                生日
+     * @param address                 家庭地址
+     * @param id_card                 身份证号
+     * @param email                   电子邮箱
+     * @param dormitory_number        寝室号
+     * @param class_no                所属班级号
+     * @param state                   状态，在读、毕业或者退学
+     * @param remarks                 备注
+     * @return 成功，返回true，失败返回false
+     */
+    public static boolean update(Long no, String name, String sex, String telephone_number, String family_telephone_number,
+                                 String birthday, String address, String id_card, String email, String dormitory_number,
+                                 Long class_no, String state, String remarks)
+    {
+        //sql语句
+        String sql = "UPDATE student SET student.`name`= ?,student.sex=?,student.telephone_number=?," +
+                "student.family_telephone_number=?,student.birthday=?,student.address=?,student.id_card=?," +
+                "student.email=?,student.dormitory_number=?,student.class_no=?,student.state=?,student.remarks=?" +
+                " WHERE student.`no`=?";
+        //参数
+        Object[] objects = {name, sex, telephone_number, family_telephone_number, birthday, address,
+                id_card, email, dormitory_number, class_no, state, remarks, no};
+        //执行sql
+        int result = JDBCTemplate.update(sql, objects);
+        //判断返回值
+        if (result > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除一条学生信息，删除之前要确保已删除其它与此学号关联的信息(外键)，不然将删除失败
+     *
+     * @param no 学生学号
+     * @return 成功，返回true，失败返回false
+     */
+    public static boolean delete(Long no)
+    {
+        //删除学生之前要删除学生对应的密码
+        //sql语句
+        String sql1 = "delete from student_password where no=?";
+        String sql2 = "delete from student where no=?";
+        //参数
+        Object[] objects1 = {no};
+        Object[] objects2 = {no};
         //合并
         String[] sql = {sql1, sql2};
         Object[][] objects = {objects1, objects2};
