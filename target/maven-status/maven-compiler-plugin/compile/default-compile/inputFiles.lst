@@ -5,6 +5,7 @@ H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\data\LoginLog.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\table\AdministratorsPassword.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\Druid.java
+H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\test\ConnectionAdapter.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\Handler\ResultSetHandler.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\io\ErrorLog.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\data\Forum.java
@@ -38,4 +39,8 @@ H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\Handler\BeanHandler.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\table\Student.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\table\LoginLog.java
+H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\test\Connection.java
+H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\test\JDBC.java
 H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\io\Add.java
+H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\test\ConnectionPool.java
+H:\程序\大三寒假\数据库课程设计_基于mysql的学生信息管理系统javaWeb实现\src\main\java\tools\test\C3P0.java
