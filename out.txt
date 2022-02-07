@@ -1360,9 +1360,16 @@ public class Student
         return student_no;
     }
 
-    public void setStudent_no(Long student_no)
+    public void setStudent_no(long student_no)
     {
-        this.student_no = student_no;
+        if (student_no <= 0)
+        {
+            this.student_no = 0L;
+        }
+        else
+        {
+            this.student_no = student_no;
+        }
     }
 
     public String getName()
@@ -1460,7 +1467,7 @@ public class Student
         return class_no;
     }
 
-    public void setClass_no(Long class_no)
+    public void setClass_no(long class_no)
     {
         if (class_no < 0)
         {
@@ -1514,7 +1521,7 @@ public class Student
         stringbuilder.append("dormitory_number：").append(dormitory_number).append('\t');
         stringbuilder.append("class_no：").append(class_no).append('\t');
         stringbuilder.append("state：").append(state).append('\t');
-        stringbuilder.append("remarks：").append(remarks).append('\t');
+        stringbuilder.append("remarks：").append(remarks).append('\n');
         return stringbuilder.toString();
     }
 }
@@ -6229,6 +6236,1056 @@ public class JDBCTemplate
     }
 }
 
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\test\\C3P0.java
+package tools.test;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import java.sql.SQLException;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.test
+ * Class(类名): C3P0
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/7
+ * Time(创建时间)： 22:53
+ * Version(版本): 1.0
+ * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
+ * 除了测试，实际上并没有用到此类。测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
+ */
+
+public class C3P0
+{
+    private static final ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+    public static java.sql.Connection getConnection()
+    {
+        java.sql.Connection connection = null;
+        try
+        {
+            connection = dataSource.getConnection();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\test\\Connection.java
+package tools.test;
+
+import tools.test.ConnectionAdapter;
+
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.test
+ * Class(类名): Connection
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/7
+ * Time(创建时间)： 22:38
+ * Version(版本): 1.0
+ * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
+ * 除了测试，实际上并没有用到此类。测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
+ */
+
+public class Connection extends ConnectionAdapter
+{
+    //连接对象
+    private final java.sql.Connection connection;
+    //连接池
+    private final List<java.sql.Connection> pool;
+
+    /**
+     * 构造方法对成员变量赋值
+     *
+     * @param connection 连接对象
+     * @param pool       连接池
+     */
+    public Connection(java.sql.Connection connection, List<java.sql.Connection> pool)
+    {
+        super(connection);
+        this.connection = connection;
+        this.pool = pool;
+    }
+
+    //重写close方法
+
+    /**
+     * 重写close方法 完成归还连接操作
+     *
+     * @throws SQLException 抛出异常
+     */
+    @Override
+    public void close() throws SQLException
+    {
+        connection.setAutoCommit(true);     //重新将连接设置为自动提交
+        pool.add(connection);               //归还连接
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\test\\ConnectionAdapter.java
+package tools.test;
+
+import java.sql.*;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.Executor;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.test
+ * Class(类名): ConnectionAdopt
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/7
+ * Time(创建时间)： 22:36
+ * Version(版本): 1.0
+ * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
+ * 除了测试，实际上并没有用到此类。测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
+ */
+
+
+public abstract class ConnectionAdapter implements java.sql.Connection
+{
+    //连接对象
+    private final java.sql.Connection connection;
+
+    public ConnectionAdapter(java.sql.Connection connection)
+    {
+        this.connection = connection;
+    }
+
+    @Override
+    public Statement createStatement() throws SQLException
+    {
+        return connection.createStatement();
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql) throws SQLException
+    {
+        return connection.prepareStatement(sql);
+    }
+
+    @Override
+    public CallableStatement prepareCall(String sql) throws SQLException
+    {
+        return connection.prepareCall(sql);
+    }
+
+    @Override
+    public String nativeSQL(String sql) throws SQLException
+    {
+        return connection.nativeSQL(sql);
+    }
+
+    @Override
+    public void setAutoCommit(boolean autoCommit) throws SQLException
+    {
+        connection.setAutoCommit(autoCommit);
+    }
+
+    @Override
+    public boolean getAutoCommit() throws SQLException
+    {
+        return connection.getAutoCommit();
+    }
+
+    @Override
+    public void commit() throws SQLException
+    {
+        connection.commit();
+    }
+
+    @Override
+    public void rollback() throws SQLException
+    {
+        connection.rollback();
+    }
+
+
+    @Override
+    public boolean isClosed() throws SQLException
+    {
+        return connection.isClosed();
+    }
+
+    @Override
+    public DatabaseMetaData getMetaData() throws SQLException
+    {
+        return connection.getMetaData();
+    }
+
+    @Override
+    public void setReadOnly(boolean readOnly) throws SQLException
+    {
+        connection.setReadOnly(readOnly);
+    }
+
+    @Override
+    public boolean isReadOnly() throws SQLException
+    {
+        return connection.isReadOnly();
+    }
+
+    @Override
+    public void setCatalog(String catalog) throws SQLException
+    {
+        connection.setCatalog(catalog);
+    }
+
+    @Override
+    public String getCatalog() throws SQLException
+    {
+        return connection.getCatalog();
+    }
+
+    @Override
+    public void setTransactionIsolation(int level) throws SQLException
+    {
+        connection.setTransactionIsolation(level);
+    }
+
+    @Override
+    public int getTransactionIsolation() throws SQLException
+    {
+        return connection.getTransactionIsolation();
+    }
+
+    @Override
+    public SQLWarning getWarnings() throws SQLException
+    {
+        return connection.getWarnings();
+    }
+
+    @Override
+    public void clearWarnings() throws SQLException
+    {
+        connection.clearWarnings();
+    }
+
+    @Override
+    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException
+    {
+        return connection.createStatement(resultSetType, resultSetConcurrency);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency)
+            throws SQLException
+    {
+        return connection.prepareStatement(sql, resultSetType, resultSetConcurrency);
+    }
+
+    @Override
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException
+    {
+        return connection.prepareCall(sql, resultSetType, resultSetConcurrency);
+    }
+
+    @Override
+    public Map<String, Class<?>> getTypeMap() throws SQLException
+    {
+        return connection.getTypeMap();
+    }
+
+    @Override
+    public void setTypeMap(Map<String, Class<?>> map) throws SQLException
+    {
+        connection.setTypeMap(map);
+    }
+
+    @Override
+    public void setHoldability(int holdability) throws SQLException
+    {
+        connection.setHoldability(holdability);
+    }
+
+    @Override
+    public int getHoldability() throws SQLException
+    {
+        return connection.getHoldability();
+    }
+
+    @Override
+    public Savepoint setSavepoint() throws SQLException
+    {
+        return connection.setSavepoint();
+    }
+
+    @Override
+    public Savepoint setSavepoint(String name) throws SQLException
+    {
+        return connection.setSavepoint(name);
+    }
+
+    @Override
+    public void rollback(Savepoint savepoint) throws SQLException
+    {
+        connection.rollback();
+    }
+
+    @Override
+    public void releaseSavepoint(Savepoint savepoint) throws SQLException
+    {
+        connection.releaseSavepoint(savepoint);
+    }
+
+    @Override
+    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            throws SQLException
+    {
+        return connection.createStatement(resultSetType, resultSetConcurrency, resultSetConcurrency);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            throws SQLException
+    {
+        return connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+    }
+
+    @Override
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            throws SQLException
+    {
+        return connection.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws SQLException
+    {
+        return connection.prepareStatement(sql, autoGeneratedKeys);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException
+    {
+        return connection.prepareStatement(sql, columnIndexes);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException
+    {
+        return connection.prepareStatement(sql, columnNames);
+    }
+
+    @Override
+    public Clob createClob() throws SQLException
+    {
+        return connection.createClob();
+    }
+
+    @Override
+    public Blob createBlob() throws SQLException
+    {
+        return connection.createBlob();
+    }
+
+    @Override
+    public NClob createNClob() throws SQLException
+    {
+        return connection.createNClob();
+    }
+
+    @Override
+    public SQLXML createSQLXML() throws SQLException
+    {
+        return connection.createSQLXML();
+    }
+
+    @Override
+    public boolean isValid(int timeout) throws SQLException
+    {
+        return connection.isValid(timeout);
+    }
+
+    @Override
+    public void setClientInfo(String name, String value) throws SQLClientInfoException
+    {
+        connection.setClientInfo(name, value);
+    }
+
+    @Override
+    public void setClientInfo(Properties properties) throws SQLClientInfoException
+    {
+        connection.setClientInfo(properties);
+    }
+
+    @Override
+    public String getClientInfo(String name) throws SQLException
+    {
+        return connection.getClientInfo(name);
+    }
+
+    @Override
+    public Properties getClientInfo() throws SQLException
+    {
+        return connection.getClientInfo();
+    }
+
+    @Override
+    public Array createArrayOf(String typeName, Object[] elements) throws SQLException
+    {
+        return connection.createArrayOf(typeName, elements);
+    }
+
+    @Override
+    public Struct createStruct(String typeName, Object[] attributes) throws SQLException
+    {
+        return connection.createStruct(typeName, attributes);
+    }
+
+    @Override
+    public void setSchema(String schema) throws SQLException
+    {
+        connection.setSchema(schema);
+    }
+
+    @Override
+    public String getSchema() throws SQLException
+    {
+        return connection.getSchema();
+    }
+
+    @Override
+    public void abort(Executor executor) throws SQLException
+    {
+        connection.abort(executor);
+    }
+
+    @Override
+    public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException
+    {
+        connection.setNetworkTimeout(executor, milliseconds);
+    }
+
+    @Override
+    public int getNetworkTimeout() throws SQLException
+    {
+        return connection.getNetworkTimeout();
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> iface) throws SQLException
+    {
+        return connection.unwrap(iface);
+    }
+
+    @Override
+    public boolean isWrapperFor(Class<?> iface) throws SQLException
+    {
+        return connection.isWrapperFor(iface);
+    }
+}
+
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\test\\ConnectionPool.java
+package tools.test;
+
+import javax.sql.DataSource;
+import java.awt.*;
+import java.io.PrintWriter;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.test
+ * Class(类名): Connection
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/7
+ * Time(创建时间)： 22:35
+ * Version(版本): 1.0
+ * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
+ * 除了测试，实际上并没有用到此类。 测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
+ */
+
+
+public class ConnectionPool implements DataSource
+{
+    //连接池对象的数量
+    private static final int ConnectionPoolSize = 10;
+
+    //连接池，线程安全
+    private static final List<java.sql.Connection> pool = Collections.synchronizedList(new ArrayList<>());
+
+    static
+    {
+        try
+        {
+            for (int i = 0; i < ConnectionPoolSize; i++)
+            {
+                java.sql.Connection connection = JDBC.getConnection();
+                pool.add(connection);
+            }
+        }
+        catch (Exception e)
+        {
+            System.err.println("连接池初始化失败！");
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 返回连接池剩余的连接数量
+     *
+     * @return int型 连接池剩余的连接数量
+     */
+    public int getPoolSize()
+    {
+        return pool.size();
+    }
+
+    /**
+     * 获取连接池最大连接的数量，此数量固定
+     *
+     * @return int型 返回最大连接的数量
+     */
+    public static int getConnectionPoolSize()
+    {
+        return ConnectionPoolSize;
+    }
+
+
+    @SuppressWarnings("all")
+    /**
+     * 获得连接 动态代理方式
+     *
+     * @return 加强的连接对象，此对象调用close方法归还连接，而不是关闭连接
+     * @throws SQLException 数据库异常
+     */
+    /*
+    @Override
+    public Connection getConnection() throws SQLException
+    {
+        if (pool.size() > 0)
+        {
+            Connection connection = pool.remove(0);
+            @SuppressWarnings("all")
+            Connection proxy = (Connection) Proxy.newProxyInstance(connection.getClass().getClassLoader(), new Class[]{Connection.class}, new InvocationHandler()
+            {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
+                {
+                    if (method.getName().equals("close"))
+                    {
+                        //归还连接
+                        connection.setAutoCommit(true);     //重新将连接设置为自动提交
+                        pool.add(connection);               //归还连接
+                        return null;
+                    }
+                    else
+                    {
+                        return method.invoke(connection, args);
+                    }
+                }
+            });
+            return proxy;
+        }
+        else
+        {
+            throw new RuntimeException("连接池连接数量已经用尽！");
+        }
+    }
+     */
+
+    /**
+     * 获得连接 装饰设计模式或者适配器设计模式
+     *
+     * @return 加强的连接对象，此对象调用close方法归还连接，而不是关闭连接
+     * @throws SQLException 数据库异常
+     */
+    @Override
+    public Connection getConnection() throws SQLException
+    {
+        if (pool.size() > 0)
+        {
+            java.sql.Connection connection = pool.remove(0);
+            @SuppressWarnings("all")
+            Connection con = new Connection(connection, pool);
+            return con;
+        }
+        else
+        {
+            throw new RuntimeException("连接池连接数量已经用尽！");
+        }
+    }
+
+
+    @Override
+    public Connection getConnection(String username, String password) throws SQLException
+    {
+        return null;
+    }
+
+    @Override
+    public PrintWriter getLogWriter() throws SQLException
+    {
+        return null;
+    }
+
+    @Override
+    public void setLogWriter(PrintWriter out) throws SQLException
+    {
+
+    }
+
+    @Override
+    public void setLoginTimeout(int seconds) throws SQLException
+    {
+
+    }
+
+    @Override
+    public int getLoginTimeout() throws SQLException
+    {
+        return 0;
+    }
+
+    @Override
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException
+    {
+        return null;
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> iface) throws SQLException
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isWrapperFor(Class<?> iface) throws SQLException
+    {
+        return false;
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\tools\\test\\JDBC.java
+package tools.test;
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): tools.test
+ * Class(类名): JDBC
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/7
+ * Time(创建时间)： 22:33
+ * Version(版本): 1.0
+ * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
+ * 除了测试，实际上并没有用到此类。测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
+ */
+
+
+public class JDBC
+{
+
+    /*
+    config.properties文件内容：
+
+    driverClass=com.mysql.cj.jdbc.Driver
+    url=jdbc:mysql://localhost:3306/student1
+    username=root
+    password=20010713
+
+     */
+
+    @SuppressWarnings("all")
+    private static String driverClass;              //驱动程序类
+    private static String url;                      //url
+    private static String username;                 //用户名
+    private static String password;                 //密码
+
+    private JDBC()
+    {
+
+    }
+
+    static
+    {
+        InputStream inputStream;
+        Properties properties;
+        try
+        {
+            //src目录下,maven 资源路径下
+            inputStream = JDBC.class.getClassLoader().getResourceAsStream("config.properties");
+            properties = new Properties();
+            properties.load(inputStream);
+            driverClass = properties.getProperty("driverClass");      //读取驱动程序类
+            url = properties.getProperty("url");                       //读取url
+            username = properties.getProperty("username");           //读取用户名
+            password = properties.getProperty("password");          //读取密码
+
+            //System.out.println(driverClass);
+            //System.out.println(url);
+            //System.out.println(username);
+            //System.out.println(password);
+
+            //注册驱动
+            Class.forName(driverClass);                             //新版
+            //旧版：com.mysql.jdbc.Driver
+        }
+        catch (IOException e)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("驱动程序类加载失败!");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    //连接方法
+
+    /**
+     * 获取数据库连接对象
+     *
+     * @return Connection对象
+     * @throws Exception 获取对象失败时抛出
+     */
+    public static java.sql.Connection getConnection() throws Exception
+    {
+        java.sql.Connection connection = null;
+
+        //Loading class `com.mysql.jdbc.Driver'. This is deprecated.
+        // The new driver class is `com.mysql.cj.jdbc.Driver'.
+        // The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+        connection = DriverManager.getConnection(url, username, password);
+        return connection;
+    }
+
+    //关闭方法
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 123
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Connection connection, Statement statement, ResultSet resultSet)
+    {
+        if (resultSet != null)
+        {
+            try
+            {
+                resultSet.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null)
+        {
+            try
+            {
+                statement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 132
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Connection connection, ResultSet resultSet, Statement statement)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 213
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Statement statement, Connection connection, ResultSet resultSet)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 231
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(Statement statement, ResultSet resultSet, Connection connection)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 312
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(ResultSet resultSet, Connection connection, Statement statement)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭查询的连接 321
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     * @param resultSet  结果集对象
+     */
+    public static void close(ResultSet resultSet, Statement statement, Connection connection)
+    {
+        close(connection, statement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 123
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet)
+    {
+        if (resultSet != null)
+        {
+            try
+            {
+                resultSet.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null)
+        {
+            try
+            {
+                preparedStatement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 132
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(Connection connection, ResultSet resultSet, PreparedStatement preparedStatement)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 213
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(PreparedStatement preparedStatement, Connection connection, ResultSet resultSet)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 231
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(PreparedStatement preparedStatement, ResultSet resultSet, Connection connection)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 312
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(ResultSet resultSet, Connection connection, PreparedStatement preparedStatement)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+    /**
+     * 关闭数据库连接  3个对象，用于关闭预编译的查询的连接 321
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     * @param resultSet         结果集对象
+     */
+    public static void close(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection)
+    {
+        close(connection, preparedStatement, resultSet);
+    }
+
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭更新的连接 12
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     */
+    public static void close(Connection connection, Statement statement)
+    {
+        if (statement != null)
+        {
+            try
+            {
+                statement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭更新的连接 21
+     *
+     * @param connection 数据库连接对象
+     * @param statement  Statement对象
+     */
+    public static void close(Statement statement, Connection connection)
+    {
+        close(connection, statement);
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭预编译的更新的连接 12
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     */
+    public static void close(Connection connection, PreparedStatement preparedStatement)
+    {
+        if (preparedStatement != null)
+        {
+            try
+            {
+                preparedStatement.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null)
+        {
+            try
+            {
+                connection.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 关闭数据库连接  2个对象，用于关闭预编译的更新的连接 21
+     *
+     * @param connection        数据库连接对象
+     * @param preparedStatement PreparedStatement对象
+     */
+    public static void close(PreparedStatement preparedStatement, Connection connection)
+    {
+        close(connection, preparedStatement);
+    }
+}
 
 �
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\MD5Test.java
