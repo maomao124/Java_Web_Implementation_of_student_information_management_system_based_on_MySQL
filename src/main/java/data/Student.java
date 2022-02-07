@@ -16,7 +16,7 @@ package data;
 public class Student
 {
     //学号
-    private Long no;
+    private Long student_no;
     //学生姓名
     private String name;
     //学生性别
@@ -54,7 +54,7 @@ public class Student
     /**
      * 全参构造
      *
-     * @param no                      学号
+     * @param student_no              学号
      * @param name                    学生姓名
      * @param sex                     学生性别
      * @param telephone_number        电话号码
@@ -68,16 +68,16 @@ public class Student
      * @param state                   状态，在读、毕业或者退学
      * @param remarks                 备注
      */
-    public Student(Long no, String name, String sex, String telephone_number, String family_telephone_number, String birthday,
+    public Student(Long student_no, String name, String sex, String telephone_number, String family_telephone_number, String birthday,
                    String address, String id_card, String email, String dormitory_number, Long class_no, String state, String remarks)
     {
-        if (no <= 0)
+        if (student_no <= 0)
         {
-            this.no = 0L;
+            this.student_no = 0L;
         }
         else
         {
-            this.no = no;
+            this.student_no = student_no;
         }
         this.name = name;
         this.sex = sex;
@@ -102,20 +102,20 @@ public class Student
 
     //对应的getter方法和setter方法
 
-    public long getNo()
+    public long getStudent_no()
     {
-        return no;
+        return student_no;
     }
 
-    public void setNo(Long no)
+    public void setStudent_no(Long student_no)
     {
-        if (no <= 0)
+        if (student_no <= 0)
         {
-            this.no = 0L;
+            this.student_no = 0L;
         }
         else
         {
-            this.no = no;
+            this.student_no = student_no;
         }
     }
 
@@ -256,7 +256,7 @@ public class Student
     public String toString()
     {
         final StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("no：").append(no).append('\t');
+        stringbuilder.append("no：").append(student_no).append('\t');
         stringbuilder.append("name：").append(name).append('\t');
         stringbuilder.append("sex：").append(sex).append('\t');
         stringbuilder.append("telephone_number：").append(telephone_number).append('\t');

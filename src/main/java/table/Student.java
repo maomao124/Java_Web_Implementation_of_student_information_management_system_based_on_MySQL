@@ -53,7 +53,7 @@ public class Student
     public static List<data.Student> getStudentList_ClassNoIsNull()
     {
         //sql语句
-        String sql = "SELECT student.`no`,student.`name`,student.sex,student.telephone_number,student." +
+        String sql = "SELECT student.`student_no`,student.`name`,student.sex,student.telephone_number,student." +
                 "family_telephone_number,student.birthday,student.address,student.id_card,student.email," +
                 "student.dormitory_number,student.state,student.remarks FROM student";
         //参数，无
@@ -72,7 +72,7 @@ public class Student
     public static Long getStudentCount()
     {
         //sql语句
-        String sql = "SELECT COUNT(student.`no`) FROM student";
+        String sql = "SELECT COUNT(student.`student_no`) FROM student";
         //参数，无
         Object[] objects = {};
         //执行sql
@@ -126,14 +126,14 @@ public class Student
         //获得密码的散列值
         String password_MD5 = SHA.MD5.getMD5(password);
         //sql语句
-        //插入密码
-        String sql1 = "insert into student_password values(?,?)";
         //插入学生信息
-        String sql2 = "insert into student values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql1 = "insert into student values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        //插入密码
+        String sql2 = "insert into student_password values(?,?)";
         //参数
-        Object[] objects1 = {no, password_MD5};
-        Object[] objects2 = {no, name, sex, telephone_number, family_telephone_number, birthday, address,
+        Object[] objects1 = {no, name, sex, telephone_number, family_telephone_number, birthday, address,
                 id_card, email, dormitory_number, class_no, state, remarks};
+        Object[] objects2 = {no, password_MD5};
         //合并
         String[] sql = {sql1, sql2};
         Object[][] objects = {objects1, objects2};
@@ -165,8 +165,8 @@ public class Student
         //插入学生信息
         String sql2 = "insert into student values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         //参数
-        Object[] objects1 = {student.getNo(), password_MD5};
-        Object[] objects2 = {student.getNo(), student.getName(), student.getSex(), student.getTelephone_number(),
+        Object[] objects1 = {student.getStudent_no(), password_MD5};
+        Object[] objects2 = {student.getStudent_no(), student.getName(), student.getSex(), student.getTelephone_number(),
                 student.getFamily_telephone_number(), student.getBirthday(), student.getAddress(),
                 student.getId_card(), student.getEmail(), student.getDormitory_number(), student.getClass_no(), student.getState(), student.getRemarks()};
         //合并
@@ -208,7 +208,7 @@ public class Student
         String sql = "UPDATE student SET student.`name`= ?,student.sex=?,student.telephone_number=?," +
                 "student.family_telephone_number=?,student.birthday=?,student.address=?,student.id_card=?," +
                 "student.email=?,student.dormitory_number=?,student.class_no=?,student.state=?,student.remarks=?" +
-                " WHERE student.`no`=?";
+                " WHERE student.`student_no`=?";
         //参数
         Object[] objects = {name, sex, telephone_number, family_telephone_number, birthday, address,
                 id_card, email, dormitory_number, class_no, state, remarks, no};
@@ -233,7 +233,7 @@ public class Student
         //删除学生之前要删除学生对应的密码
         //sql语句
         String sql1 = "delete from student_password where no=?";
-        String sql2 = "delete from student where no=?";
+        String sql2 = "delete from student where student_no=?";
         //参数
         Object[] objects1 = {no};
         Object[] objects2 = {no};
