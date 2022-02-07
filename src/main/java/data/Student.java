@@ -107,9 +107,16 @@ public class Student
         return student_no;
     }
 
-    public void setStudent_no(Long student_no)
+    public void setStudent_no(long student_no)
     {
-        this.student_no = student_no;
+        if (student_no <= 0)
+        {
+            this.student_no = 0L;
+        }
+        else
+        {
+            this.student_no = student_no;
+        }
     }
 
     public String getName()
@@ -207,7 +214,7 @@ public class Student
         return class_no;
     }
 
-    public void setClass_no(Long class_no)
+    public void setClass_no(long class_no)
     {
         if (class_no < 0)
         {
@@ -261,7 +268,7 @@ public class Student
         stringbuilder.append("dormitory_number：").append(dormitory_number).append('\t');
         stringbuilder.append("class_no：").append(class_no).append('\t');
         stringbuilder.append("state：").append(state).append('\t');
-        stringbuilder.append("remarks：").append(remarks).append('\t');
+        stringbuilder.append("remarks：").append(remarks).append('\n');
         return stringbuilder.toString();
     }
 }
