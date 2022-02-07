@@ -1,5 +1,6 @@
 package table;
 
+import tools.Handler.BeanHandler;
 import tools.Handler.BeanListHandler;
 import tools.Handler.ScalarHandler;
 import tools.JDBCTemplate;
@@ -62,6 +63,28 @@ public class Student
         List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class), objects);
         //返回结果
         return list;
+    }
+
+    /**
+     * 获得某个学生的信息
+     *
+     * @param no 学生学号
+     * @return data.Student对象
+     */
+    public static data.Student getStudent(Long no)
+    {
+        //sql语句
+        String sql = "SELECT * from student where student_no=?";
+        //参数
+        Object[] objects = {no};
+        //执行sql
+        data.Student student = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Student.class), objects);
+        //判断返回值
+        if (student.getId_card() == null)
+        {
+            return null;
+        }
+        return student;
     }
 
     /**

@@ -142,4 +142,11 @@ class StudentTest
         }
 
     }
+
+    @Test
+    void getStudent()
+    {
+        data.Student student = Student.getStudent(202012340101L);
+        System.out.println(student);
+    }
 }
