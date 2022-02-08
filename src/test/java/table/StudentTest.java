@@ -149,4 +149,34 @@ class StudentTest
         data.Student student = Student.getStudent(202012340101L);
         System.out.println(student);
     }
+
+    @Test
+    void getStudentArray()
+    {
+        Object[][] studentArray = Student.getStudentArray();
+        System.out.println("数量："+(studentArray.length-1));
+        for (int i = 0; i < studentArray.length; i++)
+        {
+            for (int j = 0; j < studentArray[i].length; j++)
+            {
+                System.out.print(studentArray[i][j] + "    ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    void getClassStudentArray()
+    {
+        Object[][] studentArray = Student.getClassStudentArray(1001L);
+        System.out.println("数量："+(studentArray.length-1));
+        for (int i = 0; i < studentArray.length; i++)
+        {
+            for (int j = 0; j < studentArray[i].length; j++)
+            {
+                System.out.print(studentArray[i][j] + "    ");
+            }
+            System.out.println();
+        }
+    }
 }

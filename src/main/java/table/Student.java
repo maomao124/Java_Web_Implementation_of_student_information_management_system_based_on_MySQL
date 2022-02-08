@@ -272,4 +272,43 @@ public class Student
         }
         return false;
     }
+
+    /**
+     * 获得一个二维数组，把class_no变成class_name
+     *
+     * @return 返回一个Object类型的二维数组，注意：二维数组的第一行为列的名称
+     */
+    public static Object[][] getStudentArray()
+    {
+        //sql语句
+        String sql = "SELECT student.student_no,student.name,student.sex,student.telephone_number," +
+                "student.family_telephone_number,student.birthday,student.address,student.id_card," +
+                "student.email,student.dormitory_number,class.class_name,student.state,student.remarks " +
+                "FROM student,class WHERE student.class_no=class.class_no";
+        //参数，无
+        Object[] objects = {};
+        //执行sql
+        Object[][] array = JDBCTemplate.queryForArray(sql, objects);
+        return array;
+    }
+
+    /**
+     * 获得某个班级的所有学生，获得一个二维数组，把class_no变成class_name
+     *
+     * @param class_no 班级编号
+     * @return 返回一个Object类型的二维数组，注意：二维数组的第一行为列的名称
+     */
+    public static Object[][] getClassStudentArray(Long class_no)
+    {
+        //sql语句
+        String sql = "SELECT student.student_no,student.name,student.sex,student.telephone_number," +
+                "student.family_telephone_number,student.birthday,student.address,student.id_card," +
+                "student.email,student.dormitory_number,class.class_name,student.state,student.remarks " +
+                "FROM student,class WHERE student.class_no=class.class_no AND class.class_no=?";
+        //参数
+        Object[] objects = {class_no};
+        //执行sql
+        Object[][] array = JDBCTemplate.queryForArray(sql, objects);
+        return array;
+    }
 }

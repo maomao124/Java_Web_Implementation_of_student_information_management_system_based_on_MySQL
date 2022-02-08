@@ -110,7 +110,8 @@ public class Administrators
                                  String administrator_telephone_number, String administrator_job, String administrator_idcard)
     {
         //sql语句
-        String sql = "UPDATE administrators SET administrator_name=?,administrator_sex=?,administrator_telephone_number=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
+        String sql = "UPDATE administrators SET administrator_name=?,administrator_sex=?," +
+                "administrator_telephone_number=?,administrator_job=?,administrator_idcard=? where administrator_no=?";
         Object[] objects = {administrator_name, administrator_sex, administrator_telephone_number,
                 administrator_job, administrator_idcard, administrator_no};
         //执行sql
