@@ -27,6 +27,14 @@
     String code = request.getParameter("CheckCode");
     //从session里取正确的验证码
     String session_code = (String) session.getAttribute("code");
+    //输入的验证码不为空
+    if (code == null || code.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入验证码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
 %>
 输出验证：
 <br>
