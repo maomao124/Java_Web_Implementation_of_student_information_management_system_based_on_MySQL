@@ -1,0 +1,31 @@
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:19
+  Version(版本): 1.0
+  Description(描述)： 管理员菜单css
+ */
+
+div.text_p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 10%);
+}
+
+div.text {
+    text-align: center;
+    color: coral;
+    font-size: 24px;
+}
+
+div.link {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
