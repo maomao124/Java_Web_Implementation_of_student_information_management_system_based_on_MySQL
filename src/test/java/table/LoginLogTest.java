@@ -48,4 +48,39 @@ class LoginLogTest
         boolean b = LoginLog.insert(10002L, "张三");
         System.out.println(b);
     }
+
+    @Test
+    void getLogCount()
+    {
+        Long logCount = LoginLog.getLogCount();
+        System.out.println(logCount);
+    }
+
+    @Test
+    void getPageCount()
+    {
+        Long logCount = LoginLog.getLogCount();
+        System.out.println(logCount);
+        long pageCount = LoginLog.getPageCount(logCount);
+        System.out.println(pageCount);
+    }
+
+    @Test
+    void getThisPageList()
+    {
+        Long logCount = LoginLog.getLogCount();
+        System.out.println(logCount);
+        long pageCount = LoginLog.getPageCount(logCount);
+        System.out.println(pageCount);
+        List<data.LoginLog> list = LoginLog.getThisPageList(pageCount, 1L);
+        if (list == null)
+        {
+            System.out.println("空");
+            return;
+        }
+        for (data.LoginLog log : list)
+        {
+            System.out.print(log);
+        }
+    }
 }

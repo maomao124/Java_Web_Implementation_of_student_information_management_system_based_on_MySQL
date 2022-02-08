@@ -1,6 +1,7 @@
 package table;
 
 import tools.Handler.BeanListHandler;
+import tools.Handler.ScalarHandler;
 import tools.JDBCTemplate;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,11 @@ import java.util.List;
 
 public class LoginLog
 {
+    //格式时间
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+    //页大小,当前为200条一页
+    private static final int PageSize = 200;
+
     /**
      * 私有化构造函数，目的是不让创建对象
      */
@@ -65,7 +71,22 @@ public class LoginLog
         return loginLogs;
     }
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+    /**
+     * 获得日志总数量
+     *
+     * @return 日志总数量
+     */
+    public static Long getLogCount()
+    {
+        //sql语句
+        String sql = "select count(log_no) from login_log";
+        //参数
+        Object[] objects = {};
+        //执行sql
+        Long result = JDBCTemplate.queryForScalar(sql, new ScalarHandler<>(), objects);
+        //返回结果
+        return result;
+    }
 
     /**
      * 插入一条日志，时间和编号由程序填充
@@ -94,4 +115,53 @@ public class LoginLog
         return false;
     }
 
+    /**
+     * 根据总条数获取页面的总大小，用于分页
+     *
+     * @param count 总条数
+     * @return 页面的总大小
+     */
+    public static long getPageCount(Long count)
+    {
+        long PageCount = count % PageSize == 0 ? (count / PageSize) : (count / PageSize + 1);
+        //相当于
+//        long PageCount = 0;
+//        if (count % PageSize == 0)
+//        {
+//            PageCount = count / PageSize;
+//        }
+//        else
+//        {
+//            PageCount = count / PageSize + 1;
+//        }
+        return PageCount;
+    }
+
+    /**
+     * 获得当前页的集合
+     *
+     * @param PageCount 页总数
+     * @param currPage  当前页的序号
+     * @return List<data.LoginLog>对象
+     */
+    public static List<data.LoginLog> getThisPageList(Long PageCount, Long currPage)
+    {
+        //当前页比总数还大，直接返回
+        if (currPage > PageCount)
+        {
+            return null;
+        }
+        //反转当前页，目的是排序
+        //long reversePage = PageCount - currPage;
+        //sql语句
+        //String sql = "SELECT * FROM login_log  LIMIT " + (reversePage * PageSize) + "," + PageSize;
+        //sql语句
+        String sql = "SELECT * FROM login_log order by log_no desc  LIMIT " + ((currPage - 1) * PageSize) + "," + PageSize;
+        //参数
+        Object[] objects = {};
+        //执行sql
+        List<data.LoginLog> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.LoginLog.class), objects);
+        //返回
+        return list;
+    }
 }
