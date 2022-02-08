@@ -23,12 +23,14 @@ class TeacherPasswordTest
     @Test
     void verification()
     {
-
+        boolean b = TeacherPassword.verification(3004L, "111111");
+        System.out.println(b);
     }
 
     @Test
     void changePassword()
     {
-
+        boolean b = TeacherPassword.changePassword(3004L, "111111", "123456");
+        System.out.println(b);
     }
 }

@@ -157,7 +157,7 @@ public class Teacher
         stringbuilder.append("teacher_telephone_number：").append(teacher_telephone_number).append('\t');
         stringbuilder.append("teacher_email：").append(teacher_email).append('\t');
         stringbuilder.append("teacher_address：").append(teacher_address).append('\t');
-        stringbuilder.append("teacher_idcard：").append(teacher_idcard).append('\t');
+        stringbuilder.append("teacher_idcard：").append(teacher_idcard).append('\n');
         return stringbuilder.toString();
     }
 }
