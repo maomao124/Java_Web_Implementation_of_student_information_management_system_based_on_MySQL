@@ -32,5 +32,15 @@
         </div>
     </div>
 </div>
+<div class="photo_left">
+    <div class="animated slideInRight">
+        <img src="photo/error_photo.png" alt="" width="250" height="250">
+    </div>
+</div>
+<div class="photo_right">
+    <div class="animated slideInLeft">
+        <img src="photo/error_photo.gif" alt="" width="250" height="250">
+    </div>
+</div>
 </body>
 </html>

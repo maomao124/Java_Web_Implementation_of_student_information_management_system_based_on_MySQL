@@ -28,3 +28,15 @@ div.text {
     color: red;
     border: 5px dotted #e6bfff;
 }
+
+div.photo_left {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+}
+
+div.photo_right {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+}

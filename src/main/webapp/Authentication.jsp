@@ -123,8 +123,20 @@
         //验证成功
         //获得全部信息
         data.Student student = table.Student.getStudent(number_no);
+        if (student == null)
+        {
+            //把错误信息写入session里
+            session.setAttribute("message", "此人不存在！");
+            //转发至错误页面
+            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
         //写入session
         session.setAttribute("student", student);
+        //写入身份
+        session.setAttribute("identity", "学生");
+        //写入登录日志
+        assert student != null;
+        table.LoginLog.insert(number_no, student.getName());
         //重定向到主页
         response.sendRedirect("student/index.jsp");
     }
@@ -143,8 +155,19 @@
         //验证成功
         //获得全部信息
         data.Teacher teacher = table.Teacher.getTeacher(number_no);
+        if (teacher == null)
+        {
+            //把错误信息写入session里
+            session.setAttribute("message", "此人不存在！");
+            //转发至错误页面
+            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
         //写入session
-        session.setAttribute("student", teacher);
+        session.setAttribute("teacher", teacher);
+        //写入身份
+        session.setAttribute("identity", "老师");
+        assert teacher != null;
+        table.LoginLog.insert(number_no, teacher.getTeacher_name());
         //重定向到主页
         response.sendRedirect("teacher/index.jsp");
     }
@@ -163,8 +186,20 @@
         //验证成功
         //获得全部信息
         data.Administrators administrator = table.Administrators.getAdministrator(number_no);
+        if (administrator == null)
+        {
+            //把错误信息写入session里
+            session.setAttribute("message", "此人不存在！");
+            //转发至错误页面
+            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
         //写入session
-        session.setAttribute("student", administrator);
+        session.setAttribute("administrator", administrator);
+        //写入身份
+        session.setAttribute("identity", "管理员");
+        //写入登录日志
+        assert administrator != null;
+        table.LoginLog.insert(number_no, administrator.getAdministrator_name());
         //重定向到主页
         response.sendRedirect("administrator/index.jsp");
     }
