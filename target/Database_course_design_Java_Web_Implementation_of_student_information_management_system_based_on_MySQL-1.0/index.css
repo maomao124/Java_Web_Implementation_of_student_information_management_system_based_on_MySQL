@@ -14,23 +14,27 @@ body {
     background-color: skyblue;
 }
 
-div {
-    width: 580px;
+div.text {
+    width: 600px;
     position: absolute;
     top: 17%;
     left: 50%;
     font-size: 48px;
     color: red;
-    border: 10px dotted lightpink;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
-a {
-    color: coral;
-    font-size: 36px;
+.link_position
+{
     position: absolute;
     top: 40%;
     left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+a.link {
+    color: coral;
+    font-size: 36px;
     display: block;
     width: 200px;
     height: 100px;
@@ -38,7 +42,77 @@ a {
     line-height: 100px;
     text-align: center;
     text-decoration: none;
-    border: 10px dotted lightpink;
-    transform: translate(-50%,-50%);
+}
+
+div.r {
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+    /*border: 10px solid coral;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+div.l {
+    position: absolute;
+    bottom: 0;
+    left: 3%;
+    /*border: 10px solid coral;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+.tip {
+    width: 200px;
+    height: 200px;
+    background: aquamarine;
+    position: absolute;
+    border: 1px solid;
+    border-radius: 10px;
+    opacity: .5;
+    text-align: center;
+    font-size: 30px;
+    color: brown;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    margin: 100px auto;
+    transform-style: preserve-3d;
+    /* perspective: 800px; */
+    position: relative;
+    animation: add 3.5s linear infinite;
+}
+
+@keyframes add {
+    0% {
+        transform: rotateX(100%) rotateY(100%)
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg)
+    }
+}
+
+.left {
+    transform: rotate(90deg) translateZ(100px)
+}
+
+.right {
+    transform: rotateY(-90deg) translateZ(-100px)
+}
+
+.font {
+    transform: translateZ(100px)
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(100px)
+}
+
+.top {
+    transform: rotateX(-90deg) translateZ(100px)
+}
+
+.bottom {
+    transform: rotateY(-90deg) translateZ(100px)
 }
     
