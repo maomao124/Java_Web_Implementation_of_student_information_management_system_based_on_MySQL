@@ -1,0 +1,49 @@
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): table
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:57
+  Version(版本): 1.0
+  Description(描述)： 表格css
+ */
+
+
+table {
+    width: 90%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+}
+
+th, td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+    font-weight: normal;
+}
+
+tr {
+    background: #fff;
+}
+
+tr:hover {
+    background: #cc0;
+}
+
+td a {
+    color: #06f;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #06f;
+    text-decoration: underline;
+}
