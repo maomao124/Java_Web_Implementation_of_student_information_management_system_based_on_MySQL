@@ -43,10 +43,11 @@
         </div>
     </div>
 </div>
-<div class="link">
+<div class="link animated slideInRight">
     <a href="see_class.jsp">查看学生信息</a>
     <a href="search.jsp">搜索学生信息</a>
     <a href="update_class.jsp">更新学生信息</a>
+    <a href="insert.jsp">添加学生信息</a>
 </div>
 </body>
 </html>
