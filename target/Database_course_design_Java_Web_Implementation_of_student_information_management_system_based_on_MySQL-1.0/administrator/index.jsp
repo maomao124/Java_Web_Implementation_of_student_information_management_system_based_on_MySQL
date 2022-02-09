@@ -45,6 +45,7 @@
 </div>
 <div class="link">
     <a href="see_class.jsp">查看学生信息</a>
+    <a href="search.jsp">搜索学生信息</a>
 </div>
 </body>
 </html>
