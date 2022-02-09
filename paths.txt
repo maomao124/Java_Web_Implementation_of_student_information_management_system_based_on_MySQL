@@ -1,4 +1,4 @@
-72
+82
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -47,7 +47,17 @@ src\\main\\java\\tools\\test\\ConnectionPool.java
 src\\main\\java\\tools\\test\\JDBC.java
 src\\main\\webapp\\administrator\\css\\index.css
 src\\main\\webapp\\administrator\\css\\link.css
+src\\main\\webapp\\administrator\\css\\table.css
+src\\main\\webapp\\administrator\\css\\table_student.css
+src\\main\\webapp\\administrator\\Error.jsp
 src\\main\\webapp\\administrator\\index.jsp
+src\\main\\webapp\\administrator\\search.jsp
+src\\main\\webapp\\administrator\\see_class.jsp
+src\\main\\webapp\\administrator\\see_class_student.jsp
+src\\main\\webapp\\administrator\\student_score.jsp
+src\\main\\webapp\\administrator\\update.jsp
+src\\main\\webapp\\administrator\\update_class.jsp
+src\\main\\webapp\\administrator\\update_class_student.jsp
 src\\main\\webapp\\animate.css
 src\\main\\webapp\\Authentication.jsp
 src\\main\\webapp\\Error.css

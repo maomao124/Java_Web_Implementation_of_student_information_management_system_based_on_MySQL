@@ -1,5 +1,6 @@
 <%@ page import="data.Student" %>
-<%@ page import="table.Score" %><%--
+<%@ page import="table.Score" %>
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
   File name(文件名): student_score
@@ -20,6 +21,28 @@
     <style>
         body {
             background-color: skyblue;
+        }
+
+        div.p {
+            width: 500px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
+
+        p.text {
+            text-align: center;
+            font-size: 25px;
+            color: coral;
+            background: cornsilk;
+            border-style: dotted;
+            border-color: plum;
+            border-width: 10px;
+        }
+
+        p:hover
+        {
+            background: aquamarine;
         }
 
         /*a.back {*/
@@ -90,6 +113,10 @@
         <th>学期</th>
     </tr>
     <%
+        //学分总和
+        float creditCount = 0;
+        //总绩点
+        float total_grade_point = 0;
         for (int i = 1; i < studentScoreArray.length; i++)
         {
     %>
@@ -126,8 +153,28 @@
         </td>
     </tr>
     <%
+            //增加学分总数
+            creditCount = creditCount + (float) studentScoreArray[i][2];
+            //增加总绩点
+            total_grade_point = total_grade_point + ((float) studentScoreArray[i][2] * (float) studentScoreArray[i][8]);
         }
     %>
 </table>
+<%
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+%>
+<div class="p">
+    <div class="animated zoomInUp">
+        <p class="text">
+            总修得学分：<%=creditCount%>
+            <br>
+            获得总绩点：
+            <%=total_grade_point%>
+            <br/>
+            平均学分绩点：
+            <%=decimalFormat.format(total_grade_point / creditCount)%>
+        </p>
+    </div>
+</div>
 </body>
 </html>

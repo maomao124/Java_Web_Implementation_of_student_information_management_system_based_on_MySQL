@@ -4420,6 +4420,27 @@ public class Score
         //返回
         return result;
     }
+
+    /**
+     * 获得某个学生的成绩信息，包含课程信息
+     *
+     * @param no 学生学号
+     * @return 二维数组
+     */
+    public static Object[][] getStudentScoreArray(Long no)
+    {
+        //sql语句
+        String sql = "SELECT course.*,score.usual_score,score.end_score,score.final_score,score.grade_point," +
+                "score.semester FROM course,score WHERE course.course_no=score.course_no AND score.`no`=?" +
+                " ORDER BY score.grade_point DESC";
+        //参数
+        Object[] objects = {no};
+        //执行sql
+        Object[][] array = JDBCTemplate.queryForArray(sql, objects);
+        //返回
+        return array;
+    }
+
 }
 �
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\Student.java
@@ -4484,6 +4505,26 @@ public class Student
                 "student.dormitory_number,student.state,student.remarks FROM student";
         //参数，无
         Object[] objects = {};
+        //执行sql
+        List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class), objects);
+        //返回结果
+        return list;
+    }
+
+    /**
+     * 获得某个班级的所有学生信息列表，与getStudentList方法不同的是：该方法不会返回班级编号，也就是班级编号那一栏始终为null
+     *
+     * @param class_no 班级编号
+     * @return List<data.Student>对象， Student对象中class_no为空
+     */
+    public static List<data.Student> getClassStudentList_ClassNoIsNull(Long class_no)
+    {
+        //sql语句
+        String sql = "SELECT student.`student_no`,student.`name`,student.sex,student.telephone_number,student." +
+                "family_telephone_number,student.birthday,student.address,student.id_card,student.email," +
+                "student.dormitory_number,student.state,student.remarks FROM student WHERE class_no=?";
+        //参数
+        Object[] objects = {class_no};
         //执行sql
         List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class), objects);
         //返回结果
@@ -7707,7 +7748,7 @@ a {
 
     padding: 0;
     list-style-type: none;
-    font-size: 25px;
+    font-size: 22px;
     width: 10em;
     height: 2em;
     text-align: center;
@@ -7762,6 +7803,172 @@ a:hover::after {
     right: -0.2em;
     filter: brightness(0.8);
 }�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\table.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): table
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:57
+  Version(版本): 1.0
+  Description(描述)： 表格css
+ */
+
+
+table {
+    width: 80%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+}
+
+th, td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+    font-weight: normal;
+}
+
+tr {
+    background: #fff;
+}
+
+tr:hover {
+    background: aqua;
+}
+
+td:hover {
+    color: magenta;
+}
+
+td a {
+    color: #06f;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #06f;
+    text-decoration: underline;
+}
+
+caption {
+    color: #28ffc7;
+    font-size: 28px;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\table_student.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): table
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:57
+  Version(版本): 1.0
+  Description(描述)： 表格css
+ */
+
+
+table {
+    width: 95%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+}
+
+th, td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+    font-weight: normal;
+}
+
+tr {
+    background: #fff;
+}
+
+tr:hover {
+    background: aqua;
+}
+
+td:hover {
+    color: magenta;
+}
+
+td a {
+    color: #06f;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #06f;
+    text-decoration: underline;
+}
+
+caption {
+    color: lime;
+    font-size: 28px;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\Error.jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): Error
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31
+  Time(创建时间)： 23:17
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>错误</title>
+    <link rel="stylesheet" href="../Error.css">
+    <link rel="stylesheet" href="../animate.css">
+</head>
+<body>
+<%--<%--%>
+<%--    //获得错误信息--%>
+<%--    String message = (String) session.getAttribute("message");--%>
+<%--%>--%>
+<%--<%=message%>--%>
+<div class="position">
+    <div class="animated slideInUp">
+        <div class="text">
+            <c:out value="错误！！！" escapeXml="true" default="null"/>
+            <br/>
+            <c:out value="错误内容：${sessionScope.message}" escapeXml="true" default="null"/>
+        </div>
+    </div>
+</div>
+<div class="photo_left">
+    <div class="animated slideInRight">
+        <img src="../photo/error_photo.png" alt="" width="250" height="250">
+    </div>
+</div>
+<div class="photo_right">
+    <div class="animated slideInLeft">
+        <img src="../photo/error_photo.gif" alt="" width="250" height="250">
+    </div>
+</div>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\index.jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="data.Administrators" %><%--
@@ -7809,8 +8016,728 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
     </div>
 </div>
 <div class="link">
-    <a href="">查看学生信息</a>
+    <a href="see_class.jsp">查看学生信息</a>
+    <a href="search.jsp">搜索学生信息</a>
+    <a href="update_class.jsp">更新学生信息</a>
 </div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\search.jsp
+<%@ page import="data.Student" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): search
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 14:41
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>搜索学生信息</title>
+    <link rel="stylesheet" href="css/table_student.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获取所有学生信息
+    Object[][] studentArray = table.Student.getStudentArray();
+%>
+<a class="back" href="index.jsp">返回</a>
+<table class="animated headShake">
+    <caption>
+        提示：请使用浏览器的搜索功能(ctrl+f)
+        <br/>
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话号码</th>
+        <th>家庭电话号码</th>
+        <th>生日</th>
+        <th>家庭地址</th>
+        <th>身份证号码</th>
+        <th>电子邮箱</th>
+        <th>寝室号</th>
+        <th>班级</th>
+        <th>状态</th>
+        <th>备注</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (int i = 1; i < studentArray.length; i++)
+        {
+    %>
+    <tr>
+        <td>
+            <%=studentArray[i][0]%>
+        </td>
+        <td>
+            <%=studentArray[i][1]%>
+        </td>
+        <td>
+            <%=studentArray[i][2]%>
+        </td>
+        <td>
+            <%=studentArray[i][3]%>
+        </td>
+        <td>
+            <%=studentArray[i][4]%>
+        </td>
+        <td>
+            <%=studentArray[i][5]%>
+        </td>
+        <td>
+            <%=studentArray[i][6]%>
+        </td>
+        <td>
+            <%=studentArray[i][7]%>
+        </td>
+        <td>
+            <%=studentArray[i][8]%>
+        </td>
+        <td>
+            <%=studentArray[i][9]%>
+        </td>
+        <td>
+            <%=studentArray[i][10]%>
+        </td>
+        <td>
+            <%=studentArray[i][11]%>
+        </td>
+        <td>
+            <%=studentArray[i][12]%>
+        </td>
+        <td>
+            <a href="student_score.jsp?no=<%=studentArray[i][0]%>">查看</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\see_class.jsp
+<%@ page import="data.Class" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): see_class
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 0:03
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>查看学生信息-查看班级</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获得班级信息
+    List<Class> classList = table.Class.getClassList();
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        请选择班级
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>班级编号</th>
+        <th>班级名称</th>
+        <th>所属学院</th>
+        <th>所属专业</th>
+        <th>入学年份</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Class c : classList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=c.getClass_no()%>
+        </td>
+        <td>
+            <%=c.getClass_name()%>
+        </td>
+        <td>
+            <%=c.getClass_college()%>
+        </td>
+        <td>
+            <%=c.getClass_major()%>
+        </td>
+        <td>
+            <%=c.getClass_enrollment_year()%>
+        </td>
+        <td>
+            <a href="see_class_student.jsp?class_no=<%=c.getClass_no()%>">查看</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\see_class_student.jsp
+<%@ page import="data.Class" %>
+<%@ page import="data.Student" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): see_class_student
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 0:04
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>查看学生信息</title>
+    <link rel="stylesheet" href="css/table_student.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String class_no_str = request.getParameter("class_no");
+    //判断是否为空
+    if (class_no_str == null || class_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long class_no = null;
+    try
+    {
+        assert class_no_str != null;
+        class_no = Long.parseLong(class_no_str);
+    }
+    catch (Exception e)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断班级是否存在
+    data.Class classInformation = table.Class.getClassInformation(class_no);
+    if (classInformation == null)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此班级不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //获取班级的所有学生信息
+    List<Student> classStudentList = table.Student.getClassStudentList_ClassNoIsNull(class_no);
+    assert classInformation != null;
+%>
+
+<table class="animated fadeInUp">
+    <caption>
+        <%=classInformation.getClass_name()%>
+        <br/>
+        请选择学生或者查看学生
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话号码</th>
+        <th>家庭电话号码</th>
+        <th>生日</th>
+        <th>家庭地址</th>
+        <th>身份证号码</th>
+        <th>电子邮箱</th>
+        <th>状态</th>
+        <th>备注</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Student student : classStudentList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=student.getStudent_no()%>
+        </td>
+        <td>
+            <%=student.getName()%>
+        </td>
+        <td>
+            <%=student.getSex()%>
+        </td>
+        <td>
+            <%=student.getTelephone_number()%>
+        </td>
+        <td>
+            <%=student.getFamily_telephone_number()%>
+        </td>
+        <td>
+            <%=student.getBirthday()%>
+        </td>
+        <td>
+            <%=student.getAddress()%>
+        </td>
+        <td>
+            <%=student.getId_card()%>
+        </td>
+        <td>
+            <%=student.getEmail()%>
+        </td>
+        <td>
+            <%=student.getState()%>
+        </td>
+        <td>
+            <%=student.getRemarks()%>
+        </td>
+        <td>
+            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">查看</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\student_score.jsp
+<%@ page import="data.Student" %>
+<%@ page import="table.Score" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): student_score
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 15:18
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>学生课程信息</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        /*a.back {*/
+        /*    text-decoration: none;*/
+        /*    color: #0066ff;*/
+        /*    font-size: 22px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String no_str = request.getParameter("no");
+    //判断是否为空
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生是否存在
+    Student student = table.Student.getStudent(no);
+    if (student == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //获取学生的所有课程信息
+    Object[][] studentScoreArray = Score.getStudentScoreArray(no);
+    assert student != null;
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        学生“<%=student.getName()%>”的成绩
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>课程学分</th>
+        <th>课程学时</th>
+        <th>考核模式</th>
+        <th>平时成绩</th>
+        <th>期末成绩</th>
+        <th>最终成绩</th>
+        <th>绩点</th>
+        <th>学期</th>
+    </tr>
+    <%
+        for (int i = 1; i < studentScoreArray.length; i++)
+        {
+    %>
+    <tr>
+        <td>
+            <%=studentScoreArray[i][0]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][1]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][2]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][3]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][4]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][5]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][6]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][7]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][8]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][9]%>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 16:06
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生信息</title>
+</head>
+<body>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_class.jsp
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_class
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 15:52
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩-选择班级</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获得班级信息
+    List<data.Class> classList = table.Class.getClassList();
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        请选择班级
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>班级编号</th>
+        <th>班级名称</th>
+        <th>所属学院</th>
+        <th>所属专业</th>
+        <th>入学年份</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Class c : classList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=c.getClass_no()%>
+        </td>
+        <td>
+            <%=c.getClass_name()%>
+        </td>
+        <td>
+            <%=c.getClass_college()%>
+        </td>
+        <td>
+            <%=c.getClass_major()%>
+        </td>
+        <td>
+            <%=c.getClass_enrollment_year()%>
+        </td>
+        <td>
+            <a href="update_class_student.jsp?class_no=<%=c.getClass_no()%>">进入</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_class_student.jsp
+<%@ page import="data.Student" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_class_student
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9
+  Time(创建时间)： 15:54
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生信息</title>
+    <link rel="stylesheet" href="css/table_student.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String class_no_str = request.getParameter("class_no");
+    //判断是否为空
+    if (class_no_str == null || class_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long class_no = null;
+    try
+    {
+        assert class_no_str != null;
+        class_no = Long.parseLong(class_no_str);
+    }
+    catch (Exception e)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断班级是否存在
+    data.Class classInformation = table.Class.getClassInformation(class_no);
+    if (classInformation == null)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此班级不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //获取班级的所有学生信息
+    List<Student> classStudentList = table.Student.getClassStudentList_ClassNoIsNull(class_no);
+    assert classInformation != null;
+%>
+
+<table class="animated fadeInUp">
+    <caption>
+        <%=classInformation.getClass_name()%>
+        <br/>
+        请选择学生或者查看学生
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话号码</th>
+        <th>家庭电话号码</th>
+        <th>生日</th>
+        <th>家庭地址</th>
+        <th>身份证号码</th>
+        <th>修改操作</th>
+        <th>删除操作</th>
+    </tr>
+    <%
+        for (data.Student student : classStudentList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=student.getStudent_no()%>
+        </td>
+        <td>
+            <%=student.getName()%>
+        </td>
+        <td>
+            <%=student.getSex()%>
+        </td>
+        <td>
+            <%=student.getTelephone_number()%>
+        </td>
+        <td>
+            <%=student.getFamily_telephone_number()%>
+        </td>
+        <td>
+            <%=student.getBirthday()%>
+        </td>
+        <td>
+            <%=student.getAddress()%>
+        </td>
+        <td>
+            <%=student.getId_card()%>
+        </td>
+        <td>
+            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">修改</a>
+        </td>
+        <td>
+            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">删除</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
 </body>
 </html>
 �
@@ -12782,6 +13709,21 @@ class ScoreTest
         int b = Score.deleteCourseAllScore(100001L);
         System.out.println(b);
     }
+
+    @Test
+    void getStudentScoreArray()
+    {
+        Object[][] studentArray = table.Score.getStudentScoreArray(202012340101L);
+        System.out.println("数量：" + (studentArray.length - 1));
+        for (int i = 0; i < studentArray.length; i++)
+        {
+            for (int j = 0; j < studentArray[i].length; j++)
+            {
+                System.out.print(studentArray[i][j] + "    ");
+            }
+            System.out.println();
+        }
+    }
 }�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\StudentPasswordTest.java
 package table;
@@ -12976,7 +13918,7 @@ class StudentTest
     void getStudentArray()
     {
         Object[][] studentArray = Student.getStudentArray();
-        System.out.println("数量："+(studentArray.length-1));
+        System.out.println("数量：" + (studentArray.length - 1));
         for (int i = 0; i < studentArray.length; i++)
         {
             for (int j = 0; j < studentArray[i].length; j++)
@@ -12991,7 +13933,7 @@ class StudentTest
     void getClassStudentArray()
     {
         Object[][] studentArray = Student.getClassStudentArray(1001L);
-        System.out.println("数量："+(studentArray.length-1));
+        System.out.println("数量：" + (studentArray.length - 1));
         for (int i = 0; i < studentArray.length; i++)
         {
             for (int j = 0; j < studentArray[i].length; j++)
@@ -12999,6 +13941,16 @@ class StudentTest
                 System.out.print(studentArray[i][j] + "    ");
             }
             System.out.println();
+        }
+    }
+
+    @Test
+    void getClassStudentList_ClassNoIsNull()
+    {
+        List<data.Student> classStudentList_classNoIsNull = Student.getClassStudentList_ClassNoIsNull(1001L);
+        for (data.Student student : classStudentList_classNoIsNull)
+        {
+            System.out.println(student);
         }
     }
 }�
