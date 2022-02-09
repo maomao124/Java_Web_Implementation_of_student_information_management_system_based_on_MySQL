@@ -66,6 +66,26 @@ public class Student
     }
 
     /**
+     * 获得某个班级的所有学生信息列表，与getStudentList方法不同的是：该方法不会返回班级编号，也就是班级编号那一栏始终为null
+     *
+     * @param class_no 班级编号
+     * @return List<data.Student>对象， Student对象中class_no为空
+     */
+    public static List<data.Student> getClassStudentList_ClassNoIsNull(Long class_no)
+    {
+        //sql语句
+        String sql = "SELECT student.`student_no`,student.`name`,student.sex,student.telephone_number,student." +
+                "family_telephone_number,student.birthday,student.address,student.id_card,student.email," +
+                "student.dormitory_number,student.state,student.remarks FROM student WHERE class_no=?";
+        //参数
+        Object[] objects = {class_no};
+        //执行sql
+        List<data.Student> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.Student.class), objects);
+        //返回结果
+        return list;
+    }
+
+    /**
      * 获得某个学生的信息
      *
      * @param no 学生学号

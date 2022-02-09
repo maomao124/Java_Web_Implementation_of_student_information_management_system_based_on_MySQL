@@ -154,7 +154,7 @@ class StudentTest
     void getStudentArray()
     {
         Object[][] studentArray = Student.getStudentArray();
-        System.out.println("数量："+(studentArray.length-1));
+        System.out.println("数量：" + (studentArray.length - 1));
         for (int i = 0; i < studentArray.length; i++)
         {
             for (int j = 0; j < studentArray[i].length; j++)
@@ -169,7 +169,7 @@ class StudentTest
     void getClassStudentArray()
     {
         Object[][] studentArray = Student.getClassStudentArray(1001L);
-        System.out.println("数量："+(studentArray.length-1));
+        System.out.println("数量：" + (studentArray.length - 1));
         for (int i = 0; i < studentArray.length; i++)
         {
             for (int j = 0; j < studentArray[i].length; j++)
@@ -177,6 +177,16 @@ class StudentTest
                 System.out.print(studentArray[i][j] + "    ");
             }
             System.out.println();
+        }
+    }
+
+    @Test
+    void getClassStudentList_ClassNoIsNull()
+    {
+        List<data.Student> classStudentList_classNoIsNull = Student.getClassStudentList_ClassNoIsNull(1001L);
+        for (data.Student student : classStudentList_classNoIsNull)
+        {
+            System.out.println(student);
         }
     }
 }

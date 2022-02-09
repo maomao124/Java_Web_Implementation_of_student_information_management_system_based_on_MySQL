@@ -12,7 +12,7 @@
 
 
 table {
-    width: 80%;
+    width: 95%;
     background: #ccc;
     margin: 10px auto;
     border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
@@ -53,6 +53,6 @@ td a:hover {
 }
 
 caption {
-    color: #28ffc7;
+    color: lime;
     font-size: 28px;
 }
