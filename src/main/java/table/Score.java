@@ -278,4 +278,25 @@ public class Score
         //返回
         return result;
     }
+
+    /**
+     * 获得某个学生的成绩信息，包含课程信息
+     *
+     * @param no 学生学号
+     * @return 二维数组
+     */
+    public static Object[][] getStudentScoreArray(Long no)
+    {
+        //sql语句
+        String sql = "SELECT course.*,score.usual_score,score.end_score,score.final_score,score.grade_point," +
+                "score.semester FROM course,score WHERE course.course_no=score.course_no AND score.`no`=?" +
+                " ORDER BY score.grade_point DESC";
+        //参数
+        Object[] objects = {no};
+        //执行sql
+        Object[][] array = JDBCTemplate.queryForArray(sql, objects);
+        //返回
+        return array;
+    }
+
 }

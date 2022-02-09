@@ -131,7 +131,7 @@
             <%=student.getRemarks()%>
         </td>
         <td>
-            <a href="#">查看</a>
+            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">查看</a>
         </td>
     </tr>
     <%
