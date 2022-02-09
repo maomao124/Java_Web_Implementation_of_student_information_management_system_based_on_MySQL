@@ -68,7 +68,8 @@
     }
     //获取班级的所有学生信息
     List<Student> classStudentList = table.Student.getClassStudentList_ClassNoIsNull(class_no);
-    assert classInformation != null;%>
+    assert classInformation != null;
+%>
 
 <table class="animated fadeInUp">
     <caption>
