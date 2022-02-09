@@ -120,7 +120,7 @@
             <%=student.getId_card()%>
         </td>
         <td>
-            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">修改</a>
+            <a href="update.jsp?no=<%=student.getStudent_no()%>">修改</a>
         </td>
         <td>
             <a href="student_score.jsp?no=<%=student.getStudent_no()%>">删除</a>
