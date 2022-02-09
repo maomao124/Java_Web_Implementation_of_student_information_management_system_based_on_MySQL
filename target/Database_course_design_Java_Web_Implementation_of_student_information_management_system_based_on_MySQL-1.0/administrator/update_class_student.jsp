@@ -74,7 +74,7 @@
     <caption>
         <%=classInformation.getClass_name()%>
         <br/>
-        请选择学生或者查看学生
+        请选择学生
     </caption>
     <br/>
     <tr>
@@ -123,7 +123,7 @@
             <a href="update.jsp?no=<%=student.getStudent_no()%>">修改</a>
         </td>
         <td>
-            <a href="student_score.jsp?no=<%=student.getStudent_no()%>">删除</a>
+            <a href="delete.jsp?no=<%=student.getStudent_no()%>">删除</a>
         </td>
     </tr>
     <%
