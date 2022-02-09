@@ -121,4 +121,11 @@ class ScoreTest
             System.out.println();
         }
     }
+
+    @Test
+    void verification()
+    {
+        boolean b = Score.verification(202012340101L, 200001L);
+        System.out.println(b);
+    }
 }

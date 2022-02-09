@@ -13,6 +13,9 @@
 <html>
 <head>
     <title>添加学生成绩</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
 </head>
 <body>
 <%
@@ -50,5 +53,70 @@
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
 %>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        插入学生学号为
+        <%=no%>
+        的成绩
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="insert_score_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="student_no" readonly="readonly" value="<%=no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">课程号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">平时成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="usual_score"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">期末成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="end_score"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学期</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="semester"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>

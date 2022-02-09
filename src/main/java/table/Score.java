@@ -1,5 +1,6 @@
 package table;
 
+import tools.Handler.BeanHandler;
 import tools.Handler.BeanListHandler;
 import tools.Handler.ScalarHandler;
 import tools.JDBCTemplate;
@@ -299,4 +300,30 @@ public class Score
         return array;
     }
 
+    /**
+     * 验证学生的成绩是否已经存在
+     *
+     * @param no        学生学号
+     * @param course_no 课程号
+     * @return 存在，则返回true，不存在，返回false
+     */
+    public static boolean verification(Long no, Long course_no)
+    {
+        //sql语句
+        String sql = "select * from score where no=? and course_no=?";
+        //参数
+        Object[] objects = {no, course_no};
+        //执行sql
+        data.Score score = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Score.class), objects);
+        if (score.getNo() == null)
+        {
+            //不存在
+            return false;
+        }
+        else
+        {
+            //存在
+            return true;
+        }
+    }
 }
