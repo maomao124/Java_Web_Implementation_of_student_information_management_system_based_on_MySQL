@@ -66,11 +66,17 @@
     <br/>
     <form action="update_result.jsp" method="post">
         <table border="1" class="animated bounceInDown">
-            <caption>
-
-            </caption>
             <tr>
                 <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="student_no" readonly="readonly"
+                               value="<%=student.getStudent_no()%>">
+                    </label>
                 </td>
             </tr>
             <tr>
