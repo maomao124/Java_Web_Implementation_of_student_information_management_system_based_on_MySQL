@@ -32,14 +32,17 @@ th {
 
 tr {
     background: #fff;
+    /*transition: all 1s linear 0s;*/
 }
 
 tr:hover {
     background: aqua;
+    /*transition: all 1s linear 0s;*/
 }
 
 td:hover {
     color: magenta;
+    /*transition: all 1s linear 0s;*/
 }
 
 td a {
@@ -50,6 +53,7 @@ td a {
 td a:hover {
     color: #06f;
     text-decoration: underline;
+    /*transition: all 1s linear 0s;*/
 }
 
 caption {

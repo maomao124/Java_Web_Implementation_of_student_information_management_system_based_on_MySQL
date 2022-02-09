@@ -28,6 +28,15 @@
             position: absolute;
             left: 50%;
             transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
+        }
+
+        div.p:hover {
+            width: 700px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
         }
 
         p.text {
@@ -38,11 +47,13 @@
             border-style: dotted;
             border-color: plum;
             border-width: 10px;
+            transition: all 1s linear 0s;
         }
 
         p:hover
         {
             background: aquamarine;
+            transition: all 1s linear 0s;
         }
 
         /*a.back {*/
