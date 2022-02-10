@@ -38,6 +38,7 @@
         session.setAttribute("message", "请输入验证码！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //输入的身份不能为空
     if (identity == null || identity.equals(""))
@@ -46,6 +47,7 @@
         session.setAttribute("message", "请选择身份！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //学号或者职工号不能为空
     if (no == null || no.equals(""))
@@ -54,6 +56,7 @@
         session.setAttribute("message", "请输入学号或者职工号！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //密码不能为空
     if (password == null || password.equals(""))
@@ -62,6 +65,7 @@
         session.setAttribute("message", "请输入密码！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //判断验证码是否正确
     assert code != null;
@@ -71,6 +75,7 @@
         session.setAttribute("message", "验证码不正确！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     Long number_no = null;
@@ -86,6 +91,7 @@
         session.setAttribute("message", "学号只能为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //学号不能为负数
@@ -95,6 +101,7 @@
         session.setAttribute("message", "学号不能为负数！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //密码不能超过20位
@@ -105,6 +112,7 @@
         session.setAttribute("message", "密码长度太长！密码长度不能超过20位！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //开始验证信息
@@ -119,6 +127,7 @@
             session.setAttribute("message", "学号不存在或者密码错误！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //验证成功
         //获得全部信息
@@ -129,6 +138,7 @@
             session.setAttribute("message", "此人不存在！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //写入session
         session.setAttribute("student", student);
@@ -151,6 +161,7 @@
             session.setAttribute("message", "职工号不存在或者密码错误！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //验证成功
         //获得全部信息
@@ -161,6 +172,7 @@
             session.setAttribute("message", "此人不存在！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //写入session
         session.setAttribute("teacher", teacher);
@@ -182,6 +194,7 @@
             session.setAttribute("message", "职工号不存在或者密码错误！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //验证成功
         //获得全部信息
@@ -192,6 +205,7 @@
             session.setAttribute("message", "此人不存在！");
             //转发至错误页面
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+            return;
         }
         //写入session
         session.setAttribute("administrator", administrator);

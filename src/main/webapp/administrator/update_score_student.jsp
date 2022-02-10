@@ -39,6 +39,7 @@
         session.setAttribute("message", "此页面不能单独访问！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //转换成数字
     Long class_no = null;
@@ -54,6 +55,7 @@
         session.setAttribute("message", "此页面传入的参数必须为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //判断班级是否存在
     data.Class classInformation = table.Class.getClassInformation(class_no);
@@ -64,6 +66,7 @@
         session.setAttribute("message", "此班级不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //获取班级的所有学生信息
     List<Student> classStudentList = table.Student.getClassStudentList_ClassNoIsNull(class_no);

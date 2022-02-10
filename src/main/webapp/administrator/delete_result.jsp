@@ -49,6 +49,7 @@
         session.setAttribute("message", "学号不为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     Long class_no = null;
     try
@@ -62,6 +63,7 @@
         session.setAttribute("message", "班级编号不为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //删除
@@ -72,6 +74,7 @@
         session.setAttribute("message", "学生信息删除失败！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 %>
 <script>

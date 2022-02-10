@@ -74,6 +74,7 @@
         session.setAttribute("message", "此页面不能单独访问！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //转换成数字
     Long no = null;
@@ -88,6 +89,7 @@
         session.setAttribute("message", "此页面传入的参数必须为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //判断学生是否存在
     Student student = table.Student.getStudent(no);
@@ -97,6 +99,7 @@
         session.setAttribute("message", "此学生不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //获取学生的所有课程信息
     Object[][] studentScoreArray = Score.getStudentScoreArray(no);
