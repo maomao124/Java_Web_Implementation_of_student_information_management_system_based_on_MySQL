@@ -15,6 +15,7 @@ body {
 }
 
 div.text {
+    text-align: center;
     width: 600px;
     position: absolute;
     top: 17%;
@@ -22,6 +23,13 @@ div.text {
     font-size: 48px;
     color: red;
     transform: translate(-50%, -50%);
+    transition: all 1s linear 0s;
+}
+
+div.text:hover{
+    width: 800px;
+    transition: all 1s linear 0s;
+    background: deepskyblue;
 }
 
 .link_position
@@ -30,6 +38,7 @@ div.text {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
 
 a.link {
@@ -42,6 +51,17 @@ a.link {
     line-height: 100px;
     text-align: center;
     text-decoration: none;
+    transition: all 1s linear 0s;
+}
+
+a.link:hover{
+    background-color: #e3ff28;
+    line-height: 200px;
+    height: 200px;
+    width: 500px;
+    transition: all 0.5s linear 0s;
+    font-size: 43px;
+    color: #0095ff;
 }
 
 div.r {
