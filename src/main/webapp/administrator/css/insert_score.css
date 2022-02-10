@@ -29,6 +29,8 @@ table {
 
 table:hover {
     background-color: #fff244;
+    /*width: 800px;*/
+    /*transition: all 1s linear 0s;*/
 }
 
 td, input, input.c {

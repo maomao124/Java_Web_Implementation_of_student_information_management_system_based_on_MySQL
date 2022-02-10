@@ -148,6 +148,6 @@
     //重定向
     response.sendRedirect("see_course.jsp");
 %>
-<%=course_no_str%>
+<%--<%=course_no_str%>--%>
 </body>
 </html>

@@ -1,18 +1,18 @@
-<%@ page import="data.Course" %><%--
+<%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): insert_course_result
+  File name(文件名): update_course_result
   Author(作者）: mao
   Author QQ：1296193245
   GitHub：https://github.com/maomao124/
   Date(创建日期)： 2022/2/10
-  Time(创建时间)： 19:37
+  Time(创建时间)： 20:44
   Description(描述)： 无
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加课程-结果</title>
+    <title>更新课程信息-结果</title>
     <style>
         body {
             background-color: skyblue;
@@ -33,7 +33,7 @@
     if (course_no_str == null || course_no_str.equals(""))
     {
         //把错误信息写入session里
-        session.setAttribute("message", "请输入课程编号！");
+        session.setAttribute("message", "此页面不能单独访问！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
         return;
@@ -113,11 +113,11 @@
     }
 
     //判断课程编号是否存在
-    Course courseInformation = table.Course.getCourseInformation(course_no);
-    if (courseInformation != null)
+    data.Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
     {
         //把错误信息写入session里
-        session.setAttribute("message", "该课程已经存在！");
+        session.setAttribute("message", "该课程不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
         return;
@@ -133,11 +133,11 @@
     }
 
     //插入课程
-    boolean result = table.Course.insert(course_no, course_name, course_credit, course_hour, course_mode);
+    boolean result = table.Course.update(course_no, course_name, course_credit, course_hour, course_mode);
     if (!result)
     {
         //把错误信息写入session里
-        session.setAttribute("message", "课程插入失败！");
+        session.setAttribute("message", "课程更新失败！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
         return;
@@ -146,8 +146,7 @@
 
 <%
     //重定向
-    response.sendRedirect("see_course.jsp");
+    response.sendRedirect("update_course_courseList.jsp");
 %>
-<%--<%=course_no_str%>--%>
 </body>
 </html>
