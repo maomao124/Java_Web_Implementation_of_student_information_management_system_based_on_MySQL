@@ -138,7 +138,7 @@
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
-    //课程存在
+    //课程不存在
     boolean result = Score.insert(no, course_no, usual_score, end_score, semester);
     //判断结果
     if (!result)
