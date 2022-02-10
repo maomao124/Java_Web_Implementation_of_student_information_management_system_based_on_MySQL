@@ -164,6 +164,9 @@
         <td>
             <a href="update_score.jsp?no=<%=no%>&course_no=<%=studentScoreArray[i][0]%>">更新</a>
         </td>
+        <td>
+            <a href="delete_score.jsp?no=<%=no%>&course_no=<%=studentScoreArray[i][0]%>">删除</a>
+        </td>
     </tr>
     <%
             //增加学分总数

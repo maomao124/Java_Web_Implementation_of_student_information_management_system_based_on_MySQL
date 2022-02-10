@@ -27,7 +27,7 @@ table {
     transition: all 1s linear 0s;
 }
 
-table:hover{
+table:hover {
     background-color: #fff244;
 }
 
@@ -59,7 +59,7 @@ body {
 
 div.text {
     border: 10px violet dotted;
-
+    text-align: center;
     font-size: 32px;
     color: tomato;
     background: bisque;
