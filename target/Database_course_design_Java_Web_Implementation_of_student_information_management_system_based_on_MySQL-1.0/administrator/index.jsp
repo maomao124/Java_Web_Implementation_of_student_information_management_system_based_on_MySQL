@@ -51,6 +51,7 @@
         <a href="insert.jsp">添加学生信息</a>
         <a target="_blank" href="see_course.jsp">查看所有课程</a>
         <a href="insert_course.jsp">添加课程信息</a>
+        <a href="update_course_courseList.jsp">更新课程信息</a>
         <a href="insert_score_class.jsp">添加学生成绩</a>
         <a href="update_score_class.jsp">更新学生成绩</a>
     </div>

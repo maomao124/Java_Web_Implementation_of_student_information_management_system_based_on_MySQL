@@ -31,6 +31,7 @@
         session.setAttribute("message", "此页面不能单独访问！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     if (course_no_str == null || course_no_str.equals(""))
     {
@@ -38,6 +39,7 @@
         session.setAttribute("message", "课程号为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //转换成数字
     Long no = null;
@@ -52,6 +54,7 @@
         session.setAttribute("message", "此页面传入的参数必须为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     Long course_no = null;
     try
@@ -65,6 +68,7 @@
         session.setAttribute("message", "此页面传入的参数必须为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //判断学生是否存在
     data.Student student = table.Student.getStudent(no);
@@ -74,6 +78,7 @@
         session.setAttribute("message", "此学生不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //判断课程号是否存在
     Course courseInformation = table.Course.getCourseInformation(course_no);
@@ -83,6 +88,7 @@
         session.setAttribute("message", "此课程不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 %>
 
@@ -96,6 +102,7 @@
         session.setAttribute("message", "此成绩不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     assert studentScore != null;
 %>

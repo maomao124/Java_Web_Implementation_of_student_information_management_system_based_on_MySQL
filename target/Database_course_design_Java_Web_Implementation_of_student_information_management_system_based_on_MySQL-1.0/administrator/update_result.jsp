@@ -45,6 +45,7 @@
         session.setAttribute("message", "此页面不能单独访问！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     if (name == null || name.equals(""))
     {
@@ -52,6 +53,7 @@
         session.setAttribute("message", "姓名不能为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     if (sex == null || sex.equals(""))
     {
@@ -59,6 +61,7 @@
         session.setAttribute("message", "性别不能为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 //    if (telephone_number == null || telephone_number.equals(""))
 //    {
@@ -73,6 +76,7 @@
         session.setAttribute("message", "生日信息不能为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     if (id_card == null || id_card.equals(""))
     {
@@ -80,6 +84,7 @@
         session.setAttribute("message", "身份证号码不能为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     if (class_no_str == null || class_no_str.equals(""))
     {
@@ -87,6 +92,7 @@
         session.setAttribute("message", "班级编号不能为空！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //身份证验证
     assert id_card != null;
@@ -96,6 +102,7 @@
         session.setAttribute("message", "输入的身份证号太短！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //性别验证
     if (!(sex.equals("男") || sex.equals("女")))
@@ -104,6 +111,7 @@
         session.setAttribute("message", "输入的性别只能是男或者女！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //转换成数字
@@ -119,6 +127,7 @@
         session.setAttribute("message", "学号不为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     Long class_no = null;
     try
@@ -132,6 +141,7 @@
         session.setAttribute("message", "班级编号不为数字！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
 
     //班级验证
@@ -142,6 +152,7 @@
         session.setAttribute("message", "班级不存在！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //更改
     boolean result = Student.update(no, name, sex, telephone_number, family_telephone_number, birthday,
@@ -152,6 +163,7 @@
         session.setAttribute("message", "学生信息更改失败！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
     }
     //更改成功
 %>
