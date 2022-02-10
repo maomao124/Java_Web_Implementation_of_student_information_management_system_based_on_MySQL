@@ -138,15 +138,18 @@
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
-    //课程不存在
-    boolean result = Score.insert(no, course_no, usual_score, end_score, semester);
-    //判断结果
-    if (!result)
+    else
     {
-        //把错误信息写入session里
-        session.setAttribute("message", "成绩插入失败！");
-        //转发至错误页面
-        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        //课程不存在
+        boolean result = Score.insert(no, course_no, usual_score, end_score, semester);
+        //判断结果
+        if (!result)
+        {
+            //把错误信息写入session里
+            session.setAttribute("message", "成绩插入失败！");
+            //转发至错误页面
+            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
     }
 %>
 <%

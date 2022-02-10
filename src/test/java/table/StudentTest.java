@@ -130,7 +130,7 @@ class StudentTest
             String FamilyPhone = studentInformation.get("FamilyPhone");
             String dormitoryNumber = studentInformation.get("dormitoryNumber");
             String email = studentInformation.get("email");
-            table.Student.insert(student_no, name, sex, tel, FamilyPhone, birthday, address, id_card, email, dormitoryNumber, class_no, "在读", "");
+            //table.Student.insert(student_no, name, sex, tel, FamilyPhone, birthday, address, id_card, email, dormitoryNumber, class_no, "在读", "");
             //填充成绩
             for (int j = 0; j < course_count; j++)
             {

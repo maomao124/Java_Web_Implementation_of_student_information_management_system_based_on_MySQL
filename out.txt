@@ -4468,6 +4468,29 @@ public class Score
             return true;
         }
     }
+
+    /**
+     * 获得某一个学生的某一个科目的成绩
+     *
+     * @param no        学生学号
+     * @param course_no 课程号
+     * @return data.Score对象
+     */
+    public static data.Score getStudentScore(Long no, Long course_no)
+    {
+        //sql语句
+        String sql = "select * from score where no=? and course_no=?";
+        //参数
+        Object[] objects = {no, course_no};
+        //执行sql
+        data.Score score = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Score.class), objects);
+        //返回
+        if (score.getNo() == null)
+        {
+            return null;
+        }
+        return score;
+    }
 }
 �
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\table\\Student.java
@@ -7794,6 +7817,177 @@ div.text_p {
     left: 50%;
     transform: translate(-50%, 0%);
 }�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\hotAirBalloon.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): hotAirBalloon
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10 
+  Time(创建时间)： 14:53
+  Version(版本): 1.0
+  Description(描述)： 热气球
+ */
+
+div.left {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    /*transform: translate(50%, -50%);*/
+}
+
+div.right {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    /*transform: translate(-50%, -50%);*/
+}
+
+div.left1 {
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    /*transform: translate(50%, -50%);*/
+}
+
+div.right1 {
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    /*transform: translate(-50%, -50%);*/
+}
+
+/*纵向居中布局*/
+.balloon {
+
+    font-size: 13px;
+    width: 12em;
+    height: 19em;
+    display: flex;
+    flex-direction: column; /*主轴线设置为了垂直方向，那么侧轴线就是水平方向*/
+    align-items: center; /*使得垂直排列的元素，在侧轴线线上居中对齐*/
+    animation: drift 2s infinite alternate; /*名为drift的动画 在两秒内完成一次；执行次数无限次 正反运动往返执行*/
+}
+
+@keyframes drift {
+    to {
+        transform: translateY(-10%); /*提升的距离是自身元素高度的30%*/
+    }
+}
+
+.envelope {
+    position: relative;
+    width: inherit;
+    height: 16em; /*高度不够，用来将盖子下面的倒三角截成倒梯形*/
+    overflow: hidden;
+}
+
+/*伞盖的形状是上端为球形，下端为圆锥形,所以我们先在上部画一个圆，再在下部画一个三角形。
+先画上部的圆：*/
+.envelope span {
+    position: absolute;
+    width: inherit;
+    height: 12em;
+    border-radius: 50%;
+    color: orange;
+    background-color: currentColor;
+}
+
+/*再用伪元素画出下部的等腰三角形：*/
+.envelope span::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 10em 5.5em 0 5.5em;
+    border-style: solid;
+    border-color: currentColor transparent transparent transparent;
+    left: calc(50% - 5.5em); /*动态计算长度值*/
+    top: 8.45em;
+}
+
+.envelope span:nth-child(2) { /*这里的两个span元素其实是重叠的相同的图案，这里将第二个span元素进行压缩和变色，是为了形成两幅图案的色彩叠加效果*/
+    transform: scaleX(0.4);
+    filter: brightness(0.85) contrast(1.4); /*滤镜效果：前者调整明亮程度；后者是对比度设置*/
+}
+
+/*定义吊篮的尺寸：*/
+.basket {
+    position: relative;
+    width: 2em;
+    height: 3em;
+}
+
+/*用 ::before 伪元素画出篮子：*/
+.basket::before {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: 1.6em;
+    background-color: peru; /*秘鲁色：明度稍高的褐色*/
+    bottom: 0px;
+    border-radius: 0 0 0.5em 0.5em; /*圆角边框设置*/
+}
+
+/*用 ::after 伪元素画出篮子的顶边：*/
+.basket::after {
+    content: '';
+    position: absolute;
+    width: 105%;
+    height: 0.3em;
+    background-color: saddlebrown;
+    top: 1.3em;
+    left: calc((100% - 105%) / 2); /*用于将篮边居中对齐*/
+    border-radius: 0.3em;
+}
+
+/*定位缆绳，并倾斜不同的角度：*/
+.basket span {
+    position: absolute;
+    width: 0.1em;
+    height: 1.5em;
+    background-color: burlywood;
+    left: calc((var(--n) - 1) * 0.6em);
+    transform: rotate(calc(var(--r) * 7deg));
+    trasnform-origin: bottom;
+}
+
+.basket span:nth-child(1) {
+    --n: 1;
+    --r: -2;
+}
+
+/*对每一个span元素都应用上面的span设置，相当于调用类*/
+.basket span:nth-child(2) {
+    --n: 2;
+    --r: -1;
+}
+
+.basket span:nth-child(3) {
+    --n: 3;
+    --r: 1;
+}
+
+.basket span:nth-child(4) {
+    --n: 4;
+    --r: 2
+}
+
+.s {
+    text-align: center;
+    width: 170px;
+}
+
+.code {
+    color: royalblue;
+    text-decoration: none;
+    font-size: 23px;
+}
+
+.img {
+    /*text-align: center;*/
+}�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\index.css
 /*
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -7930,7 +8124,7 @@ table {
     transition: all 1s linear 0s;
 }
 
-table:hover{
+table:hover {
     background-color: #fff244;
 }
 
@@ -7962,7 +8156,7 @@ body {
 
 div.text {
     border: 10px violet dotted;
-
+    text-align: center;
     font-size: 32px;
     color: tomato;
     background: bisque;
@@ -8537,6 +8731,317 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_score.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_score
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 15:12
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除学生成绩</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<%
+    //从request里获取参数
+    String no_str = request.getParameter("no");
+    String course_no_str = request.getParameter("course_no");
+    //判断是否为空
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (course_no_str == null || course_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程号为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Long course_no = null;
+    try
+    {
+        assert course_no_str != null;
+        course_no = Long.parseLong(course_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生是否存在
+    data.Student student = table.Student.getStudent(no);
+    if (student == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断课程号是否存在
+    data.Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此课程不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+%>
+
+<%
+    //获取该学生该课程的成绩
+    data.Score studentScore = table.Score.getStudentScore(no, course_no);
+    //判断是否为空
+    if (studentScore == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此成绩不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    assert studentScore != null;
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        删除学生学号为
+        <%=no%>、课程号为
+        <%=course_no%>
+        的成绩
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="delete_score_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="student_no" readonly="readonly" value="<%=no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">课程号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no" readonly="readonly" value="<%=course_no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">平时成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="usual_score"
+                               value="<%=studentScore.getUsual_score()%>" disabled="disabled"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">期末成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="end_score"
+                               value="<%=studentScore.getEnd_score()%>" disabled="disabled"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学期</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="semester" value="<%=studentScore.getSemester()%>"
+                               disabled="disabled"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input style="color: red" type="submit" value="删除"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_score_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_score_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 15:21
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除学生成绩-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String no_str = request.getParameter("student_no");
+    String course_no_str = request.getParameter("course_no");
+
+    //验证
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (course_no_str == null || course_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程编号不能为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "学号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Long course_no = null;
+    try
+    {
+        assert course_no_str != null;
+        course_no = Long.parseLong(course_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Float usual_score = null;
+    //判断课程号对应的课程是否存在
+    data.Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该课程不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生的成绩是否已经存在
+    boolean verification = table.Score.verification(no, course_no);
+    if (!verification)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在此课程，不能再次删除！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //课程存在，更新
+    boolean result = table.Score.delete(no, course_no);
+    //判断结果
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "成绩删除失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+%>
+<%
+    //重定向
+    response.sendRedirect("update_score_course.jsp?no=" + no);
+%>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\Error.jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -8631,13 +9136,16 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
         </div>
     </div>
 </div>
-<div class="link animated slideInRight">
-    <a href="see_class.jsp">查看学生信息</a>
-    <a href="search.jsp">搜索学生信息</a>
-    <a href="update_class.jsp">更新学生信息</a>
-    <a href="insert.jsp">添加学生信息</a>
-    <a target="_blank" href="see_course.jsp">查看所有课程</a>
-    <a  href="insert_score_class.jsp">添加学生成绩</a>
+<div class="link">
+    <div class="animated slideInRight">
+        <a href="see_class.jsp">查看学生信息</a>
+        <a href="search.jsp">搜索学生信息</a>
+        <a href="update_class.jsp">更新学生信息</a>
+        <a href="insert.jsp">添加学生信息</a>
+        <a target="_blank" href="see_course.jsp">查看所有课程</a>
+        <a href="insert_score_class.jsp">添加学生成绩</a>
+        <a href="update_score_class.jsp">更新学生成绩</a>
+    </div>
 </div>
 </body>
 </html>
@@ -9353,7 +9861,7 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
-    //课程存在
+    //课程不存在
     boolean result = Score.insert(no, course_no, usual_score, end_score, semester);
     //判断结果
     if (!result)
@@ -10738,6 +11246,781 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 <%--    <%=remarks%>--%>
 <%--    <br/>--%>
 <%--</div>--%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_score.jsp
+<%@ page import="data.Course" %>
+<%@ page import="data.Score" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_score
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:23
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<%
+    //从request里获取参数
+    String no_str = request.getParameter("no");
+    String course_no_str = request.getParameter("course_no");
+    //判断是否为空
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (course_no_str == null || course_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程号为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Long course_no = null;
+    try
+    {
+        assert course_no_str != null;
+        course_no = Long.parseLong(course_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生是否存在
+    data.Student student = table.Student.getStudent(no);
+    if (student == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断课程号是否存在
+    Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此课程不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+%>
+
+<%
+    //获取该学生该课程的成绩
+    Score studentScore = table.Score.getStudentScore(no, course_no);
+    //判断是否为空
+    if (studentScore == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此成绩不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    assert studentScore != null;
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        更新学生学号为
+        <%=no%>、课程号为
+        <%=course_no%>
+        的成绩
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="update_score_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="student_no" readonly="readonly" value="<%=no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">课程号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no" readonly="readonly" value="<%=course_no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">平时成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="usual_score"
+                               value="<%=studentScore.getUsual_score()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">期末成绩</td>
+                <td>
+                    <label>
+                        <input class="c" type="number" min="0.0" max="100.0" step="0.5" name="end_score"
+                               value="<%=studentScore.getEnd_score()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">学期</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="semester" value="<%=studentScore.getSemester()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_score_class.jsp
+<%@ page import="data.Class" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_score_class
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:08
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩-请选择班级</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获得班级信息
+    List<Class> classList = table.Class.getClassList();
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        请选择班级
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>班级编号</th>
+        <th>班级名称</th>
+        <th>所属学院</th>
+        <th>所属专业</th>
+        <th>入学年份</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Class c : classList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=c.getClass_no()%>
+        </td>
+        <td>
+            <%=c.getClass_name()%>
+        </td>
+        <td>
+            <%=c.getClass_college()%>
+        </td>
+        <td>
+            <%=c.getClass_major()%>
+        </td>
+        <td>
+            <%=c.getClass_enrollment_year()%>
+        </td>
+        <td>
+            <a href="update_score_student.jsp?class_no=<%=c.getClass_no()%>">进入</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_score_course.jsp
+<%@ page import="java.text.DecimalFormat" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_score_course
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:15
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩-请选择科目</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+<%--    <link rel="stylesheet" href="css/link.css">--%>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        div.p {
+            width: 500px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
+        }
+
+        div.p:hover {
+            width: 700px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
+        }
+
+        p.text {
+            text-align: center;
+            font-size: 25px;
+            color: coral;
+            background: cornsilk;
+            border-style: dotted;
+            border-color: plum;
+            border-width: 10px;
+            transition: all 1s linear 0s;
+        }
+
+        p:hover {
+            background: aquamarine;
+            transition: all 1s linear 0s;
+        }
+
+        /*a.back {*/
+        /*    text-decoration: none;*/
+        /*    color: #0066ff;*/
+        /*    font-size: 22px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String no_str = request.getParameter("no");
+    //判断是否为空
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生是否存在
+    data.Student student = table.Student.getStudent(no);
+    if (student == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //获取学生的所有课程信息
+    Object[][] studentScoreArray = table.Score.getStudentScoreArray(no);
+    assert student != null;
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        学生“<%=student.getName()%>”的成绩
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>课程学分</th>
+        <th>课程学时</th>
+        <th>考核模式</th>
+        <th>平时成绩</th>
+        <th>期末成绩</th>
+        <th>最终成绩</th>
+        <th>绩点</th>
+        <th>学期</th>
+        <th>更新操作</th>
+        <th>删除操作</th>
+    </tr>
+    <%
+        //学分总和
+        float creditCount = 0;
+        //总绩点
+        float total_grade_point = 0;
+        for (int i = 1; i < studentScoreArray.length; i++)
+        {
+    %>
+    <tr>
+        <td>
+            <%=studentScoreArray[i][0]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][1]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][2]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][3]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][4]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][5]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][6]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][7]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][8]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][9]%>
+        </td>
+        <td>
+            <a href="update_score.jsp?no=<%=no%>&course_no=<%=studentScoreArray[i][0]%>">更新</a>
+        </td>
+        <td>
+            <a href="delete_score.jsp?no=<%=no%>&course_no=<%=studentScoreArray[i][0]%>">删除</a>
+        </td>
+    </tr>
+    <%
+            //增加学分总数
+            creditCount = creditCount + (float) studentScoreArray[i][2];
+            //增加总绩点
+            total_grade_point = total_grade_point + ((float) studentScoreArray[i][2] * (float) studentScoreArray[i][8]);
+        }
+    %>
+</table>
+<%
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+%>
+<div class="p">
+    <div class="animated zoomInUp">
+        <p class="text">
+            总修得学分：<%=creditCount%>
+            <br>
+            获得总绩点：
+            <%=total_grade_point%>
+            <br/>
+            平均学分绩点：
+            <%=decimalFormat.format(total_grade_point / creditCount)%>
+        </p>
+    </div>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_score_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_score_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:57
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String no_str = request.getParameter("student_no");
+    String course_no_str = request.getParameter("course_no");
+    String usual_score_str = request.getParameter("usual_score");
+    String end_score_str = request.getParameter("end_score");
+    String semester = request.getParameter("semester");
+
+    //验证
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (course_no_str == null || course_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程编号不能为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (usual_score_str == null || usual_score_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "平时成绩不能为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (end_score_str == null || end_score_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "期末成绩不能为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    if (semester == null || semester.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "学期不能为空 示例：2021年下学期！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+
+    //转换成数字
+    Long no = null;
+    try
+    {
+        assert no_str != null;
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "学号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Long course_no = null;
+    try
+    {
+        assert course_no_str != null;
+        course_no = Long.parseLong(course_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Float usual_score = null;
+    try
+    {
+        assert usual_score_str != null;
+        usual_score = Float.parseFloat(usual_score_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "平时成绩不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    Float end_score = null;
+    try
+    {
+        assert end_score_str != null;
+        end_score = Float.parseFloat(end_score_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "期末成绩不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断课程号对应的课程是否存在
+    data.Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该课程不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断学生的成绩是否已经存在
+    boolean verification = table.Score.verification(no, course_no);
+    if (!verification)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此学生不存在此课程！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //课程存在，更新
+    boolean result = table.Score.update(no, course_no, usual_score, end_score, semester);
+    //判断结果
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "成绩更新失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+%>
+<%
+    //重定向
+    response.sendRedirect("update_score_course.jsp?no=" + no);
+%>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_score_student.jsp
+<%@ page import="data.Student" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_score_student
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:11
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新学生成绩-请选择学生</title>
+    <link rel="stylesheet" href="css/table_student.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String class_no_str = request.getParameter("class_no");
+    //判断是否为空
+    if (class_no_str == null || class_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //转换成数字
+    Long class_no = null;
+    try
+    {
+        assert class_no_str != null;
+        class_no = Long.parseLong(class_no_str);
+    }
+    catch (Exception e)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //判断班级是否存在
+    data.Class classInformation = table.Class.getClassInformation(class_no);
+    if (classInformation == null)
+    {
+        //转换失败
+        //把错误信息写入session里
+        session.setAttribute("message", "此班级不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+    }
+    //获取班级的所有学生信息
+    List<Student> classStudentList = table.Student.getClassStudentList_ClassNoIsNull(class_no);
+    assert classInformation != null;
+%>
+
+<table class="animated fadeInUp">
+    <caption>
+        <%=classInformation.getClass_name()%>
+        <br/>
+        请选择学生
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话号码</th>
+        <th>家庭电话号码</th>
+        <th>生日</th>
+        <th>家庭地址</th>
+        <th>身份证号码</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Student student : classStudentList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=student.getStudent_no()%>
+        </td>
+        <td>
+            <%=student.getName()%>
+        </td>
+        <td>
+            <%=student.getSex()%>
+        </td>
+        <td>
+            <%=student.getTelephone_number()%>
+        </td>
+        <td>
+            <%=student.getFamily_telephone_number()%>
+        </td>
+        <td>
+            <%=student.getBirthday()%>
+        </td>
+        <td>
+            <%=student.getAddress()%>
+        </td>
+        <td>
+            <%=student.getId_card()%>
+        </td>
+        <td>
+            <a href="update_score_course.jsp?no=<%=student.getStudent_no()%>">进入</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+
 </body>
 </html>
 �
@@ -14418,6 +15701,7 @@ body {
 }
 
 div.text {
+    text-align: center;
     width: 600px;
     position: absolute;
     top: 17%;
@@ -14425,6 +15709,13 @@ div.text {
     font-size: 48px;
     color: red;
     transform: translate(-50%, -50%);
+    transition: all 1s linear 0s;
+}
+
+div.text:hover{
+    width: 800px;
+    transition: all 1s linear 0s;
+    background: deepskyblue;
 }
 
 .link_position
@@ -14433,6 +15724,7 @@ div.text {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
 
 a.link {
@@ -14445,6 +15737,17 @@ a.link {
     line-height: 100px;
     text-align: center;
     text-decoration: none;
+    transition: all 1s linear 0s;
+}
+
+a.link:hover{
+    background-color: #e3ff28;
+    line-height: 200px;
+    height: 200px;
+    width: 500px;
+    transition: all 0.5s linear 0s;
+    font-size: 43px;
+    color: #0095ff;
 }
 
 div.r {
@@ -15736,6 +17039,13 @@ class ScoreTest
     {
         boolean b = Score.verification(202012340101L, 200001L);
         System.out.println(b);
+    }
+
+    @Test
+    void getStudentScore()
+    {
+        data.Score score = Score.getStudentScore(202012340101L, 200001L);
+        System.out.println(score);
     }
 }�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\table\\StudentPasswordTest.java
