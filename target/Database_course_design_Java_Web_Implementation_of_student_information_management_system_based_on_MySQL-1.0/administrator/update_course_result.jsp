@@ -132,7 +132,7 @@
         return;
     }
 
-    //插入课程
+    //更新课程
     boolean result = table.Course.update(course_no, course_name, course_credit, course_hour, course_mode);
     if (!result)
     {
