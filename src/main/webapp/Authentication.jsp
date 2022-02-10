@@ -186,7 +186,7 @@
     else
     {
         //验证管理员
-        boolean result = AdministratorsPassword.verification(number_no, password);
+        boolean result = table.AdministratorsPassword.verification(number_no, password);
         //用户名或者密码错误
         if (!result)
         {

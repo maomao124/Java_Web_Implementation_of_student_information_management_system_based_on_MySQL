@@ -54,6 +54,8 @@
         <a href="update_course_courseList.jsp">更新课程信息</a>
         <a href="insert_score_class.jsp">添加学生成绩</a>
         <a href="update_score_class.jsp">更新学生成绩</a>
+        <a href="change_password.jsp">更改登录密码</a>
+        <a href="quit.jsp">安全退出</a>
     </div>
 </div>
 </body>
