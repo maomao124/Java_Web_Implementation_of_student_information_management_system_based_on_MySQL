@@ -1,19 +1,18 @@
-<%@ page import="data.Course" %>
-<%@ page import="table.Score" %><%--
+<%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): insert_score_result
+  File name(文件名): update_score_result
   Author(作者）: mao
   Author QQ：1296193245
   GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/2/9
-  Time(创建时间)： 21:15
+  Date(创建日期)： 2022/2/10
+  Time(创建时间)： 14:57
   Description(描述)： 无
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加学生成绩-结果</title>
+    <title>更新学生成绩-结果</title>
     <style>
         body {
             background-color: skyblue;
@@ -121,7 +120,7 @@
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
     //判断课程号对应的课程是否存在
-    Course courseInformation = table.Course.getCourseInformation(course_no);
+    data.Course courseInformation = table.Course.getCourseInformation(course_no);
     if (courseInformation == null)
     {
         //把错误信息写入session里
@@ -130,28 +129,29 @@
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
     //判断学生的成绩是否已经存在
-    boolean verification = Score.verification(no, course_no);
-    if (verification)
+    boolean verification = table.Score.verification(no, course_no);
+    if (!verification)
     {
         //把错误信息写入session里
-        session.setAttribute("message", "此学生已经存在此课程！");
+        session.setAttribute("message", "此学生不存在此课程！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
-    //课程不存在
-    boolean result = Score.insert(no, course_no, usual_score, end_score, semester);
+    //课程存在，更新
+    boolean result = table.Score.update(no, course_no, usual_score, end_score, semester);
     //判断结果
     if (!result)
     {
         //把错误信息写入session里
-        session.setAttribute("message", "成绩插入失败！");
+        session.setAttribute("message", "成绩更新失败！");
         //转发至错误页面
         request.getRequestDispatcher("Error.jsp").forward(request, response);
     }
 %>
 <%
     //重定向
-    response.sendRedirect("student_score.jsp?no=" + no);
+    response.sendRedirect("update_score_course.jsp?no=" + no);
 %>
+
 </body>
 </html>

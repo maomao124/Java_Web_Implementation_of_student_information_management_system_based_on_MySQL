@@ -11,12 +11,6 @@
  */
 
 
-a.position_one {
-    position: absolute;
-    top: 20%;
-    left: 1%;
-}
-
 a {
     color: tomato;
     text-decoration: none;

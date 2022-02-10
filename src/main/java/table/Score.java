@@ -326,4 +326,27 @@ public class Score
             return true;
         }
     }
+
+    /**
+     * 获得某一个学生的某一个科目的成绩
+     *
+     * @param no        学生学号
+     * @param course_no 课程号
+     * @return data.Score对象
+     */
+    public static data.Score getStudentScore(Long no, Long course_no)
+    {
+        //sql语句
+        String sql = "select * from score where no=? and course_no=?";
+        //参数
+        Object[] objects = {no, course_no};
+        //执行sql
+        data.Score score = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Score.class), objects);
+        //返回
+        if (score.getNo() == null)
+        {
+            return null;
+        }
+        return score;
+    }
 }

@@ -128,4 +128,11 @@ class ScoreTest
         boolean b = Score.verification(202012340101L, 200001L);
         System.out.println(b);
     }
+
+    @Test
+    void getStudentScore()
+    {
+        data.Score score = Score.getStudentScore(202012340101L, 200001L);
+        System.out.println(score);
+    }
 }
