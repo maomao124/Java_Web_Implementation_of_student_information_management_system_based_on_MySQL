@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="../animate.css">
     <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/wandered_jelly.css">
 </head>
 <%
     //获得管理员信息
@@ -58,5 +59,13 @@
         <a href="quit.jsp">安全退出</a>
     </div>
 </div>
+
+<body>
+<div class="monster">
+    <span class="body"></span>
+    <span class="eyes"></span>
+</div>
+</body>
+
 </body>
 </html>
