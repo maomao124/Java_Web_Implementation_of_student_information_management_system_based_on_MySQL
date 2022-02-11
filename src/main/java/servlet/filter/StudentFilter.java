@@ -2,6 +2,8 @@ package servlet.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -17,7 +19,7 @@ import java.io.IOException;
  * Description(描述)： 无
  */
 
-@WebFilter(filterName = "StudentFilter")
+@WebFilter(filterName = "StudentFilter", urlPatterns = "/student/*")
 public class StudentFilter implements Filter
 {
     public void init(FilterConfig config) throws ServletException
@@ -32,6 +34,43 @@ public class StudentFilter implements Filter
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws ServletException, IOException
     {
+        //设置编码
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        //获得session对象
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession();
+        //从session里获取身份信息
+        Object identity = session.getAttribute("identity");
+        //判断身份是否存在
+        if (identity == null || identity.equals(""))
+        {
+            //不存在，没登录
+//            //重定向
+//            HttpServletResponse httpResponse = (HttpServletResponse) response;
+//            httpResponse.sendRedirect("error_login.jsp");
+            //转发
+            request.getRequestDispatcher("../error_login.jsp").forward(request, response);
+            return;
+        }
+        //身份存在
+        //判断身份是否为老师
+        if (!identity.equals("学生"))
+        {
+            //转发
+            request.getRequestDispatcher("../error_noPermission.jsp").forward(request, response);
+            return;
+        }
+        //从session里取数据验证
+        data.Student student = (data.Student) session.getAttribute("student");
+        //判断是否为空，如果是，身份过期，重新登录
+        if (student == null)
+        {
+            //转发
+            request.getRequestDispatcher("../error_login.jsp").forward(request, response);
+            return;
+        }
+        //验证通过
         chain.doFilter(request, response);
     }
 }

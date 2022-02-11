@@ -22,7 +22,7 @@
     //身份
     session.removeAttribute("identity");
     //重定向至索引页面
-    response.sendRedirect("../index.jsp");
+    response.sendRedirect("../thanks.jsp");
 %>
 </body>
 </html>
