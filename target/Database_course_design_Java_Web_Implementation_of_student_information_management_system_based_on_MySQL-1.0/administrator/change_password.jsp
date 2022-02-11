@@ -41,7 +41,7 @@
 </div>
 <div class="form">
     <br/>
-    <form action="update_course_result.jsp" method="post">
+    <form action="change_password_result.jsp" method="post">
         <table border="1" class="animated bounceInDown">
             <tr>
                 <td colspan="2" align="center">
@@ -51,7 +51,7 @@
                 <td class="ss">您的职工号</td>
                 <td>
                     <label>
-                        <input class="c" type="text" name="course_no" readonly="readonly"
+                        <input class="c" type="text" name="administrator_no" readonly="readonly"
                                value="<%=administrator.getAdministrator_no()%>">
                     </label>
                 </td>
