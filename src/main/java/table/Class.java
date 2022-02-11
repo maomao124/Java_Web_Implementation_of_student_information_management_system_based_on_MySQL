@@ -119,7 +119,7 @@ public class Class
      * @param class_enrollment_year 入学年份
      * @return 成功，返回true，失败返回false
      */
-    public static boolean update(Long class_no, String class_name, String class_college, String class_major, Integer class_enrollment_year)
+    public static boolean update(Long class_no, String class_name, String class_college, String class_major, String class_enrollment_year)
     {
         //sql语句
         String sql = "UPDATE class SET class_name=?,class_college=?,class_major=?,class_enrollment_year=? WHERE class_no=?";

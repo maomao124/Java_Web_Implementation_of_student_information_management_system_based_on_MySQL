@@ -55,7 +55,7 @@ class ClassTest
     @Test
     void update()
     {
-        boolean b = Class.update(10012L, "计算机2", "计算机学院", "计算机专业", 2020);
+        boolean b = Class.update(10012L, "计算机2", "计算机学院", "计算机专业", "2020");
         System.out.println(b);
     }
 
