@@ -29,3 +29,10 @@ div.link {
     top: 50%;
     transform: translate(0%, -50%);
 }
+
+div.link2 {
+    position: absolute;
+    left: 270px;
+    top: 50%;
+    transform: translate(0%, -50%);
+}

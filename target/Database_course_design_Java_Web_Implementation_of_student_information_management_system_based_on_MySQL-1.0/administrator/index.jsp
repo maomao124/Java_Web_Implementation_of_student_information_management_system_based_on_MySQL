@@ -65,7 +65,10 @@
         <a href="quit.jsp">安全退出</a>
     </div>
 </div>
-
-
+<div class="link2">
+    <div class="animated slideInRight">
+        <a href="insert_a_class.jsp">添加班级信息</a>
+    </div>
+</div>
 </body>
 </html>
