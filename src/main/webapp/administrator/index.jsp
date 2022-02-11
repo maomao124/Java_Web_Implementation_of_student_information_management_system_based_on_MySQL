@@ -37,6 +37,12 @@
 <%
     }
 %>
+
+<div class="monster">
+    <span class="body"></span>
+    <span class="eyes"></span>
+</div>
+
 <div class="text_p">
     <div class="animated shake">
         <div class="text">
@@ -60,12 +66,6 @@
     </div>
 </div>
 
-<body>
-<div class="monster">
-    <span class="body"></span>
-    <span class="eyes"></span>
-</div>
-</body>
 
 </body>
 </html>
