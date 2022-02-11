@@ -69,6 +69,7 @@
     <div class="animated slideInRight">
         <a href="insert_a_class.jsp">添加班级信息</a>
         <a href="update_class_choose.jsp">更新班级信息</a>
+        <a href="custom_query.jsp">自定义查询</a>
     </div>
 </div>
 </body>
