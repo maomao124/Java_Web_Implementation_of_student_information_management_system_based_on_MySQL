@@ -25,7 +25,7 @@ public class LoginLog
 {
     //格式时间
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //页大小,当前为200条一页
+    //页大小,当前为100条一页
     private static final int PageSize = 100;
 
     /**

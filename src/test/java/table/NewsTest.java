@@ -66,4 +66,19 @@ class NewsTest
         boolean result = News.delete(7L);
         System.out.println(result);
     }
+
+    @Test
+    void getPageCount()
+    {
+        long pageCount = News.getPageCount(News.getNewsCount());
+        System.out.println(pageCount);
+    }
+
+    @Test
+    void getThisPageList()
+    {
+        long pageCount = News.getPageCount(News.getNewsCount());
+        List<data.News> thisPageList = News.getThisPageList(pageCount, 2L);
+        System.out.println(thisPageList);
+    }
 }

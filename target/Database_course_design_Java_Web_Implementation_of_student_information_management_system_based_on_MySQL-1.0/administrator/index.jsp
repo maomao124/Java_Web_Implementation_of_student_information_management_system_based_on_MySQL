@@ -71,6 +71,7 @@
         <a href="update_class_choose.jsp">更新班级信息</a>
         <a href="custom_query.jsp">自定义查询</a>
         <a href="login_log.jsp?page=1">查看登录日志</a>
+        <a href="see_newList.jsp?page=1">查看新闻列表</a>
     </div>
 </div>
 </body>

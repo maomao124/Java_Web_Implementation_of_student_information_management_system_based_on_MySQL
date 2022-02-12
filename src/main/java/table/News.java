@@ -24,11 +24,19 @@ import java.util.List;
 
 public class News
 {
+    //页大小,当前为100条一页
+    private static final int PageSize = 100;
+
     /**
      * 私有化构造函数，不能创建对象
      */
     private News()
     {
+    }
+
+    public static int getPageSize()
+    {
+        return PageSize;
     }
 
     /**
@@ -187,4 +195,51 @@ public class News
         }
         return false;
     }
+
+    /**
+     * 根据总条数获取页面的总大小，用于分页
+     *
+     * @param count 总条数
+     * @return 页面的总大小
+     */
+    public static long getPageCount(Long count)
+    {
+        long PageCount = count % PageSize == 0 ? (count / PageSize) : (count / PageSize + 1);
+        //相当于
+//        long PageCount = 0;
+//        if (count % PageSize == 0)
+//        {
+//            PageCount = count / PageSize;
+//        }
+//        else
+//        {
+//            PageCount = count / PageSize + 1;
+//        }
+        return PageCount;
+    }
+
+    /**
+     * 获得当前页的集合
+     *
+     * @param PageCount 页总数
+     * @param currPage  当前页的序号
+     * @return List<data.LoginLog>对象
+     */
+    public static List<data.News> getThisPageList(Long PageCount, Long currPage)
+    {
+        //当前页比总数还大，直接返回
+        if (currPage > PageCount)
+        {
+            return null;
+        }
+        String sql = "SELECT news.new_no,news.new_author,news.new_identity,news.new_time,news.new_title " +
+                "FROM news ORDER BY new_no DESC LIMIT " + ((currPage - 1) * PageSize) + "," + PageSize;
+        //参数
+        Object[] objects = {};
+        //执行sql
+        List<data.News> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.News.class));
+        //返回
+        return list;
+    }
+
 }
