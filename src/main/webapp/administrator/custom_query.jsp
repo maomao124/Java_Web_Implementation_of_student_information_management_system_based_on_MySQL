@@ -27,14 +27,16 @@
     </div>
 </div>
 <div class="form">
-    <br/>
-    <form action="custom_query_result.jsp" method="post">
-        <label>
-            <textarea rows="10" name="select">SELECT * FROM</textarea>
-        </label>
+    <div class="animated rotateIn">
         <br/>
-        <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="提交SQL语句"/>
-    </form>
+        <form action="custom_query_result.jsp" method="post">
+            <label>
+                <textarea rows="10" name="sql">SELECT * FROM</textarea>
+            </label>
+            <br/>
+            <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="提交SQL语句"/>
+        </form>
+    </div>
 </div>
 
 <div class="left animated slideInUp">
