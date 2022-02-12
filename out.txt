@@ -1644,6 +1644,8 @@ public class Teach
     private Long teacher_no;
     //è€å¸ˆæ‰€æ•™çš„ç­çº§ç¼–å·
     private Long class_no;
+    //è€å¸ˆæ‰€æ•™çš„è¯¾ç¨‹ç¼–å·
+    private Long course_no;
     //å­¦æœŸ,æ¯”å¦‚ï¼š2019å¹´ä¸‹å­¦æœŸ
     private String semester;
 
@@ -1662,7 +1664,7 @@ public class Teach
      * @param class_no   è€å¸ˆæ‰€æ•™çš„ç­çº§ç¼–å·
      * @param semester   å­¦æœŸ,æ¯”å¦‚ï¼š2019å¹´ä¸‹å­¦æœŸ
      */
-    public Teach(Long teach_no, Long teacher_no, Long class_no, String semester)
+    public Teach(Long teach_no, Long teacher_no, Long class_no, Long course_no, String semester)
     {
         if (teach_no >= 0)
         {
@@ -1687,6 +1689,14 @@ public class Teach
         else
         {
             this.class_no = 0L;
+        }
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
         }
         this.semester = semester;
     }
@@ -1744,6 +1754,23 @@ public class Teach
         }
     }
 
+    public Long getCourse_no()
+    {
+        return course_no;
+    }
+
+    public void setCourse_no(Long course_no)
+    {
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+    }
+
     public String getSemester()
     {
         return semester;
@@ -1767,6 +1794,7 @@ public class Teach
         stringbuilder.append("teach_noï¼š").append(teach_no).append('\t');
         stringbuilder.append("teacher_noï¼š").append(teacher_no).append('\t');
         stringbuilder.append("class_noï¼š").append(class_no).append('\t');
+        stringbuilder.append("course_noï¼š").append(course_no).append('\t');
         stringbuilder.append("semesterï¼š").append(semester).append('\n');
         return stringbuilder.toString();
     }
@@ -3874,6 +3902,143 @@ public class Course
     }
 }
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Customize.java
+package table;
+
+import io.ErrorLog;
+import tools.Druid;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.sql.*;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(ç±»å): Customize
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/11
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:11
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š è‡ªå®šä¹‰æŸ¥è¯¢
+ */
+
+public class Customize
+{
+
+    //æ‰§è¡Œä¸€æ¬¡åï¼Œæ˜¯å¦é”™è¯¯
+    public static boolean isError = false;
+
+    //é”™è¯¯ä¿¡æ¯
+    private static String errorMessage = "";
+
+    public static String getErrorMessage()
+    {
+        return errorMessage;
+    }
+
+    /**
+     * æŸ¥è¯¢æ–¹æ³•ï¼Œæ­¤æ–¹æ³•ç”¨äºå°†ä¸€æ¡æˆ–è€…å¤šæ¡è®°å½•å°è£…æˆä¸€ä¸ªObjectçš„äºŒç»´æ•°ç»„å¹¶è¿”å›ï¼Œé€‚ç”¨äºå¤šè¡¨æŸ¥è¯¢
+     *
+     * @param sql é¢„ç¼–è¯‘çš„sqlæŸ¥è¯¢è¯­å¥ï¼Œç»å¸¸ä½¿ç”¨å¤šè¡¨æŸ¥è¯¢ï¼Œsqlè¯­å¥å®ä¾‹ï¼šæŸ¥è¯¢æŸå·å­¦ç”Ÿé€‰ä¿®çš„è¯¾ç¨‹åç§°å’Œå¯¹åº”è¯¾ç¨‹çš„åˆ†æ•°ï¼š
+     *            SELECT course.`name`, grade.grade
+     *            FROM grade, course WHERE grade.cno = course.cno AND grade.`no`=?
+     * @return è¿”å›ä¸€ä¸ªObjectç±»å‹çš„äºŒç»´æ•°ç»„ï¼Œæ³¨æ„ï¼šäºŒç»´æ•°ç»„çš„ç¬¬ä¸€è¡Œä¸ºåˆ—çš„åç§°ï¼Œåœ¨ä¸Šä¸€ä¸ªä¾‹å­ä¸­ï¼Œ
+     * åˆ—åæœ‰ä¸¤ä¸ªåˆ™Object[0][0]ç­‰äºcourse.`name`çš„åˆ—åï¼ŒObject[0][1]ç­‰äºgrade.gradeçš„åˆ—åï¼Œ
+     * çœŸæ­£çš„æ•°æ®ä»è¡Œä¸‹æ ‡ä¸º1å¼€å§‹ã€‚è¡¨å†…å®¹çš„è¡Œæ•°ä¸ºObject[][]å¯¹è±¡.length-1ã€‚
+     */
+    public static Object[][] queryForArray(String sql)
+    {
+        //å…ˆè®¾ç½®æˆå¦
+        isError = false;
+        //å®šä¹‰ä¸€ä¸ªObjectç±»å‹çš„äºŒç»´æ•°ç»„
+        Object[][] result = null;
+        //è¿æ¥å¯¹è±¡
+        Connection connection = null;
+        //é¢„ç¼–è¯‘æ‰§è¡Œè€…å¯¹è±¡
+        PreparedStatement preparedStatement = null;
+        //ç»“æœé›†å¯¹è±¡
+        ResultSet resultSet = null;
+        try
+        {
+            //è·å–è¿æ¥å¯¹è±¡(Druidè¿æ¥æ± )
+            connection = Druid.getConnection();
+            //æˆ–è€…(è‡ªå®šä¹‰æ•°æ®åº“è¿æ¥æ± )ï¼š
+            //connection = connectionPool.getConnection();
+            //æˆ–è€…ç›´æ¥è·å–(è‡ªå®šä¹‰JDBCå·¥å…·ç±»)ï¼š
+            //connection = JDBC.getConnection();
+
+            //é¢„ç¼–è¯‘sqlï¼Œè¿”å›æ‰§è¡Œè€…å¯¹è±¡
+            preparedStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            //æ‰§è¡Œsqlè¯­å¥,è¿”å›ç»“æœé›†
+            resultSet = preparedStatement.executeQuery();
+            //å®šä¹‰è¡Œæ•°å’Œåˆ—æ•°
+            int rows;
+            int column;
+            //é€šè¿‡ç»“æœé›†çš„å¯¹è±¡è·å–ç»“æœæºä¿¡æ¯å¯¹è±¡
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            //é€šè¿‡æºä¿¡æ¯å¯¹è±¡è·å–åˆ—æ•°
+            column = metaData.getColumnCount();
+            //è·å–è¡Œæ•°
+            //resultSet.afterLast();
+            resultSet.last();
+            rows = resultSet.getRow();
+            //System.out.println(rows + "  " + column);
+            //ç»“æœé›†å…‰æ ‡ç§»å›ç¬¬ä¸€è¡Œçš„å‰é¢
+            resultSet.beforeFirst();
+            //æ•°ç»„åˆ›å»ºï¼Œå› ä¸ºç¬¬ä¸€è¡Œä¸ºåˆ—çš„åç§°ï¼Œæ‰€ä»¥è¡Œæ•°è¦åŠ ä¸€
+            result = new Object[rows + 1][column];
+            //å–å¾—åˆ—åç§°ï¼Œå¡«å……æ•°ç»„çš„ç¬¬ä¸€è¡Œ
+            for (int i = 0; i < column; i++)
+            {
+                //è·å–åˆ—å
+                String columnName = metaData.getColumnName(i + 1);
+                result[0][i] = columnName;
+            }
+            int rowIndex = 1;
+            //å¡«å……å…¶å®ƒæ•°æ®
+            while (resultSet.next())
+            {
+                //å¾ªç¯éå†åˆ—æ•°
+                for (int i = 0; i < column; i++)
+                {
+                    //è·å–åˆ—å
+                    String columnName = metaData.getColumnName(i + 1);
+                    //é€šè¿‡åˆ—åè·å–æ•°æ®
+                    Object object = resultSet.getObject(columnName);
+                    //System.err.print(object+" ");
+                    //å¡«å……è‡³æ•°ç»„
+                    result[rowIndex][i] = object;
+                    //æˆ–è€…
+                    //result[resultSet.getRow()][i] = object;
+                }
+                //è¡Œç´¢å¼•+1
+                rowIndex = rowIndex + 1;
+            }
+        }
+        catch (Exception e)
+        {
+            //äº§ç”Ÿé”™è¯¯
+            e.printStackTrace();
+            isError = true;
+            //è·å¾—é”™è¯¯ä¿¡æ¯
+            errorMessage = e.getMessage();
+        }
+        finally
+        {
+            //é‡Šæ”¾èµ„æº
+            Druid.close(connection, preparedStatement, resultSet);
+            //æˆ–è€…ï¼š
+            //JDBC.close(connection, preparedStatement);
+        }
+        //è¿”å›ç»“æœ
+        return result;
+    }
+}
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Forum.java
 package table;
 
@@ -3928,8 +4093,8 @@ public class LoginLog
 {
     //æ ¼å¼æ—¶é—´
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //é¡µå¤§å°,å½“å‰ä¸º200æ¡ä¸€é¡µ
-    private static final int PageSize = 200;
+    //é¡µå¤§å°,å½“å‰ä¸º100æ¡ä¸€é¡µ
+    private static final int PageSize = 100;
 
     /**
      * ç§æœ‰åŒ–æ„é€ å‡½æ•°ï¼Œç›®çš„æ˜¯ä¸è®©åˆ›å»ºå¯¹è±¡
@@ -4096,11 +4261,19 @@ import java.util.List;
 
 public class News
 {
+    //é¡µå¤§å°,å½“å‰ä¸º100æ¡ä¸€é¡µ
+    private static final int PageSize = 100;
+
     /**
      * ç§æœ‰åŒ–æ„é€ å‡½æ•°ï¼Œä¸èƒ½åˆ›å»ºå¯¹è±¡
      */
     private News()
     {
+    }
+
+    public static int getPageSize()
+    {
+        return PageSize;
     }
 
     /**
@@ -4259,6 +4432,53 @@ public class News
         }
         return false;
     }
+
+    /**
+     * æ ¹æ®æ€»æ¡æ•°è·å–é¡µé¢çš„æ€»å¤§å°ï¼Œç”¨äºåˆ†é¡µ
+     *
+     * @param count æ€»æ¡æ•°
+     * @return é¡µé¢çš„æ€»å¤§å°
+     */
+    public static long getPageCount(Long count)
+    {
+        long PageCount = count % PageSize == 0 ? (count / PageSize) : (count / PageSize + 1);
+        //ç›¸å½“äº
+//        long PageCount = 0;
+//        if (count % PageSize == 0)
+//        {
+//            PageCount = count / PageSize;
+//        }
+//        else
+//        {
+//            PageCount = count / PageSize + 1;
+//        }
+        return PageCount;
+    }
+
+    /**
+     * è·å¾—å½“å‰é¡µçš„é›†åˆ
+     *
+     * @param PageCount é¡µæ€»æ•°
+     * @param currPage  å½“å‰é¡µçš„åºå·
+     * @return List<data.LoginLog>å¯¹è±¡
+     */
+    public static List<data.News> getThisPageList(Long PageCount, Long currPage)
+    {
+        //å½“å‰é¡µæ¯”æ€»æ•°è¿˜å¤§ï¼Œç›´æ¥è¿”å›
+        if (currPage > PageCount)
+        {
+            return null;
+        }
+        String sql = "SELECT news.new_no,news.new_author,news.new_identity,news.new_time,news.new_title " +
+                "FROM news ORDER BY new_no DESC LIMIT " + ((currPage - 1) * PageSize) + "," + PageSize;
+        //å‚æ•°
+        Object[] objects = {};
+        //æ‰§è¡Œsql
+        List<data.News> list = JDBCTemplate.queryForList(sql, new BeanListHandler<>(data.News.class));
+        //è¿”å›
+        return list;
+    }
+
 }
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\java\\table\\Score.java
@@ -8282,6 +8502,80 @@ a{
         transform: rotate(360deg);
     }
 }ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\floor.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): floor
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 20:12
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+div.floor {
+    position: fixed;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    animation: 3s move infinite ease-in-out alternate,
+    3s zoom infinite ease-in-out alternate;
+}
+
+@keyframes zoom {
+    to {
+        transform: scale(10);
+    }
+}
+
+div.floor::before {
+    content: '';
+    position: fixed;
+    width: 200vmax;
+    height: 200vmax;
+    background-color: steelblue;
+    color: turquoise;
+    background-image: linear-gradient(
+            45deg,
+            currentColor 25%,
+            transparent 25%, transparent 75%,
+            currentColor 75%),
+    linear-gradient(
+            45deg,
+            currentColor 25%,
+            transparent 25%, transparent 75%,
+            currentColor 75%);
+    background-position: 0 0, 5vmax 5vmax;
+    background-size: 10vmax 10vmax;
+    top: 50%;
+    left: 50%;
+    animation: 9s move infinite ease-in-out alternate,
+    9s -1.5s rotating infinite ease-in-out alternate;
+}
+
+@keyframes move {
+    from {
+        left: -40%;
+        top: -40%;
+    }
+
+    to {
+        left: -60%;
+        top: -60%;
+    }
+}
+
+@keyframes rotating {
+    to {
+        transform: rotate(180deg);
+        filter: hue-rotate(1turn);
+    }
+}
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\hotAirBalloon.css
 /*
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -8720,6 +9014,117 @@ a:hover::after {
     right: -0.2em;
     filter: brightness(0.8);
 }ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\new.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): new
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 21:53
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+
+.title_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+.title {
+
+    font-size: 32px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.title:hover {
+    font-size: 48px;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time_p {
+    position: absolute;
+    left: 0;
+    /*transform: translate(-50%, 0%);*/
+}
+
+.author_and_time {
+
+    font-size: 24px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time:hover {
+    font-size: 36px;
+    transition: all 0.5s linear 0s;
+}
+
+.pre_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+pre {
+
+    width: 85vw;
+    font-size: 22px;
+    color: black;
+    border: dotted 4px lawngreen;
+    background-color: snow;
+    transition: all 0.5s linear 0s;
+}ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\page.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): page
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 21:11
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+div.next {
+    position: absolute;
+    right: 250px;
+}
+
+div.next2 {
+    position: absolute;
+    right: 0;
+}
+
+div.before {
+    position: absolute;
+    left: 250px;
+}
+
+div.before2 {
+    position: absolute;
+    left: 0;
+}
+
+div.last {
+    position: absolute;
+    right: 20vw;
+}
+
+div.first {
+    position: absolute;
+    left: 20vw;
+}ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\password.css
 /*
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -8918,6 +9323,33 @@ caption {
     color: lime;
     font-size: 28px;
 }ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\textarea.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): textarea
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 0:01
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+textarea {
+    width: 50vw;
+    height: 50vh;
+    color: magenta;
+    font-size: 32px;
+    background-color: lightblue;
+    transition: all 0.7s linear 0s;
+}
+
+textarea:hover {
+    background-color: cornsilk;
+    transition: all 0.7s linear 0s;
+    border: 15px groove	coral;
+}ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\update.css
 /*
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -9084,6 +9516,241 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
         transform: scaleY(0);
     }
 }
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\custom_query.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): custom_query
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/11
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:12
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>è‡ªå®šä¹‰æŸ¥è¯¢</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+    <link rel="stylesheet" href="css/textarea.css">
+    <style>
+        a.position {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /*transform: translate(0%, 0%);*/
+        }
+    </style>
+</head>
+<body>
+<a class="back" href="index.jsp">è¿”å›</a>
+<a class="position" href="table_photo.jsp">æŸ¥çœ‹è¡¨ç»“æ„</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        è‡ªå®šä¹‰æŸ¥è¯¢
+    </div>
+</div>
+<div class="form">
+    <div class="animated rotateIn">
+        <br/>
+        <form action="custom_query_result.jsp" method="post">
+            <label>
+                <textarea rows="10" name="sql">SELECT * FROM</textarea>
+            </label>
+            <br/>
+            <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="æäº¤SQLè¯­å¥"/>
+        </form>
+    </div>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\custom_query_result.jsp
+<%@ page import="table.Customize" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): custom_query_result
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 19:10
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>è‡ªå®šä¹‰æŸ¥è¯¢-ç»“æœ</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/table_student.css">
+    <style>
+        body {
+            background: skyblue;
+        }
+        div.text {
+            border: 10px violet dotted;
+            text-align: center;
+            font-size: 32px;
+            color: tomato;
+            background: bisque;
+        }
+
+        div.text_p {
+            position: absolute;
+            top: 2%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //è·å–ä¿¡æ¯
+    String sql = request.getParameter("sql");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (sql == null || sql.equals(""))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æäº¤çš„SQLè¯­å¥ä¸ºç©ºæˆ–è€…å•ç‹¬è®¿é—®æ­¤é¡µé¢ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //åˆ¤æ–­æ˜¯å¦åŒ…å«SELECTå…³é”®å­—
+    if (!sql.toLowerCase().contains("select"))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æäº¤çš„SQLè¯­å¥åº”è¯¥è¦åŒ…å«selectå…³é”®å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //ä¸æ˜¯æ›´æ–°è¯­å¥
+    if (sql.toLowerCase().contains("update") && sql.toLowerCase().contains("set"))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æäº¤çš„SQLè¯­å¥ä¸èƒ½åŒ…å«updateå…³é”®å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (sql.toLowerCase().contains("delete") && sql.toLowerCase().contains("from"))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æäº¤çš„SQLè¯­å¥ä¸èƒ½åŒ…å«deleteå…³é”®å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //ä¸èƒ½åŒ…å«passwordå…³é”®å­—
+    if (sql.toLowerCase().contains("password"))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æäº¤çš„SQLè¯­å¥ä¸èƒ½åŒ…å«passwordå…³é”®å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //æŸ¥è¯¢
+    Object[][] objects = Customize.queryForArray(sql);
+    //åˆ¤æ–­æ˜¯å¦é”™è¯¯
+    if (Customize.isError)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", table.Customize.getErrorMessage());
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+<div class="text_p">
+    <div class="text animated bounceInUp">
+        è‡ªå®šä¹‰æŸ¥è¯¢ç»“æœ
+    </div>
+</div>
+
+<table class="animated headShake">
+    <caption>
+        <br/>
+    </caption>
+    <br/>
+    <tr>
+        <!-- thä¸ºè¡¨æ ¼æ ‡é¢˜æ -->
+        <%
+            for (int i = 0; i < objects[0].length; i++)
+            {
+        %>
+        <th>
+            <%=objects[0][i]%>
+        </th>
+        <%
+            }
+        %>
+
+    </tr>
+    <%
+        for (int i = 1; i < objects.length; i++)
+        {
+    %>
+    <tr>
+        <%
+            for (int j = 0; j < objects[i].length; j++)
+            {
+
+        %>
+        <td>
+            <%=objects[i][j]%>
+        </td>
+        <%
+            }
+        %>
+    </tr>
+    <%
+        }
+    %>
+</table>
+
+</body>
+</html>
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\delete.jsp
 <%--
@@ -10316,6 +10983,9 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     <div class="animated slideInRight">
         <a href="insert_a_class.jsp">æ·»åŠ ç­çº§ä¿¡æ¯</a>
         <a href="update_class_choose.jsp">æ›´æ–°ç­çº§ä¿¡æ¯</a>
+        <a href="custom_query.jsp">è‡ªå®šä¹‰æŸ¥è¯¢</a>
+        <a href="login_log.jsp?page=1">æŸ¥çœ‹ç™»å½•æ—¥å¿—</a>
+        <a href="see_newList.jsp?page=1">æŸ¥çœ‹æ–°é—»åˆ—è¡¨</a>
     </div>
 </div>
 </body>
@@ -11735,6 +12405,375 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </body>
 </html>
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\login_log.jsp
+<%@ page import="table.LoginLog" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): login_log
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 20:25
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>ç™»å½•æ—¥å¿—</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.LoginLog.getLogCount();
+    //è·å–æ€»é¡µæ•°
+    long pageCount = LoginLog.getPageCount(count);
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > pageCount)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—å½“å‰é¡µé¢åˆ—è¡¨
+    List<data.LoginLog> thisPageList = LoginLog.getThisPageList(pageCount, curr_page);
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+
+<table class="animated fadeInUp">
+    <caption>
+        å½“å‰é¡µé¢ï¼š
+        <%=curr_page%>
+    </caption>
+    <br/>
+    <tr>
+        <!-- thä¸ºè¡¨æ ¼æ ‡é¢˜æ -->
+        <th>ç¼–å·</th>
+        <th>ç™»å½•æ—¶é—´</th>
+        <th>ç™»å½•äººå­¦å·/èŒå·¥å·</th>
+        <th>ç™»å½•äººå§“å</th>
+
+    </tr>
+    <%
+        assert thisPageList != null;
+        for (data.LoginLog loginLog : thisPageList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=loginLog.getLog_no()%>
+        </td>
+        <td>
+            <%=loginLog.getLog_time()%>
+        </td>
+        <td>
+            <%=loginLog.getLog_login_no()%>
+        </td>
+        <td>
+            <%=loginLog.getLog_name()%>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before">
+    <a class="animated slideInLeft" href="login_log.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page >= 3)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="login_log.jsp?page=<%=(curr_page-2)%>">å‰ä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount)
+    {
+%>
+<div class="next">
+    <a class="animated slideInRight" href="login_log.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="login_log.jsp?page=<%=(curr_page+2)%>">åä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="first">
+    <a class="animated rotateInUpLeft" href="login_log.jsp?page=<%=(1)%>">ç¬¬ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="last">
+    <a class="animated rotateInUpRight" href="login_log.jsp?page=<%=(pageCount)%>">æœ€åä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\new.jsp
+<%@ page import="data.News" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): new
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 21:47
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>æ–°é—»</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/new.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.News.getNewsCount();
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > count)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ–°é—»
+    News aNew = table.News.getNew(curr_page);
+    if (aNew == null)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»è·å–å¤±è´¥ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+
+<br>
+<div class="title_p">
+    <div class="title animated zoomInDown">
+        <%=aNew.getNew_title()%>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="author_and_time_p">
+    <div class="author_and_time animated bounceInRight">
+        æ–°é—»å‘å¸ƒè€…ï¼š
+        <%=aNew.getNew_identity()%>
+        <%=aNew.getNew_author()%>
+        <br>
+        æ—¶é—´ï¼š
+        <%=aNew.getNew_time()%>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br/>
+
+<div class="pre_p">
+    <pre class="animated bounceInUp">
+    <%=aNew.getNew_text()%>
+</pre>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€æ¡æ–°é—»</a>
+</div>
+<%
+    }
+%>
+
+
+<%
+    if (curr_page < count)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€æ¡æ–°é—»</a>
+</div>
+<%
+    }
+%>
+
+</body>
+</html>
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\quit.jsp
 <%--
   Created by IntelliJ IDEA.
@@ -12190,6 +13229,222 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </body>
 </html>
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\see_newList.jsp
+<%@ page import="table.News" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): see_newList
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 21:31
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>æ–°é—»åˆ—è¡¨</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.News.getNewsCount();
+    //è·å–æ€»é¡µæ•°
+    long pageCount = News.getPageCount(count);
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > pageCount)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—å½“å‰é¡µé¢åˆ—è¡¨
+    List<data.News> thisPageList = News.getThisPageList(pageCount, curr_page);
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+
+<table class="animated fadeInUp">
+    <caption>
+        å½“å‰é¡µé¢ï¼š
+        <%=curr_page%>
+    </caption>
+    <br/>
+    <tr>
+        <!-- thä¸ºè¡¨æ ¼æ ‡é¢˜æ -->
+        <th>æ–°é—»ç¼–å·</th>
+        <th>æ–°é—»å‘å¸ƒè€…</th>
+        <th>å‘å¸ƒè€…èº«ä»½</th>
+        <th>å‘å¸ƒæ—¶é—´</th>
+        <th>æ–°é—»æ ‡é¢˜</th>
+        <th>æ“ä½œ</th>
+    </tr>
+    <%
+        int i = 1;
+        assert thisPageList != null;
+        for (data.News news : thisPageList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=news.getNew_no()%>
+        </td>
+        <td>
+            <%=news.getNew_author()%>
+        </td>
+        <td>
+            <%=news.getNew_identity()%>
+        </td>
+        <td>
+            <%=news.getNew_time()%>
+        </td>
+        <td>
+            <%=news.getNew_title()%>
+        </td>
+        <td>
+            <a style="width: 50px;display:inline;"
+               href="new.jsp?page=<%=(table.News.getPageSize()*(curr_page-1)+i)%>">æŸ¥çœ‹</a>
+        </td>
+    </tr>
+    <%
+            i++;
+        }
+    %>
+</table>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before">
+    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page >= 3)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-2)%>">å‰ä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount)
+    {
+%>
+<div class="next">
+    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+2)%>">åä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="first">
+    <a class="animated rotateInUpLeft" href="see_newList.jsp?page=<%=(1)%>">ç¬¬ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="last">
+    <a class="animated rotateInUpRight" href="see_newList.jsp?page=<%=(pageCount)%>">æœ€åä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+</body>
+</html>
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\student_score.jsp
 <%@ page import="data.Student" %>
 <%@ page import="table.Score" %>
@@ -12382,6 +13637,65 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
             <%=decimalFormat.format(total_grade_point / creditCount)%>
         </p>
     </div>
+</div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\table_photo.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): table_photo
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 19:50
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>æŸ¥çœ‹è¡¨ç»“æ„</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/floor.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        .photo_p {
+            position: absolute;
+            left: 50vw;
+            transform: translate(-50%, 0%);
+        }
+    </style>
+</head>
+<body>
+<div class="floor"></div>
+<div class="photo_p">
+    <img class="animated bounceInLeft" src="table_photo/p1_table.png" alt="è¡¨">
+    <br/>
+    <img class="animated bounceInRight" src="table_photo/p2_administrator.png" alt="administrator">
+    <br/>
+    <img class="animated bounceInLeft" src="table_photo/p3_class.png" alt="class">
+    <br/>
+    <img class="animated bounceInRight" src="table_photo/p4_course.png" alt="course">
+    <br/>
+    <img class="animated bounceInLeft" src="table_photo/p5_forum.png" alt="forum">
+    <br/>
+    <img class="animated bounceInRight" src="table_photo/p6_login_log.png" alt="login_log">
+    <br/>
+    <img class="animated bounceInLeft" src="table_photo/p7_news.png" alt="news">
+    <br/>
+    <img class="animated bounceInRight" src="table_photo/p8_score.png" alt="score">
+    <br/>
+    <img class="animated bounceInLeft" src="table_photo/p9_student.png" alt="student">
+    <br/>
+    <img class="animated bounceInRight" src="table_photo/p10_teach.png" alt="teach">
+    <br/>
+    <img class="animated bounceInLeft" src="table_photo/p11_teacher.png" alt="teacher">
+    <br/>
 </div>
 </body>
 </html>
@@ -19628,6 +20942,52 @@ class CourseTest
         System.out.println(b);
     }
 }ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\CustomizeTest.java
+package table;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(åŒ…å): table
+ * Class(æµ‹è¯•ç±»å): CustomizeTest
+ * Author(ä½œè€…ï¼‰: mao
+ * Author QQï¼š1296193245
+ * GitHubï¼šhttps://github.com/maomao124/
+ * Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/11
+ * Time(åˆ›å»ºæ—¶é—´)ï¼š 23:42
+ * Version(ç‰ˆæœ¬): 1.0
+ * Description(æè¿°)ï¼š æµ‹è¯•ç±»
+ */
+
+class CustomizeTest
+{
+
+    @Test
+    void queryForArray()
+    {
+        String sql = "SELECT * FROM administrators";
+        Object[][] objects = Customize.queryForArray(sql);
+        if (Customize.isError)
+        {
+            System.out.println("é”™è¯¯ï¼ï¼ï¼");
+            System.out.println(table.Customize.getErrorMessage());
+        }
+        else
+        {
+            for (int i = 0; i < objects.length; i++)
+            {
+                for (int j = 0; j < objects[i].length; j++)
+                {
+                    System.out.print(objects[i][j]+"   ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\LoginLogTest.java
 package table;
 
@@ -19783,6 +21143,21 @@ class NewsTest
     {
         boolean result = News.delete(7L);
         System.out.println(result);
+    }
+
+    @Test
+    void getPageCount()
+    {
+        long pageCount = News.getPageCount(News.getNewsCount());
+        System.out.println(pageCount);
+    }
+
+    @Test
+    void getThisPageList()
+    {
+        long pageCount = News.getPageCount(News.getNewsCount());
+        List<data.News> thisPageList = News.getThisPageList(pageCount, 2L);
+        System.out.println(thisPageList);
     }
 }ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\ScoreTest.java
@@ -20193,9 +21568,11 @@ class TeacherPasswordTest
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\test\\java\\table\\TeacherTest.java
 package table;
 
+import io.Add;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20260,5 +21637,31 @@ class TeacherTest
     {
         boolean b = Teacher.delete(3004L);
         System.out.println(b);
+    }
+
+    @Test
+    void add()
+    {
+        final int course_count = 12;
+        for (int i = 0; i < 100; i++)
+        {
+            Map<String, String> studentInformation = Add.getStudentInformation();
+            Long class_no = 1010L;
+            Long student_no = 10000001L + i;
+            String name = studentInformation.get("name");
+            String sex = studentInformation.get("sex");
+            String address = studentInformation.get("road");
+            String id_card = studentInformation.get("IdCard");
+            String birthday = studentInformation.get("birthday");
+            String tel = studentInformation.get("tel");
+            String FamilyPhone = studentInformation.get("FamilyPhone");
+            String dormitoryNumber = studentInformation.get("dormitoryNumber");
+            String email = studentInformation.get("email");
+            //table.Student.insert(student_no, name, sex, tel, FamilyPhone, birthday, address, id_card, email, dormitoryNumber, class_no, "åœ¨è¯»", "");
+            table.Teacher.insert(student_no, name, sex, tel, email, address, id_card);
+            //éšæœº
+
+        }
+
     }
 }ÿ

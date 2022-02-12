@@ -1,0 +1,68 @@
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): new
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 21:53
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+
+.title_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+.title {
+
+    font-size: 32px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.title:hover {
+    font-size: 48px;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time_p {
+    position: absolute;
+    left: 0;
+    /*transform: translate(-50%, 0%);*/
+}
+
+.author_and_time {
+
+    font-size: 24px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time:hover {
+    font-size: 36px;
+    transition: all 0.5s linear 0s;
+}
+
+.pre_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+pre {
+
+    width: 85vw;
+    font-size: 22px;
+    color: black;
+    border: dotted 4px lawngreen;
+    background-color: snow;
+    transition: all 0.5s linear 0s;
+}
