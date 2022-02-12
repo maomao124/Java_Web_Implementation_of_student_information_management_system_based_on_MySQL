@@ -18,9 +18,18 @@
     <link rel="stylesheet" href="css/insert_score.css">
     <link rel="stylesheet" href="css/hotAirBalloon.css">
     <link rel="stylesheet" href="css/textarea.css">
+    <style>
+        a.position {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /*transform: translate(0%, 0%);*/
+        }
+    </style>
 </head>
 <body>
 <a class="back" href="index.jsp">返回</a>
+<a class="position" href="table_photo.jsp">查看表结构</a>
 <div class="text_p">
     <div class="text animated flipInY">
         自定义查询
