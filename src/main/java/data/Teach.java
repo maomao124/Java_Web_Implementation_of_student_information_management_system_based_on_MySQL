@@ -21,6 +21,8 @@ public class Teach
     private Long teacher_no;
     //老师所教的班级编号
     private Long class_no;
+    //老师所教的课程编号
+    private Long course_no;
     //学期,比如：2019年下学期
     private String semester;
 
@@ -39,7 +41,7 @@ public class Teach
      * @param class_no   老师所教的班级编号
      * @param semester   学期,比如：2019年下学期
      */
-    public Teach(Long teach_no, Long teacher_no, Long class_no, String semester)
+    public Teach(Long teach_no, Long teacher_no, Long class_no, Long course_no, String semester)
     {
         if (teach_no >= 0)
         {
@@ -64,6 +66,14 @@ public class Teach
         else
         {
             this.class_no = 0L;
+        }
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
         }
         this.semester = semester;
     }
@@ -121,6 +131,23 @@ public class Teach
         }
     }
 
+    public Long getCourse_no()
+    {
+        return course_no;
+    }
+
+    public void setCourse_no(Long course_no)
+    {
+        if (course_no >= 0)
+        {
+            this.course_no = course_no;
+        }
+        else
+        {
+            this.course_no = 0L;
+        }
+    }
+
     public String getSemester()
     {
         return semester;
@@ -144,6 +171,7 @@ public class Teach
         stringbuilder.append("teach_no：").append(teach_no).append('\t');
         stringbuilder.append("teacher_no：").append(teacher_no).append('\t');
         stringbuilder.append("class_no：").append(class_no).append('\t');
+        stringbuilder.append("course_no：").append(course_no).append('\t');
         stringbuilder.append("semester：").append(semester).append('\n');
         return stringbuilder.toString();
     }

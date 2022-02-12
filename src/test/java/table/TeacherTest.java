@@ -1,8 +1,10 @@
 package table;
 
+import io.Add;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,5 +69,31 @@ class TeacherTest
     {
         boolean b = Teacher.delete(3004L);
         System.out.println(b);
+    }
+
+    @Test
+    void add()
+    {
+        final int course_count = 12;
+        for (int i = 0; i < 100; i++)
+        {
+            Map<String, String> studentInformation = Add.getStudentInformation();
+            Long class_no = 1010L;
+            Long student_no = 10000001L + i;
+            String name = studentInformation.get("name");
+            String sex = studentInformation.get("sex");
+            String address = studentInformation.get("road");
+            String id_card = studentInformation.get("IdCard");
+            String birthday = studentInformation.get("birthday");
+            String tel = studentInformation.get("tel");
+            String FamilyPhone = studentInformation.get("FamilyPhone");
+            String dormitoryNumber = studentInformation.get("dormitoryNumber");
+            String email = studentInformation.get("email");
+            //table.Student.insert(student_no, name, sex, tel, FamilyPhone, birthday, address, id_card, email, dormitoryNumber, class_no, "在读", "");
+            table.Teacher.insert(student_no, name, sex, tel, email, address, id_card);
+            //随机
+
+        }
+
     }
 }
