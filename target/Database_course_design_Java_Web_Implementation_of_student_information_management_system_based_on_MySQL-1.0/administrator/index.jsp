@@ -84,6 +84,9 @@
         <a class="choose" href="see_newList.jsp?page=1">查看新闻列表</a>
         <a class="choose" href="insert_new.jsp">发布新闻</a>
         <a class="choose" href="update_news_list.jsp?page=1">管理已发布新闻</a>
+        <hr>
+        <a class="choose" href="">添加教师信息</a>
+        <a class="choose" href="">管理教师</a>
     </div>
 </div>
 
@@ -104,7 +107,7 @@
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul>
+        <ul >
 
             <%
                 for (int i = 1; i <= 9; i++)
@@ -112,12 +115,12 @@
                     //获取全标题
                     String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
                     //防止标题太长
-                    if (title.length() > 16)
+                    if (title.length() > 19)
                     {
-                        title = title.substring(0, 14) + "...";
+                        title = title.substring(0, 17) + "...";
                     }
             %>
-            <li>
+            <li style="width: 60rem;" >
                 <a
                         class="new" href="new.jsp?page=<%=i%>"><%=title%>
                 </a>
@@ -126,7 +129,7 @@
                 }
             %>
 
-            <li>
+            <li style="width: 60rem;">
                 <a class="new" href="see_newList.jsp?page=1">更多新闻</a>
             </li>
         </ul>
@@ -140,7 +143,7 @@ else
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul>
+        <ul >
 
             <%
                 for (int i = 1; i <= newsCount; i++)
@@ -148,12 +151,12 @@ else
                     //获取全标题
                     String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
                     //防止标题太长
-                    if (title.length() > 12)
+                    if (title.length() > 19)
                     {
-                        title = title.substring(0, 10) + "...";
+                        title = title.substring(0, 17) + "...";
                     }
             %>
-            <li>
+            <li style="width: 60rem;">
                 <a
                         class="new" href="new.jsp?page=<%=i%>"><%=title%>
                 </a>
@@ -162,7 +165,7 @@ else
                 }
             %>
 
-            <li>
+            <li style="width: 60rem;">
                 <a class="new" href="see_newList.jsp?page=1">更多新闻</a>
             </li>
         </ul>
