@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="data.News" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
@@ -122,39 +123,40 @@
 <br>
 <br/>
 
-<div class="pre_p">
-    <pre class="animated bounceInUp">
-    <%=aNew.getNew_text()%>
-</pre>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<%
-    if (curr_page >= 2)
-    {
-%>
-<div class="before2">
-    <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">上一条新闻</a>
-</div>
-<%
-    }
-%>
+<div class="new_text_p">
+    <div class="new_text animated bounceInUp">
+        <c:out value="<%=aNew.getNew_text()%>" escapeXml="true" default="null"/>
+
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">上一条新闻</a>
+    </div>
+    <%
+        }
+    %>
 
 
-<%
-    if (curr_page < count)
-    {
-%>
-<div class="next2">
-    <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">下一条新闻</a>
+    <%
+        if (curr_page < count)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">下一条新闻</a>
+    </div>
+    <%
+        }
+    %>
+
 </div>
-<%
-    }
-%>
+
 
 </body>
 </html>

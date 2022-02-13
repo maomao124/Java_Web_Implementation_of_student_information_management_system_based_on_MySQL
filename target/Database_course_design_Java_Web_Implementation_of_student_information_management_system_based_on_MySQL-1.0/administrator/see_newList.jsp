@@ -72,6 +72,15 @@
     Long count = table.News.getNewsCount();
     //获取总页数
     long pageCount = News.getPageCount(count);
+    //判断是否有新闻
+    if (count == 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前没有已发布的新闻！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
     //判断当前页面是否大于页总数
     if (curr_page > pageCount)
     {

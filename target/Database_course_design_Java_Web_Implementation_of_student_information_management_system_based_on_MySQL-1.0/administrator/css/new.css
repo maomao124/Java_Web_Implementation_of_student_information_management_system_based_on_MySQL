@@ -51,18 +51,22 @@
     transition: all 0.5s linear 0s;
 }
 
-.pre_p {
+div.new_text_p {
     position: absolute;
     left: 50vw;
     transform: translate(-50%, 0%);
 }
 
-pre {
-
+div.new_text {
+    white-space:pre-wrap;
     width: 85vw;
     font-size: 22px;
     color: black;
     border: dotted 4px lawngreen;
     background-color: snow;
     transition: all 0.5s linear 0s;
+}
+
+p{
+
 }
