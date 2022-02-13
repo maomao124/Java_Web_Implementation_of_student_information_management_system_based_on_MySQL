@@ -89,6 +89,7 @@
         <a class="choose" href="">管理教师</a>
         <hr>
         <a class="choose" href="">进入校园论坛</a>
+        <a class="choose" href="">管理校园论坛</a>
     </div>
 </div>
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,6 +24,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TeacherTest
 {
+
+    public static int getIntRandom(int min, int max)         //空间复杂度和时间复杂度更低
+    {
+        if (min > max)
+        {
+            min = max;
+        }
+        return min + (int) (Math.random() * (max - min + 1));
+    }
+
+    public static int getIntRandom1(int min, int max)          //获取int型的随机数
+    {
+        if (min > max)
+        {
+            min = max;
+        }
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
+    }
 
     @Test
     void getTeacherList()
@@ -90,9 +110,14 @@ class TeacherTest
             String dormitoryNumber = studentInformation.get("dormitoryNumber");
             String email = studentInformation.get("email");
             //table.Student.insert(student_no, name, sex, tel, FamilyPhone, birthday, address, id_card, email, dormitoryNumber, class_no, "在读", "");
-            table.Teacher.insert(student_no, name, sex, tel, email, address, id_card);
+            //table.Teacher.insert(student_no, name, sex, tel, email, address, id_card);
             //随机
-
+            for (int j = 0; j < 3; j++)
+            {
+                Long class1_no = (long) getIntRandom(1001, 1010);
+                Long course_no = (long) getIntRandom(200001, 200012);
+                table.Teach.insert(student_no, class1_no, course_no, "2021下学期");
+            }
         }
 
     }
