@@ -9014,6 +9014,95 @@ a:hover::after {
     right: -0.2em;
     filter: brightness(0.8);
 }ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\link_index.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): link
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/8 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 23:43
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š è¶…é“¾æ¥css
+ */
+
+
+a.choose {
+    color: tomato;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    list-style-type: none;
+    font-size: 22px;
+    width: 10em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    position: relative;
+    margin: 0.8em;
+}
+
+/* æ·»åŠ äº†å·¦å³ä¸¤ä¸ªåœ†ç‚¹ */
+a.choose::before, a.choose::after {
+    content: '';
+    position: absolute;
+    width: 0.6em;
+    height: 0.6em;
+    background-color: gainsboro;
+    top: calc(50% - 0.3em);
+    border-radius: 50%;
+    transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+}
+
+a.choose::before {
+    left: 0;
+    z-index: -1;
+}
+
+a.choose::after {
+    right: 0;
+    z-index: -2;
+}
+
+/* æ·»åŠ æ‚¬æµ®æ•ˆæœ */
+a.choose:hover {
+    color: deeppink;
+}
+
+/* ç»™å‰åä¼ªå…ƒç´ æ·»åŠ æ‚¬æµ®æ•ˆæœï¼Œæ³¨æ„å…ˆåé¡ºåºï¼Œå…ˆæ˜¯hoveråæ˜¯ä¼ªå…ƒç´  */
+a.choose:hover::before, a.choose:hover::after {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: dodgerblue;
+}
+
+a.choose:hover::before {
+    top: 0;
+    left: -0.2em;
+}
+
+a.choose:hover::after {
+    right: -0.2em;
+    filter: brightness(0.8);
+}
+
+a.new {
+    text-decoration: none;
+    color: black;
+    transition: all 0.5s linear 0s;
+}
+
+a.new:hover{
+    color: #0066ff;
+    transition: all 0.5s linear 0s;
+}ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\new.css
 /*
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -9068,20 +9157,103 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     transition: all 0.5s linear 0s;
 }
 
-.pre_p {
+div.new_text_p {
     position: absolute;
     left: 50vw;
     transform: translate(-50%, 0%);
 }
 
-pre {
-
+div.new_text {
+    white-space:pre-wrap;
     width: 85vw;
     font-size: 22px;
     color: black;
     border: dotted 4px lawngreen;
     background-color: snow;
     transition: all 0.5s linear 0s;
+}
+
+p{
+
+}ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\newList.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): newList
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/12 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:46
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+:root {
+    font-size: 7px;
+}
+
+nav ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li {
+    width: 60rem;
+    height: 6rem;
+    font-size: 20px;
+    text-align: center;
+    line-height: 6rem;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: 0.3s;
+    margin: 3rem;
+}
+
+nav li::before,
+nav li::after {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+nav li::before {
+    background-color: white;
+    z-index: -1;
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+nav li::after {
+    background-color: goldenrod;
+    transform: translate(1.5rem, 1.5rem);
+    z-index: -2;
+}
+
+nav li:hover {
+    transform: translate(1.5rem, 1.5rem);
+    color: white;
+}
+
+nav li:hover::before {
+    background-color: goldenrod;
+}
+
+nav li:hover::after {
+    background-color: white;
+    transform: translate(-1.5rem, -1.5rem);
+}
+
+.newList_p {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translate(0, -50%);
 }ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\page.css
 /*
@@ -10446,6 +10618,276 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </body>
 </html>
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\delete_new.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): delete_new
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/13
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 14:47
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>åˆ é™¤æ–°é—»</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/new.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.News.getNewsCount();
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > count)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ–°é—»
+    data.News aNew = table.News.getNew(curr_page);
+    if (aNew == null)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»è·å–å¤±è´¥ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+
+<div class="text_p">
+    <div class="text animated flipInY">
+        åˆ é™¤æ–°é—»
+        <br>
+        æ–°é—»ä¸èƒ½æ›´æ”¹ï¼Œåªèƒ½åˆ é™¤å†é‡æ–°å‘å¸ƒ
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="delete_new_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">æ–°é—»ç¼–å·</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="new_no" readonly="readonly"
+                               value="<%=aNew.getNew_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">æ–°é—»å‘å¸ƒè€…</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="new_author" readonly="readonly"
+                               value="<%=aNew.getNew_author()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">æ–°é—»æ ‡é¢˜</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" readonly="readonly"
+                               name="title"
+                               value="<%=aNew.getNew_title()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">æ–°é—»æ­£æ–‡</td>
+                <%
+                    //è·å–æ–°é—»æ ‡é¢˜
+                    String title = aNew.getNew_text();
+                    //é˜²æ­¢æ ‡é¢˜å¤ªé•¿
+                    if (title.length() > 20)
+                    {
+                        title = title.substring(0, 20) + "...";
+                    }
+                %>
+                <td>
+                    <label>
+                        <input class="c" type="text" readonly="readonly"
+                               name="text"
+                               value="<%=title%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input style="color: red;" type="submit" value="åˆ é™¤"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\delete_new_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): delete_new_result
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/13
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 14:54
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>åˆ é™¤æ–°é—»-ç»“æœ</title>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //è·å–ä¿¡æ¯
+    String new_no_str = request.getParameter("new_no");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (new_no_str == null || new_no_str.equals(""))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ­¤é¡µé¢ä¸èƒ½å•ç‹¬è®¿é—®ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è½¬æ¢æˆæ•°å­—
+    Long new_no = null;
+    try
+    {
+        new_no = Long.parseLong(new_no_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»ç¼–å·ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+
+    //åˆ é™¤è¯¾ç¨‹
+    boolean result = table.News.delete(new_no);
+    if (!result)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»åˆ é™¤å¤±è´¥ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //é‡å®šå‘
+    response.sendRedirect("update_news_list.jsp?page=1");
+%>
+
+</body>
+</html>
+ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\delete_result.jsp
 <%--
   Created by IntelliJ IDEA.
@@ -10913,7 +11355,9 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\index.jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="data.Administrators" %><%--
+<%@ page import="data.Administrators" %>
+<%@ page import="table.News" %>
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
   File name(æ–‡ä»¶å): index
@@ -10930,8 +11374,9 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     <title>ç®¡ç†å‘˜-èœå•</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="../animate.css">
-    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/link_index.css">
     <link rel="stylesheet" href="css/wandered_jelly.css">
+    <link rel="stylesheet" href="css/newList.css">
 </head>
 <%
     //è·å¾—ç®¡ç†å‘˜ä¿¡æ¯
@@ -10958,36 +11403,137 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </div>
 
 <div class="text_p">
-    <div class="animated shake">
+    <div class="animated flip">
         <div class="text">
             æ¬¢è¿ç™»å½•ï¼<%=administrator.getAdministrator_job()%><%=administrator.getAdministrator_name()%>
         </div>
     </div>
 </div>
 <div class="link">
-    <div class="animated slideInRight">
-        <a href="see_class.jsp">æŸ¥çœ‹å­¦ç”Ÿä¿¡æ¯</a>
-        <a href="search.jsp">æœç´¢å­¦ç”Ÿä¿¡æ¯</a>
-        <a href="update_class.jsp">æ›´æ–°å­¦ç”Ÿä¿¡æ¯</a>
-        <a href="insert.jsp">æ·»åŠ å­¦ç”Ÿä¿¡æ¯</a>
-        <a target="_blank" href="see_course.jsp">æŸ¥çœ‹æ‰€æœ‰è¯¾ç¨‹</a>
-        <a href="insert_course.jsp">æ·»åŠ è¯¾ç¨‹ä¿¡æ¯</a>
-        <a href="update_course_courseList.jsp">æ›´æ–°è¯¾ç¨‹ä¿¡æ¯</a>
-        <a href="insert_score_class.jsp">æ·»åŠ å­¦ç”Ÿæˆç»©</a>
-        <a href="update_score_class.jsp">æ›´æ–°å­¦ç”Ÿæˆç»©</a>
-        <a href="change_password.jsp">æ›´æ”¹ç™»å½•å¯†ç </a>
-        <a href="quit.jsp">å®‰å…¨é€€å‡º</a>
+    <div class="animated zoomInRight">
+        <a class="choose" href="see_class.jsp">æŸ¥çœ‹å­¦ç”Ÿä¿¡æ¯</a>
+        <a class="choose" href="search.jsp">æœç´¢å­¦ç”Ÿä¿¡æ¯</a>
+        <a class="choose" href="update_class.jsp">æ›´æ–°å­¦ç”Ÿä¿¡æ¯</a>
+        <a class="choose" href="insert.jsp">æ·»åŠ å­¦ç”Ÿä¿¡æ¯</a>
+        <hr>
+        <a class="choose" target="_blank" href="see_course.jsp">æŸ¥çœ‹æ‰€æœ‰è¯¾ç¨‹</a>
+        <a class="choose" href="insert_course.jsp">æ·»åŠ è¯¾ç¨‹ä¿¡æ¯</a>
+        <a class="choose" href="update_course_courseList.jsp">æ›´æ–°è¯¾ç¨‹ä¿¡æ¯</a>
+        <hr>
+        <a class="choose" href="insert_score_class.jsp">æ·»åŠ å­¦ç”Ÿæˆç»©</a>
+        <a class="choose" href="update_score_class.jsp">æ›´æ–°å­¦ç”Ÿæˆç»©</a>
+        <hr>
+        <a class="choose" href="change_password.jsp">æ›´æ”¹ç™»å½•å¯†ç </a>
+        <hr>
+        <a class="choose" href="quit.jsp">å®‰å…¨é€€å‡º</a>
     </div>
 </div>
 <div class="link2">
-    <div class="animated slideInRight">
-        <a href="insert_a_class.jsp">æ·»åŠ ç­çº§ä¿¡æ¯</a>
-        <a href="update_class_choose.jsp">æ›´æ–°ç­çº§ä¿¡æ¯</a>
-        <a href="custom_query.jsp">è‡ªå®šä¹‰æŸ¥è¯¢</a>
-        <a href="login_log.jsp?page=1">æŸ¥çœ‹ç™»å½•æ—¥å¿—</a>
-        <a href="see_newList.jsp?page=1">æŸ¥çœ‹æ–°é—»åˆ—è¡¨</a>
+    <div class="animated fadeInRightBig">
+        <a class="choose" href="insert_a_class.jsp">æ·»åŠ ç­çº§ä¿¡æ¯</a>
+        <a class="choose" href="update_class_choose.jsp">æ›´æ–°ç­çº§ä¿¡æ¯</a>
+        <hr>
+        <a class="choose" href="custom_query.jsp">è‡ªå®šä¹‰æŸ¥è¯¢</a>
+        <hr>
+        <a class="choose" href="login_log.jsp?page=1">æŸ¥çœ‹ç™»å½•æ—¥å¿—</a>
+        <hr>
+        <a class="choose" href="see_newList.jsp?page=1">æŸ¥çœ‹æ–°é—»åˆ—è¡¨</a>
+        <a class="choose" href="insert_new.jsp">å‘å¸ƒæ–°é—»</a>
+        <a class="choose" href="update_news_list.jsp?page=1">ç®¡ç†å·²å‘å¸ƒæ–°é—»</a>
+        <hr>
+        <a class="choose" href="">æ·»åŠ æ•™å¸ˆä¿¡æ¯</a>
+        <a class="choose" href="">ç®¡ç†æ•™å¸ˆ</a>
+        <hr>
+        <a class="choose" href="">è¿›å…¥æ ¡å›­è®ºå›</a>
     </div>
 </div>
+
+<%
+    //è·å¾—æ–°é—»æ€»æ•°
+    Long newsCount = News.getNewsCount();
+
+%>
+<%
+    //å¦‚æœæœ‰æ–°é—»
+    if (newsCount > 0)
+    {
+%>
+<%
+    //å¦‚æœæ–°é—»æ•°é‡å¤§äº9æ¡ï¼Œåªæ˜¾ç¤º9æ¡
+    if (newsCount >= 9)
+    {
+%>
+<div class="newList_p">
+    <nav class="animated bounceInDown">
+        <ul >
+
+            <%
+                for (int i = 1; i <= 9; i++)
+                {
+                    //è·å–å…¨æ ‡é¢˜
+                    String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
+                    //é˜²æ­¢æ ‡é¢˜å¤ªé•¿
+                    if (title.length() > 19)
+                    {
+                        title = title.substring(0, 17) + "...";
+                    }
+            %>
+            <li style="width: 60rem;" >
+                <a
+                        class="new" href="new.jsp?page=<%=i%>"><%=title%>
+                </a>
+            </li>
+            <%
+                }
+            %>
+
+            <li style="width: 60rem;">
+                <a class="new" href="see_newList.jsp?page=1">æ›´å¤šæ–°é—»</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<%
+}
+//å¦åˆ™æœ‰å¤šå°‘æ¡å°±æ˜¾ç¤ºå¤šå°‘æ¡
+else
+{
+%>
+<div class="newList_p">
+    <nav class="animated bounceInDown">
+        <ul >
+
+            <%
+                for (int i = 1; i <= newsCount; i++)
+                {
+                    //è·å–å…¨æ ‡é¢˜
+                    String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
+                    //é˜²æ­¢æ ‡é¢˜å¤ªé•¿
+                    if (title.length() > 19)
+                    {
+                        title = title.substring(0, 17) + "...";
+                    }
+            %>
+            <li style="width: 60rem;">
+                <a
+                        class="new" href="new.jsp?page=<%=i%>"><%=title%>
+                </a>
+            </li>
+            <%
+                }
+            %>
+
+            <li style="width: 60rem;">
+                <a class="new" href="see_newList.jsp?page=1">æ›´å¤šæ–°é—»</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<%
+        }
+    }
+%>
+
 </body>
 </html>
 ÿ
@@ -11658,6 +12204,176 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     response.sendRedirect("see_course.jsp");
 %>
 <%--<%=course_no_str%>--%>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\insert_new.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): insert_new
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/13
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 14:14
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>å‘å¸ƒæ–°é—»</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+    <link rel="stylesheet" href="css/textarea.css">
+    <style>
+        a.position {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /*transform: translate(0%, 0%);*/
+        }
+    </style>
+</head>
+<body>
+<a class="back" href="index.jsp">è¿”å›</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        å‘å¸ƒæ–°é—»
+    </div>
+</div>
+<div class="form">
+    <div class="animated rotateIn">
+        <br/>
+        <form action="insert_new_result.jsp" method="post">
+            <input style="width: 50vw;background-color: lightcyan" type="text" name="title" placeholder="æ ‡é¢˜"/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <label>
+                <textarea rows="10" name="text" placeholder="æ–°é—»æ­£æ–‡"></textarea>
+            </label>
+            <br/>
+            <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="å‘å¸ƒæ–°é—»"/>
+        </form>
+    </div>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\insert_new_result.jsp
+<%@ page import="data.Administrators" %>
+<%@ page import="table.News" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): insert_new_result
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/13
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 14:29
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>å‘å¸ƒæ–°é—»-ç»“æœ</title>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //è·å–ä¿¡æ¯
+    String title = request.getParameter("title");
+    String text = request.getParameter("text");
+
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (title == null || title.equals(""))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "è¯·è¾“å…¥æ ‡é¢˜ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (text == null || text.equals(""))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "è¯·è¾“å…¥æ­£æ–‡ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //æ–°é—»ä¸èƒ½å¤ªé•¿
+    if (title.length() > 255)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»æ ‡é¢˜å¤ªé•¿ï¼Œæ–°é—»æ ‡é¢˜ä¸èƒ½è¶…è¿‡255ä¸ªå­—ç¬¦ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (text.length() > 65535)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»æ­£æ–‡å¤ªé•¿ï¼Œæ–°é—»æ­£æ–‡ä¸èƒ½è¶…è¿‡65535ä¸ªå­—ç¬¦ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //ä»sessioné‡Œè·å–è‡ªèº«ä¿¡æ¯
+    data.Administrators administrator = (Administrators) session.getAttribute("administrator");
+
+
+    //æ’å…¥æ–°é—»
+    boolean result = News.insert(administrator.getAdministrator_name(), administrator.getAdministrator_job(), title, text);
+    if (!result)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "æ–°é—»å‘å¸ƒå¤±è´¥ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //é‡å®šå‘
+    response.sendRedirect("see_newList.jsp?page=1");
+%>
 </body>
 </html>
 ÿ
@@ -12613,6 +13329,7 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </html>
 ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\new.jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="data.News" %><%--
   Created by IntelliJ IDEA.
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
@@ -12737,39 +13454,40 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 <br>
 <br/>
 
-<div class="pre_p">
-    <pre class="animated bounceInUp">
-    <%=aNew.getNew_text()%>
-</pre>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<%
-    if (curr_page >= 2)
-    {
-%>
-<div class="before2">
-    <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€æ¡æ–°é—»</a>
-</div>
-<%
-    }
-%>
+<div class="new_text_p">
+    <div class="new_text animated bounceInUp">
+        <c:out value="<%=aNew.getNew_text()%>" escapeXml="true" default="null"/>
+
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€æ¡æ–°é—»</a>
+    </div>
+    <%
+        }
+    %>
 
 
-<%
-    if (curr_page < count)
-    {
-%>
-<div class="next2">
-    <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€æ¡æ–°é—»</a>
+    <%
+        if (curr_page < count)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€æ¡æ–°é—»</a>
+    </div>
+    <%
+        }
+    %>
+
 </div>
-<%
-    }
-%>
+
 
 </body>
 </html>
@@ -13304,6 +14022,15 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     Long count = table.News.getNewsCount();
     //è·å–æ€»é¡µæ•°
     long pageCount = News.getPageCount(count);
+    //åˆ¤æ–­æ˜¯å¦æœ‰æ–°é—»
+    if (count == 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰æ²¡æœ‰å·²å‘å¸ƒçš„æ–°é—»ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
     //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
     if (curr_page > pageCount)
     {
@@ -14897,6 +15624,222 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 <%
     //é‡å®šå‘
     response.sendRedirect("update_course_courseList.jsp");
+%>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\update_news_list.jsp
+<%@ page import="table.News" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): update_news_list
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/13
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 14:43
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>ç®¡ç†å·²å‘å¸ƒæ–°é—»</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.News.getNewsCount();
+    //è·å–æ€»é¡µæ•°
+    long pageCount = News.getPageCount(count);
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > pageCount)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—å½“å‰é¡µé¢åˆ—è¡¨
+    List<data.News> thisPageList = News.getThisPageList(pageCount, curr_page);
+%>
+
+<a class="back" href="index.jsp">è¿”å›</a>
+
+<table class="animated fadeInUp">
+    <caption>
+        å½“å‰é¡µé¢ï¼š
+        <%=curr_page%>
+    </caption>
+    <br/>
+    <tr>
+        <!-- thä¸ºè¡¨æ ¼æ ‡é¢˜æ -->
+        <th>æ–°é—»ç¼–å·</th>
+        <th>æ–°é—»å‘å¸ƒè€…</th>
+        <th>å‘å¸ƒè€…èº«ä»½</th>
+        <th>å‘å¸ƒæ—¶é—´</th>
+        <th>æ–°é—»æ ‡é¢˜</th>
+        <th>æ“ä½œ</th>
+    </tr>
+    <%
+        int i = 1;
+        assert thisPageList != null;
+        for (data.News news : thisPageList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=news.getNew_no()%>
+        </td>
+        <td>
+            <%=news.getNew_author()%>
+        </td>
+        <td>
+            <%=news.getNew_identity()%>
+        </td>
+        <td>
+            <%=news.getNew_time()%>
+        </td>
+        <td>
+            <%=news.getNew_title()%>
+        </td>
+        <td>
+            <a style="width: 50px;display:inline;"
+               href="delete_new.jsp?page=<%=(table.News.getPageSize()*(curr_page-1)+i)%>">åˆ é™¤</a>
+        </td>
+    </tr>
+    <%
+            i++;
+        }
+    %>
+</table>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before">
+    <a class="animated slideInLeft" href="update_news_list.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page >= 3)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="update_news_list.jsp?page=<%=(curr_page-2)%>">å‰ä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount)
+    {
+%>
+<div class="next">
+    <a class="animated slideInRight" href="update_news_list.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="update_news_list.jsp?page=<%=(curr_page+2)%>">åä¸¤é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="first">
+    <a class="animated rotateInUpLeft" href="update_news_list.jsp?page=<%=(1)%>">ç¬¬ä¸€é¡µ</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="last">
+    <a class="animated rotateInUpRight" href="update_news_list.jsp?page=<%=(pageCount)%>">æœ€åä¸€é¡µ</a>
+</div>
+<%
+    }
 %>
 </body>
 </html>
@@ -19935,7 +20878,6 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
         <div class="tip bottom"></div>
     </div>
 </div>
-
 </body>
 </html>ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\Login.html

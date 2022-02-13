@@ -87,6 +87,8 @@
         <hr>
         <a class="choose" href="">添加教师信息</a>
         <a class="choose" href="">管理教师</a>
+        <hr>
+        <a class="choose" href="">进入校园论坛</a>
     </div>
 </div>
 

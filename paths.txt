@@ -1,4 +1,4 @@
-140
+147
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -56,7 +56,9 @@ src\\main\\webapp\\administrator\\css\\index.css
 src\\main\\webapp\\administrator\\css\\insert.css
 src\\main\\webapp\\administrator\\css\\insert_score.css
 src\\main\\webapp\\administrator\\css\\link.css
+src\\main\\webapp\\administrator\\css\\link_index.css
 src\\main\\webapp\\administrator\\css\\new.css
+src\\main\\webapp\\administrator\\css\\newList.css
 src\\main\\webapp\\administrator\\css\\page.css
 src\\main\\webapp\\administrator\\css\\password.css
 src\\main\\webapp\\administrator\\css\\table.css
@@ -71,6 +73,8 @@ src\\main\\webapp\\administrator\\delete_a_class.jsp
 src\\main\\webapp\\administrator\\delete_a_class_result.jsp
 src\\main\\webapp\\administrator\\delete_course.jsp
 src\\main\\webapp\\administrator\\delete_course_result.jsp
+src\\main\\webapp\\administrator\\delete_new.jsp
+src\\main\\webapp\\administrator\\delete_new_result.jsp
 src\\main\\webapp\\administrator\\delete_result.jsp
 src\\main\\webapp\\administrator\\delete_score.jsp
 src\\main\\webapp\\administrator\\delete_score_result.jsp
@@ -81,6 +85,8 @@ src\\main\\webapp\\administrator\\insert_a_class.jsp
 src\\main\\webapp\\administrator\\insert_a_class_result.jsp
 src\\main\\webapp\\administrator\\insert_course.jsp
 src\\main\\webapp\\administrator\\insert_course_result.jsp
+src\\main\\webapp\\administrator\\insert_new.jsp
+src\\main\\webapp\\administrator\\insert_new_result.jsp
 src\\main\\webapp\\administrator\\insert_result.jsp
 src\\main\\webapp\\administrator\\insert_score.jsp
 src\\main\\webapp\\administrator\\insert_score_class.jsp
@@ -105,6 +111,7 @@ src\\main\\webapp\\administrator\\update_class_student.jsp
 src\\main\\webapp\\administrator\\update_course.jsp
 src\\main\\webapp\\administrator\\update_course_courseList.jsp
 src\\main\\webapp\\administrator\\update_course_result.jsp
+src\\main\\webapp\\administrator\\update_news_list.jsp
 src\\main\\webapp\\administrator\\update_result.jsp
 src\\main\\webapp\\administrator\\update_score.jsp
 src\\main\\webapp\\administrator\\update_score_class.jsp
