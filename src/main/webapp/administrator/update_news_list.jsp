@@ -2,18 +2,18 @@
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
-  File name(文件名): see_newList
+  File name(文件名): update_news_list
   Author(作者）: mao
   Author QQ：1296193245
   GitHub：https://github.com/maomao124/
-  Date(创建日期)： 2022/2/12
-  Time(创建时间)： 21:31
+  Date(创建日期)： 2022/2/13
+  Time(创建时间)： 14:43
   Description(描述)： 无
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>新闻列表</title>
+    <title>管理已发布新闻</title>
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="../animate.css">
     <link rel="stylesheet" href="css/link.css">
@@ -72,15 +72,6 @@
     Long count = table.News.getNewsCount();
     //获取总页数
     long pageCount = News.getPageCount(count);
-    //判断是否有新闻
-    if (count == 0)
-    {
-        //把错误信息写入session里
-        session.setAttribute("message", "当前没有已发布的新闻！");
-        //转发至错误页面
-        request.getRequestDispatcher("Error.jsp").forward(request, response);
-        return;
-    }
     //判断当前页面是否大于页总数
     if (curr_page > pageCount)
     {
@@ -136,7 +127,7 @@
         </td>
         <td>
             <a style="width: 50px;display:inline;"
-               href="new.jsp?page=<%=(table.News.getPageSize()*(curr_page-1)+i)%>">查看</a>
+               href="delete_new.jsp?page=<%=(table.News.getPageSize()*(curr_page-1)+i)%>">删除</a>
         </td>
     </tr>
     <%
@@ -151,7 +142,7 @@
     {
 %>
 <div class="before">
-    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-1)%>">上一页</a>
+    <a class="animated slideInLeft" href="update_news_list.jsp?page=<%=(curr_page-1)%>">上一页</a>
 </div>
 <%
     }
@@ -162,7 +153,7 @@
     {
 %>
 <div class="before2">
-    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-2)%>">前两页</a>
+    <a class="animated slideInLeft" href="update_news_list.jsp?page=<%=(curr_page-2)%>">前两页</a>
 </div>
 <%
     }
@@ -173,7 +164,7 @@
     {
 %>
 <div class="next">
-    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+1)%>">下一页</a>
+    <a class="animated slideInRight" href="update_news_list.jsp?page=<%=(curr_page+1)%>">下一页</a>
 </div>
 <%
     }
@@ -184,7 +175,7 @@
     {
 %>
 <div class="next2">
-    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+2)%>">后两页</a>
+    <a class="animated slideInRight" href="update_news_list.jsp?page=<%=(curr_page+2)%>">后两页</a>
 </div>
 <%
     }
@@ -203,7 +194,7 @@
     {
 %>
 <div class="first">
-    <a class="animated rotateInUpLeft" href="see_newList.jsp?page=<%=(1)%>">第一页</a>
+    <a class="animated rotateInUpLeft" href="update_news_list.jsp?page=<%=(1)%>">第一页</a>
 </div>
 <%
     }
@@ -214,7 +205,7 @@
     {
 %>
 <div class="last">
-    <a class="animated rotateInUpRight" href="see_newList.jsp?page=<%=(pageCount)%>">最后一页</a>
+    <a class="animated rotateInUpRight" href="update_news_list.jsp?page=<%=(pageCount)%>">最后一页</a>
 </div>
 <%
     }

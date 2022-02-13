@@ -83,6 +83,7 @@
         <hr>
         <a class="choose" href="see_newList.jsp?page=1">查看新闻列表</a>
         <a class="choose" href="insert_new.jsp">发布新闻</a>
+        <a class="choose" href="update_news_list.jsp?page=1">管理已发布新闻</a>
     </div>
 </div>
 
@@ -147,9 +148,9 @@ else
                     //获取全标题
                     String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
                     //防止标题太长
-                    if (title.length() > 16)
+                    if (title.length() > 12)
                     {
-                        title = title.substring(0, 14) + "...";
+                        title = title.substring(0, 10) + "...";
                     }
             %>
             <li>
