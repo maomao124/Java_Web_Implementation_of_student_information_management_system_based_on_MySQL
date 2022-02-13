@@ -1,4 +1,4 @@
-147
+149
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -139,6 +139,7 @@ src\\test\\java\\table\\AdministratorsTest.java
 src\\test\\java\\table\\ClassTest.java
 src\\test\\java\\table\\CourseTest.java
 src\\test\\java\\table\\CustomizeTest.java
+src\\test\\java\\table\\ForumTest.java
 src\\test\\java\\table\\LoginLogTest.java
 src\\test\\java\\table\\NewsTest.java
 src\\test\\java\\table\\ScoreTest.java
@@ -146,3 +147,4 @@ src\\test\\java\\table\\StudentPasswordTest.java
 src\\test\\java\\table\\StudentTest.java
 src\\test\\java\\table\\TeacherPasswordTest.java
 src\\test\\java\\table\\TeacherTest.java
+src\\test\\java\\table\\TeachTest.java
