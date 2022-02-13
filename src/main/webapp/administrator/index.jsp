@@ -82,6 +82,7 @@
         <a class="choose" href="login_log.jsp?page=1">查看登录日志</a>
         <hr>
         <a class="choose" href="see_newList.jsp?page=1">查看新闻列表</a>
+        <a class="choose" href="insert_new.jsp">发布新闻</a>
     </div>
 </div>
 
