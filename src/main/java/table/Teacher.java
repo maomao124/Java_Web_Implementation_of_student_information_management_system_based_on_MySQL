@@ -140,7 +140,7 @@ public class Teacher
     {
         //sql语句
         String sql = "UPDATE teacher SET teacher_name=?,teacher_sex=?,teacher_telephone_number=?,teacher_email=?," +
-                "teacher_address=?,teacher_address=? WHERE teacher_no=?";
+                "teacher_address=?,teacher_idcard=? WHERE teacher_no=?";
         //参数
         Object[] objects = {teacher_name, teacher_sex, teacher_telephone_number, teacher_email, teacher_address, teacher_idcard, teacher_no};
         //执行sql

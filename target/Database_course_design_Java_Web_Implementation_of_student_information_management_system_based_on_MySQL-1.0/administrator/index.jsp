@@ -85,8 +85,8 @@
         <a class="choose" href="insert_new.jsp">发布新闻</a>
         <a class="choose" href="update_news_list.jsp?page=1">管理已发布新闻</a>
         <hr>
-        <a class="choose" href="">添加教师信息</a>
-        <a class="choose" href="">管理教师</a>
+        <a class="choose" href="insert_teacher.jsp">添加教师信息</a>
+        <a class="choose" href="teacher_index.jsp">管理教师</a>
         <hr>
         <a class="choose" href="">进入校园论坛</a>
         <a class="choose" href="">管理校园论坛</a>
@@ -110,7 +110,7 @@
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul >
+        <ul>
 
             <%
                 for (int i = 1; i <= 9; i++)
@@ -123,7 +123,7 @@
                         title = title.substring(0, 17) + "...";
                     }
             %>
-            <li style="width: 60rem;" >
+            <li style="width: 60rem;">
                 <a
                         class="new" href="new.jsp?page=<%=i%>"><%=title%>
                 </a>
@@ -146,7 +146,7 @@ else
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul >
+        <ul>
 
             <%
                 for (int i = 1; i <= newsCount; i++)

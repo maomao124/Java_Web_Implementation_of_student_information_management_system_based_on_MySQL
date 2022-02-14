@@ -47,6 +47,28 @@ public class Teach
     }
 
     /**
+     * 根据编号获得信息
+     *
+     * @param teach_no 编号
+     * @return data.Teach对象
+     */
+    public static data.Teach getTeach(Long teach_no)
+    {
+        //sql语句
+        String sql = "select * from teach where teach_no=?";
+        //参数，无
+        Object[] objects = {teach_no};
+        //执行sql
+        data.Teach teach = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Teach.class), objects);
+        //返回结果
+        if (teach.getTeach_no() == null)
+        {
+            return null;
+        }
+        return teach;
+    }
+
+    /**
      * 获得某个老师的工作信息列表（教授的班级和课程）
      *
      * @param teacher_no 老师编号
