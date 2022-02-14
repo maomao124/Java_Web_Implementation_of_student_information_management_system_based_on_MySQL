@@ -15,6 +15,7 @@
     <title>查看表结构</title>
     <link rel="stylesheet" href="../animate.css">
     <link rel="stylesheet" href="css/floor.css">
+    <link rel="stylesheet" href="css/link.css">
     <style>
         body {
             background-color: skyblue;
@@ -29,6 +30,7 @@
 </head>
 <body>
 <div class="floor"></div>
+<a class="back" href="custom_query.jsp">返回</a>
 <div class="photo_p">
     <img class="animated bounceInLeft" src="table_photo/p1_table.png" alt="表">
     <br/>
