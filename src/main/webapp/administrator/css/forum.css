@@ -9,5 +9,19 @@
   Version(版本): 1.0
   Description(描述)： 无
  */
-    
-    
+
+.insert_p {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+div.message {
+    font-size: 24px;
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-right: 5px dotted lawngreen;
+    background-color: cornsilk;
+    width: 80vw;
+    border-radius: 1.5em;
+}

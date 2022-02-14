@@ -97,12 +97,14 @@
 %>
 
 <a class="back" href="index.jsp">返回</a>
+<a class="insert_p" href="forum_insert.jsp">发布</a>
 
 <%
     assert thisPageList != null;
     for (data.Forum forum : thisPageList)
     {
 %>
+<br>
 <div class="message">
     第
     <%=forum.getForum_no()%>

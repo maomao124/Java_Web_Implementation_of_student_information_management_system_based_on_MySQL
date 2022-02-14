@@ -8,7 +8,7 @@
   GitHub：https://github.com/maomao124/
   Date(创建日期)： 2022/2/14
   Time(创建时间)： 22:14
-  Description(描述)： 无
+  Description(描述)： 论坛
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -97,12 +97,14 @@
 %>
 
 <a class="back" href="index.jsp">返回</a>
+<a class="insert_p" href="forum_insert.jsp">发布</a>
 
 <%
     assert thisPageList != null;
     for (data.Forum forum : thisPageList)
     {
 %>
+<br>
 <div class="message">
     第
     <%=forum.getForum_no()%>
