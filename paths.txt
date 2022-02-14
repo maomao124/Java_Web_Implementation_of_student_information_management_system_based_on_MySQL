@@ -1,4 +1,4 @@
-149
+162
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -55,6 +55,7 @@ src\\main\\webapp\\administrator\\css\\hotAirBalloon.css
 src\\main\\webapp\\administrator\\css\\index.css
 src\\main\\webapp\\administrator\\css\\insert.css
 src\\main\\webapp\\administrator\\css\\insert_score.css
+src\\main\\webapp\\administrator\\css\\insert_teach.css
 src\\main\\webapp\\administrator\\css\\link.css
 src\\main\\webapp\\administrator\\css\\link_index.css
 src\\main\\webapp\\administrator\\css\\new.css
@@ -78,6 +79,10 @@ src\\main\\webapp\\administrator\\delete_new_result.jsp
 src\\main\\webapp\\administrator\\delete_result.jsp
 src\\main\\webapp\\administrator\\delete_score.jsp
 src\\main\\webapp\\administrator\\delete_score_result.jsp
+src\\main\\webapp\\administrator\\delete_teach.jsp
+src\\main\\webapp\\administrator\\delete_teacher.jsp
+src\\main\\webapp\\administrator\\delete_teacher_result.jsp
+src\\main\\webapp\\administrator\\delete_teach_result.jsp
 src\\main\\webapp\\administrator\\Error.jsp
 src\\main\\webapp\\administrator\\index.jsp
 src\\main\\webapp\\administrator\\insert.jsp
@@ -92,6 +97,10 @@ src\\main\\webapp\\administrator\\insert_score.jsp
 src\\main\\webapp\\administrator\\insert_score_class.jsp
 src\\main\\webapp\\administrator\\insert_score_result.jsp
 src\\main\\webapp\\administrator\\insert_score_student.jsp
+src\\main\\webapp\\administrator\\insert_teach.jsp
+src\\main\\webapp\\administrator\\insert_teacher.jsp
+src\\main\\webapp\\administrator\\insert_teacher_result.jsp
+src\\main\\webapp\\administrator\\insert_teach_result.jsp
 src\\main\\webapp\\administrator\\login_log.jsp
 src\\main\\webapp\\administrator\\new.jsp
 src\\main\\webapp\\administrator\\quit.jsp
@@ -102,6 +111,8 @@ src\\main\\webapp\\administrator\\see_course.jsp
 src\\main\\webapp\\administrator\\see_newList.jsp
 src\\main\\webapp\\administrator\\student_score.jsp
 src\\main\\webapp\\administrator\\table_photo.jsp
+src\\main\\webapp\\administrator\\teacher_index.jsp
+src\\main\\webapp\\administrator\\teach_index.jsp
 src\\main\\webapp\\administrator\\update.jsp
 src\\main\\webapp\\administrator\\update_a_class.jsp
 src\\main\\webapp\\administrator\\update_a_class_result.jsp
@@ -118,6 +129,8 @@ src\\main\\webapp\\administrator\\update_score_class.jsp
 src\\main\\webapp\\administrator\\update_score_course.jsp
 src\\main\\webapp\\administrator\\update_score_result.jsp
 src\\main\\webapp\\administrator\\update_score_student.jsp
+src\\main\\webapp\\administrator\\update_teacher.jsp
+src\\main\\webapp\\administrator\\update_teacher_result.jsp
 src\\main\\webapp\\animate.css
 src\\main\\webapp\\Authentication.jsp
 src\\main\\webapp\\Error.css

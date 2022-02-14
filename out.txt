@@ -5447,6 +5447,28 @@ public class Teach
     }
 
     /**
+     * 根据编号获得信息
+     *
+     * @param teach_no 编号
+     * @return data.Teach对象
+     */
+    public static data.Teach getTeach(Long teach_no)
+    {
+        //sql语句
+        String sql = "select * from teach where teach_no=?";
+        //参数，无
+        Object[] objects = {teach_no};
+        //执行sql
+        data.Teach teach = JDBCTemplate.queryForObject(sql, new BeanHandler<>(data.Teach.class), objects);
+        //返回结果
+        if (teach.getTeach_no() == null)
+        {
+            return null;
+        }
+        return teach;
+    }
+
+    /**
      * 获得某个老师的工作信息列表（教授的班级和课程）
      *
      * @param teacher_no 老师编号
@@ -5735,7 +5757,7 @@ public class Teacher
     {
         //sql语句
         String sql = "UPDATE teacher SET teacher_name=?,teacher_sex=?,teacher_telephone_number=?,teacher_email=?," +
-                "teacher_address=?,teacher_address=? WHERE teacher_no=?";
+                "teacher_address=?,teacher_idcard=? WHERE teacher_no=?";
         //参数
         Object[] objects = {teacher_name, teacher_sex, teacher_telephone_number, teacher_email, teacher_address, teacher_idcard, teacher_no};
         //执行sql
@@ -9234,6 +9256,82 @@ div.text_p {
     left: 50%;
     transform: translate(-50%, 0%);
 }�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\insert_teach.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 650px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover {
+    background-color: #fff244;
+    /*width: 800px;*/
+    /*transition: all 1s linear 0s;*/
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.ss {
+    text-align: center;
+    width: 250px;
+}
+
+div.text {
+    border: 10px violet dotted;
+    text-align: center;
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\css\\link.css
 /*
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -11603,6 +11701,514 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_teach.jsp
+<%@ page import="data.Teach" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_teach
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 20:26
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除教师工作信息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<%
+    //从request里获取参数
+    String teach_no_str = request.getParameter("teach_no");
+    //判断是否为空
+    if (teach_no_str == null || teach_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teach_no = null;
+    try
+    {
+        teach_no = Long.parseLong(teach_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断编号是否存在
+    Teach teach = table.Teach.getTeach(teach_no);
+    if (teach == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此信息不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+%>
+
+
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+       删除教师工作信息
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="delete_teach_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="student_no" readonly="readonly" value="<%=teach_no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no" readonly="readonly" value="<%=teach.getTeacher_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">老师所教班级编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no" readonly="readonly" value="<%=teach.getClass_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">老师所教课程编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no" readonly="readonly" value="<%=teach.getCourse_no()%>">
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="s">学期</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="semester" value="<%=teach.getSemester()%>"
+                               disabled="disabled"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input style="color: red" type="submit" value="删除"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_teacher.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_teacher
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:27
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除教师信息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+
+<%
+    //从request里获取参数
+    String teacher_no_str = request.getParameter("teacher_no");
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取教师信息
+    data.Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师信息不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        删除教师信息
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="delete_teacher_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_no" readonly="readonly"
+                               value="<%=teacher.getTeacher_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师姓名</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_name" readonly="readonly"
+                               value="<%=teacher.getTeacher_name()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师性别</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_sex" readonly="readonly"
+                               value="<%=teacher.getTeacher_sex()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电话号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_telephone_number" readonly="readonly"
+                               value="<%=teacher.getTeacher_telephone_number()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电子邮箱</td>
+                <td>
+                    <label>
+                        <input class="c" type="email" name="teacher_email" readonly="readonly"
+                               value="<%=teacher.getTeacher_email()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">家庭住址</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_address" readonly="readonly"
+                               value="<%=teacher.getTeacher_address()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">身份证号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_idcard" readonly="readonly"
+                               value="<%=teacher.getTeacher_idcard()%>"/>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="color: red;" align="center">
+                    <input type="submit" value="删除"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_teacher_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_teacher_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:29
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除教师信息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String teacher_no_str = request.getParameter("teacher_no");
+
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师编号！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断教师编号是否存在
+    data.Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //删除教师信息
+    boolean result = table.Teacher.delete(teacher_no);
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师信息删除失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("teacher_index.jsp");
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_teach_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_teach_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 20:39
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除教师工作信息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String teach_no_str = request.getParameter("teach_no");
+
+    //验证
+    if (teach_no_str == null || teach_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teach_no = null;
+    try
+    {
+
+        teach_no = Long.parseLong(teach_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //判断编号是否存在
+    data.Teach teach = table.Teach.getTeach(teach_no);
+    if (teach == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此信息不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //编号存在，删除
+    boolean result = table.Teach.delete(teach_no);
+    //判断结果
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "删除失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+<%
+    //重定向
+    response.sendRedirect("teach_index.jsp");
+%>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\Error.jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -11739,8 +12345,8 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
         <a class="choose" href="insert_new.jsp">发布新闻</a>
         <a class="choose" href="update_news_list.jsp?page=1">管理已发布新闻</a>
         <hr>
-        <a class="choose" href="">添加教师信息</a>
-        <a class="choose" href="">管理教师</a>
+        <a class="choose" href="insert_teacher.jsp">添加教师信息</a>
+        <a class="choose" href="teacher_index.jsp">管理教师</a>
         <hr>
         <a class="choose" href="">进入校园论坛</a>
         <a class="choose" href="">管理校园论坛</a>
@@ -11764,7 +12370,7 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul >
+        <ul>
 
             <%
                 for (int i = 1; i <= 9; i++)
@@ -11777,7 +12383,7 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
                         title = title.substring(0, 17) + "...";
                     }
             %>
-            <li style="width: 60rem;" >
+            <li style="width: 60rem;">
                 <a
                         class="new" href="new.jsp?page=<%=i%>"><%=title%>
                 </a>
@@ -11800,7 +12406,7 @@ else
 %>
 <div class="newList_p">
     <nav class="animated bounceInDown">
-        <ul >
+        <ul>
 
             <%
                 for (int i = 1; i <= newsCount; i++)
@@ -13420,6 +14026,607 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\insert_teach.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): insert_teach
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:37
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>添加教师工作信息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_teach.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<%
+    //从request里获取参数
+    String teacher_no_str = request.getParameter("teacher_no");
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取教师信息
+    data.Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师信息不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        添加教师工作信息
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="insert_teach_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">教师编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_no" readonly="readonly" value="<%=teacher_no%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">教师姓名</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_name" readonly="readonly" value="<%=teacher.getTeacher_name()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">教师所教班级编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="class_no"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">教师所教课程编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="course_no"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">学期</td>
+                <td>
+                    <label>
+                        <input class="c" type="email" name="semester"/>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\insert_teacher.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): insert_teacher
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 19:40
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>添加教师信息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        添加教师信息
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="insert_teacher_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_no">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师姓名</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_name">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师性别</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_sex"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电话号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_telephone_number"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电子邮箱</td>
+                <td>
+                    <label>
+                        <input class="c" type="email" name="teacher_email"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">家庭住址</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_address"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">身份证号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_idcard"/>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\insert_teacher_result.jsp
+<%@ page import="data.Teacher" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): insert_teacher_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 19:46
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>添加教师信息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String teacher_no_str = request.getParameter("teacher_no");
+    String teacher_name = request.getParameter("teacher_name");
+    String teacher_sex = request.getParameter("teacher_sex");
+    String teacher_telephone_number = request.getParameter("teacher_telephone_number");
+    String teacher_email = request.getParameter("teacher_email");
+    String teacher_address = request.getParameter("teacher_address");
+    String teacher_idcard = request.getParameter("teacher_idcard");
+
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师编号！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_name == null || teacher_name.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师姓名！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_sex == null || teacher_sex.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师性别！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_telephone_number == null || teacher_telephone_number.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师电话号码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_email == null || teacher_email.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入电子邮箱！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_address == null || teacher_address.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师家庭住址！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_idcard == null || teacher_idcard.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师身份证号码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    if (!(teacher_sex.equals("男") || teacher_sex.equals("女")))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "性别只能为男或者女！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断教师编号是否存在
+    Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher != null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师已经存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //插入教师信息
+    boolean result = table.Teacher.insert(teacher_no, teacher_name, teacher_sex, teacher_telephone_number, teacher_email, teacher_address, teacher_idcard);
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师信息添加失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("teacher_index.jsp");
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\insert_teach_result.jsp
+<%@ page import="data.Class" %>
+<%@ page import="data.Course" %>
+<%@ page import="table.Teach" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): insert_teach_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:49
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>添加教师工作信息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String teacher_no_str = request.getParameter("teacher_no");
+    String class_no_str = request.getParameter("class_no");
+    String course_no_str = request.getParameter("course_no");
+    String semester = request.getParameter("semester");
+
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "不能单独访问此页面！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (class_no_str == null || class_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师所教班级编号！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (course_no_str == null || course_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师所教课程编号！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    Long class_no = null;
+    try
+    {
+        class_no = Long.parseLong(class_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "班级编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    Long course_no = null;
+    try
+    {
+        course_no = Long.parseLong(course_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "课程编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断教师编号是否存在
+    data.Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断班级是否存在
+    Class classInformation = table.Class.getClassInformation(class_no);
+    if (classInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该班级不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断课程编号是否存在
+    Course courseInformation = table.Course.getCourseInformation(course_no);
+    if (courseInformation == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该课程不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断此条信息是否已经存在
+    boolean verification = Teach.verification(teacher_no, class_no, course_no);
+    if (verification)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "已经存在，不能重复添加！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //插入信息
+    boolean result = table.Teach.insert(teacher_no, class_no, course_no, semester);
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "添加失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("teacher_index.jsp");
+%>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\login_log.jsp
 <%@ page import="table.LoginLog" %>
 <%@ page import="java.util.List" %><%--
@@ -14723,6 +15930,225 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
     <img class="animated bounceInLeft" src="table_photo/p11_teacher.png" alt="teacher">
     <br/>
 </div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\teacher_index.jsp
+<%@ page import="data.Teacher" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): teacher_index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 19:58
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>管理教师</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获得教师信息
+    List<Teacher> teacherList = table.Teacher.getTeacherList();
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        请选择教师
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>教师编号</th>
+        <th>教师姓名</th>
+        <th>教师性别</th>
+        <th>教师电话号码</th>
+        <th>教师电子邮箱</th>
+        <th>教师家庭住址</th>
+        <th>教师身份证号码</th>
+        <th>查看</th>
+        <th>更新操作</th>
+        <th>删除操作</th>
+        <th>添加操作</th>
+    </tr>
+    <%
+        for (data.Teacher teacher : teacherList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=teacher.getTeacher_no()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_name()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_sex()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_telephone_number()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_email()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_address()%>
+        </td>
+        <td>
+            <%=teacher.getTeacher_idcard()%>
+        </td>
+        <td>
+            <a href="teach_index.jsp?teacher_no=<%=teacher.getTeacher_no()%>">查看详情</a>
+        </td>
+        <td>
+            <a href="update_teacher.jsp?teacher_no=<%=teacher.getTeacher_no()%>">更新</a>
+        </td>
+        <td>
+            <a href="delete_teacher.jsp?teacher_no=<%=teacher.getTeacher_no()%>">删除</a>
+        </td>
+        <td>
+            <a href="insert_teach.jsp?teacher_no=<%=teacher.getTeacher_no()%>">添加工作信息</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\teach_index.jsp
+<%@ page import="data.Teach" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Objects" %>
+<%@ page import="table.Class" %>
+<%@ page import="table.Course" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): teach_index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 20:07
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>教师工作信息</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<%
+    //从request里获取参数
+    String teacher_no_str = request.getParameter("teacher_no");
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得教师信息
+    List<Teach> teacher_teach = table.Teach.getTeacher_teach(teacher_no);
+
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>编号</th>
+        <th>教师所教班级编号</th>
+        <th>教师所教课程编号</th>
+        <th>教师所教班级名称</th>
+        <th>教师所教课程名称</th>
+        <th>学期</th>
+        <th>操作</th>
+    </tr>
+    <%
+        for (data.Teach teach : teacher_teach)
+        {
+    %>
+    <tr>
+        <td>
+            <%=teach.getTeach_no()%>
+        </td>
+        <td>
+            <%=teach.getClass_no()%>
+        </td>
+        <td>
+            <%=teach.getCourse_no()%>
+        </td>
+        <td>
+            <%=Objects.requireNonNull(Class.getClassInformation(teach.getClass_no())).getClass_name()%>
+        </td>
+        <td>
+            <%=Objects.requireNonNull(Course.getCourseInformation(teach.getCourse_no())).getCourse_name()%>
+        </td>
+        <td>
+            <%=teach.getSemester()%>
+        </td>
+        <td>
+            <a href="delete_teach.jsp?teach_no=<%=teach.getTeach_no()%>">删除</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
 </body>
 </html>
 �
@@ -17165,6 +18591,329 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
     %>
 </table>
 
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_teacher.jsp
+<%@ page import="data.Teacher" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_teacher
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:11
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新教师信息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+
+<%
+    //从request里获取参数
+    String teacher_no_str = request.getParameter("teacher_no");
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面传入的参数必须为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取教师信息
+    Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师信息不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        更新教师信息
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="update_teacher_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师编号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_no" readonly="readonly"
+                               value="<%=teacher.getTeacher_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师姓名</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_name" value="<%=teacher.getTeacher_name()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">教师性别</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_sex" value="<%=teacher.getTeacher_sex()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电话号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_telephone_number"
+                               value="<%=teacher.getTeacher_telephone_number()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">电子邮箱</td>
+                <td>
+                    <label>
+                        <input class="c" type="email" name="teacher_email" value="<%=teacher.getTeacher_email()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">家庭住址</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_address" value="<%=teacher.getTeacher_address()%>"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="s">身份证号码</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="teacher_idcard" value="<%=teacher.getTeacher_idcard()%>"/>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\update_teacher_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): update_teacher_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14
+  Time(创建时间)： 21:17
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更新教师信息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String teacher_no_str = request.getParameter("teacher_no");
+    String teacher_name = request.getParameter("teacher_name");
+    String teacher_sex = request.getParameter("teacher_sex");
+    String teacher_telephone_number = request.getParameter("teacher_telephone_number");
+    String teacher_email = request.getParameter("teacher_email");
+    String teacher_address = request.getParameter("teacher_address");
+    String teacher_idcard = request.getParameter("teacher_idcard");
+
+    //判断是否为空
+    if (teacher_no_str == null || teacher_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师编号！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_name == null || teacher_name.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师姓名！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_sex == null || teacher_sex.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师性别！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_telephone_number == null || teacher_telephone_number.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师电话号码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_email == null || teacher_email.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入电子邮箱！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_address == null || teacher_address.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师家庭住址！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (teacher_idcard == null || teacher_idcard.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入教师身份证号码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    if (!(teacher_sex.equals("男") || teacher_sex.equals("女")))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "性别只能为男或者女！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long teacher_no = null;
+    try
+    {
+        teacher_no = Long.parseLong(teacher_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师编号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断教师编号是否存在
+    data.Teacher teacher = table.Teacher.getTeacher(teacher_no);
+    if (teacher == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "该教师不存在！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //更新教师信息
+    boolean result = table.Teacher.update(teacher_no, teacher_name, teacher_sex, teacher_telephone_number, teacher_email, teacher_address, teacher_idcard);
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "教师信息更新失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("teacher_index.jsp");
+%>
 </body>
 </html>
 �
