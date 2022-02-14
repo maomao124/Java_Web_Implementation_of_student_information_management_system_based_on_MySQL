@@ -28,7 +28,7 @@
         <div class="text">
             <c:out value="错误！！！" escapeXml="true" default="null"/>
             <br/>
-            <c:out value="错误内容：${sessionScope.message}" escapeXml="true" default="null"/>
+            <c:out value="错误内容：${sessionScope.message}" escapeXml="false" default="null"/>
         </div>
     </div>
 </div>
