@@ -25,8 +25,14 @@ public class LoginLog
 {
     //格式时间
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //页大小,当前为100条一页
-    private static final int PageSize = 100;
+    //页大小,默认为100条一页
+    private static final int PageSize;
+
+    static
+    {
+        //加载分页大小
+        PageSize = io.Configuration.getLogin_log_pageSize();
+    }
 
     /**
      * 私有化构造函数，目的是不让创建对象

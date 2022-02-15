@@ -24,8 +24,14 @@ import java.util.List;
 
 public class News
 {
-    //页大小,当前为100条一页
-    private static final int PageSize = 100;
+    //页大小,默认为100条一页
+    private static final int PageSize;
+
+    static
+    {
+        //获取页大小
+        PageSize = io.Configuration.getNew_pageSize();
+    }
 
     /**
      * 私有化构造函数，不能创建对象

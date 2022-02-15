@@ -26,8 +26,14 @@ public class Forum
 {
     //格式时间
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //页大小,当前为50条一页
-    private static final int PageSize = 50;
+    //页大小,默认为50条一页
+    private static final int PageSize;
+
+    static
+    {
+        //获取分页大小
+        PageSize = io.Configuration.getForum_pageSize();
+    }
 
     /**
      * 私有化构造函数，目的是不让创建对象
