@@ -89,7 +89,7 @@
         <a class="choose" href="teacher_index.jsp">管理教师</a>
         <hr>
         <a class="choose" href="forum.jsp?page=1">进入校园论坛</a>
-        <a class="choose" href="">管理校园论坛</a>
+        <a class="choose" href="forum_management.jsp?page=1">管理校园论坛</a>
     </div>
 </div>
 

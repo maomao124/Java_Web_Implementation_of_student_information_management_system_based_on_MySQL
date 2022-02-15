@@ -59,6 +59,8 @@ public class Forum
         return result;
     }
 
+
+
     /**
      * 插入一条论坛信息
      *
