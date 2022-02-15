@@ -55,7 +55,7 @@
 <div class="link">
     <div class="animated zoomInRight">
         <a class="choose" href="see_course.jsp">查看所有课程</a>
-        <a class="choose" href="">查看成绩</a>
+        <a class="choose" href="student_score.jsp">查看成绩</a>
         <a class="choose" href="see_newList.jsp?page=1">查看新闻列表</a>
         <a class="choose" href="forum.jsp?page=1">进入校园论坛</a>
         <a class="choose" href="change_password.jsp">更改登录密码</a>

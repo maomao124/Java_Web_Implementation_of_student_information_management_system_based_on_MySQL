@@ -1,5 +1,6 @@
 <%@ page import="data.Forum" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="data.Student" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
   File name(文件名): forum
@@ -96,7 +97,7 @@
     //获得当前页面列表
     List<Forum> thisPageList = table.Forum.getThisPageList(pageCount, curr_page);
     //获取自身信息
-    data.Administrators administrator = (data.Administrators) session.getAttribute("administrator");
+    data.Student student = (Student) session.getAttribute("student");
 %>
 
 <a class="back animated bounceInDown" href="index.jsp">返回</a>
@@ -108,7 +109,7 @@
     {
 %>
 <%
-    if (!forum.getForum_people_no().equals(administrator.getAdministrator_no()))
+    if (!forum.getForum_people_no().equals(student.getStudent_no()))
     {
 %>
 <div class="message animated bounceInRight">
