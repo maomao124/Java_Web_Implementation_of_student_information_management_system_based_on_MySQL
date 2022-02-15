@@ -2362,6 +2362,134 @@ public class Add
     }
 }
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\io\\Configuration.java
+package io;
+
+import tools.test.JDBC;
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): io
+ * Class(类名): Configuration
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/15
+ * Time(创建时间)： 19:17
+ * Version(版本): 1.0
+ * Description(描述)： 配置文件
+ */
+
+public class Configuration
+{
+    //论坛页面分页大小
+    private static int forum_pageSize = 50;
+    //登录日志页面分页大小
+    private static int login_log_pageSize = 50;
+    //新闻列表页面分页大小
+    private static int new_pageSize = 50;
+    //错误日志文件路径
+    private static String Error_path = "error.log";
+
+
+    static
+    {
+        InputStream inputStream=null;
+        Properties properties;
+        try
+        {
+            //src目录下,maven 资源路径下
+            inputStream = Configuration.class.getClassLoader().getResourceAsStream("PageSize.properties");
+            properties = new Properties();
+            properties.load(inputStream);
+            //获取论坛分页大小
+            forum_pageSize = Integer.parseInt(properties.getProperty("forum"));
+            //获取登录日志分页大小
+            login_log_pageSize = Integer.parseInt(properties.getProperty("loginLog"));
+            //获取登录日志大小
+            new_pageSize = Integer.parseInt(properties.getProperty("new"));
+            //清除
+            properties.clear();
+            //关闭流
+            if (inputStream != null)
+            {
+                inputStream.close();
+            }
+            //加载错误日志的配置文件
+            inputStream = Configuration.class.getClassLoader().getResourceAsStream("ErrorLog.properties");
+            //从输入字节流中读取属性列表
+            properties.load(inputStream);
+            //获取错误日志路径
+            Error_path = properties.getProperty("path");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //关闭
+            try
+            {
+                if (inputStream != null)
+                {
+                    inputStream.close();
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public static int getForum_pageSize()
+    {
+        return forum_pageSize;
+    }
+
+    public static void setForum_pageSize(int forum_pageSize)
+    {
+        Configuration.forum_pageSize = forum_pageSize;
+    }
+
+    public static int getLogin_log_pageSize()
+    {
+        return login_log_pageSize;
+    }
+
+    public static void setLogin_log_pageSize(int login_log_pageSize)
+    {
+        Configuration.login_log_pageSize = login_log_pageSize;
+    }
+
+    public static int getNew_pageSize()
+    {
+        return new_pageSize;
+    }
+
+    public static void setNew_pageSize(int new_pageSize)
+    {
+        Configuration.new_pageSize = new_pageSize;
+    }
+
+    public static String getError_path()
+    {
+        return Error_path;
+    }
+
+    public static void setError_path(String error_path)
+    {
+        Error_path = error_path;
+    }
+}
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\java\\io\\ErrorLog.java
 package io;
 
@@ -4068,8 +4196,14 @@ public class Forum
 {
     //格式时间
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //页大小,当前为50条一页
-    private static final int PageSize = 50;
+    //页大小,默认为50条一页
+    private static final int PageSize;
+
+    static
+    {
+        //获取分页大小
+        PageSize = io.Configuration.getForum_pageSize();
+    }
 
     /**
      * 私有化构造函数，目的是不让创建对象
@@ -4094,6 +4228,8 @@ public class Forum
         //返回结果
         return result;
     }
+
+
 
     /**
      * 插入一条论坛信息
@@ -4222,8 +4358,14 @@ public class LoginLog
 {
     //格式时间
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-    //页大小,当前为100条一页
-    private static final int PageSize = 100;
+    //页大小,默认为100条一页
+    private static final int PageSize;
+
+    static
+    {
+        //加载分页大小
+        PageSize = io.Configuration.getLogin_log_pageSize();
+    }
 
     /**
      * 私有化构造函数，目的是不让创建对象
@@ -4390,8 +4532,14 @@ import java.util.List;
 
 public class News
 {
-    //页大小,当前为100条一页
-    private static final int PageSize = 100;
+    //页大小,默认为100条一页
+    private static final int PageSize;
+
+    static
+    {
+        //获取页大小
+        PageSize = io.Configuration.getNew_pageSize();
+    }
 
     /**
      * 私有化构造函数，不能创建对象
@@ -11123,6 +11271,78 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_forum_result.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): delete_forum_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:20
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>删除论坛消息-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String forum_no_str = request.getParameter("forum_no");
+    //判断是否为空
+    if (forum_no_str == null || forum_no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long forum_no = null;
+    try
+    {
+        forum_no = Long.parseLong(forum_no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "论坛楼层不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+
+    //删除论坛消息
+    boolean result = table.Forum.delete(forum_no);
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "论坛消息删除失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("forum_management.jsp");
+%>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\delete_new.jsp
 <%--
   Created by IntelliJ IDEA.
@@ -12398,69 +12618,6 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
             font-size: 22px;
         }
 
-        .insert_p {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-
-        div.message {
-            border-top: 5px dotted lawngreen;
-            border-bottom: 5px dotted lawngreen;
-            border-right: 5px dotted lawngreen;
-            background-color: white;
-            width: 80vw;
-            border-radius: 2em;
-            left: 25px;
-            font-size: 24px;
-            padding-left: 20px;
-            padding-right: 18px;
-            padding-bottom: 12px;
-            padding-top: 12px;
-            margin-bottom: 12px;
-            margin-top: 12px;
-            transition: all 0.8s linear 0s;
-            float: left;
-        }
-
-        div.message:hover {
-            width: 95vw;
-            transition: all 0.5s linear 0s;
-            background-color: #25ffe6;
-            color: #0007ff;
-        }
-
-        div.message_self {
-            border-top: 5px dotted lawngreen;
-            border-bottom: 5px dotted lawngreen;
-            border-left: 5px dotted lawngreen;
-            background-color: white;
-            width: 80vw;
-            float: right;
-            border-radius: 2em;
-            font-size: 24px;
-            padding-left: 20px;
-            padding-right: 18px;
-            padding-bottom: 12px;
-            padding-top: 12px;
-            margin-bottom: 12px;
-            margin-top: 12px;
-            transition: all 0.8s linear 0s;
-        }
-
-        div.message_self:hover {
-            width: 95vw;
-            transition: all 0.5s linear 0s;
-            background-color: aquamarine;
-            color: #0007ff;
-        }
-
-        .content {
-            white-space: pre-wrap;
-            /*border: 10px violet dotted;*/
-            word-break: break-all;
-            word-wrap: break-word;
-        }
 
     </style>
 </head>
@@ -12632,6 +12789,18 @@ else
 %>
 
 <div style="float: left">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <br/>
@@ -12868,6 +13037,245 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\forum_management.jsp
+<%@ page import="data.Forum" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): forum_management
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 19:55
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>论坛管理</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //获取当前页面
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //判断是否为空
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //赋值，第一页
+        curr_page_str = "1";
+    }
+
+    //转数字
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断当前页面是否是大于0的
+    if (curr_page <= 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不能为负数和0！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得总条数
+    Long count = table.Forum.getForumCount();
+    //如果总条数为0
+    if (count == 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前论坛无消息！<br><a href=forum_insert.jsp>发布一条消息</a>");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取总页数
+    long pageCount = table.Forum.getPageCount(count);
+    //判断当前页面是否大于页总数
+    if (curr_page > pageCount)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前页面大于页面总数！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得当前页面列表
+    List<Forum> thisPageList = table.Forum.getThisPageList(pageCount, curr_page);
+%>
+
+<a class="back" href="index.jsp">返回</a>
+
+<table class="animated fadeInUp">
+    <caption>
+        当前页面：
+        <%=curr_page%>
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>楼层</th>
+        <th>发布者学号/职工号</th>
+        <th>发布者姓名</th>
+        <th>发布者身份</th>
+        <th>发布时间</th>
+        <th>内容</th>
+        <th>操作</th>
+    </tr>
+    <%
+        assert thisPageList != null;
+        for (data.Forum forum : thisPageList)
+        {
+    %>
+    <tr>
+        <td>
+            第
+            <%=forum.getForum_no()%>
+            楼
+        </td>
+        <td>
+            <%=forum.getForum_people_no()%>
+        </td>
+        <td>
+            <%=forum.getForum_name()%>
+        </td>
+        <td>
+            <%=forum.getForum_identity()%>
+        </td>
+        <td>
+            <%=forum.getForum_time()%>
+        </td>
+        <td>
+            <%
+                //获取内容
+                String text = forum.getForum_content();
+                //不能太长
+                if (text.length() > 70)
+                {
+                    text = text.substring(0, 68) + "...";
+                }
+            %>
+            <%=text%>
+        </td>
+        <td>
+            <a style="width: 50px;display:inline;"
+               href="delete_forum_result.jsp?forum_no=<%=forum.getForum_no()%>">删除</a>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before">
+    <a class="animated slideInLeft" href="forum_management.jsp?page=<%=(curr_page-1)%>">上一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page >= 3)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="forum_management.jsp?page=<%=(curr_page-2)%>">前两页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount)
+    {
+%>
+<div class="next">
+    <a class="animated slideInRight" href="forum_management.jsp?page=<%=(curr_page+1)%>">下一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="forum_management.jsp?page=<%=(curr_page+2)%>">后两页</a>
+</div>
+<%
+    }
+%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<%
+    if (curr_page > 2)
+    {
+%>
+<div class="first">
+    <a class="animated rotateInUpLeft" href="forum_management.jsp?page=<%=(1)%>">第一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="last">
+    <a class="animated rotateInUpRight" href="forum_management.jsp?page=<%=(pageCount)%>">最后一页</a>
+</div>
+<%
+    }
+%>
+</body>
+</html>
+�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\administrator\\index.jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="data.Administrators" %>
@@ -12960,7 +13368,7 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
         <a class="choose" href="teacher_index.jsp">管理教师</a>
         <hr>
         <a class="choose" href="forum.jsp?page=1">进入校园论坛</a>
-        <a class="choose" href="">管理校园论坛</a>
+        <a class="choose" href="forum_management.jsp?page=1">管理校园论坛</a>
     </div>
 </div>
 
@@ -24013,8 +24421,2249 @@ Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_s
     }
 </script>
 </html>�
-H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\index.jsp
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\change_password.jsp
 <%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): change_password
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:46
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更改登录密码</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/password.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+</head>
+<body>
+<%
+    //获取本身的信息
+    data.Student student = (data.Student) session.getAttribute("student");
+    //判断是否为空
+    if (student == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "无法获取到信息，请先登录！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        修改登录密码
+    </div>
+</div>
+<div class="form">
+    <br/>
+    <form action="change_password_result.jsp" method="post">
+        <table border="1" class="animated bounceInDown">
+            <tr>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">您的学号</td>
+                <td>
+                    <label>
+                        <input class="c" type="text" name="no" readonly="readonly"
+                               value="<%=student.getStudent_no()%>">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">请输入原密码</td>
+                <td>
+                    <label>
+                        <input class="c" type="password" name="old_password">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">请输入新密码</td>
+                <td>
+                    <label>
+                        <input class="c" type="password" name="password1">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="ss">请再次输入</td>
+                <td>
+                    <label>
+                        <input class="c" type="password" name="password2">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="更改"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\change_password_result.jsp
+<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.regex.Matcher" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): change_password_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:47
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>更改登录密码-结果</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String no_str = request.getParameter("no");
+    String old_password = request.getParameter("old_password");
+    String password1 = request.getParameter("password1");
+    String password2 = request.getParameter("password2");
+
+
+    //判断是否为空
+    if (no_str == null || no_str.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "此页面不能单独访问！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (old_password == null || old_password.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入原密码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (password1 == null || password1.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入新密码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (password2 == null || password2.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "请输入新密码！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断新密码是否一致
+    if (!password1.equals(password2))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "输入的两次密码不一致！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断长度
+    if (password1.length() < 6)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "密码长度太短！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    if (password1.length() > 20)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "密码长度太长！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //密码由大小写和数字构成
+    Pattern pattern = Pattern.compile("^[\\w]*$");
+    Matcher matcher = pattern.matcher(password1);
+    boolean result = matcher.matches();
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "密码应该由大小写字母和数字构成！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //转换成数字
+    Long no = null;
+    try
+    {
+        no = Long.parseLong(no_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "学号不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //验证旧密码
+    boolean verification = table.StudentPassword.verification(no, old_password);
+    if (!verification)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "原密码不正确！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //更改密码
+    boolean b = table.StudentPassword.changePassword(no, old_password, password1);
+    if (!b)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "密码更改失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //密码更改成功
+    //重定向至主页
+    response.sendRedirect("index.jsp");
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\delete.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): delete
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 800px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover {
+    background-color: #fff244;
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.s {
+    text-align: center;
+    width: 200px;
+}
+
+div.text {
+    border: 10px violet dotted;
+    text-align: center;
+    font-size: 32px;
+    color: red;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\error_login.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): error_login
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/11 
+  Time(创建时间)： 20:11
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(20%, 20%, 20%);
+}
+
+a{
+    text-decoration: none;
+}
+
+.warning {
+    color: whitesmoke;
+    font-size: 80px;
+    font-family: sans-serif;
+    font-weight: bold;
+    position: relative;
+    padding: 0.6em 0.4em;
+}
+
+.warning::before,
+.warning::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0.2em solid transparent;
+    box-sizing: border-box;
+    color: orangered;
+    animation: rotating 10s infinite;
+}
+
+.warning::before {
+    border-top-color: currentColor;
+    border-right-color: currentColor;
+    z-index: -1;
+}
+
+.warning::after {
+    border-bottom-color: currentColor;
+    border-left-color: currentColor;
+    box-shadow: 0.3em 0.3em 0.3em rgba(20%, 20%, 20%, 0.8);
+}
+
+@keyframes rotating {
+    to {
+        transform: rotate(360deg);
+    }
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\floor.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): floor
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 20:12
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.floor {
+    position: fixed;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    animation: 3s move infinite ease-in-out alternate,
+    3s zoom infinite ease-in-out alternate;
+}
+
+@keyframes zoom {
+    to {
+        transform: scale(10);
+    }
+}
+
+div.floor::before {
+    content: '';
+    position: fixed;
+    width: 200vmax;
+    height: 200vmax;
+    background-color: steelblue;
+    color: turquoise;
+    background-image: linear-gradient(
+            45deg,
+            currentColor 25%,
+            transparent 25%, transparent 75%,
+            currentColor 75%),
+    linear-gradient(
+            45deg,
+            currentColor 25%,
+            transparent 25%, transparent 75%,
+            currentColor 75%);
+    background-position: 0 0, 5vmax 5vmax;
+    background-size: 10vmax 10vmax;
+    top: 50%;
+    left: 50%;
+    animation: 9s move infinite ease-in-out alternate,
+    9s -1.5s rotating infinite ease-in-out alternate;
+}
+
+@keyframes move {
+    from {
+        left: -40%;
+        top: -40%;
+    }
+
+    to {
+        left: -60%;
+        top: -60%;
+    }
+}
+
+@keyframes rotating {
+    to {
+        transform: rotate(180deg);
+        filter: hue-rotate(1turn);
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\forum.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): forum
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14 
+  Time(创建时间)： 22:23
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+.insert_p {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+div.message {
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-right: 5px dotted lawngreen;
+    background-color: white;
+    width: 80vw;
+    border-radius: 2em;
+    left: 25px;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+    float: left;
+}
+
+div.message:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: #25ffe6;
+    color: #0007ff;
+}
+
+div.message_self {
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-left: 5px dotted lawngreen;
+    background-color: white;
+    width: 80vw;
+    float: right;
+    border-radius: 2em;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+}
+
+div.message_self:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: aquamarine;
+    color: #0007ff;
+}
+
+.content {
+    white-space: pre-wrap;
+    /*border: 10px violet dotted;*/
+    word-break: break-all;
+    word-wrap: break-word;
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\forum_insert.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): forum_insert
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/14 
+  Time(创建时间)： 22:21
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+textarea {
+    width: 50vw;
+    height: 50vh;
+    color: magenta;
+    font-size: 32px;
+    background-color: lightblue;
+    transition: all 0.7s linear 0s;
+}
+
+textarea:hover {
+    background-color: cornsilk;
+    transition: all 0.7s linear 0s;
+    border: 15px groove coral;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\hotAirBalloon.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): hotAirBalloon
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/10 
+  Time(创建时间)： 14:53
+  Version(版本): 1.0
+  Description(描述)： 热气球
+ */
+
+div.left {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    /*transform: translate(50%, -50%);*/
+}
+
+div.right {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    /*transform: translate(-50%, -50%);*/
+}
+
+div.left1 {
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    /*transform: translate(50%, -50%);*/
+}
+
+div.right1 {
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    /*transform: translate(-50%, -50%);*/
+}
+
+/*纵向居中布局*/
+.balloon {
+
+    font-size: 13px;
+    width: 12em;
+    height: 19em;
+    display: flex;
+    flex-direction: column; /*主轴线设置为了垂直方向，那么侧轴线就是水平方向*/
+    align-items: center; /*使得垂直排列的元素，在侧轴线线上居中对齐*/
+    animation: drift 2s infinite alternate; /*名为drift的动画 在两秒内完成一次；执行次数无限次 正反运动往返执行*/
+}
+
+@keyframes drift {
+    to {
+        transform: translateY(-10%); /*提升的距离是自身元素高度的30%*/
+    }
+}
+
+.envelope {
+    position: relative;
+    width: inherit;
+    height: 16em; /*高度不够，用来将盖子下面的倒三角截成倒梯形*/
+    overflow: hidden;
+}
+
+/*伞盖的形状是上端为球形，下端为圆锥形,所以我们先在上部画一个圆，再在下部画一个三角形。
+先画上部的圆：*/
+.envelope span {
+    position: absolute;
+    width: inherit;
+    height: 12em;
+    border-radius: 50%;
+    color: orange;
+    background-color: currentColor;
+}
+
+/*再用伪元素画出下部的等腰三角形：*/
+.envelope span::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 10em 5.5em 0 5.5em;
+    border-style: solid;
+    border-color: currentColor transparent transparent transparent;
+    left: calc(50% - 5.5em); /*动态计算长度值*/
+    top: 8.45em;
+}
+
+.envelope span:nth-child(2) { /*这里的两个span元素其实是重叠的相同的图案，这里将第二个span元素进行压缩和变色，是为了形成两幅图案的色彩叠加效果*/
+    transform: scaleX(0.4);
+    filter: brightness(0.85) contrast(1.4); /*滤镜效果：前者调整明亮程度；后者是对比度设置*/
+}
+
+/*定义吊篮的尺寸：*/
+.basket {
+    position: relative;
+    width: 2em;
+    height: 3em;
+}
+
+/*用 ::before 伪元素画出篮子：*/
+.basket::before {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: 1.6em;
+    background-color: peru; /*秘鲁色：明度稍高的褐色*/
+    bottom: 0px;
+    border-radius: 0 0 0.5em 0.5em; /*圆角边框设置*/
+}
+
+/*用 ::after 伪元素画出篮子的顶边：*/
+.basket::after {
+    content: '';
+    position: absolute;
+    width: 105%;
+    height: 0.3em;
+    background-color: saddlebrown;
+    top: 1.3em;
+    left: calc((100% - 105%) / 2); /*用于将篮边居中对齐*/
+    border-radius: 0.3em;
+}
+
+/*定位缆绳，并倾斜不同的角度：*/
+.basket span {
+    position: absolute;
+    width: 0.1em;
+    height: 1.5em;
+    background-color: burlywood;
+    left: calc((var(--n) - 1) * 0.6em);
+    transform: rotate(calc(var(--r) * 7deg));
+    trasnform-origin: bottom;
+}
+
+.basket span:nth-child(1) {
+    --n: 1;
+    --r: -2;
+}
+
+/*对每一个span元素都应用上面的span设置，相当于调用类*/
+.basket span:nth-child(2) {
+    --n: 2;
+    --r: -1;
+}
+
+.basket span:nth-child(3) {
+    --n: 3;
+    --r: 1;
+}
+
+.basket span:nth-child(4) {
+    --n: 4;
+    --r: 2
+}
+
+.s {
+    text-align: center;
+    width: 170px;
+}
+
+.code {
+    color: royalblue;
+    text-decoration: none;
+    font-size: 23px;
+}
+
+.img {
+    /*text-align: center;*/
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\index.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:19
+  Version(版本): 1.0
+  Description(描述)： 管理员菜单css
+ */
+
+div.text_p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 10%);
+}
+
+div.text {
+    text-align: center;
+    color: coral;
+    font-size: 24px;
+}
+
+div.link {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+div.link2 {
+    position: absolute;
+    left: 270px;
+    top: 50%;
+    transform: translate(0%, -50%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\insert.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 800px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover{
+    background-color: #fff244;
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.s {
+    text-align: center;
+    width: 200px;
+}
+
+div.text {
+    border: 10px violet dotted;
+
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\insert_score.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 600px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover {
+    background-color: #fff244;
+    /*width: 800px;*/
+    /*transition: all 1s linear 0s;*/
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.s {
+    text-align: center;
+    width: 200px;
+}
+
+div.text {
+    border: 10px violet dotted;
+    text-align: center;
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\insert_teach.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 650px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover {
+    background-color: #fff244;
+    /*width: 800px;*/
+    /*transition: all 1s linear 0s;*/
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.ss {
+    text-align: center;
+    width: 250px;
+}
+
+div.text {
+    border: 10px violet dotted;
+    text-align: center;
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\link.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): link
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:43
+  Version(版本): 1.0
+  Description(描述)： 超链接css
+ */
+
+
+a {
+    color: tomato;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    list-style-type: none;
+    font-size: 22px;
+    width: 10em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    position: relative;
+    margin: 0.8em;
+}
+
+/* 添加了左右两个圆点 */
+a::before, a::after {
+    content: '';
+    position: absolute;
+    width: 0.6em;
+    height: 0.6em;
+    background-color: gainsboro;
+    top: calc(50% - 0.3em);
+    border-radius: 50%;
+    transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+}
+
+a::before {
+    left: 0;
+    z-index: -1;
+}
+
+a::after {
+    right: 0;
+    z-index: -2;
+}
+
+/* 添加悬浮效果 */
+a:hover {
+    color: deeppink;
+}
+
+/* 给前后伪元素添加悬浮效果，注意先后顺序，先是hover后是伪元素 */
+a:hover::before, a:hover::after {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: dodgerblue;
+}
+
+a:hover::before {
+    top: 0;
+    left: -0.2em;
+}
+
+a:hover::after {
+    right: -0.2em;
+    filter: brightness(0.8);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\link_index.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): link
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:43
+  Version(版本): 1.0
+  Description(描述)： 超链接css
+ */
+
+
+a.choose {
+    color: tomato;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    list-style-type: none;
+    font-size: 22px;
+    width: 10em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    position: relative;
+    margin: 0.8em;
+}
+
+/* 添加了左右两个圆点 */
+a.choose::before, a.choose::after {
+    content: '';
+    position: absolute;
+    width: 0.6em;
+    height: 0.6em;
+    background-color: gainsboro;
+    top: calc(50% - 0.3em);
+    border-radius: 50%;
+    transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+}
+
+a.choose::before {
+    left: 0;
+    z-index: -1;
+}
+
+a.choose::after {
+    right: 0;
+    z-index: -2;
+}
+
+/* 添加悬浮效果 */
+a.choose:hover {
+    color: deeppink;
+}
+
+/* 给前后伪元素添加悬浮效果，注意先后顺序，先是hover后是伪元素 */
+a.choose:hover::before, a.choose:hover::after {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: dodgerblue;
+}
+
+a.choose:hover::before {
+    top: 0;
+    left: -0.2em;
+}
+
+a.choose:hover::after {
+    right: -0.2em;
+    filter: brightness(0.8);
+}
+
+a.new {
+    text-decoration: none;
+    color: black;
+    transition: all 0.5s linear 0s;
+}
+
+a.new:hover{
+    color: #0066ff;
+    transition: all 0.5s linear 0s;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\new.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): new
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 21:53
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+
+.title_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+.title {
+
+    font-size: 32px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.title:hover {
+    font-size: 48px;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time_p {
+    position: absolute;
+    left: 0;
+    /*transform: translate(-50%, 0%);*/
+}
+
+.author_and_time {
+
+    font-size: 24px;
+    color: chocolate;
+    border: dotted 10px cadetblue;
+    background-color: antiquewhite;
+    transition: all 0.5s linear 0s;
+}
+
+.author_and_time:hover {
+    font-size: 36px;
+    transition: all 0.5s linear 0s;
+}
+
+div.new_text_p {
+    position: absolute;
+    left: 50vw;
+    transform: translate(-50%, 0%);
+}
+
+div.new_text {
+    border-radius: 0.8em;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    white-space:pre-wrap;
+    width: 85vw;
+    font-size: 22px;
+    color: black;
+    border: dotted 4px lawngreen;
+    background-color: snow;
+    transition: all 0.5s linear 0s;
+}
+
+p{
+
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\newList.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): newList
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 22:46
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+:root {
+    font-size: 7px;
+}
+
+nav ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li {
+    width: 60rem;
+    height: 6rem;
+    font-size: 20px;
+    text-align: center;
+    line-height: 6rem;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: 0.3s;
+    margin: 3rem;
+}
+
+nav li::before,
+nav li::after {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+nav li::before {
+    background-color: white;
+    z-index: -1;
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+nav li::after {
+    background-color: goldenrod;
+    transform: translate(1.5rem, 1.5rem);
+    z-index: -2;
+}
+
+nav li:hover {
+    transform: translate(1.5rem, 1.5rem);
+    color: white;
+}
+
+nav li:hover::before {
+    background-color: goldenrod;
+}
+
+nav li:hover::after {
+    background-color: white;
+    transform: translate(-1.5rem, -1.5rem);
+}
+
+.newList_p {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translate(0, -50%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\page.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): page
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 21:11
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.next {
+    position: absolute;
+    right: 250px;
+}
+
+div.next2 {
+    position: absolute;
+    right: 0;
+}
+
+div.before {
+    position: absolute;
+    left: 250px;
+}
+
+div.before2 {
+    position: absolute;
+    left: 0;
+}
+
+div.last {
+    position: absolute;
+    right: 20vw;
+}
+
+div.first {
+    position: absolute;
+    left: 20vw;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\password.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 600px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover {
+    background-color: #fff244;
+    /*width: 800px;*/
+    /*transition: all 1s linear 0s;*/
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.ss {
+    text-align: center;
+    width: 190px;
+}
+
+div.text {
+    border: 10px violet dotted;
+    text-align: center;
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\table.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): table
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:57
+  Version(版本): 1.0
+  Description(描述)： 表格css
+ */
+
+
+table {
+    width: 80%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+}
+
+th, td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+    font-weight: normal;
+}
+
+tr {
+    background: #fff;
+    /*transition: all 1s linear 0s;*/
+}
+
+tr:hover {
+    background: aqua;
+    /*transition: all 1s linear 0s;*/
+}
+
+td:hover {
+    color: magenta;
+    /*transition: all 1s linear 0s;*/
+}
+
+td a {
+    color: #06f;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #06f;
+    text-decoration: underline;
+    /*transition: all 1s linear 0s;*/
+}
+
+caption {
+    color: #28ffc7;
+    font-size: 28px;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\table_student.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): table
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/8 
+  Time(创建时间)： 23:57
+  Version(版本): 1.0
+  Description(描述)： 表格css
+ */
+
+
+table {
+    width: 95%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse; /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+}
+
+th, td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+    font-weight: normal;
+}
+
+tr {
+    background: #fff;
+}
+
+tr:hover {
+    background: aqua;
+}
+
+td:hover {
+    color: magenta;
+}
+
+td a {
+    color: #06f;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #06f;
+    text-decoration: underline;
+}
+
+caption {
+    color: lime;
+    font-size: 28px;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\textarea.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): textarea
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/12 
+  Time(创建时间)： 0:01
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+textarea {
+    width: 50vw;
+    height: 50vh;
+    color: magenta;
+    font-size: 32px;
+    background-color: lightblue;
+    transition: all 0.7s linear 0s;
+}
+
+textarea:hover {
+    background-color: cornsilk;
+    transition: all 0.7s linear 0s;
+    border: 15px groove	coral;
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\update.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): update
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/9 
+  Time(创建时间)： 17:38
+  Version(版本): 1.0
+  Description(描述)： 无
+ */
+
+div.form {
+    border: 10px skyblue dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+table {
+    width: 800px;
+    border-collapse: collapse;
+    color: skyblue;
+    background-color: lightpink;
+    transition: all 1s linear 0s;
+}
+
+table:hover{
+    background-color: #fff244;
+}
+
+td, input, input.c {
+    font-size: 30px;
+}
+
+input {
+    /*font-size: 24px;*/
+    /*width: 90%;*/
+    color: coral;
+}
+
+input.c {
+    width: 90%;
+    color: coral;
+}
+
+
+body {
+    background: skyblue;
+    /*background: linear-gradient(deepskyblue, skyblue, lightblue 20%);*/
+}
+
+.s {
+    text-align: center;
+    width: 200px;
+}
+
+div.text {
+    border: 10px violet dotted;
+
+    font-size: 32px;
+    color: tomato;
+    background: bisque;
+}
+
+div.text_p {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\css\\wandered_jelly.css
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): wandered_jelly
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/11 
+  Time(创建时间)： 18:08
+  Version(版本): 1.0
+  Description(描述)： 果冻
+ */
+
+
+.monster {
+    width: 100%;
+    height: 100%;
+    /*background-color: lightcyan;*/
+    position: relative;
+    overflow: hidden;
+    /*transform: translate(0%, 1%);*/
+}
+
+.body {
+    position: absolute;
+    width: 32vmin;
+    height: 32vmin;
+    background-color: teal;
+    border-radius: 43% 40% 43% 40%;
+    bottom: calc(-1 * 32vmin / 2 - 4vmin);
+    left: -2vmin;
+    animation: wander 5s linear infinite alternate,
+    wave 3s linear infinite,
+    bounce 1s infinite alternate;
+}
+
+.eyes {
+    width: 24vmin;
+    height: 5vmin;
+    position: absolute;
+    bottom: 2vmin;
+    left: calc(32vmin - 24vmin - 2vmin);
+    animation: wander 5s linear infinite alternate;
+}
+
+.eyes::before,
+.eyes::after {
+    content: '';
+    position: absolute;
+    width: 5vmin;
+    height: 5vmin;
+    border: 1.25vmin solid white;
+    box-sizing: border-box;
+    border-radius: 50%;
+    animation: blink 3s linear infinite;
+}
+
+.eyes::before {
+    left: 4vmin;
+}
+
+.eyes::after {
+    right: 4vmin;
+}
+
+@keyframes bounce {
+    to {
+        bottom: calc(-1 * 32vmin / 2 - 2vmin);
+    }
+}
+
+@keyframes wave {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes wander {
+    to {
+        left: calc(100vw - 32vmin + 2vmin);
+    }
+}
+
+@keyframes blink {
+    4%, 10%, 34%, 40% {
+        transform: scaleY(1);
+    }
+
+    7%, 37% {
+        transform: scaleY(0);
+    }
+}
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\forum.jsp
+<%@ page import="data.Forum" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): forum
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 21:01
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>校园论坛</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/forum.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+
+    </style>
+</head>
+<body>
+<%
+    //获取当前页面
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //判断是否为空
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //赋值，第一页
+        curr_page_str = "1";
+    }
+
+    //转数字
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断当前页面是否是大于0的
+    if (curr_page <= 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不能为负数和0！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得总条数
+    Long count = table.Forum.getForumCount();
+    //如果总条数为0
+    if (count == 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前论坛无消息！<br><a href=forum_insert.jsp>发布一条消息</a>");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取总页数
+    long pageCount = table.Forum.getPageCount(count);
+    //判断当前页面是否大于页总数
+    if (curr_page > pageCount)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前页面大于页面总数！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得当前页面列表
+    List<Forum> thisPageList = table.Forum.getThisPageList(pageCount, curr_page);
+    //获取自身信息
+    data.Administrators administrator = (data.Administrators) session.getAttribute("administrator");
+%>
+
+<a class="back animated bounceInDown" href="index.jsp">返回</a>
+<a class="insert_p animated bounceInDown" href="forum_insert.jsp">发布</a>
+
+<%
+    assert thisPageList != null;
+    for (data.Forum forum : thisPageList)
+    {
+%>
+<%
+    if (!forum.getForum_people_no().equals(administrator.getAdministrator_no()))
+    {
+%>
+<div class="message animated bounceInRight">
+    第
+    <%=forum.getForum_no()%>
+    楼
+    <br>
+    <%=forum.getForum_time()%>
+    <%
+        if (forum.getForum_identity().equals("学生"))
+        {
+    %>
+    <div style="color: black">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+    }
+    else if (forum.getForum_identity().equals("老师"))
+    {
+    %>
+    <div style="color:salmon">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+    }
+    else
+    {
+    %>
+    <div style="color:red">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+        }
+    %>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
+</div>
+<%
+}
+else
+{
+%>
+
+<div class="message_self animated bounceInLeft">
+    第
+    <%=forum.getForum_no()%>
+    楼
+    <br>
+    <%=forum.getForum_time()%>
+    <%
+        if (forum.getForum_identity().equals("学生"))
+        {
+    %>
+    <div style="color: black">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+    }
+    else if (forum.getForum_identity().equals("老师"))
+    {
+    %>
+    <div style="color:salmon">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+    }
+    else
+    {
+    %>
+    <div style="color:red">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+        }
+    %>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
+</div>
+
+<%
+        }
+    }
+%>
+
+<div style="float: left">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-1)%>">上一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page >= 3)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-2)%>">前两页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount)
+        {
+    %>
+    <div class="next">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+1)%>">下一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+2)%>">后两页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="first">
+        <a class="animated rotateInUpLeft" href="forum.jsp?page=<%=(1)%>">第一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="last">
+        <a class="animated rotateInUpRight" href="forum.jsp?page=<%=(pageCount)%>">最后一页</a>
+    </div>
+    <%
+        }
+    %>
+
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\forum_insert.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): forum_insert
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 21:02
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>发布一条论坛消息</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+    <link rel="stylesheet" href="css/textarea.css">
+    <style>
+        a.position {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /*transform: translate(0%, 0%);*/
+        }
+    </style>
+</head>
+<body>
+<a class="back" href="index.jsp">返回</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        发布一条论坛消息
+    </div>
+</div>
+<div class="form">
+    <div class="animated rotateIn">
+        <br/>
+        <form action="forum_insert_result.jsp" method="post">
+            <label>
+                <textarea rows="10" name="text" placeholder="从这里输入文字"></textarea>
+            </label>
+            <br/>
+            <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="发布"/>
+        </form>
+    </div>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\forum_insert_result.jsp
+<%@ page import="data.Student" %>
+<%@ page import="table.Forum" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): forum_insert_result
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 21:04
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>发布一条论坛消息-结果</title>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //获取信息
+    String text = request.getParameter("text");
+    //判断是否为空
+    if (text == null || text.equals(""))
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "输入的消息不能为空！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断是否太长
+    if (text.length() > 255)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "输入的消息太长最大允许255个字符，您的字符为！" + text.length() + "个");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获取信息
+    data.Student student = (Student) session.getAttribute("student");
+    //插入
+    boolean result = Forum.insert(student.getStudent_no(), student.getName(), "学生", text);
+    //判断返回值
+    if (!result)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "论坛消息发布失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //重定向
+    response.sendRedirect("forum.jsp?page=1");
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\index.jsp
+<%@ page import="data.Student" %>
+<%@ page import="java.util.Objects" %>
+<%@ page import="table.News" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
   File name(文件名): index
@@ -24029,9 +26678,803 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 <html>
 <head>
     <title>学生-菜单</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link_index.css">
+    <link rel="stylesheet" href="css/wandered_jelly.css">
+    <link rel="stylesheet" href="css/newList.css">
+</head>
+<%
+    //获得学生信息
+    data.Student student = (Student) session.getAttribute("student");
+%>
+<%
+    if (student.getSex().equals("女"))
+    {
+%>
+<body style="background: pink">
+    <%
+    }
+    else
+        {
+    %>
+<body style="background: skyblue">
+<%
+    }
+%>
+
+<div class="monster">
+    <span class="body"></span>
+    <span class="eyes"></span>
+</div>
+
+<div class="text_p">
+    <div class="animated flip">
+        <div class="text">
+            欢迎登录！<%=student.getName()%>
+        </div>
+    </div>
+</div>
+<div class="link">
+    <div class="animated zoomInRight">
+        <a class="choose" href="see_course.jsp">查看所有课程</a>
+        <a class="choose" href="">查看成绩</a>
+        <a class="choose" href="see_newList.jsp?page=1">查看新闻列表</a>
+        <a class="choose" href="forum.jsp?page=1">进入校园论坛</a>
+        <a class="choose" href="change_password.jsp">更改登录密码</a>
+        <a class="choose" href="quit.jsp">安全退出</a>
+    </div>
+</div>
+<div class="link2">
+    <div class="animated fadeInRightBig">
+
+    </div>
+</div>
+
+<%
+    //获得新闻总数
+    Long newsCount = table.News.getNewsCount();
+
+%>
+<%
+    //如果有新闻
+    if (newsCount > 0)
+    {
+%>
+<%
+    //如果新闻数量大于9条，只显示9条
+    if (newsCount >= 9)
+    {
+%>
+<div class="newList_p">
+    <nav class="animated bounceInDown">
+        <ul>
+
+            <%
+                for (int i = 1; i <= 9; i++)
+                {
+                    //获取全标题
+                    String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
+                    //防止标题太长
+                    if (title.length() > 19)
+                    {
+                        title = title.substring(0, 17) + "...";
+                    }
+            %>
+            <li style="width: 60rem;">
+                <a
+                        class="new" href="new.jsp?page=<%=i%>"><%=title%>
+                </a>
+            </li>
+            <%
+                }
+            %>
+
+            <li style="width: 60rem;">
+                <a class="new" href="see_newList.jsp?page=1">更多新闻</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<%
+}
+//否则有多少条就显示多少条
+else
+{
+%>
+<div class="newList_p">
+    <nav class="animated bounceInDown">
+        <ul>
+
+            <%
+                for (int i = 1; i <= newsCount; i++)
+                {
+                    //获取全标题
+                    String title = Objects.requireNonNull(News.getNew((long) i)).getNew_title();
+                    //防止标题太长
+                    if (title.length() > 19)
+                    {
+                        title = title.substring(0, 17) + "...";
+                    }
+            %>
+            <li style="width: 60rem;">
+                <a
+                        class="new" href="new.jsp?page=<%=i%>"><%=title%>
+                </a>
+            </li>
+            <%
+                }
+            %>
+
+            <li style="width: 60rem;">
+                <a class="new" href="see_newList.jsp?page=1">更多新闻</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<%
+        }
+    }
+%>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\new.jsp
+<%@ page import="data.News" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): new
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:59
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>新闻</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/new.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
 </head>
 <body>
+<%
+    //获取当前页面
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //判断是否为空
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //赋值，第一页
+        curr_page_str = "1";
+    }
 
+    //转数字
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断当前页面是否是大于0的
+    if (curr_page <= 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不能为负数和0！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得总条数
+    Long count = table.News.getNewsCount();
+    //判断当前页面是否大于页总数
+    if (curr_page > count)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前页面大于页面总数！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得新闻
+    News aNew = table.News.getNew(curr_page);
+    if (aNew == null)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "新闻获取失败！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<a class="back" href="index.jsp">返回</a>
+
+<br>
+<div class="title_p">
+    <div class="title animated zoomInDown">
+        <%=aNew.getNew_title()%>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="author_and_time_p">
+    <div class="author_and_time animated bounceInRight">
+        新闻发布者：
+        <%=aNew.getNew_identity()%>
+        <%=aNew.getNew_author()%>
+        <br>
+        时间：
+        <%=aNew.getNew_time()%>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br/>
+
+<div class="new_text_p">
+    <div class="new_text animated bounceInUp">
+        <c:out value="<%=aNew.getNew_text()%>" escapeXml="true" default="null"/>
+
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="new.jsp?page=<%=(curr_page-1)%>">上一条新闻</a>
+    </div>
+    <%
+        }
+    %>
+
+
+    <%
+        if (curr_page < count)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="new.jsp?page=<%=(curr_page+1)%>">下一条新闻</a>
+    </div>
+    <%
+        }
+    %>
+
+</div>
+
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\quit.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): quit
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:51
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>安全退出</title>
+</head>
+<body>
+<%
+    //清除session域的关键信息
+    //信息
+    session.removeAttribute("student");
+    //身份
+    session.removeAttribute("identity");
+    //重定向至索引页面
+    response.sendRedirect("../thanks.jsp");
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\see_course.jsp
+<%@ page import="data.Course" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): see_course
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:44
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>查看所有课程</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        p:hover
+        {
+            background: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<%
+    //获取所有课程列表
+    List<Course> courseList = table.Course.getCourseList();
+%>
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        课程列表
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>课程学分</th>
+        <th>课程学时</th>
+        <th>考核模式</th>
+    </tr>
+    <%
+        for (data.Course course : courseList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=course.getCourse_no()%>
+        </td>
+        <td>
+            <%=course.getCourse_name()%>
+        </td>
+        <td>
+            <%=course.getCourse_credit()%>
+        </td>
+        <td>
+            <%=course.getCourse_hour()%>
+        </td>
+        <td>
+            <%=course.getCourse_mode()%>
+        </td>
+    </tr>
+    <%
+        }
+    %>
+</table>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\see_newList.jsp
+<%@ page import="table.News" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): see_newList
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:58
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>新闻列表</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //获取当前页面
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //判断是否为空
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //赋值，第一页
+        curr_page_str = "1";
+    }
+
+    //转数字
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不为数字！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //判断当前页面是否是大于0的
+    if (curr_page <= 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "页面参数不能为负数和0！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得总条数
+    Long count = table.News.getNewsCount();
+    //获取总页数
+    long pageCount = News.getPageCount(count);
+    //判断是否有新闻
+    if (count == 0)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前没有已发布的新闻！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+    //判断当前页面是否大于页总数
+    if (curr_page > pageCount)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "当前页面大于页面总数！");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //获得当前页面列表
+    List<data.News> thisPageList = News.getThisPageList(pageCount, curr_page);
+%>
+
+<a class="back" href="index.jsp">返回</a>
+
+<table class="animated fadeInUp">
+    <caption>
+        当前页面：
+        <%=curr_page%>
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>新闻编号</th>
+        <th>新闻发布者</th>
+        <th>发布者身份</th>
+        <th>发布时间</th>
+        <th>新闻标题</th>
+        <th>操作</th>
+    </tr>
+    <%
+        int i = 1;
+        assert thisPageList != null;
+        for (data.News news : thisPageList)
+        {
+    %>
+    <tr>
+        <td>
+            <%=news.getNew_no()%>
+        </td>
+        <td>
+            <%=news.getNew_author()%>
+        </td>
+        <td>
+            <%=news.getNew_identity()%>
+        </td>
+        <td>
+            <%=news.getNew_time()%>
+        </td>
+        <td>
+            <%=news.getNew_title()%>
+        </td>
+        <td>
+            <a style="width: 50px;display:inline;"
+               href="new.jsp?page=<%=(table.News.getPageSize()*(curr_page-1)+i)%>">查看</a>
+        </td>
+    </tr>
+    <%
+            i++;
+        }
+    %>
+</table>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="before">
+    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-1)%>">上一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page >= 3)
+    {
+%>
+<div class="before2">
+    <a class="animated slideInLeft" href="see_newList.jsp?page=<%=(curr_page-2)%>">前两页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount)
+    {
+%>
+<div class="next">
+    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+1)%>">下一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="next2">
+    <a class="animated slideInRight" href="see_newList.jsp?page=<%=(curr_page+2)%>">后两页</a>
+</div>
+<%
+    }
+%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<%
+    if (curr_page >= 2)
+    {
+%>
+<div class="first">
+    <a class="animated rotateInUpLeft" href="see_newList.jsp?page=<%=(1)%>">第一页</a>
+</div>
+<%
+    }
+%>
+
+<%
+    if (curr_page < pageCount - 1)
+    {
+%>
+<div class="last">
+    <a class="animated rotateInUpRight" href="see_newList.jsp?page=<%=(pageCount)%>">最后一页</a>
+</div>
+<%
+    }
+%>
+</body>
+</html>
+�
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\main\\webapp\\student\\student_score.jsp
+<%@ page import="data.Student" %>
+<%@ page import="table.Score" %>
+<%@ page import="java.text.DecimalFormat" %><%--
+  Created by IntelliJ IDEA.
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(文件名): student_score
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/2/15
+  Time(创建时间)： 20:55
+  Description(描述)： 无
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>查看成绩</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        div.p {
+            width: 500px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
+        }
+
+        div.p:hover {
+            width: 700px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 1s linear 0s;
+        }
+
+        p.text {
+            text-align: center;
+            font-size: 25px;
+            color: coral;
+            background: cornsilk;
+            border-style: dotted;
+            border-color: plum;
+            border-width: 10px;
+            transition: all 1s linear 0s;
+        }
+
+        p:hover {
+            background: aquamarine;
+            transition: all 1s linear 0s;
+        }
+
+        /*a.back {*/
+        /*    text-decoration: none;*/
+        /*    color: #0066ff;*/
+        /*    font-size: 22px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<%
+    //从session里获取自身信息
+    data.Student student = (Student) session.getAttribute("student");
+    Long no = student.getStudent_no();
+
+    //获取学生的所有课程信息
+    Object[][] studentScoreArray = Score.getStudentScoreArray(no);
+%>
+
+<a class="back" href="index.jsp">返回</a>
+<br>
+<table class="animated fadeInUp">
+    <caption>
+        “<%=student.getName()%>”的成绩
+    </caption>
+    <br/>
+    <tr>
+        <!-- th为表格标题栏-->
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>课程学分</th>
+        <th>课程学时</th>
+        <th>考核模式</th>
+        <th>平时成绩</th>
+        <th>期末成绩</th>
+        <th>最终成绩</th>
+        <th>绩点</th>
+        <th>学期</th>
+    </tr>
+    <%
+        //学分总和
+        float creditCount = 0;
+        //总绩点
+        float total_grade_point = 0;
+        for (int i = 1; i < studentScoreArray.length; i++)
+        {
+    %>
+    <tr>
+        <td>
+            <%=studentScoreArray[i][0]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][1]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][2]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][3]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][4]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][5]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][6]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][7]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][8]%>
+        </td>
+        <td>
+            <%=studentScoreArray[i][9]%>
+        </td>
+    </tr>
+    <%
+            //增加学分总数
+            creditCount = creditCount + (float) studentScoreArray[i][2];
+            //增加总绩点
+            total_grade_point = total_grade_point + ((float) studentScoreArray[i][2] * (float) studentScoreArray[i][8]);
+        }
+    %>
+</table>
+<%
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+%>
+<div class="p">
+    <div class="animated zoomInUp">
+        <p class="text">
+            总修得学分：<%=creditCount%>
+            <br>
+            获得总绩点：
+            <%=total_grade_point%>
+            <br/>
+            平均学分绩点：
+            <%=decimalFormat.format(total_grade_point / creditCount)%>
+        </p>
+    </div>
+</div>
 </body>
 </html>
 �
@@ -24175,6 +27618,38 @@ H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\mai
 </body>
 </html>
 �
+H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\io\\ConfigurationTest.java
+package io;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+ * Package(包名): io
+ * Class(测试类名): ConfigurationTest
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2022/2/15
+ * Time(创建时间)： 19:39
+ * Version(版本): 1.0
+ * Description(描述)： 测试类
+ */
+
+class ConfigurationTest
+{
+
+    @Test
+    void test()
+    {
+        System.out.println(io.Configuration.getForum_pageSize());
+        System.out.println(io.Configuration.getLogin_log_pageSize());
+        System.out.println(io.Configuration.getNew_pageSize());
+        System.out.println(io.Configuration.getError_path());
+    }
+}�
 H:\����\��������\���ݿ�γ����_����mysql��ѧ����Ϣ����ϵͳjavaWebʵ��\\src\\test\\java\\SHA\\MD5Test.java
 package SHA;
 
