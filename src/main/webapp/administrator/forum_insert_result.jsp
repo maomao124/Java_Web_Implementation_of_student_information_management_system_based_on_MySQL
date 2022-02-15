@@ -30,6 +30,16 @@
         return;
     }
 
+    //判断是否太长
+    if (text.length() > 255)
+    {
+        //把错误信息写入session里
+        session.setAttribute("message", "输入的消息太长最大允许255个字符，您的字符为！" + text.length() + "个");
+        //转发至错误页面
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
     //获取信息
     data.Administrators administrator = (Administrators) session.getAttribute("administrator");
     //插入

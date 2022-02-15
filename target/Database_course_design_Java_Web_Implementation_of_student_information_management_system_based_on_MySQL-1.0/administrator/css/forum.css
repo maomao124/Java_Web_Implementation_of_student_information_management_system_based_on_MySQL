@@ -17,11 +17,59 @@
 }
 
 div.message {
-    font-size: 24px;
     border-top: 5px dotted lawngreen;
     border-bottom: 5px dotted lawngreen;
     border-right: 5px dotted lawngreen;
-    background-color: cornsilk;
+    background-color: white;
     width: 80vw;
-    border-radius: 1.5em;
+    border-radius: 2em;
+    left: 25px;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+    float: left;
+}
+
+div.message:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: #25ffe6;
+    color: #0007ff;
+}
+
+div.message_self {
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-left: 5px dotted lawngreen;
+    background-color: white;
+    width: 80vw;
+    float: right;
+    border-radius: 2em;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+}
+
+div.message_self:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: aquamarine;
+    color: #0007ff;
+}
+
+.content {
+    white-space: pre-wrap;
+    /*border: 10px violet dotted;*/
+    word-break: break-all;
+    word-wrap: break-word;
 }

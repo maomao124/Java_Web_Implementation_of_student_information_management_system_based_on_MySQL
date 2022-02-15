@@ -29,6 +29,70 @@
             font-size: 22px;
         }
 
+        .insert_p {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        div.message {
+            border-top: 5px dotted lawngreen;
+            border-bottom: 5px dotted lawngreen;
+            border-right: 5px dotted lawngreen;
+            background-color: white;
+            width: 80vw;
+            border-radius: 2em;
+            left: 25px;
+            font-size: 24px;
+            padding-left: 20px;
+            padding-right: 18px;
+            padding-bottom: 12px;
+            padding-top: 12px;
+            margin-bottom: 12px;
+            margin-top: 12px;
+            transition: all 0.8s linear 0s;
+            float: left;
+        }
+
+        div.message:hover {
+            width: 95vw;
+            transition: all 0.5s linear 0s;
+            background-color: #25ffe6;
+            color: #0007ff;
+        }
+
+        div.message_self {
+            border-top: 5px dotted lawngreen;
+            border-bottom: 5px dotted lawngreen;
+            border-left: 5px dotted lawngreen;
+            background-color: white;
+            width: 80vw;
+            float: right;
+            border-radius: 2em;
+            font-size: 24px;
+            padding-left: 20px;
+            padding-right: 18px;
+            padding-bottom: 12px;
+            padding-top: 12px;
+            margin-bottom: 12px;
+            margin-top: 12px;
+            transition: all 0.8s linear 0s;
+        }
+
+        div.message_self:hover {
+            width: 95vw;
+            transition: all 0.5s linear 0s;
+            background-color: aquamarine;
+            color: #0007ff;
+        }
+
+        .content {
+            white-space: pre-wrap;
+            /*border: 10px violet dotted;*/
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
     </style>
 </head>
 <body>
@@ -94,18 +158,23 @@
 
     //获得当前页面列表
     List<Forum> thisPageList = table.Forum.getThisPageList(pageCount, curr_page);
+    //获取自身信息
+    data.Administrators administrator = (data.Administrators) session.getAttribute("administrator");
 %>
 
-<a class="back" href="index.jsp">返回</a>
-<a class="insert_p" href="forum_insert.jsp">发布</a>
+<a class="back animated bounceInDown" href="index.jsp">返回</a>
+<a class="insert_p animated bounceInDown" href="forum_insert.jsp">发布</a>
 
 <%
     assert thisPageList != null;
     for (data.Forum forum : thisPageList)
     {
 %>
-<br>
-<div class="message">
+<%
+    if (!forum.getForum_people_no().equals(administrator.getAdministrator_no()))
+    {
+%>
+<div class="message animated bounceInRight">
     第
     <%=forum.getForum_no()%>
     楼
@@ -140,86 +209,146 @@
     <%
         }
     %>
-    <%=forum.getForum_content()%>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
 </div>
 <%
-    }
+}
+else
+{
 %>
-<br/>
 
-<%
-    if (curr_page >= 2)
+<div class="message_self animated bounceInLeft">
+    第
+    <%=forum.getForum_no()%>
+    楼
+    <br>
+    <%=forum.getForum_time()%>
+    <%
+        if (forum.getForum_identity().equals("学生"))
+        {
+    %>
+    <div style="color: black">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+    }
+    else if (forum.getForum_identity().equals("老师"))
     {
-%>
-<div class="before">
-    <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-1)%>">上一页</a>
-</div>
-<%
+    %>
+    <div style="color:salmon">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
     }
-%>
-
-<%
-    if (curr_page >= 3)
+    else
     {
-%>
-<div class="before2">
-    <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-2)%>">前两页</a>
+    %>
+    <div style="color:red">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>：
+    </div>
+    <%
+        }
+    %>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
 </div>
+
 <%
+        }
     }
 %>
 
-<%
-    if (curr_page < pageCount)
-    {
-%>
-<div class="next">
-    <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+1)%>">下一页</a>
+<div style="float: left">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-1)%>">上一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page >= 3)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-2)%>">前两页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount)
+        {
+    %>
+    <div class="next">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+1)%>">下一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+2)%>">后两页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="first">
+        <a class="animated rotateInUpLeft" href="forum.jsp?page=<%=(1)%>">第一页</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="last">
+        <a class="animated rotateInUpRight" href="forum.jsp?page=<%=(pageCount)%>">最后一页</a>
+    </div>
+    <%
+        }
+    %>
+
 </div>
-<%
-    }
-%>
-
-<%
-    if (curr_page < pageCount - 1)
-    {
-%>
-<div class="next2">
-    <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+2)%>">后两页</a>
-</div>
-<%
-    }
-%>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<%
-    if (curr_page >= 2)
-    {
-%>
-<div class="first">
-    <a class="animated rotateInUpLeft" href="forum.jsp?page=<%=(1)%>">第一页</a>
-</div>
-<%
-    }
-%>
-
-<%
-    if (curr_page < pageCount - 1)
-    {
-%>
-<div class="last">
-    <a class="animated rotateInUpRight" href="forum.jsp?page=<%=(pageCount)%>">最后一页</a>
-</div>
-<%
-    }
-%>
-
 </body>
 </html>

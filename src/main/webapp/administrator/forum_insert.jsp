@@ -39,7 +39,7 @@
         <br/>
         <form action="forum_insert_result.jsp" method="post">
             <label>
-                <textarea rows="10" name="text"></textarea>
+                <textarea rows="10" name="text" placeholder="从这里输入文字"></textarea>
             </label>
             <br/>
             <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="发布"/>
