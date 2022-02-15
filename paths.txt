@@ -1,4 +1,4 @@
-162
+167
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -51,6 +51,8 @@ src\\main\\webapp\\administrator\\change_password_result.jsp
 src\\main\\webapp\\administrator\\css\\delete.css
 src\\main\\webapp\\administrator\\css\\error_login.css
 src\\main\\webapp\\administrator\\css\\floor.css
+src\\main\\webapp\\administrator\\css\\forum.css
+src\\main\\webapp\\administrator\\css\\forum_insert.css
 src\\main\\webapp\\administrator\\css\\hotAirBalloon.css
 src\\main\\webapp\\administrator\\css\\index.css
 src\\main\\webapp\\administrator\\css\\insert.css
@@ -84,6 +86,9 @@ src\\main\\webapp\\administrator\\delete_teacher.jsp
 src\\main\\webapp\\administrator\\delete_teacher_result.jsp
 src\\main\\webapp\\administrator\\delete_teach_result.jsp
 src\\main\\webapp\\administrator\\Error.jsp
+src\\main\\webapp\\administrator\\forum.jsp
+src\\main\\webapp\\administrator\\forum_insert.jsp
+src\\main\\webapp\\administrator\\forum_insert_result.jsp
 src\\main\\webapp\\administrator\\index.jsp
 src\\main\\webapp\\administrator\\insert.jsp
 src\\main\\webapp\\administrator\\insert_a_class.jsp

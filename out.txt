@@ -8896,6 +8896,110 @@ div.floor::before {
     }
 }
 ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\forum.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): forum
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/14 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:23
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+.insert_p {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+div.message {
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-right: 5px dotted lawngreen;
+    background-color: white;
+    width: 80vw;
+    border-radius: 2em;
+    left: 25px;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+    float: left;
+}
+
+div.message:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: #25ffe6;
+    color: #0007ff;
+}
+
+div.message_self {
+    border-top: 5px dotted lawngreen;
+    border-bottom: 5px dotted lawngreen;
+    border-left: 5px dotted lawngreen;
+    background-color: white;
+    width: 80vw;
+    float: right;
+    border-radius: 2em;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 18px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    transition: all 0.8s linear 0s;
+}
+
+div.message_self:hover {
+    width: 95vw;
+    transition: all 0.5s linear 0s;
+    background-color: aquamarine;
+    color: #0007ff;
+}
+
+.content {
+    white-space: pre-wrap;
+    /*border: 10px violet dotted;*/
+    word-break: break-all;
+    word-wrap: break-word;
+}
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\forum_insert.css
+/*
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(æ–‡ä»¶å): forum_insert
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/14 
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:21
+  Version(ç‰ˆæœ¬): 1.0
+  Description(æè¿°)ï¼š æ— 
+ */
+
+textarea {
+    width: 50vw;
+    height: 50vh;
+    color: magenta;
+    font-size: 32px;
+    background-color: lightblue;
+    transition: all 0.7s linear 0s;
+}
+
+textarea:hover {
+    background-color: cornsilk;
+    transition: all 0.7s linear 0s;
+    border: 15px groove coral;
+}ÿ
 H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\css\\hotAirBalloon.css
 /*
   Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
@@ -9560,6 +9664,11 @@ div.new_text_p {
 }
 
 div.new_text {
+    border-radius: 0.8em;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     white-space:pre-wrap;
     width: 85vw;
     font-size: 22px;
@@ -12240,7 +12349,7 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
         <div class="text">
             <c:out value="é”™è¯¯ï¼ï¼ï¼" escapeXml="true" default="null"/>
             <br/>
-            <c:out value="é”™è¯¯å†…å®¹ï¼š${sessionScope.message}" escapeXml="true" default="null"/>
+            <c:out value="é”™è¯¯å†…å®¹ï¼š${sessionScope.message}" escapeXml="false" default="null"/>
         </div>
     </div>
 </div>
@@ -12254,6 +12363,508 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
         <img src="../photo/error_photo.gif" alt="" width="250" height="250">
     </div>
 </div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\forum.jsp
+<%@ page import="data.Forum" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): forum
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/14
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:14
+  Description(æè¿°)ï¼š è®ºå›
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>æ ¡å›­è®ºå›</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/forum.css">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        a.back {
+            text-decoration: none;
+            color: #0066ff;
+            font-size: 22px;
+        }
+
+        .insert_p {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        div.message {
+            border-top: 5px dotted lawngreen;
+            border-bottom: 5px dotted lawngreen;
+            border-right: 5px dotted lawngreen;
+            background-color: white;
+            width: 80vw;
+            border-radius: 2em;
+            left: 25px;
+            font-size: 24px;
+            padding-left: 20px;
+            padding-right: 18px;
+            padding-bottom: 12px;
+            padding-top: 12px;
+            margin-bottom: 12px;
+            margin-top: 12px;
+            transition: all 0.8s linear 0s;
+            float: left;
+        }
+
+        div.message:hover {
+            width: 95vw;
+            transition: all 0.5s linear 0s;
+            background-color: #25ffe6;
+            color: #0007ff;
+        }
+
+        div.message_self {
+            border-top: 5px dotted lawngreen;
+            border-bottom: 5px dotted lawngreen;
+            border-left: 5px dotted lawngreen;
+            background-color: white;
+            width: 80vw;
+            float: right;
+            border-radius: 2em;
+            font-size: 24px;
+            padding-left: 20px;
+            padding-right: 18px;
+            padding-bottom: 12px;
+            padding-top: 12px;
+            margin-bottom: 12px;
+            margin-top: 12px;
+            transition: all 0.8s linear 0s;
+        }
+
+        div.message_self:hover {
+            width: 95vw;
+            transition: all 0.5s linear 0s;
+            background-color: aquamarine;
+            color: #0007ff;
+        }
+
+        .content {
+            white-space: pre-wrap;
+            /*border: 10px violet dotted;*/
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+    </style>
+</head>
+<body>
+<%
+    //è·å–å½“å‰é¡µé¢
+    request.setCharacterEncoding("utf-8");
+    String curr_page_str = request.getParameter("page");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (curr_page_str == null || curr_page_str.equals(""))
+    {
+        //èµ‹å€¼ï¼Œç¬¬ä¸€é¡µ
+        curr_page_str = "1";
+    }
+
+    //è½¬æ•°å­—
+    Long curr_page = null;
+    try
+    {
+        curr_page = Long.parseLong(curr_page_str);
+    }
+    catch (Exception e)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸ä¸ºæ•°å­—ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦æ˜¯å¤§äº0çš„
+    if (curr_page <= 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "é¡µé¢å‚æ•°ä¸èƒ½ä¸ºè´Ÿæ•°å’Œ0ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—æ€»æ¡æ•°
+    Long count = table.Forum.getForumCount();
+    //å¦‚æœæ€»æ¡æ•°ä¸º0
+    if (count == 0)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰è®ºå›æ— æ¶ˆæ¯ï¼<br><a href=forum_insert.jsp>å‘å¸ƒä¸€æ¡æ¶ˆæ¯</a>");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å–æ€»é¡µæ•°
+    long pageCount = table.Forum.getPageCount(count);
+    //åˆ¤æ–­å½“å‰é¡µé¢æ˜¯å¦å¤§äºé¡µæ€»æ•°
+    if (curr_page > pageCount)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "å½“å‰é¡µé¢å¤§äºé¡µé¢æ€»æ•°ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å¾—å½“å‰é¡µé¢åˆ—è¡¨
+    List<Forum> thisPageList = table.Forum.getThisPageList(pageCount, curr_page);
+    //è·å–è‡ªèº«ä¿¡æ¯
+    data.Administrators administrator = (data.Administrators) session.getAttribute("administrator");
+%>
+
+<a class="back animated bounceInDown" href="index.jsp">è¿”å›</a>
+<a class="insert_p animated bounceInDown" href="forum_insert.jsp">å‘å¸ƒ</a>
+
+<%
+    assert thisPageList != null;
+    for (data.Forum forum : thisPageList)
+    {
+%>
+<%
+    if (!forum.getForum_people_no().equals(administrator.getAdministrator_no()))
+    {
+%>
+<div class="message animated bounceInRight">
+    ç¬¬
+    <%=forum.getForum_no()%>
+    æ¥¼
+    <br>
+    <%=forum.getForum_time()%>
+    <%
+        if (forum.getForum_identity().equals("å­¦ç”Ÿ"))
+        {
+    %>
+    <div style="color: black">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+    }
+    else if (forum.getForum_identity().equals("è€å¸ˆ"))
+    {
+    %>
+    <div style="color:salmon">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+    }
+    else
+    {
+    %>
+    <div style="color:red">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+        }
+    %>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
+</div>
+<%
+}
+else
+{
+%>
+
+<div class="message_self animated bounceInLeft">
+    ç¬¬
+    <%=forum.getForum_no()%>
+    æ¥¼
+    <br>
+    <%=forum.getForum_time()%>
+    <%
+        if (forum.getForum_identity().equals("å­¦ç”Ÿ"))
+        {
+    %>
+    <div style="color: black">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+    }
+    else if (forum.getForum_identity().equals("è€å¸ˆ"))
+    {
+    %>
+    <div style="color:salmon">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+    }
+    else
+    {
+    %>
+    <div style="color:red">
+        <%=forum.getForum_identity()%>
+        <%=forum.getForum_name()%>ï¼š
+    </div>
+    <%
+        }
+    %>
+    <div class="content"><%=forum.getForum_content()%>
+    </div>
+</div>
+
+<%
+        }
+    }
+%>
+
+<div style="float: left">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="before">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-1)%>">ä¸Šä¸€é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page >= 3)
+        {
+    %>
+    <div class="before2">
+        <a class="animated slideInLeft" href="forum.jsp?page=<%=(curr_page-2)%>">å‰ä¸¤é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount)
+        {
+    %>
+    <div class="next">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+1)%>">ä¸‹ä¸€é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="next2">
+        <a class="animated slideInRight" href="forum.jsp?page=<%=(curr_page+2)%>">åä¸¤é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <%
+        if (curr_page >= 2)
+        {
+    %>
+    <div class="first">
+        <a class="animated rotateInUpLeft" href="forum.jsp?page=<%=(1)%>">ç¬¬ä¸€é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+    <%
+        if (curr_page < pageCount - 1)
+        {
+    %>
+    <div class="last">
+        <a class="animated rotateInUpRight" href="forum.jsp?page=<%=(pageCount)%>">æœ€åä¸€é¡µ</a>
+    </div>
+    <%
+        }
+    %>
+
+</div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\forum_insert.jsp
+<%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): forum_insert
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/14
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:15
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>æ ¡å›­è®ºå›-æ’å…¥ä¸€æ¡æ¶ˆæ¯</title>
+    <link rel="stylesheet" href="../animate.css">
+    <link rel="stylesheet" href="css/link.css">
+    <link rel="stylesheet" href="css/insert_score.css">
+    <link rel="stylesheet" href="css/hotAirBalloon.css">
+    <link rel="stylesheet" href="css/textarea.css">
+    <style>
+        a.position {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /*transform: translate(0%, 0%);*/
+        }
+    </style>
+</head>
+<body>
+<a class="back" href="index.jsp">è¿”å›</a>
+<div class="text_p">
+    <div class="text animated flipInY">
+        å‘å¸ƒä¸€æ¡è®ºå›æ¶ˆæ¯
+    </div>
+</div>
+<div class="form">
+    <div class="animated rotateIn">
+        <br/>
+        <form action="forum_insert_result.jsp" method="post">
+            <label>
+                <textarea rows="10" name="text" placeholder="ä»è¿™é‡Œè¾“å…¥æ–‡å­—"></textarea>
+            </label>
+            <br/>
+            <input style=" position: absolute;left: 50%;transform: translate(-50%, 0%);" type="submit" value="å‘å¸ƒ"/>
+        </form>
+    </div>
+</div>
+
+<div class="left animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+<div class="right animated slideInUp">
+    <figure class="balloon">
+        <div class="envelope">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="basket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
+ÿ
+H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\main\\webapp\\administrator\\forum_insert_result.jsp
+<%@ page import="data.Administrators" %>
+<%@ page import="table.Forum" %><%--
+  Created by IntelliJ IDEA.
+  Project name(é¡¹ç›®åç§°)ï¼šDatabase_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
+  File name(æ–‡ä»¶å): forum_insert_result
+  Author(ä½œè€…ï¼‰: mao
+  Author QQï¼š1296193245
+  GitHubï¼šhttps://github.com/maomao124/
+  Date(åˆ›å»ºæ—¥æœŸ)ï¼š 2022/2/14
+  Time(åˆ›å»ºæ—¶é—´)ï¼š 22:50
+  Description(æè¿°)ï¼š æ— 
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>å‘å¸ƒä¸€æ¡è®ºå›æ¶ˆæ¯-ç»“æœ</title>
+</head>
+<body>
+<%
+    request.setCharacterEncoding("utf-8");
+    //è·å–ä¿¡æ¯
+    String text = request.getParameter("text");
+    //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    if (text == null || text.equals(""))
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "è¾“å…¥çš„æ¶ˆæ¯ä¸èƒ½ä¸ºç©ºï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //åˆ¤æ–­æ˜¯å¦å¤ªé•¿
+    if (text.length() > 255)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "è¾“å…¥çš„æ¶ˆæ¯å¤ªé•¿æœ€å¤§å…è®¸255ä¸ªå­—ç¬¦ï¼Œæ‚¨çš„å­—ç¬¦ä¸ºï¼" + text.length() + "ä¸ª");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+
+    //è·å–ä¿¡æ¯
+    data.Administrators administrator = (Administrators) session.getAttribute("administrator");
+    //æ’å…¥
+    boolean result = Forum.insert(administrator.getAdministrator_no(), administrator.getAdministrator_name(), "ç®¡ç†å‘˜", text);
+    //åˆ¤æ–­è¿”å›å€¼
+    if (!result)
+    {
+        //æŠŠé”™è¯¯ä¿¡æ¯å†™å…¥sessioné‡Œ
+        session.setAttribute("message", "è®ºå›æ¶ˆæ¯å‘å¸ƒå¤±è´¥ï¼");
+        //è½¬å‘è‡³é”™è¯¯é¡µé¢
+        request.getRequestDispatcher("Error.jsp").forward(request, response);
+        return;
+    }
+%>
+
+<%
+    //é‡å®šå‘
+    response.sendRedirect("forum.jsp?page=1");
+%>
 </body>
 </html>
 ÿ
@@ -12348,7 +12959,7 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
         <a class="choose" href="insert_teacher.jsp">æ·»åŠ æ•™å¸ˆä¿¡æ¯</a>
         <a class="choose" href="teacher_index.jsp">ç®¡ç†æ•™å¸ˆ</a>
         <hr>
-        <a class="choose" href="">è¿›å…¥æ ¡å›­è®ºå›</a>
+        <a class="choose" href="forum.jsp?page=1">è¿›å…¥æ ¡å›­è®ºå›</a>
         <a class="choose" href="">ç®¡ç†æ ¡å›­è®ºå›</a>
     </div>
 </div>
@@ -15892,6 +16503,7 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
     <title>æŸ¥çœ‹è¡¨ç»“æ„</title>
     <link rel="stylesheet" href="../animate.css">
     <link rel="stylesheet" href="css/floor.css">
+    <link rel="stylesheet" href="css/link.css">
     <style>
         body {
             background-color: skyblue;
@@ -15906,6 +16518,7 @@ H:\³ÌĞò\´óÈıº®¼Ù\Êı¾İ¿â¿Î³ÌÉè¼Æ_»ùÓÚmysqlµÄÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³javaWebÊµÏÖ\\src\\mai
 </head>
 <body>
 <div class="floor"></div>
+<a class="back" href="custom_query.jsp">è¿”å›</a>
 <div class="photo_p">
     <img class="animated bounceInLeft" src="table_photo/p1_table.png" alt="è¡¨">
     <br/>

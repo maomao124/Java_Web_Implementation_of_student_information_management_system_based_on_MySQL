@@ -58,6 +58,11 @@ div.new_text_p {
 }
 
 div.new_text {
+    border-radius: 0.8em;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     white-space:pre-wrap;
     width: 85vw;
     font-size: 22px;
