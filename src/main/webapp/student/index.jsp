@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/wandered_jelly.css">
     <link rel="stylesheet" href="css/newList.css">
     <link rel="stylesheet" href="css/vue.css">
+    <%--    <link rel="stylesheet" href="../fonts/css/font-awesome.css">--%>
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <style>
