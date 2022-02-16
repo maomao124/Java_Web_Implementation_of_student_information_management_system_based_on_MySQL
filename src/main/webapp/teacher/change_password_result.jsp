@@ -121,7 +121,7 @@
     }
 
     //验证旧密码
-    boolean verification = table.StudentPassword.verification(no, old_password);
+    boolean verification = table.TeacherPassword.verification(no, old_password);
     if (!verification)
     {
         //把错误信息写入session里
@@ -131,7 +131,7 @@
         return;
     }
     //更改密码
-    boolean b = table.StudentPassword.changePassword(no, old_password, password1);
+    boolean b = table.TeacherPassword.changePassword(no, old_password, password1);
     if (!b)
     {
         //把错误信息写入session里

@@ -1,4 +1,5 @@
-<%@ page import="table.News" %><%--
+<%@ page import="table.News" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
   File name(文件名): see_newList
