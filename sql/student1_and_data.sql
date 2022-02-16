@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 15/02/2022 15:28:21
+ Date: 16/02/2022 22:46:09
 */
 
 SET NAMES utf8mb4;
@@ -180,7 +180,7 @@ CREATE TABLE `forum`  (
   `forum_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '论坛文字内容，最大长度255字',
   PRIMARY KEY (`forum_no`) USING BTREE,
   UNIQUE INDEX `forum`(`forum_no`) USING BTREE COMMENT '唯一索引'
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '此表应该独立，当学生被删除时，学生发表的论坛内容应该保存在论坛里' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '此表应该独立，当学生被删除时，学生发表的论坛内容应该保存在论坛里' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of forum
@@ -234,13 +234,27 @@ INSERT INTO `forum` VALUES (46, 10002, '隗瑶', '管理员', '2022/02/15  14:53
 INSERT INTO `forum` VALUES (47, 10002, '隗瑶', '管理员', '2022/02/15  14:53:03', ' background: #CCC;');
 INSERT INTO `forum` VALUES (48, 10002, '隗瑶', '管理员', '2022/02/15  14:53:06', ' background: #CCC;');
 INSERT INTO `forum` VALUES (49, 10002, '隗瑶', '管理员', '2022/02/15  14:53:09', ' background: #CCC;');
-INSERT INTO `forum` VALUES (50, 10002, '隗瑶', '管理员', '2022/02/15  14:53:12', ' background: #CCC;');
 INSERT INTO `forum` VALUES (51, 10002, '隗瑶', '管理员', '2022/02/15  14:53:15', ' background: #CCC;');
 INSERT INTO `forum` VALUES (52, 10019, '李明', '管理员', '2022/02/15  15:18:42', 'CSS 响应式布局也称自适应布局，是 Ethan Marcotte 在 2010 年 5 月份提出的一个概念，简单来讲就是一个网站能够兼容多个不同的终端（设备），而不是为每个终端做一个特定的版本。这个概念是为解决移动端浏览网页而诞生的。响应式布局能够为使用不同终端的用户提供很好的用户体验，而且随着大屏智能手机的普及，用“大势所趋”来形容也不为过。');
 INSERT INTO `forum` VALUES (53, 10019, '李明', '管理员', '2022/02/15  15:18:57', '要实现响应式布局，常用的方式有以下几种：\r\n使用 CSS 中的媒体查询（最简单）；\r\n使用 JavaScript（使用成本比较高）；\r\n使用第三方开源框架（例如 bootstrap，可以很好的支持各种浏览器）。');
 INSERT INTO `forum` VALUES (54, 10019, '李明', '管理员', '2022/02/15  15:19:32', 'viewport：即视口，表示网页的可视区域\r\nwidth：控制 viewport 的大小，可以指定一个具体的值，例如 600，也可以是由关键字组成的特殊值，例如 device-width就表示设备的宽度\r\ninitial-scale：表示初始缩放比例，也就是页面第一次加载时的缩放比例\r\nmaximum-scale：表示允许用户缩放的最大比例，范围从 0 到 10.0\r\nminimum-scale：表示允许用户缩放到最小比例，范围从 0 到 10.0\r\nuser-scalable：表示用户是否可以手动缩放');
 INSERT INTO `forum` VALUES (55, 10019, '李明', '管理员', '2022/02/15  15:20:00', 'Flex 是 Flexible Box 的缩写，意为“弹性布局”或者“弹性盒子”，是 CSS3 中的一种新的布局模式，可以简便、完整、响应式地实现各种页面布局，当页面需要适应不同的屏幕大小以及设备类型时非常适用。目前，几乎所有的浏览器都支持 Flex 布局。');
 INSERT INTO `forum` VALUES (56, 10019, '李明', '管理员', '2022/02/15  15:20:22', '采用 Flex 布局的元素，称为 Flex 容器（flex container），简称“容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称“项目”。容器默认存在两根轴，分别为水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置叫做 main start，结束位置叫做 main end；交叉轴的开始位置叫做 cross start，结束位置叫做 cross end。项目默认沿主轴排列。单个项目占据的主轴空间叫做 main size');
+INSERT INTO `forum` VALUES (57, 10001, '唐淑玲', '管理员', '2022/02/15  20:14:40', 'MyBatis 是一个开源、轻量级的数据持久化框架，是 JDBC 和 Hibernate 的替代方案。');
+INSERT INTO `forum` VALUES (58, 10001, '唐淑玲', '管理员', '2022/02/15  20:14:52', 'MyBatis 前身为 IBatis，2002 年由 Clinton Begin 发布。2010 年从 Apache 迁移到 Google，并改名为 MyBatis，2013 年又迁移到了 Github。\r\n\r\nMyBatis 内部封装了 JDBC，简化了加载驱动、创建连接、创建 statement 等繁杂的过程，开发者只需要关注 SQL 语句本身。\r\n\r\nMyBatis 支持定制化 SQL、存储过程以及高级映射，可以在实体类和 SQL 语句之间建立映射关系，是一种半自动化的 ORM 实现。');
+INSERT INTO `forum` VALUES (59, 10001, '唐淑玲', '管理员', '2022/02/15  20:15:21', 'MyBatis、Hibernate 和 JDBC\r\n和 Hibernate 相比，MyBatis 封装性低于 Hibernate，但性能优秀、小巧、简单易学、应用广泛。\r\n\r\n和 JDBC 相比，MyBatis 减少了 50% 以上的代码量，并且满足高并发和高响应的要求。');
+INSERT INTO `forum` VALUES (60, 10001, '唐淑玲', '管理员', '2022/02/15  20:15:57', '缓存可以将数据保存在内存中，是互联网系统常常用到的。目前流行的缓存服务器有 MongoDB、Redis、Ehcache 等。缓存是在计算机内存上保存的数据，读取时无需再从磁盘读入，因此具备快速读取和使用的特点。\r\n\r\n和大多数持久化框架一样，MyBatis 提供了一级缓存和二级缓存的支持。默认情况下，MyBatis 只开启一级缓存。');
+INSERT INTO `forum` VALUES (61, 10001, '唐淑玲', '管理员', '2022/02/15  20:24:29', 'Mybatis 提供了一个逆向工程工具，该工具可以根据数据表自动生成针对单表的 po 类、mapper 映射文件和 mapper 接口。大大缩减了开发时间，可以让开发人员将更多的精力放在繁杂的业务逻辑上。\r\n\r\n之所以强调单表两个字，是因为 MyBatis 逆向工程生成的 Mapper 中的操作都是针对单表的。在大型项目中，很少有复杂的多表关联查询，所以该工具作用还是很大的。');
+INSERT INTO `forum` VALUES (62, 10001, '唐淑玲', '管理员', '2022/02/15  20:24:51', 'MyBatis 的分页功能是基于内存的分页，即先查询出所有记录，再按起始位置和页面容量取出结果。\r\n');
+INSERT INTO `forum` VALUES (63, 10001, '唐淑玲', '管理员', '2022/02/15  20:25:25', 'MyBatis 实现分页查询属于 DAO 层操作，由于 DAO 层不牵涉任何业务实现，所以实现分页的方法中第一个参数为 limit 的起始位置（下标从 0 开始），而不是用户输入的真正页码（页码从1开始）');
+INSERT INTO `forum` VALUES (64, 202012340114, '蒋馨凝', '学生', '2022/02/15  21:29:53', '什么是Stream?\r\nStream 实际上是一个具有消息发布/订阅功能的组件，也就常说的消息队列。其实这种类似于 broker/consumer(生产者/消费者)的数据结构很常见，比如 RabbitMQ 消息中间件、Celery 消息中间件，以及 Kafka 分布式消息系统等，而 Redis Stream 正是借鉴了 Kafaka 系统。');
+INSERT INTO `forum` VALUES (65, 202012340114, '蒋馨凝', '学生', '2022/02/15  21:30:48', 'Redis hash（哈希散列）是由字符类型的 field（字段）和 value 组成的哈希映射表结构（也称散列表），它非常类似于表格结构。在 hash 类型中，field 与 value 一一对应，且不允许重复。\r\n\r\nRedis hash 特别适合于存储对象。一个 filed/value 可以看做是表格中一条数据记录；而一个 key 可以对应多条数据。');
+INSERT INTO `forum` VALUES (66, 202012340114, '蒋馨凝', '学生', '2022/02/15  21:31:18', '动态 SQL 是 MyBatis 的强大特性之一。在 JDBC 或其它类似的框架中，开发人员通常需要手动拼接 SQL 语句。根据不同的条件拼接 SQL 语句是一件极其痛苦的工作。例如，拼接时要确保添加了必要的空格，还要注意去掉列表最后一个列名的逗号。而动态 SQL 恰好解决了这一问题，可以根据场景动态的构建查询。');
+INSERT INTO `forum` VALUES (67, 202012340114, '蒋馨凝', '学生', '2022/02/15  21:31:45', '级联关系是一个数据库实体的概念，有 3 种级联关系，分别是一对一级联、一对多级联以及多对多级联。例如，一个角色可以分配给多个用户，也可以只分配给一个用户。大部分场景下，我们都需要获取角色信息和用户信息，所以会经常遇见以下 SQL。');
+INSERT INTO `forum` VALUES (68, 202012340111, '洪成健', '学生', '2022/02/16  19:44:03', 'Sentinel 是由阿里巴巴中间件团队开发的开源项目，是一种面向分布式微服务架构的轻量级高可用流量控制组件。\r\n\r\nSentinel 主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度帮助用户保护服务的稳定性。');
+INSERT INTO `forum` VALUES (69, 202012340111, '洪成健', '学生', '2022/02/16  19:44:29', 'Sentinel 具有以下优势:\r\n丰富的应用场景：Sentinel 承接了阿里巴巴近 10 年的“双十一”大促流量的核心场景，例如秒杀（将突发流量控制在系统可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用服务等。\r\n完备的实时监控：Sentinel 提供了实时监控功能。用户可以在控制台中看到接入应用的单台机器的秒级数据，甚至是 500 台以下规模集群的汇总运行情况。\r\n');
+INSERT INTO `forum` VALUES (70, 10000001, '谷凤莎', '老师', '2022/02/16  22:36:14', 'Hibernate 框架具有良好的可移植性，它支持几乎所有主流的关系型数据库，例如 MySQL、Oracle、SQL Server和 DB2 等等，开发人员只要在配置文件中指定好当前使用的数据库，就不需要操心不同数据库之间的差异。\r\n\r\nHibernate 是一款全自动的 ORM 框架');
+INSERT INTO `forum` VALUES (71, 10000001, '谷凤莎', '老师', '2022/02/16  22:43:27', 'Hibernate 是一款基于 ORM 设计思想的框架，它将关系型数据库中的表与我们 Java 实体类进行映射，表中的记录对应实体类的对象，而表中的字段对应着实体类中的属性。Hibernate 进行增删改查等操作时，不再直接操作数据库表，而是对与之对应的实体类对象进行处理');
 
 -- ----------------------------
 -- Table structure for login_log
@@ -253,7 +267,7 @@ CREATE TABLE `login_log`  (
   `log_name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录人的姓名',
   PRIMARY KEY (`log_no`) USING BTREE,
   UNIQUE INDEX `log_no`(`log_no`) USING BTREE COMMENT '索引'
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '此表为登录日志表，此表应该独立存在，不设外键' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '此表为登录日志表，此表应该独立存在，不设外键' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of login_log
@@ -314,6 +328,17 @@ INSERT INTO `login_log` VALUES (53, '2022/02/15  13:38:45', 10001, '唐淑玲');
 INSERT INTO `login_log` VALUES (54, '2022/02/15  13:46:08', 10001, '唐淑玲');
 INSERT INTO `login_log` VALUES (55, '2022/02/15  14:43:45', 10002, '隗瑶');
 INSERT INTO `login_log` VALUES (56, '2022/02/15  15:17:41', 10019, '李明');
+INSERT INTO `login_log` VALUES (57, '2022/02/15  19:21:26', 10001, '唐淑玲');
+INSERT INTO `login_log` VALUES (58, '2022/02/15  20:31:26', 10001, '唐淑玲');
+INSERT INTO `login_log` VALUES (59, '2022/02/15  21:08:10', 202012340114, '蒋馨凝');
+INSERT INTO `login_log` VALUES (60, '2022/02/15  21:11:08', 202012340114, '蒋馨凝');
+INSERT INTO `login_log` VALUES (61, '2022/02/15  21:28:13', 202012340114, '蒋馨凝');
+INSERT INTO `login_log` VALUES (62, '2022/02/16  19:39:59', 202012340111, '洪成健');
+INSERT INTO `login_log` VALUES (63, '2022/02/16  21:31:29', 202012340114, '蒋馨凝');
+INSERT INTO `login_log` VALUES (64, '2022/02/16  21:44:54', 10001, '唐淑玲');
+INSERT INTO `login_log` VALUES (65, '2022/02/16  21:57:49', 10001, '唐淑玲');
+INSERT INTO `login_log` VALUES (66, '2022/02/16  22:28:41', 10000001, '谷凤莎');
+INSERT INTO `login_log` VALUES (67, '2022/02/16  22:40:48', 10000001, '谷凤莎');
 
 -- ----------------------------
 -- Table structure for news
@@ -8218,7 +8243,7 @@ INSERT INTO `student_password` VALUES (202012340110, 'e71e197a8770b794f64df501da
 INSERT INTO `student_password` VALUES (202012340111, '9c4411d1fcd31b420d62f33194a4707b');
 INSERT INTO `student_password` VALUES (202012340112, '217055ad232f5d94c6e486315a19581f');
 INSERT INTO `student_password` VALUES (202012340113, '3637ec425d16cb0cee083b4a3d2bc00e');
-INSERT INTO `student_password` VALUES (202012340114, '943687093312f23d0814bab74661b02d');
+INSERT INTO `student_password` VALUES (202012340114, '96e79218965eb72c92a549dd5a330112');
 INSERT INTO `student_password` VALUES (202012340115, '846a38d667c97f130c1c8a59b9e8e300');
 INSERT INTO `student_password` VALUES (202012340116, '4c332fbcb896f2e4ebaf43dfd38e430f');
 INSERT INTO `student_password` VALUES (202012340117, '41bde6bc0d3a6977145719fdadc7483c');
@@ -8823,7 +8848,7 @@ CREATE TABLE `teach`  (
   CONSTRAINT `class_no1` FOREIGN KEY (`class_no`) REFERENCES `class` (`class_no`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_no1` FOREIGN KEY (`course_no`) REFERENCES `course` (`course_no`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `teacher_no1` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 308 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 307 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teach
@@ -9262,7 +9287,7 @@ CREATE TABLE `teacher_password`  (
 -- ----------------------------
 -- Records of teacher_password
 -- ----------------------------
-INSERT INTO `teacher_password` VALUES (10000001, '60776db625f6b328c27deacb846a8c5651ed6eb6c45ec66c4b4580853cf71af2');
+INSERT INTO `teacher_password` VALUES (10000001, 'bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a');
 INSERT INTO `teacher_password` VALUES (10000002, '0e9a2ca85b9af8eb69131d4f4d373dc9c507dc4294824532f218e6ae1d28e0f2');
 INSERT INTO `teacher_password` VALUES (10000003, '9abaab1e29dbfea1eda423ce95cc280a1ce18e8b98989ccddf62ec1ca152fd01');
 INSERT INTO `teacher_password` VALUES (10000004, '890431d49c5fafcf036f639a831185a437bade5537a337ff26ac2793bebc6453');
