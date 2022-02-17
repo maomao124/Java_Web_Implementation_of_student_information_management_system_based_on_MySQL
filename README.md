@@ -1,4 +1,5 @@
 # 本人大三上期的数据库课程设计
+
 ## 基于MYSQL的学生信息管理系统javaWeb实现
 
 耗时20天
@@ -7,47 +8,77 @@
 
 使用了Druid连接池
 
-前端使用了html、css、javascript（少量）、jsp页面、servlet和servlet过滤器，
-页面包含大量的动画效果
+前端使用了html、css、javascript（少量）、jsp页面、servlet和servlet过滤器， 页面包含大量的动画效果
 
-后端使用的是java。service层：table包的所有类；dao层：data包的所有类、tools包的所有类。
-使用了JDBC模板，大大降低了代码重复。所有的sql语句都不是拼接的（除了使用LIMIT关键字分页），
-不要想到sql注入。
+后端使用的是java。service层：table包的所有类；dao层：data包的所有类、tools包的所有类。 使用了JDBC模板，大大降低了代码重复。所有的sql语句都不是拼接的（除了使用LIMIT关键字分页）， 不要想到sql注入。
 
-sql文件在sql文件夹里，sql文件夹里有两个文件，一个是只有表结构的，一个是有表结构和数据的。
-绝大部分数据都是程序生成的，生成的类在io包里，Add类，执行添加的代码在text文件夹下（JUnit5）。
+sql文件在sql文件夹里，sql文件夹里有两个文件，一个是只有表结构的，一个是有表结构和数据的。 绝大部分数据都是程序生成的，生成的类在io包里，Add类，执行添加的代码在text文件夹下（JUnit5）。
 
 ## 关于密码：
-password表中存放的是密码对应的散列值，学生的是MD5，教师的是SHA256，管理员的是SHA3_512。
-初始密码是身份证后六位，如果不是，那就是我改了，更改后的密码是111111，
-我只更改了校长和部分学生的密码。
+
+password表中存放的是密码对应的散列值，学生的是MD5，教师的是SHA256，管理员的是SHA3_512。 初始密码是身份证后六位，如果不是，那就是我改了，更改后的密码是111111， 我只更改了校长和部分学生的密码。
+
+## 关于代码
+
+代码总共32488行。字符总数：886878 ，有效字符总数：644533，空格数：209857。
+
+其中：
+
+.java文件：66个，9701行；
+
+.jsp文件：100个，14096行；
+
+.html文件：1个，470行；
+
+.css文件：69个，8221行
 
 # 项目结构
-![项目结构](photos/p0.png)
 
+![项目结构](photos/p0.png)
 
 ### 效果展示：
 
 ![索引](photos/p1.png)
 ![登录页面](photos/p2.png)
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
+![管理员页面](photos/p3.png)
+![管理员页面](photos/p4.png)
+![管理员页面](photos/p5.png)
+![管理员页面](photos/p6.png)
+![管理员页面](photos/p7.png)
+![管理员页面](photos/p8.png)
+![管理员页面](photos/p9.png)
+![管理员页面](photos/p10.png)
+![管理员页面](photos/p11.png)
+![管理员页面](photos/p12.png)
+![管理员页面](photos/p13.png)
+![管理员页面](photos/p14.png)
+![管理员页面](photos/p15.png)
+![管理员页面](photos/p16.png)
+![管理员页面](photos/p17.png)
 
-![w](src/main/webapp/photo/error_photo.png)
-![w](src/main/webapp/photo/error_photo.gif)
+![管理员页面](photos/p19.png)
+![管理员页面](photos/p20.png)
+![管理员页面](photos/p21.png)
+![管理员页面](photos/p22.png)
+![管理员页面](photos/p23.png)
+![管理员页面](photos/p24.png)
+![管理员页面](photos/p25.png)
+![管理员页面](photos/p26.png)
+![管理员页面](photos/p27.png)
+![管理员页面](photos/p28.png)
+![管理员页面](photos/p29.png)
+![管理员页面](photos/p30.png)
+![管理员页面](photos/p31.png)
+![管理员页面](photos/p32.png)
+![管理员页面](photos/p33.png)
+![管理员页面](photos/p34.png)
+![学生页面](photos/p35.png)
+![学生页面](photos/p36.png)
 
+![error](src/main/webapp/photo/error_photo.png)
 
 ## sql表结构
+
 ```sql
 /*
  Navicat MySQL Data Transfer
