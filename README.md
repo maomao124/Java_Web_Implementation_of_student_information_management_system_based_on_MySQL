@@ -47,6 +47,7 @@ password表中存放的是密码对应的散列值，学生的是MD5，教师的
 
 ### 效果展示：
 
+
 ![索引](photos/p1.png)
 ![登录页面](photos/p2.png)
 ![管理员页面](photos/p3.png)
