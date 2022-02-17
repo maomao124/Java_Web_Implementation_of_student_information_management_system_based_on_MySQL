@@ -1,0 +1,165 @@
+/*
+  Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL 
+  File name(文件名): index
+  Author(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/1/31 
+  Time(创建时间)： 21:07
+  Version(版本): 1.0
+  Description(描述)： 索引的css文件
+ */
+
+body {
+    /* 初始化 取消内外边距 */
+    margin: 0;
+    padding: 0;
+    /* 100%窗口高度 */
+    height: 100vh;
+    /* 弹性布局 水平垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 渐变背景 */
+    background: linear-gradient(125deg, #2c3e50, #27ae60, #2980b9, #e74c3c, #8e44ad);
+    /* 指定背景图像的大小 */
+    background-size: 500%;
+    /* 执行动画：动画名 时长 线性的 无限次播放 */
+    animation: bgAnimation 15s linear infinite;
+}
+
+
+/* 定义动画 */
+@keyframes bgAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+div.text {
+    text-align: center;
+    width: 600px;
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    font-size: 48px;
+    color: red;
+    transform: translate(-50%, -50%);
+    transition: all 1s linear 0s;
+}
+
+div.text:hover {
+    width: 800px;
+    transition: all 1s linear 0s;
+    background: deepskyblue;
+}
+
+.link_position {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+a.link {
+    color: coral;
+    font-size: 36px;
+    display: block;
+    width: 200px;
+    height: 100px;
+    background-color: lawngreen;
+    line-height: 100px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 1s linear 0s;
+}
+
+a.link:hover {
+    background-color: #e3ff28;
+    line-height: 200px;
+    height: 200px;
+    width: 500px;
+    transition: all 0.5s linear 0s;
+    font-size: 43px;
+    color: #0095ff;
+}
+
+div.r {
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+    /*border: 10px solid coral;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+div.l {
+    position: absolute;
+    bottom: 0;
+    left: 3%;
+    /*border: 10px solid coral;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+.tip {
+    width: 200px;
+    height: 200px;
+    background: aquamarine;
+    position: absolute;
+    border: 1px solid;
+    border-radius: 10px;
+    opacity: .5;
+    text-align: center;
+    font-size: 30px;
+    color: brown;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    margin: 100px auto;
+    transform-style: preserve-3d;
+    /* perspective: 800px; */
+    position: relative;
+    animation: add 3.5s linear infinite;
+}
+
+@keyframes add {
+    0% {
+        transform: rotateX(100%) rotateY(100%)
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg)
+    }
+}
+
+.left {
+    transform: rotate(90deg) translateZ(100px)
+}
+
+.right {
+    transform: rotateY(-90deg) translateZ(-100px)
+}
+
+.font {
+    transform: translateZ(100px)
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(100px)
+}
+
+.top {
+    transform: rotateX(-90deg) translateZ(100px)
+}
+
+.bottom {
+    transform: rotateY(-90deg) translateZ(100px)
+}
+    
