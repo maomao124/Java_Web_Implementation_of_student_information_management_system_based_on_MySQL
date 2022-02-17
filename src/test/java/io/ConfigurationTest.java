@@ -26,6 +26,7 @@ class ConfigurationTest
         System.out.println(io.Configuration.getForum_pageSize());
         System.out.println(io.Configuration.getLogin_log_pageSize());
         System.out.println(io.Configuration.getNew_pageSize());
+        System.out.println(io.Configuration.isSwitch());
         System.out.println(io.Configuration.getError_path());
     }
 }

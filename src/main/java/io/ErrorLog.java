@@ -21,7 +21,16 @@ import java.util.Calendar;
 
 public class ErrorLog
 {
-    private static final String path = "error.log";  //错误日志路径
+    //总开关
+    private static final boolean Switch;
+    private static final String path;  //错误日志路径
+
+    static
+    {
+        //赋值
+        Switch = io.Configuration.isSwitch();
+        path = io.Configuration.getError_path();
+    }
 
     /**
      * 把错误的堆栈字符串写入文件
@@ -30,6 +39,10 @@ public class ErrorLog
      */
     public static void write(String message)
     {
+        if (!Switch)
+        {
+            return;
+        }
         Calendar calendar = Calendar.getInstance();// 获取当前时间
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);

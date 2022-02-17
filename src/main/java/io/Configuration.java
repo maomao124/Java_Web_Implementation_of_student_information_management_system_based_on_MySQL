@@ -28,13 +28,15 @@ public class Configuration
     private static int login_log_pageSize = 50;
     //新闻列表页面分页大小
     private static int new_pageSize = 50;
+    //错误日志总开关
+    private static boolean Switch = true;
     //错误日志文件路径
     private static String Error_path = "error.log";
 
 
     static
     {
-        InputStream inputStream=null;
+        InputStream inputStream = null;
         Properties properties;
         try
         {
@@ -59,6 +61,8 @@ public class Configuration
             inputStream = Configuration.class.getClassLoader().getResourceAsStream("ErrorLog.properties");
             //从输入字节流中读取属性列表
             properties.load(inputStream);
+            //获取错误日志总开关状态
+            Switch= Boolean.parseBoolean(properties.getProperty("Switch"));
             //获取错误日志路径
             Error_path = properties.getProperty("path");
         }
@@ -112,6 +116,16 @@ public class Configuration
     public static void setNew_pageSize(int new_pageSize)
     {
         Configuration.new_pageSize = new_pageSize;
+    }
+
+    public static boolean isSwitch()
+    {
+        return Switch;
+    }
+
+    public static void setSwitch(boolean aSwitch)
+    {
+        Switch = aSwitch;
     }
 
     public static String getError_path()
