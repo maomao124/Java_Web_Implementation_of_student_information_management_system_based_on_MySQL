@@ -47,6 +47,14 @@ password表中存放的是密码对应的散列值，学生的是MD5，教师的
 
 ### 效果展示：
 
+### 视频
+
+[![视频 video/演示.mp4](photos/p1.png)](video/演示.mp4)
+
+或者
+
+<video src="video/演示.mp4" controls="controls">您的浏览器不支持播放该视频！</video>
+### 图片
 
 ![索引](photos/p1.png)
 ![登录页面](photos/p2.png)
