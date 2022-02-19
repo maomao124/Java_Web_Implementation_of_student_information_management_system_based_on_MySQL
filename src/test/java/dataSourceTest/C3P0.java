@@ -53,7 +53,7 @@ public class C3P0
         {
             //获取连接对象(Druid连接池)
             //connection = Druid.getConnection();
-            connection=tools.test.C3P0.getConnection();
+            connection = tools.test.C3P0.getConnection();
             //或者(自定义数据库连接池)：
             //connection = connectionPool.getConnection();
             //或者直接获取(自定义JDBC工具类)：
@@ -100,6 +100,11 @@ public class C3P0
         return object;
     }
 
+    /**
+     * 测试用的查询方法
+     *
+     * @return data.Administrators对象
+     */
     public static data.Administrators select()
     {
         //sql语句

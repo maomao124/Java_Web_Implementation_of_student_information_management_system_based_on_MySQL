@@ -101,6 +101,11 @@ public class noDataSource
         return object;
     }
 
+    /**
+     * 测试用的查询方法
+     *
+     * @return data.Administrators对象
+     */
     public static data.Administrators select()
     {
         //sql语句
@@ -133,6 +138,7 @@ public class noDataSource
         {
             select();
         }
+
         //------------------------------------------------------
         long endTime = System.nanoTime(); //获取结束时间
         if ((endTime - startTime) < 1000000)

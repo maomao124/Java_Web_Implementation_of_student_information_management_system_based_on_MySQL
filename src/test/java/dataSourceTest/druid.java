@@ -99,6 +99,11 @@ public class druid
         return object;
     }
 
+    /**
+     * 测试用的查询方法
+     *
+     * @return data.Administrators对象
+     */
     public static data.Administrators select()
     {
         //sql语句

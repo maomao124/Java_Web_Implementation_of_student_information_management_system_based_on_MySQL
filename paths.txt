@@ -1,4 +1,4 @@
-66
+71
 src\\main\\java\\data\\Administrators.java
 src\\main\\java\\data\\AdministratorsPassword.java
 src\\main\\java\\data\\Class.java
@@ -47,6 +47,11 @@ src\\main\\java\\tools\\test\\Connection.java
 src\\main\\java\\tools\\test\\ConnectionAdapter.java
 src\\main\\java\\tools\\test\\ConnectionPool.java
 src\\main\\java\\tools\\test\\JDBC.java
+src\\test\\java\\dataSourceTest\\C3P0.java
+src\\test\\java\\dataSourceTest\\connection_adaptor.java
+src\\test\\java\\dataSourceTest\\connection_proxy.java
+src\\test\\java\\dataSourceTest\\druid.java
+src\\test\\java\\dataSourceTest\\noDataSource.java
 src\\test\\java\\io\\ConfigurationTest.java
 src\\test\\java\\SHA\\MD5Test.java
 src\\test\\java\\SHA\\SHA256Test.java
