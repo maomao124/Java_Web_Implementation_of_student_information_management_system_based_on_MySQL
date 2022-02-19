@@ -82,40 +82,40 @@ public class ConnectionPool implements DataSource
      * @return 加强的连接对象，此对象调用close方法归还连接，而不是关闭连接
      * @throws SQLException 数据库异常
      */
-    /*
-    @Override
-    public Connection getConnection() throws SQLException
-    {
-        if (pool.size() > 0)
-        {
-            Connection connection = pool.remove(0);
-            @SuppressWarnings("all")
-            Connection proxy = (Connection) Proxy.newProxyInstance(connection.getClass().getClassLoader(), new Class[]{Connection.class}, new InvocationHandler()
-            {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
-                {
-                    if (method.getName().equals("close"))
-                    {
-                        //归还连接
-                        connection.setAutoCommit(true);     //重新将连接设置为自动提交
-                        pool.add(connection);               //归还连接
-                        return null;
-                    }
-                    else
-                    {
-                        return method.invoke(connection, args);
-                    }
-                }
-            });
-            return proxy;
-        }
-        else
-        {
-            throw new RuntimeException("连接池连接数量已经用尽！");
-        }
-    }
-     */
+
+//    @Override
+//    public java.sql.Connection getConnection() throws SQLException
+//    {
+//        if (pool.size() > 0)
+//        {
+//            java.sql.Connection connection = pool.remove(0);
+//            @SuppressWarnings("all")
+//            java.sql.Connection proxy = (java.sql.Connection) Proxy.newProxyInstance(connection.getClass().getClassLoader(), new Class[]{java.sql.Connection.class}, new InvocationHandler()
+//            {
+//                @Override
+//                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
+//                {
+//                    if (method.getName().equals("close"))
+//                    {
+//                        //归还连接
+//                        connection.setAutoCommit(true);     //重新将连接设置为自动提交
+//                        pool.add(connection);               //归还连接
+//                        return null;
+//                    }
+//                    else
+//                    {
+//                        return method.invoke(connection, args);
+//                    }
+//                }
+//            });
+//            return proxy;
+//        }
+//        else
+//        {
+//            throw new RuntimeException("连接池连接数量已经用尽！");
+//        }
+//    }
+
 
     /**
      * 获得连接 装饰设计模式或者适配器设计模式
@@ -124,7 +124,7 @@ public class ConnectionPool implements DataSource
      * @throws SQLException 数据库异常
      */
     @Override
-    public Connection getConnection() throws SQLException
+    public  Connection getConnection() throws SQLException
     {
         if (pool.size() > 0)
         {
