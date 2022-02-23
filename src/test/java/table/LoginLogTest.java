@@ -18,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * Version(版本): 1.0
  * Description(描述)： 测试类
  */
-
 class LoginLogTest
 {
 
+    /**
+     * Gets log list.
+     */
     @Test
     void getLogList()
     {
@@ -32,6 +34,9 @@ class LoginLogTest
         }
     }
 
+    /**
+     * Gets people log list.
+     */
     @Test
     void getPeopleLogList()
     {
@@ -42,6 +47,9 @@ class LoginLogTest
         }
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert()
     {
@@ -49,6 +57,9 @@ class LoginLogTest
         System.out.println(b);
     }
 
+    /**
+     * Gets log count.
+     */
     @Test
     void getLogCount()
     {
@@ -56,6 +67,9 @@ class LoginLogTest
         System.out.println(logCount);
     }
 
+    /**
+     * Gets page count.
+     */
     @Test
     void getPageCount()
     {
@@ -65,6 +79,9 @@ class LoginLogTest
         System.out.println(pageCount);
     }
 
+    /**
+     * Gets this page list.
+     */
     @Test
     void getThisPageList()
     {

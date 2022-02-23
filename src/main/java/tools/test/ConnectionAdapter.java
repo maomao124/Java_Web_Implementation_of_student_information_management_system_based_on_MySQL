@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+
 /**
  * Project name(项目名称)：Database_course_design_Java_Web_Implementation_of_student_information_management_system_based_on_MySQL
  * Package(包名): tools.test
@@ -18,13 +19,16 @@ import java.util.concurrent.Executor;
  * Description(描述)： 此包下的所有类主要用于测试druid连接池、C3P0连接池、自定义连接池适配器设计模式、自定义连接池动态代理方式、不使用数据库连接池这五个之间的性能差距
  * 除了测试，实际上并没有用到此类。测试方法：插入100条学生数据、100条学生密码数据、1200条成绩的时间消耗，精确到微秒。
  */
-
-
 public abstract class ConnectionAdapter implements java.sql.Connection
 {
     //连接对象
     private final java.sql.Connection connection;
 
+    /**
+     * Instantiates a new Connection adapter.
+     *
+     * @param connection the connection
+     */
     public ConnectionAdapter(java.sql.Connection connection)
     {
         this.connection = connection;

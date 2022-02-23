@@ -18,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * Version(版本): 1.0
  * Description(描述)： 测试类
  */
-
 class NewsTest
 {
 
+    /**
+     * Gets news.
+     */
     @Test
     void getNews()
     {
@@ -36,6 +38,9 @@ class NewsTest
         System.out.println(newsCount);
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert()
     {
@@ -43,6 +48,9 @@ class NewsTest
         System.out.println(insert);
     }
 
+    /**
+     * Gets news list.
+     */
     @Test
     void getNewsList()
     {
@@ -53,6 +61,9 @@ class NewsTest
         }
     }
 
+    /**
+     * Gets new.
+     */
     @Test
     void getNew()
     {
@@ -60,6 +71,9 @@ class NewsTest
         System.out.println(news);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete()
     {
@@ -67,6 +81,9 @@ class NewsTest
         System.out.println(result);
     }
 
+    /**
+     * Gets page count.
+     */
     @Test
     void getPageCount()
     {
@@ -74,6 +91,9 @@ class NewsTest
         System.out.println(pageCount);
     }
 
+    /**
+     * Gets this page list.
+     */
     @Test
     void getThisPageList()
     {

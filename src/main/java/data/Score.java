@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 分数
  */
-
 public class Score
 {
     //学生学号
@@ -103,11 +102,21 @@ public class Score
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets no.
+     *
+     * @return the no
+     */
     public Long getNo()
     {
         return no;
     }
 
+    /**
+     * Sets no.
+     *
+     * @param no the no
+     */
     public void setNo(Long no)
     {
         if (no >= 0)
@@ -120,11 +129,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets course no.
+     *
+     * @return the course no
+     */
     public Long getCourse_no()
     {
         return course_no;
     }
 
+    /**
+     * Sets course no.
+     *
+     * @param course_no the course no
+     */
     public void setCourse_no(Long course_no)
     {
         if (course_no >= 0)
@@ -137,11 +156,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets usual score.
+     *
+     * @return the usual score
+     */
     public Float getUsual_score()
     {
         return usual_score;
     }
 
+    /**
+     * Sets usual score.
+     *
+     * @param usual_score the usual score
+     */
     public void setUsual_score(Float usual_score)
     {
         if (usual_score >= 0)
@@ -154,11 +183,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets end score.
+     *
+     * @return the end score
+     */
     public Float getEnd_score()
     {
         return end_score;
     }
 
+    /**
+     * Sets end score.
+     *
+     * @param end_score the end score
+     */
     public void setEnd_score(Float end_score)
     {
         if (end_score >= 0)
@@ -171,11 +210,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets final score.
+     *
+     * @return the final score
+     */
     public Float getFinal_score()
     {
         return final_score;
     }
 
+    /**
+     * Sets final score.
+     *
+     * @param final_score the final score
+     */
     public void setFinal_score(Float final_score)
     {
         if (final_score >= 0)
@@ -188,11 +237,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets grade point.
+     *
+     * @return the grade point
+     */
     public Float getGrade_point()
     {
         return grade_point;
     }
 
+    /**
+     * Sets grade point.
+     *
+     * @param grade_point the grade point
+     */
     public void setGrade_point(Float grade_point)
     {
         if (grade_point >= 0)
@@ -205,11 +264,21 @@ public class Score
         }
     }
 
+    /**
+     * Gets semester.
+     *
+     * @return the semester
+     */
     public String getSemester()
     {
         return semester;
     }
 
+    /**
+     * Sets semester.
+     *
+     * @param semester the semester
+     */
     public void setSemester(String semester)
     {
         this.semester = semester;

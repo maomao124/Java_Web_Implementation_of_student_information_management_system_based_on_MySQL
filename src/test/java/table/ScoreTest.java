@@ -18,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * Version(版本): 1.0
  * Description(描述)： 测试类
  */
-
 class ScoreTest
 {
 
+    /**
+     * Gets final score.
+     */
     @Test
     void getFinalScore()
     {
@@ -31,6 +33,9 @@ class ScoreTest
 
     }
 
+    /**
+     * Gets grade point.
+     */
     @Test
     void getGradePoint()
     {
@@ -43,6 +48,9 @@ class ScoreTest
         System.out.println(table.Score.getGradePoint(100f));
     }
 
+    /**
+     * Gets score list.
+     */
     @Test
     void getScoreList()
     {
@@ -53,6 +61,9 @@ class ScoreTest
         }
     }
 
+    /**
+     * Gets score count.
+     */
     @Test
     void getScoreCount()
     {
@@ -60,18 +71,27 @@ class ScoreTest
         System.out.println(scoreCount);
     }
 
+    /**
+     * Gets student score count.
+     */
     @Test
     void getStudentScoreCount()
     {
         System.out.println(table.Score.getStudentScoreCount(20L));
     }
 
+    /**
+     * Gets course score count.
+     */
     @Test
     void getCourseScoreCount()
     {
         System.out.println(table.Score.getCourseScoreCount(50L));
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert()
     {
@@ -79,6 +99,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Update.
+     */
     @Test
     void update()
     {
@@ -86,6 +109,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete()
     {
@@ -93,6 +119,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Delete student all score.
+     */
     @Test
     void deleteStudentAllScore()
     {
@@ -100,6 +129,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Delete course all score.
+     */
     @Test
     void deleteCourseAllScore()
     {
@@ -107,6 +139,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Gets student score array.
+     */
     @Test
     void getStudentScoreArray()
     {
@@ -122,6 +157,9 @@ class ScoreTest
         }
     }
 
+    /**
+     * Verification.
+     */
     @Test
     void verification()
     {
@@ -129,6 +167,9 @@ class ScoreTest
         System.out.println(b);
     }
 
+    /**
+     * Gets student score.
+     */
     @Test
     void getStudentScore()
     {

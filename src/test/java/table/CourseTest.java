@@ -18,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * Version(版本): 1.0
  * Description(描述)： 测试类
  */
-
 class CourseTest
 {
 
+    /**
+     * Gets course list.
+     */
     @Test
     void getCourseList()
     {
@@ -32,18 +34,27 @@ class CourseTest
         }
     }
 
+    /**
+     * Gets course count.
+     */
     @Test
     void getCourseCount()
     {
         System.out.println(table.Course.getCourseCount());
     }
 
+    /**
+     * Gets course information.
+     */
     @Test
     void getCourseInformation()
     {
         System.out.println(table.Course.getCourseInformation(200003L));
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert()
     {
@@ -51,6 +62,9 @@ class CourseTest
         System.out.println(b);
     }
 
+    /**
+     * Update.
+     */
     @Test
     void update()
     {
@@ -58,6 +72,9 @@ class CourseTest
         System.out.println(b);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete()
     {

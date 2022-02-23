@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 无
  */
-
 public class Teacher
 {
     //老师编号
@@ -69,11 +68,21 @@ public class Teacher
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets teacher no.
+     *
+     * @return the teacher no
+     */
     public Long getTeacher_no()
     {
         return teacher_no;
     }
 
+    /**
+     * Sets teacher no.
+     *
+     * @param teacher_no the teacher no
+     */
     public void setTeacher_no(Long teacher_no)
     {
         if (teacher_no >= 0)
@@ -86,61 +95,121 @@ public class Teacher
         }
     }
 
+    /**
+     * Gets teacher name.
+     *
+     * @return the teacher name
+     */
     public String getTeacher_name()
     {
         return teacher_name;
     }
 
+    /**
+     * Sets teacher name.
+     *
+     * @param teacher_name the teacher name
+     */
     public void setTeacher_name(String teacher_name)
     {
         this.teacher_name = teacher_name;
     }
 
+    /**
+     * Gets teacher sex.
+     *
+     * @return the teacher sex
+     */
     public String getTeacher_sex()
     {
         return teacher_sex;
     }
 
+    /**
+     * Sets teacher sex.
+     *
+     * @param teacher_sex the teacher sex
+     */
     public void setTeacher_sex(String teacher_sex)
     {
         this.teacher_sex = teacher_sex;
     }
 
+    /**
+     * Gets teacher telephone number.
+     *
+     * @return the teacher telephone number
+     */
     public String getTeacher_telephone_number()
     {
         return teacher_telephone_number;
     }
 
+    /**
+     * Sets teacher telephone number.
+     *
+     * @param teacher_telephone_number the teacher telephone number
+     */
     public void setTeacher_telephone_number(String teacher_telephone_number)
     {
         this.teacher_telephone_number = teacher_telephone_number;
     }
 
+    /**
+     * Gets teacher email.
+     *
+     * @return the teacher email
+     */
     public String getTeacher_email()
     {
         return teacher_email;
     }
 
+    /**
+     * Sets teacher email.
+     *
+     * @param teacher_email the teacher email
+     */
     public void setTeacher_email(String teacher_email)
     {
         this.teacher_email = teacher_email;
     }
 
+    /**
+     * Gets teacher address.
+     *
+     * @return the teacher address
+     */
     public String getTeacher_address()
     {
         return teacher_address;
     }
 
+    /**
+     * Sets teacher address.
+     *
+     * @param teacher_address the teacher address
+     */
     public void setTeacher_address(String teacher_address)
     {
         this.teacher_address = teacher_address;
     }
 
+    /**
+     * Gets teacher idcard.
+     *
+     * @return the teacher idcard
+     */
     public String getTeacher_idcard()
     {
         return teacher_idcard;
     }
 
+    /**
+     * Sets teacher idcard.
+     *
+     * @param teacher_idcard the teacher idcard
+     */
     public void setTeacher_idcard(String teacher_idcard)
     {
         this.teacher_idcard = teacher_idcard;

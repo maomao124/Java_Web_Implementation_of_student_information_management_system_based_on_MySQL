@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 课程
  */
-
 public class Course
 {
     //课程编号
@@ -74,11 +73,21 @@ public class Course
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets course no.
+     *
+     * @return the course no
+     */
     public Long getCourse_no()
     {
         return course_no;
     }
 
+    /**
+     * Sets course no.
+     *
+     * @param course_no the course no
+     */
     public void setCourse_no(Long course_no)
     {
         if (course_no >= 0)
@@ -91,11 +100,21 @@ public class Course
         }
     }
 
+    /**
+     * Gets course credit.
+     *
+     * @return the course credit
+     */
     public Float getCourse_credit()
     {
         return course_credit;
     }
 
+    /**
+     * Sets course credit.
+     *
+     * @param course_credit the course credit
+     */
     public void setCourse_credit(Float course_credit)
     {
         if (course_credit >= 0)
@@ -108,11 +127,21 @@ public class Course
         }
     }
 
+    /**
+     * Gets course hour.
+     *
+     * @return the course hour
+     */
     public Integer getCourse_hour()
     {
         return course_hour;
     }
 
+    /**
+     * Sets course hour.
+     *
+     * @param course_hour the course hour
+     */
     public void setCourse_hour(Integer course_hour)
     {
         if (course_hour >= 0)
@@ -125,21 +154,41 @@ public class Course
         }
     }
 
+    /**
+     * Gets course name.
+     *
+     * @return the course name
+     */
     public String getCourse_name()
     {
         return course_name;
     }
 
+    /**
+     * Sets course name.
+     *
+     * @param course_name the course name
+     */
     public void setCourse_name(String course_name)
     {
         this.course_name = course_name;
     }
 
+    /**
+     * Gets course mode.
+     *
+     * @return the course mode
+     */
     public String getCourse_mode()
     {
         return course_mode;
     }
 
+    /**
+     * Sets course mode.
+     *
+     * @param course_mode the course mode
+     */
     public void setCourse_mode(String course_mode)
     {
         this.course_mode = course_mode;

@@ -21,10 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
  * Version(版本): 1.0
  * Description(描述)： 测试类
  */
-
 class StudentTest
 {
 
+    /**
+     * Gets int random.
+     *
+     * @param min the min
+     * @param max the max
+     * @return the int random
+     */
     public static int getIntRandom(int min, int max)         //空间复杂度和时间复杂度更低
     {
         if (min > max)
@@ -34,6 +40,13 @@ class StudentTest
         return min + (int) (Math.random() * (max - min + 1));
     }
 
+    /**
+     * Gets int random 1.
+     *
+     * @param min the min
+     * @param max the max
+     * @return the int random 1
+     */
     public static int getIntRandom1(int min, int max)          //获取int型的随机数
     {
         if (min > max)
@@ -44,6 +57,9 @@ class StudentTest
         return random.nextInt(max - min + 1) + min;
     }
 
+    /**
+     * Gets student list.
+     */
     @Test
     void getStudentList()
     {
@@ -54,6 +70,9 @@ class StudentTest
         }
     }
 
+    /**
+     * Gets student list class no is null.
+     */
     @Test
     void getStudentList_ClassNoIsNull()
     {
@@ -64,6 +83,9 @@ class StudentTest
         }
     }
 
+    /**
+     * Gets student count.
+     */
     @Test
     void getStudentCount()
     {
@@ -71,6 +93,9 @@ class StudentTest
         System.out.println(studentCount);
     }
 
+    /**
+     * Gets class student list.
+     */
     @Test
     void getClassStudentList()
     {
@@ -81,6 +106,9 @@ class StudentTest
         }
     }
 
+    /**
+     * Insert.
+     */
     @Test
     void insert()
     {
@@ -90,12 +118,18 @@ class StudentTest
         System.out.println(b);
     }
 
+    /**
+     * Test insert.
+     */
     @Test
     void testInsert()
     {
 
     }
 
+    /**
+     * Update.
+     */
     @Test
     void update()
     {
@@ -105,6 +139,9 @@ class StudentTest
         System.out.println(b);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete()
     {
@@ -112,6 +149,9 @@ class StudentTest
         System.out.println(b);
     }
 
+    /**
+     * Add.
+     */
     @Test
     void add()
     {
@@ -143,6 +183,9 @@ class StudentTest
 
     }
 
+    /**
+     * Gets student.
+     */
     @Test
     void getStudent()
     {
@@ -150,6 +193,9 @@ class StudentTest
         System.out.println(student);
     }
 
+    /**
+     * Gets student array.
+     */
     @Test
     void getStudentArray()
     {
@@ -165,6 +211,9 @@ class StudentTest
         }
     }
 
+    /**
+     * Gets class student array.
+     */
     @Test
     void getClassStudentArray()
     {
@@ -180,6 +229,9 @@ class StudentTest
         }
     }
 
+    /**
+     * Gets class student list class no is null.
+     */
     @Test
     void getClassStudentList_ClassNoIsNull()
     {

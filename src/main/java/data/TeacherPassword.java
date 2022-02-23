@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 无
  */
-
 public class TeacherPassword
 {
     //老师编号
@@ -48,11 +47,21 @@ public class TeacherPassword
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets teacher no.
+     *
+     * @return the teacher no
+     */
     public Long getTeacher_no()
     {
         return teacher_no;
     }
 
+    /**
+     * Sets teacher no.
+     *
+     * @param teacher_no the teacher no
+     */
     public void setTeacher_no(Long teacher_no)
     {
         if (teacher_no >= 0)
@@ -65,11 +74,21 @@ public class TeacherPassword
         }
     }
 
+    /**
+     * Gets teacher password.
+     *
+     * @return the teacher password
+     */
     public String getTeacher_password()
     {
         return teacher_password;
     }
 
+    /**
+     * Sets teacher password.
+     *
+     * @param teacher_password the teacher password
+     */
     public void setTeacher_password(String teacher_password)
     {
         this.teacher_password = teacher_password;

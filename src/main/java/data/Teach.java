@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 教
  */
-
 public class Teach
 {
     //编号
@@ -39,6 +38,7 @@ public class Teach
      * @param teach_no   编号
      * @param teacher_no 老师编号
      * @param class_no   老师所教的班级编号
+     * @param course_no  the course no
      * @param semester   学期,比如：2019年下学期
      */
     public Teach(Long teach_no, Long teacher_no, Long class_no, Long course_no, String semester)
@@ -80,11 +80,21 @@ public class Teach
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets teach no.
+     *
+     * @return the teach no
+     */
     public Long getTeach_no()
     {
         return teach_no;
     }
 
+    /**
+     * Sets teach no.
+     *
+     * @param teach_no the teach no
+     */
     public void setTeach_no(Long teach_no)
     {
         if (teach_no >= 0)
@@ -97,11 +107,21 @@ public class Teach
         }
     }
 
+    /**
+     * Gets teacher no.
+     *
+     * @return the teacher no
+     */
     public Long getTeacher_no()
     {
         return teacher_no;
     }
 
+    /**
+     * Sets teacher no.
+     *
+     * @param teacher_no the teacher no
+     */
     public void setTeacher_no(Long teacher_no)
     {
         if (teacher_no >= 0)
@@ -114,11 +134,21 @@ public class Teach
         }
     }
 
+    /**
+     * Gets class no.
+     *
+     * @return the class no
+     */
     public Long getClass_no()
     {
         return class_no;
     }
 
+    /**
+     * Sets class no.
+     *
+     * @param class_no the class no
+     */
     public void setClass_no(Long class_no)
     {
         if (class_no >= 0)
@@ -131,11 +161,21 @@ public class Teach
         }
     }
 
+    /**
+     * Gets course no.
+     *
+     * @return the course no
+     */
     public Long getCourse_no()
     {
         return course_no;
     }
 
+    /**
+     * Sets course no.
+     *
+     * @param course_no the course no
+     */
     public void setCourse_no(Long course_no)
     {
         if (course_no >= 0)
@@ -148,11 +188,21 @@ public class Teach
         }
     }
 
+    /**
+     * Gets semester.
+     *
+     * @return the semester
+     */
     public String getSemester()
     {
         return semester;
     }
 
+    /**
+     * Sets semester.
+     *
+     * @param semester the semester
+     */
     public void setSemester(String semester)
     {
         this.semester = semester;

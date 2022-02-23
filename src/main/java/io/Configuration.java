@@ -19,7 +19,6 @@ import java.util.Properties;
  * Version(版本): 1.0
  * Description(描述)： 配置文件
  */
-
 public class Configuration
 {
     //论坛页面分页大小
@@ -88,51 +87,101 @@ public class Configuration
     }
 
 
+    /**
+     * Gets forum page size.
+     *
+     * @return the forum page size
+     */
     public static int getForum_pageSize()
     {
         return forum_pageSize;
     }
 
+    /**
+     * Sets forum page size.
+     *
+     * @param forum_pageSize the forum page size
+     */
     public static void setForum_pageSize(int forum_pageSize)
     {
         Configuration.forum_pageSize = forum_pageSize;
     }
 
+    /**
+     * Gets login log page size.
+     *
+     * @return the login log page size
+     */
     public static int getLogin_log_pageSize()
     {
         return login_log_pageSize;
     }
 
+    /**
+     * Sets login log page size.
+     *
+     * @param login_log_pageSize the login log page size
+     */
     public static void setLogin_log_pageSize(int login_log_pageSize)
     {
         Configuration.login_log_pageSize = login_log_pageSize;
     }
 
+    /**
+     * Gets new page size.
+     *
+     * @return the new page size
+     */
     public static int getNew_pageSize()
     {
         return new_pageSize;
     }
 
+    /**
+     * Sets new page size.
+     *
+     * @param new_pageSize the new page size
+     */
     public static void setNew_pageSize(int new_pageSize)
     {
         Configuration.new_pageSize = new_pageSize;
     }
 
+    /**
+     * Is switch boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isSwitch()
     {
         return Switch;
     }
 
+    /**
+     * Sets switch.
+     *
+     * @param aSwitch the a switch
+     */
     public static void setSwitch(boolean aSwitch)
     {
         Switch = aSwitch;
     }
 
+    /**
+     * Gets error path.
+     *
+     * @return the error path
+     */
     public static String getError_path()
     {
         return Error_path;
     }
 
+    /**
+     * Sets error path.
+     *
+     * @param error_path the error path
+     */
     public static void setError_path(String error_path)
     {
         Error_path = error_path;

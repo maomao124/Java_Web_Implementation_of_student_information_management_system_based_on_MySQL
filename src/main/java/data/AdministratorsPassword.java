@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 管理员密码
  */
-
 public class AdministratorsPassword
 {
     //管理员编号
@@ -49,11 +48,21 @@ public class AdministratorsPassword
     //对应的getter方法和setter方法
 
 
+    /**
+     * Gets administrator no.
+     *
+     * @return the administrator no
+     */
     public Long getAdministrator_no()
     {
         return administrator_no;
     }
 
+    /**
+     * Sets administrator no.
+     *
+     * @param administrator_no the administrator no
+     */
     public void setAdministrator_no(Long administrator_no)
     {
         if (administrator_no < 0)
@@ -66,11 +75,21 @@ public class AdministratorsPassword
         }
     }
 
+    /**
+     * Gets administrator password.
+     *
+     * @return the administrator password
+     */
     public String getAdministrator_password()
     {
         return administrator_password;
     }
 
+    /**
+     * Sets administrator password.
+     *
+     * @param administrator_password the administrator password
+     */
     public void setAdministrator_password(String administrator_password)
     {
         this.administrator_password = administrator_password;

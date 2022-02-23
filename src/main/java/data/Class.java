@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 班级
  */
-
 public class Class
 {
     //班级编号
@@ -61,51 +60,101 @@ public class Class
     //对应的getter方法和setter方法
 
 
+    /**
+     * Gets class no.
+     *
+     * @return the class no
+     */
     public Long getClass_no()
     {
         return class_no;
     }
 
+    /**
+     * Sets class no.
+     *
+     * @param class_no the class no
+     */
     public void setClass_no(Long class_no)
     {
         this.class_no = class_no;
     }
 
+    /**
+     * Gets class name.
+     *
+     * @return the class name
+     */
     public String getClass_name()
     {
         return class_name;
     }
 
+    /**
+     * Sets class name.
+     *
+     * @param class_name the class name
+     */
     public void setClass_name(String class_name)
     {
         this.class_name = class_name;
     }
 
+    /**
+     * Gets class college.
+     *
+     * @return the class college
+     */
     public String getClass_college()
     {
         return class_college;
     }
 
+    /**
+     * Sets class college.
+     *
+     * @param class_college the class college
+     */
     public void setClass_college(String class_college)
     {
         this.class_college = class_college;
     }
 
+    /**
+     * Gets class major.
+     *
+     * @return the class major
+     */
     public String getClass_major()
     {
         return class_major;
     }
 
+    /**
+     * Sets class major.
+     *
+     * @param class_major the class major
+     */
     public void setClass_major(String class_major)
     {
         this.class_major = class_major;
     }
 
+    /**
+     * Gets class enrollment year.
+     *
+     * @return the class enrollment year
+     */
     public Integer getClass_enrollment_year()
     {
         return class_enrollment_year;
     }
 
+    /**
+     * Sets class enrollment year.
+     *
+     * @param class_enrollment_year the class enrollment year
+     */
     public void setClass_enrollment_year(Integer class_enrollment_year)
     {
         if (class_enrollment_year >= 0)

@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 登录日志
  */
-
 public class LoginLog
 {
     //日志编号，主键
@@ -64,11 +63,21 @@ public class LoginLog
     //对应的getter方法和setter方法
 
 
+    /**
+     * Gets log no.
+     *
+     * @return the log no
+     */
     public Long getLog_no()
     {
         return log_no;
     }
 
+    /**
+     * Sets log no.
+     *
+     * @param log_no the log no
+     */
     public void setLog_no(Long log_no)
     {
         if (log_no >= 0)
@@ -81,11 +90,21 @@ public class LoginLog
         }
     }
 
+    /**
+     * Gets log login no.
+     *
+     * @return the log login no
+     */
     public Long getLog_login_no()
     {
         return log_login_no;
     }
 
+    /**
+     * Sets log login no.
+     *
+     * @param log_login_no the log login no
+     */
     public void setLog_login_no(Long log_login_no)
     {
         if (log_login_no >= 0)
@@ -98,21 +117,41 @@ public class LoginLog
         }
     }
 
+    /**
+     * Gets log time.
+     *
+     * @return the log time
+     */
     public String getLog_time()
     {
         return log_time;
     }
 
+    /**
+     * Sets log time.
+     *
+     * @param log_time the log time
+     */
     public void setLog_time(String log_time)
     {
         this.log_time = log_time;
     }
 
+    /**
+     * Gets log name.
+     *
+     * @return the log name
+     */
     public String getLog_name()
     {
         return log_name;
     }
 
+    /**
+     * Sets log name.
+     *
+     * @param log_name the log name
+     */
     public void setLog_name(String log_name)
     {
         this.log_name = log_name;

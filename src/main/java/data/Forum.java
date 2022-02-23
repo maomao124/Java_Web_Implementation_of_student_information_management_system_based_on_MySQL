@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 论坛
  */
-
 public class Forum
 {
     //论坛编号，楼层
@@ -69,11 +68,21 @@ public class Forum
         this.forum_content = forum_content;
     }
 
+    /**
+     * Gets forum no.
+     *
+     * @return the forum no
+     */
     public Long getForum_no()
     {
         return forum_no;
     }
 
+    /**
+     * Sets forum no.
+     *
+     * @param forum_no the forum no
+     */
     public void setForum_no(Long forum_no)
     {
         if (forum_no >= 0)
@@ -86,11 +95,21 @@ public class Forum
         }
     }
 
+    /**
+     * Gets forum people no.
+     *
+     * @return the forum people no
+     */
     public Long getForum_people_no()
     {
         return forum_people_no;
     }
 
+    /**
+     * Sets forum people no.
+     *
+     * @param forum_people_no the forum people no
+     */
     public void setForum_people_no(Long forum_people_no)
     {
         if (forum_people_no >= 0)
@@ -103,41 +122,81 @@ public class Forum
         }
     }
 
+    /**
+     * Gets forum name.
+     *
+     * @return the forum name
+     */
     public String getForum_name()
     {
         return forum_name;
     }
 
+    /**
+     * Sets forum name.
+     *
+     * @param forum_name the forum name
+     */
     public void setForum_name(String forum_name)
     {
         this.forum_name = forum_name;
     }
 
+    /**
+     * Gets forum identity.
+     *
+     * @return the forum identity
+     */
     public String getForum_identity()
     {
         return forum_identity;
     }
 
+    /**
+     * Sets forum identity.
+     *
+     * @param forum_identity the forum identity
+     */
     public void setForum_identity(String forum_identity)
     {
         this.forum_identity = forum_identity;
     }
 
+    /**
+     * Gets forum time.
+     *
+     * @return the forum time
+     */
     public String getForum_time()
     {
         return forum_time;
     }
 
+    /**
+     * Sets forum time.
+     *
+     * @param forum_time the forum time
+     */
     public void setForum_time(String forum_time)
     {
         this.forum_time = forum_time;
     }
 
+    /**
+     * Gets forum content.
+     *
+     * @return the forum content
+     */
     public String getForum_content()
     {
         return forum_content;
     }
 
+    /**
+     * Sets forum content.
+     *
+     * @param forum_content the forum content
+     */
     public void setForum_content(String forum_content)
     {
         this.forum_content = forum_content;

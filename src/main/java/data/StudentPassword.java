@@ -12,7 +12,6 @@ package data;
  * Version(版本): 1.0
  * Description(描述)： 学生密码
  */
-
 public class StudentPassword
 {
     //学生学号
@@ -48,11 +47,21 @@ public class StudentPassword
 
     //对应的getter方法和setter方法
 
+    /**
+     * Gets no.
+     *
+     * @return the no
+     */
     public Long getNo()
     {
         return no;
     }
 
+    /**
+     * Sets no.
+     *
+     * @param no the no
+     */
     public void setNo(Long no)
     {
         if (no >= 0)
@@ -65,11 +74,21 @@ public class StudentPassword
         }
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword()
     {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password)
     {
         this.password = password;
