@@ -1,4 +1,4 @@
-tools\Druid.class
 data\Course.class
 table\Course.class
+tools\Druid.class
 servlet\filter\AdministratorsFilter.class
